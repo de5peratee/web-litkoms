@@ -1,0 +1,52 @@
+/* resources/css/reset.css */
+
+/* Сброс всех отступов и полей */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Убираем стандартные стили у ссылок */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Убираем стили у списков */
+ul, ol {
+    list-style: none;
+}
+
+/* Убираем стили у таблиц */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Убираем фон и границы у ввода */
+input, button, textarea, select {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+/* Сброс шрифтов */
+body {
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+
+/* Убираем стандартные отступы у блоков */
+blockquote, dl, dd, ol, ul, figure {
+    margin: 0;
+}
+
+/* Настройки для изображений */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
