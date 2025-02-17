@@ -1,17 +1,39 @@
 <!-- resources/views/partials/header.blade.php -->
 <header>
-    <div class="logo">
-        <img src="{{ asset('images/logo.svg') }}" alt="Logo">
-    </div>
-    <nav>
+    <nav class="header">
+
+        <div class="logo">
+            <img src="{{ asset('images/logo.svg') }}" alt="Logo">
+        </div>
+
         <ul class="nav-menu">
-            <li><a href="/home" class="nav-link active">Главная</a></li>
+            <li><a href="{{ route('home') }}" class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">Главная</a></li>
+            <li><a href="{{ route('publications') }}" class="nav-link {{ Route::currentRouteName() == 'publications' ? 'active' : '' }}">Каталог</a></li>
             <li><a href="/news" class="nav-link">Лента</a></li>
-            <li><a href="/publications" class="nav-link">Каталог</a></li>
             <li><a href="/events" class="nav-link">Мероприятия</a></li>
             <li><a href="/ak" class="nav-link">Авторские комиксы</a></li>
             <li><a href="/lit-ar" class="nav-link">Лит-AR</a></li>
         </ul>
+
+        <div class="profile">
+
+            <div class="avatar">
+                <div class="notify-count">
+                    9+
+                </div>
+                <div class="avatar">
+                    <img src="{{ asset('images/nigga.png') }}" alt="Img">
+                </div>
+            </div>
+
+            <div class="profile-info">
+                <p class="text-small">Имя пользователя</p>
+                <div class="whistleblower">
+                    <img src="{{ asset('images/icons/arrow-down.svg') }}" alt="Icon">
+                </div>
+            </div>
+
+        </div>
 
     </nav>
 </header>
