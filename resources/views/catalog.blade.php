@@ -9,7 +9,7 @@
 
             <!-- Иконка перед заголовком -->
             <div class="catalog-icon">
-                <img src="{{ asset('icons/library.svg') }}" alt="Catalog Icon">
+                <img src="{{ asset('images/icons/library.svg') }}" alt="Catalog Icon">
             </div>
 
             <!-- Заголовок каталога -->
@@ -20,7 +20,7 @@
             <!-- Блок поиска -->
             <div class="catalog-search">
                 <input type="text" class="search-input" placeholder="Поиск по каталогу...">
-                <button class="search-button">Поиск</button>
+{{--                <button class="search-button">Поиск</button>--}}
             </div>
 
             <!-- Чекбоксы для сортировки -->

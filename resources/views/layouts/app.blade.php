@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Главная')</title>
-    <link href="{{ asset('reset.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/reset.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/fonts.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/colors.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/header.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/footer.css') }}?v={{ time() }}" rel="stylesheet">
+
     {{--    <link rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
 </head>
 <body>

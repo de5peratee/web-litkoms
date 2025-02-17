@@ -1,0 +1,28 @@
+:root {
+    --primary-blue: #1D6CFF;
+    --primary: #202020;
+    --secondary: #787878;
+    --tertiary: #AEAEAE;
+    --gray: #F1F1F1;
+    --white: #FFFFFF;
+    --primary-red: #FF4929;
+    --error: #E30004;
+    --error-secondary: #FFF9F9;
+    --success: #006730;
+    --success-secondary: #E6F9E6;
+}
+
+/*body {*/
+/*    background-color: var(--white);*/
+/*    color: var(--primary);*/
+/*}*/
+
+/*.button {*/
+/*    background-color: var(--primary-blue);*/
+/*    color: var(--white);*/
+/*}*/
+
+/*.alert {*/
+/*    background-color: var(--error);*/
+/*    color: var(--white);*/
+/*}*/
