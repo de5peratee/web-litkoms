@@ -6,7 +6,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/catalog', function () {
-    return view('catalog');
+Route::get('/publications', function () {
+    return view('publications');
 });
 
