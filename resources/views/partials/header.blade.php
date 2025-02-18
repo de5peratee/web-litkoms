@@ -8,11 +8,11 @@
 
         <ul class="nav-menu">
             <li><a href="{{ route('home') }}" class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">Главная</a></li>
-            <li><a href="{{ route('publications') }}" class="nav-link {{ Route::currentRouteName() == 'publications' ? 'active' : '' }}">Каталог</a></li>
-            <li><a href="/news" class="nav-link">Лента</a></li>
-            <li><a href="/events" class="nav-link">Мероприятия</a></li>
-            <li><a href="/ak" class="nav-link">Авторские комиксы</a></li>
-            <li><a href="/lit-ar" class="nav-link">Лит-AR</a></li>
+            <li><a href="{{ route('publications') }}" class="nav-link {{ Route::currentRouteName() == 'publications' ? 'active' : '' }}">Библиотека</a></li>
+            <li><a href="{{ route('news') }}" class="nav-link {{ Route::currentRouteName() == 'news' ? 'active' : '' }}">Лента</a></li>
+            <li><a href="{{ route('events') }}" class="nav-link {{ Route::currentRouteName() == 'events' ? 'active' : '' }}">Мероприятия</a></li>
+            <li><a href="{{ route('authors_comics_landing') }}" class="nav-link {{ Route::currentRouteName() == 'authors_comics_landing' ? 'active' : '' }}">Авторские комиксы</a></li>
+            <li><a href="{{ route('litar_landing') }}" class="nav-link {{ Route::currentRouteName() == 'litar_landing' ? 'active' : '' }}">Лит-AR</a></li>
         </ul>
 
         <div class="profile-bar">

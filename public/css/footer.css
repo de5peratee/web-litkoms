@@ -1,0 +1,42 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
+    padding: 48px 135px;
+    margin-top: 64px;
+
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.footer-nav-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+}
+
+.footer-nav-menu .nav-link {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.footer-nav-menu .nav-link:hover {
+    color: var(--secondary);
+}
+
+.litcoms-info {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+}
+
+.description {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    color: var(--secondary);
+}

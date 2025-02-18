@@ -10,3 +10,18 @@ Route::get('/publications', function () {
     return view('publications');
 })->name('publications');
 
+Route::get('/news', function () {
+    return view('news');
+})->name('news');
+
+Route::get('/events', function () {
+    return view('events');
+})->name('events');
+
+Route::get('/authors_comics_landing', function () {
+    return view('authors_comics_landing');
+})->name('authors_comics_landing');
+
+Route::get('/litar_landing', function () {
+    return view('litar_landing');
+})->name('litar_landing');

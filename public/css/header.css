@@ -7,6 +7,7 @@
 
     padding: 16px 135px;
     height: 68px;
+    margin-bottom: 16px;
 
     border-radius: 0 0 16px 16px;
     background-color: var(--white);
@@ -34,7 +35,7 @@
 
     text-decoration: none;
     color: var(--primary); /* Цвет текста */
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .nav-link:hover {
@@ -42,12 +43,12 @@
 }
 
 .active {
-    background-color: var(--primary);
+    background-color: var(--primary-blue);
     color: var(--white);
 }
 
 .active:hover {
-    background-color: var(--primary-blue);
+    background-color: var(--primary);
 }
 
 .profile-bar {
@@ -119,7 +120,7 @@
     width: 36px;
     height: 36px;
     border-radius: 999px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .whistleblower:hover {
