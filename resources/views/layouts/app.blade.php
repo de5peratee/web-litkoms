@@ -8,10 +8,9 @@
     <link href="{{ asset('css/reset.css') }}?v={{ time() }}" rel="stylesheet">
     <link href="{{ asset('css/fonts.css') }}?v={{ time() }}" rel="stylesheet">
     <link href="{{ asset('css/colors.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}?v={{ time() }}" rel="stylesheet">
     <link href="{{ asset('css/header.css') }}?v={{ time() }}" rel="stylesheet">
     <link href="{{ asset('css/footer.css') }}?v={{ time() }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}?v={{ time() }}" rel="stylesheet">
-
     {{--    <link rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
 </head>
 <body>

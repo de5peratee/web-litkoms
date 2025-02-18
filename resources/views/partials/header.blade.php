@@ -15,15 +15,14 @@
             <li><a href="/lit-ar" class="nav-link">Лит-AR</a></li>
         </ul>
 
-        <div class="profile">
+        <div class="profile-bar">
 
             <div class="avatar">
                 <div class="notify-count">
-                    9+
+                    <span>9+</span>
                 </div>
-                <div class="avatar">
-                    <img src="{{ asset('images/nigga.png') }}" alt="Img">
-                </div>
+
+                <img src="{{ asset('images/nigga.png') }}" alt="Img">
             </div>
 
             <div class="profile-info">
