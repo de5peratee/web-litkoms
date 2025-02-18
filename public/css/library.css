@@ -1,0 +1,46 @@
+.library-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 48px;
+    border-radius: 32px;
+
+    background-color: var(--white);
+}
+
+.search-controller {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.search-controller .catalog-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.library-search input {
+    width: 394px;
+    height: 44px;
+    padding: 8px 16px;
+
+    background-color: var(--light-gray);
+    border-radius: 12px;
+
+    font-family: 'Involve', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 140%;
+    letter-spacing: 0;
+
+    color: var(--primary);
+}
+
+.library-search input::placeholder {
+    color: var(--tertiary);
+}
+
+
+

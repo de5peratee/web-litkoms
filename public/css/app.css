@@ -5,8 +5,13 @@ body {
     min-height: 100vh;
 
     background-color: var(--gray);
+    background-image: url("../images/handwrite.svg");
+    background-repeat: repeat;
 }
 
 main {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 135px;
 }
