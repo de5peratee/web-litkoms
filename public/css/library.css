@@ -1,3 +1,10 @@
+.catalog {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: auto;
+}
+
 .library-header {
     display: flex;
     flex-direction: column;
@@ -5,6 +12,7 @@
     gap: 24px;
     padding: 48px;
     border-radius: 32px;
+    width: auto;
 
     background-color: var(--white);
 }
@@ -21,26 +29,149 @@
     height: 48px;
 }
 
+.library-search {
+    position: relative;
+    display: inline-block;
+}
+
+/* Сам инпут */
 .library-search input {
     width: 394px;
     height: 44px;
-    padding: 8px 16px;
+    padding: 8px 16px 8px 48px; /* Оставляем место под иконку */
 
     background-color: var(--light-gray);
     border-radius: 12px;
+    border: none;
 
     font-family: 'Involve', sans-serif;
     font-size: 14px;
     font-weight: 600;
     line-height: 140%;
-    letter-spacing: 0;
+    color: var(--primary);
 
+    transition: box-shadow 0.1s ease-in, background-color 0.3s ease-in;
+}
+
+/* Иконка поиска */
+.library-search::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: url('../images/icons/search_library.svg') no-repeat center;
+    background-size: contain;
+    opacity: 0.32; /* Прозрачность по умолчанию */
+
+    transition: opacity 0.1s ease-in;
+}
+
+/* Изменение тени при фокусе */
+.library-search input:focus,
+.library-search input:not(:placeholder-shown) {
+    background-color: white;
+    border: 1px solid var(--primary-blue);
+    box-shadow: 0px 16px 48px rgba(0, 90, 255, 0.08);
+}
+
+/* Делаем иконку полностью видимой при вводе текста */
+.library-search input:focus ~ .library-search::before,
+.library-search input:not(:placeholder-shown) ~ .library-search::before {
+    opacity: 1;
+}
+
+.catalog-sort {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.catalog-sort label {
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
+    accent-color: var(--primary-blue);
+}
+
+.filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+    padding-left: 48px;
+    width: auto;
+}
+
+.filter-tag {
+    cursor: pointer;
+    padding: 12px 24px;
+    border: 1px solid var(--gray);
+    border-radius: 12px;
+    transition: border-color 0.1s ease-in, background-color 0.1s ease-in;
+}
+
+.filter-tag:hover {
+    border-color: var(--light-gray);
+    background-color: var(--light-gray);
+}
+
+.filters .choice {
+    border: 2px solid var(--primary-blue);
+}
+
+.library-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 16px;
+    width: auto;
+}
+
+.book {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: auto;
+    background-color: var(--white);
+}
+
+.book img {
+    border-radius: 12px;
+    width: auto;
+}
+
+.book .description {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.book .categories {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.book .category {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--primary);
+}
+
+.book .about {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.book .title {
     color: var(--primary);
 }
 
-.library-search input::placeholder {
-    color: var(--tertiary);
+.book .author {
+    color: var(--secondary);
 }
-
-
-
