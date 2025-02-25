@@ -13,6 +13,7 @@
     <link href="{{ asset('css/footer.css') }}?v={{ time() }}" rel="stylesheet">
     <link href="{{ asset('css/library.css') }}?v={{ time() }}" rel="stylesheet">
     <link href="{{ asset('css/buttons.css') }}?v={{ time() }}" rel="stylesheet">
+    <link href="{{ asset('css/auth.css') }}?v={{ time() }}" rel="stylesheet">
     {{--    <link rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
 </head>
 <body>

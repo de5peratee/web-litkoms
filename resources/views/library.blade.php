@@ -9,7 +9,7 @@
 
             <div class="search-controller">
                 <div class="catalog-icon">
-                    <img src="{{ asset('images/icons/library.svg') }}" alt="Catalog Icon">
+                    <img src="{{ asset('images/icons/hw/library.svg') }}" alt="Catalog Icon">
                 </div>
 
                 <h2>Каталог</h2>

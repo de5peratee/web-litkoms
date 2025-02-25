@@ -1,0 +1,120 @@
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+
+    padding: 48px;
+    border-radius: 32px;
+    background-color: var(--white);
+}
+
+.auth-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.auth-container h3, .auth-container p {
+    text-align: center;
+}
+
+.auth-tabs {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+    padding: 4px;
+
+    border-radius: 16px;
+    background-color: var(--light-gray);
+}
+
+.auth-tabs .tab {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: 12px 16px;
+    width: 100%;
+    border-radius: 12px;
+    cursor: pointer;
+
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+.auth-tabs .tab .active {
+    background-color: var(--primary);
+    color: var(--light-gray);
+}
+
+
+.auth-tabs .tab:hover{
+    background-color: var(--white);
+}
+
+.auth-tabs .active:hover {
+    background-color: var(--primary);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+
+    width: 100%;
+
+    /*border: 2px solid red;*/
+}
+
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    width: 100%;
+}
+
+.auth-field input {
+    padding: 8px 16px;
+    height: 44px;
+
+    border-radius: 12px;
+    border: none;
+
+    font-family: 'Involve', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 140%;
+    color: var(--primary);
+
+    background-color: var(--light-gray);
+
+    transition: box-shadow 0.1s ease-in, background-color 0.3s ease-in;
+}
+
+.auth-field input::placeholder {
+    color: var(--tertiary);
+}
+
+.auth-field input:focus,
+.auth-field input:not(:placeholder-shown) {
+    background-color: var(--white);
+    border: 1px solid var(--primary-blue);
+    box-shadow: 0px 16px 48px rgba(0, 90, 255, 0.08);
+}
+
+
+.auth-form button {
+    font-family: 'Involve', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 140%;
+    letter-spacing: 0;
+
+    width: 100%;
+}
+
+
