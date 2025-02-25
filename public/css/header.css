@@ -43,7 +43,7 @@
 }
 
 .active {
-    background-color: var(--primary-blue);
+    background-color: var(--primary);
     color: var(--white);
 }
 
@@ -127,6 +127,41 @@
     background-color: var(--light-gray);
     cursor: pointer;
 }
+
+/* Общие стили для кнопки */
+.login-page-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px; /* Отступы вокруг текста */
+    font-family: 'Involve', sans-serif;
+    color: var(--white); /* Цвет текста */
+    background-color: var(--primary-blue);
+    border-radius: 12px; /* Скругленные углы */
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.3s, transform 0.2s; /* Анимации */
+    gap: 8px; /* Расстояние между иконкой и текстом */
+    height: 44px;
+}
+
+/* Стили для иконки */
+.icon {
+    width: 24px; /* Ширина иконки */
+    height: 24px; /* Высота иконки */
+    background: url('../images/icons/login_icon.svg') no-repeat center; /* Путь к иконке */
+    background-size: contain; /* Масштабируем иконку, чтобы она помещалась */
+}
+
+/* Эффект при наведении */
+.login-page-button:hover {
+    background-color: var(--primary); /* Темный оттенок для ховера */
+}
+
+/* Эффект при нажатии */
+.login-page-button:active {
+    transform: scale(0.95); /* Мелкое сжатие при нажатии */
+}
+
 
 
 

@@ -17,6 +17,11 @@
 
         <div class="profile-bar">
 
+            <a href ="{{ route('auth') }}" class="login-page-button text-small">
+                Войти
+                <span class="icon"></span>
+            </a>
+
             <div class="avatar">
                 <div class="notify-count">
                     <span>9+</span>

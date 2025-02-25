@@ -25,3 +25,8 @@ Route::get('/authors_comics_landing', function () {
 Route::get('/litar_landing', function () {
     return view('litar_landing');
 })->name('litar_landing');
+
+Route::get('/auth', function () {
+    return view('auth');
+})->name('auth');
+
