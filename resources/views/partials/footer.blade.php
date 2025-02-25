@@ -7,7 +7,7 @@
 
     <ul class="footer-nav-menu">
         <li><a href="{{ route('home') }}" class="nav-link">Главная</a></li>
-        <li><a href="{{ route('publications') }}" class="nav-link">Библиотека</a></li>
+        <li><a href="{{ route('library') }}" class="nav-link">Библиотека</a></li>
         <li><a href="{{ route('news') }}" class="nav-link">Лента</a></li>
         <li><a href="{{ route('events') }}" class="nav-link">Мероприятия</a></li>
         <li><a href="{{ route('authors_comics_landing') }}" class="nav-link">Авторские комиксы</a></li>

@@ -1,0 +1,30 @@
+.primary-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    /*font-size: 14px;*/
+    /*font-weight: 600;*/
+    /*line-height: 140%;*/
+    /*letter-spacing: 0;*/
+
+    padding: 8px 24px;
+    height: 44px;
+    border-radius: 12px;
+    cursor: pointer;
+
+    background-color: var(--primary-blue);
+    color: var(--white);
+
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.primary-btn:hover {
+    background-color: var(--primary);
+}
+
+.primary-btn:active {
+    transform: scale(0.95); /* Мелкое сжатие при нажатии */
+}

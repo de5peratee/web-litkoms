@@ -91,62 +91,6 @@
                     </div>
                 </div>
             </div>
-            <div class="book">
-                <img src="{{ asset('images/comics_cover.png') }}" alt="" class="comics_cover">
-                <div class="description">
-                    <div class="categories">
-                        <div class="category">Хоррор</div>
-                        <div class="category">Ужасы</div>
-                        <div class="category">Триллер</div>
-                    </div>
-                    <div class="about">
-                        <p class="title text-big">BLACK MIRROR</p>
-                        <p class="author text-small">Мухва</p>
-                    </div>
-                </div>
-            </div>
-            <div class="book">
-                <img src="{{ asset('images/comics_cover.png') }}" alt="" class="comics_cover">
-                <div class="description">
-                    <div class="categories">
-                        <div class="category">Хоррор</div>
-                        <div class="category">Ужасы</div>
-                        <div class="category">Триллер</div>
-                    </div>
-                    <div class="about">
-                        <p class="title text-big">BLACK MIRROR</p>
-                        <p class="author text-small">Мухва</p>
-                    </div>
-                </div>
-            </div>
-            <div class="book">
-                <img src="{{ asset('images/comics_cover.png') }}" alt="" class="comics_cover">
-                <div class="description">
-                    <div class="categories">
-                        <div class="category">Хоррор</div>
-                        <div class="category">Ужасы</div>
-                        <div class="category">Триллер</div>
-                    </div>
-                    <div class="about">
-                        <p class="title text-big">BLACK MIRROR</p>
-                        <p class="author text-small">Мухва</p>
-                    </div>
-                </div>
-            </div>
-            <div class="book">
-                <img src="{{ asset('images/comics_cover.png') }}" alt="" class="comics_cover">
-                <div class="description">
-                    <div class="categories">
-                        <div class="category">Хоррор</div>
-                        <div class="category">Ужасы</div>
-                        <div class="category">Триллер</div>
-                    </div>
-                    <div class="about">
-                        <p class="title text-big">BLACK MIRROR</p>
-                        <p class="author text-small">Мухва</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 @endsection

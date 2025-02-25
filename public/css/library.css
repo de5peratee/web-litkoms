@@ -89,12 +89,7 @@
     gap: 24px;
 }
 
-.catalog-sort label {
-    cursor: pointer;
-}
-
 input[type="checkbox"] {
-    transform: scale(1.5);
     accent-color: var(--primary-blue);
 }
 
@@ -115,15 +110,6 @@ input[type="checkbox"] {
     transition: border-color 0.1s ease-in, background-color 0.1s ease-in;
 }
 
-.filter-tag:hover {
-    border-color: var(--light-gray);
-    background-color: var(--light-gray);
-}
-
-.filters .choice {
-    border: 2px solid var(--primary-blue);
-}
-
 .library-content {
     display: flex;
     flex-wrap: wrap;
@@ -136,7 +122,6 @@ input[type="checkbox"] {
     flex-direction: column;
     gap: 24px;
     width: auto;
-    background-color: var(--white);
 }
 
 .book img {

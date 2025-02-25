@@ -6,9 +6,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/publications', function () {
-    return view('publications');
-})->name('publications');
+Route::get('/library', function () {
+    return view('library');
+})->name('library');
 
 Route::get('/news', function () {
     return view('news');
