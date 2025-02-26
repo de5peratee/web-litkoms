@@ -39,52 +39,52 @@
             <button type="submit" class="primary-btn">Войти</button>
         </form>
 
-{{--        <!-- Форма регистрации -->--}}
-{{--        <form method="POST" id="registerForm" class="auth-form">--}}
-{{--            @csrf--}}
-{{--            <div class="auth-form-row">--}}
-{{--                <div>--}}
-{{--                    <label for="full_name">ФИО:</label>--}}
-{{--                    <input type="text" name="full_name" id="full_name" required placeholder="Введите ваше полное имя">--}}
-{{--                </div>--}}
-{{--            </div>--}}
+        <!-- Форма регистрации -->
+        <form method="POST" id="registerForm" class="auth-form">
+            @csrf
+            <div class="auth-form-row">
+                <div>
+                    <label for="full_name">ФИО:</label>
+                    <input type="text" name="full_name" id="full_name" required placeholder="Введите ваше полное имя">
+                </div>
+            </div>
 
-{{--            <div class="auth-form-row">--}}
-{{--                <div>--}}
-{{--                    <label for="nickname">Ник:</label>--}}
-{{--                    <input type="text" name="nickname" id="nickname" required placeholder="Введите ваш ник">--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="auth-form-row">
+                <div>
+                    <label for="nickname">Ник:</label>
+                    <input type="text" name="nickname" id="nickname" required placeholder="Введите ваш ник">
+                </div>
+            </div>
 
-{{--            <div class="auth-form-row">--}}
-{{--                <div>--}}
-{{--                    <label for="dob">Дата рождения:</label>--}}
-{{--                    <input type="date" name="dob" id="dob" required>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="auth-form-row">
+                <div>
+                    <label for="dob">Дата рождения:</label>
+                    <input type="date" name="dob" id="dob" required>
+                </div>
+            </div>
 
-{{--            <div class="auth-form-row">--}}
-{{--                <div>--}}
-{{--                    <label for="email">Почта:</label>--}}
-{{--                    <input type="email" name="email" id="email" required placeholder="Введите ваш email">--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="auth-form-row">
+                <div>
+                    <label for="email">Почта:</label>
+                    <input type="email" name="email" id="email" required placeholder="Введите ваш email">
+                </div>
+            </div>
 
-{{--            <div class="auth-form-row">--}}
-{{--                <div>--}}
-{{--                    <label for="password">Пароль:</label>--}}
-{{--                    <input type="password" name="password" id="password" required placeholder="Введите ваш пароль">--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="auth-form-row">
+                <div>
+                    <label for="password">Пароль:</label>
+                    <input type="password" name="password" id="password" required placeholder="Введите ваш пароль">
+                </div>
+            </div>
 
-{{--            <div class="auth-form-row">--}}
-{{--                <div>--}}
-{{--                    <label for="password_confirmation">Подтверждение пароля:</label>--}}
-{{--                    <input type="password" name="password_confirmation" id="password_confirmation" required placeholder="Повторите пароль">--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="auth-form-row">
+                <div>
+                    <label for="password_confirmation">Подтверждение пароля:</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" required placeholder="Повторите пароль">
+                </div>
+            </div>
 
-{{--            <button type="submit" class="primary-btn">Зарегистрироваться</button>--}}
-{{--        </form>--}}
+            <button type="submit" class="primary-btn">Зарегистрироваться</button>
+        </form>
     </div>
 @endsection

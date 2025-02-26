@@ -5,16 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Главная')</title>
-    <link href="{{ asset('css/reset.css') }}?v={{ time() }}" rel="stylesheet">
-    <link href="{{ asset('css/fonts.css') }}?v={{ time() }}" rel="stylesheet">
-    <link href="{{ asset('css/colors.css') }}?v={{ time() }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}?v={{ time() }}" rel="stylesheet">
-    <link href="{{ asset('css/header.css') }}?v={{ time() }}" rel="stylesheet">
-    <link href="{{ asset('css/footer.css') }}?v={{ time() }}" rel="stylesheet">
-    <link href="{{ asset('css/library.css') }}?v={{ time() }}" rel="stylesheet">
-    <link href="{{ asset('css/buttons.css') }}?v={{ time() }}" rel="stylesheet">
-    <link href="{{ asset('css/auth.css') }}?v={{ time() }}" rel="stylesheet">
-    {{--    <link rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
+        @vite(['resources/css/reset.css'])
+        @vite(['resources/css/fonts.css'])
+        @vite(['resources/css/colors.css'])
+        @vite(['resources/css/app.css'])
+        @vite(['resources/css/header.css'])
+        @vite(['resources/css/footer.css'])
+        @vite(['resources/css/library.css'])
+        @vite(['resources/css/buttons.css'])
+        @vite(['resources/css/auth.css'])
 </head>
 <body>
 <!-- Включаем шапку -->

@@ -66,7 +66,7 @@
     transform: translateY(-50%);
     width: 24px;
     height: 24px;
-    background: url('../images/icons/search_library.svg') no-repeat center;
+    background: url('../../public/images/icons/search_library.svg') no-repeat center;
     background-size: contain;
     opacity: 0.32; /* Прозрачность по умолчанию */
 
