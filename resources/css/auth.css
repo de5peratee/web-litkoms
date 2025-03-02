@@ -42,20 +42,18 @@
     border-radius: 12px;
     cursor: pointer;
 
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-.auth-tabs .tab .active {
-    background-color: var(--primary);
-    color: var(--light-gray);
+    color: var(--tertiary);
+
+    transition: all 0.3s ease;
 }
 
-
-.auth-tabs .tab:hover{
+.auth-tabs .tab.active {
     background-color: var(--white);
+    color: var(--primary);
 }
 
-.auth-tabs .active:hover {
-    background-color: var(--primary);
+.auth-tabs .tab:hover, .auth-tabs .active:hover{
+    background-color: var(--white);
 }
 
 .auth-form {
@@ -66,7 +64,13 @@
 
     width: 100%;
 
-    /*border: 2px solid red;*/
+    transition: all 0.3s ease;
+}
+
+.auth-form-row {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
 }
 
 .auth-field {

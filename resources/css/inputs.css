@@ -1,0 +1,29 @@
+input {
+    padding: 8px 16px;
+    height: 44px;
+
+    border-radius: 12px;
+    border: none;
+
+    font-family: 'Involve', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 140%;
+    color: var(--primary);
+
+    background-color: var(--light-gray);
+
+    transition: box-shadow 0.1s ease-in, background-color 0.3s ease-in;
+}
+
+input::placeholder {
+    color: var(--tertiary);
+}
+
+input:focus,
+input:not(:placeholder-shown) {
+    background-color: var(--white);
+    border: 1px solid var(--primary-blue);
+    box-shadow: 0px 16px 48px rgba(0, 90, 255, 0.08);
+}
+

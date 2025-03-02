@@ -14,7 +14,7 @@
         <li><a href="{{ route('litar_landing') }}" class="nav-link ">Лит-AR</a></li>
     </ul>
 
-    <div class="description">
+    <div class="policy_desc">
         <span>&copy; 2025 Все права защищены</span>
         <span>Политика конфиденциальности</span>
         <span>Условия использования контента</span>

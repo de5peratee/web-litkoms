@@ -30,3 +30,13 @@ Route::get('/auth', function () {
     return view('auth');
 })->name('auth');
 
+Route::post('/auth/login', function () {
+    return view('auth');
+})->name('login');
+
+
+Route::post('/auth/register', function () {
+    return view('auth');
+})->name('register');
+
+

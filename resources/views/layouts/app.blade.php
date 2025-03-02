@@ -8,12 +8,14 @@
         @vite(['resources/css/reset.css'])
         @vite(['resources/css/fonts.css'])
         @vite(['resources/css/colors.css'])
-        @vite(['resources/css/app.css'])
         @vite(['resources/css/header.css'])
         @vite(['resources/css/footer.css'])
-        @vite(['resources/css/library.css'])
         @vite(['resources/css/buttons.css'])
+        @vite(['resources/css/app.css'])
+        @vite(['resources/css/library.css'])
         @vite(['resources/css/auth.css'])
+
+        @vite(['resources/js/auth-tabs.js'])
 </head>
 <body>
 <!-- Включаем шапку -->

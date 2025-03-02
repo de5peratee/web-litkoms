@@ -15,8 +15,8 @@ export default defineConfig({
                 'resources/css/library.css',
                 'resources/css/reset.css',
 
-                'resources/js/app.js'
-
+                'resources/js/app.js',
+                'resources/js/auth-tabs.js'
 
             ],
             refresh: true,
