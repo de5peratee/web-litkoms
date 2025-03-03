@@ -15,32 +15,35 @@
             <li><a href="{{ route('litar_landing') }}" class="nav-link {{ Route::currentRouteName() == 'litar_landing' ? 'active' : '' }}">Лит-AR</a></li>
         </ul>
 
-        @guest
-            <a href="{{route('auth')}}" class="primary-btn">
-                Войти
-                <img src="{{asset('../images/icons/login_icon.svg')}}" alt="icon">
-            </a>
-        @endguest
+{{--        @guest--}}
+{{--            <a href="{{route('auth')}}" class="primary-btn">--}}
+{{--                Войти--}}
+{{--                <img src="{{asset('../images/icons/login_icon.svg')}}" alt="icon">--}}
+{{--            </a>--}}
+{{--        @endguest--}}
 
-        @auth
+{{--        @auth--}}
             <div class="profile-bar">
-                <div class="avatar">
-                    <div class="notify-count">
-                        <span>9+</span>
-                    </div>
+                <div class="icon-wrapper">
+                    <img src="{{ asset('images/icons/bell.svg') }}" alt="Icon">
+                </div>
 
+                <div class="avatar">
                     <img src="{{ asset('images/nigga.png') }}" alt="Img">
                 </div>
 
                 <div class="profile-info">
-                    <p class="text-small">Имя пользователя</p>
-                    <div class="whistleblower">
+
+                    <p class="text-small">Владислав М.</p>
+
+                    <div class="icon-wrapper">
                         <img src="{{ asset('images/icons/arrow-down.svg') }}" alt="Icon">
                     </div>
+
                 </div>
 
             </div>
-        @endauth
+{{--        @endauth--}}
 
     </nav>
 </header>

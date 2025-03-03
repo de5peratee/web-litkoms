@@ -14,7 +14,15 @@
 }
 
 .logo {
-    width: 96px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 280px;
+
+}
+
+.logo img {
+    height: 48px;
 }
 
 .nav-menu {
@@ -55,7 +63,34 @@
 .profile-bar {
     display: flex;
     flex-direction: row;
-    gap: 16px;
+    justify-content: right;
+    gap: 8px;
+    align-items: center;
+
+    width: 280px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.icon-wrapper:hover {
+    background-color: var(--light-gray);
+    cursor: pointer;
 }
 
 .avatar {
@@ -84,50 +119,6 @@
     object-fit: cover;
 }
 
-.notify-count {
-    position: absolute;
-    top: -8px;  /* Чуть выше аватарки */
-    right: -8px; /* Чуть правее */
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    min-width: 18px;
-    min-height: 18px;
-    padding: 0 4px;
-
-    z-index: 10;
-
-    background-color: var(--primary-red);
-    color: var(--white);
-
-    border-radius: 999px;
-    border: 2px solid var(--white);
-}
-
-
-.profile-info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-}
-
-.whistleblower {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 999px;
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.whistleblower:hover {
-    background-color: var(--light-gray);
-    cursor: pointer;
-}
 
 
 
