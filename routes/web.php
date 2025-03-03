@@ -39,4 +39,6 @@ Route::post('/auth/register', function () {
     return view('auth');
 })->name('register');
 
-
+Route::get('/profile', function () {
+    return view('user.profile');
+})->name('profile');

@@ -15,14 +15,14 @@
             <li><a href="{{ route('litar_landing') }}" class="nav-link {{ Route::currentRouteName() == 'litar_landing' ? 'active' : '' }}">Лит-AR</a></li>
         </ul>
 
-{{--        @guest--}}
-{{--            <a href="{{route('auth')}}" class="primary-btn">--}}
-{{--                Войти--}}
-{{--                <img src="{{asset('../images/icons/login_icon.svg')}}" alt="icon">--}}
-{{--            </a>--}}
-{{--        @endguest--}}
+        @guest
+            <a href="{{route('auth')}}" class="primary-btn">
+                Войти
+                <img src="{{asset('../images/icons/login_icon.svg')}}" alt="icon">
+            </a>
+        @endguest
 
-{{--        @auth--}}
+        @auth
             <div class="profile-bar">
                 <div class="icon-wrapper">
                     <img src="{{ asset('images/icons/bell.svg') }}" alt="Icon">
@@ -43,7 +43,7 @@
                 </div>
 
             </div>
-{{--        @endauth--}}
+        @endauth
 
     </nav>
 </header>

@@ -1,7 +1,7 @@
 <!-- resources/views/home.blade.php -->
 @extends('layouts.app')  <!-- Используем главный шаблон -->
 
-@section('title', 'Каталог')  <!-- Устанавливаем название страницы -->
+@section('title', 'Библиотека книг и комиксов')  <!-- Устанавливаем название страницы -->
 
 @section('content')
     <section class="catalog">
@@ -12,7 +12,7 @@
                     <img src="{{ asset('images/icons/hw/library.svg') }}" alt="Catalog Icon">
                 </div>
 
-                <h2>Каталог</h2>
+                <h2>Библиотека книг и комиксов</h2>
 
                 <div class="library-search">
                     <input type="text" class="search-input" placeholder="Поиск по каталогу...">

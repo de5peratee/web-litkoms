@@ -54,6 +54,7 @@
 .active {
     background-color: var(--primary);
     color: var(--white);
+    /*border-bottom: 2px solid var(--primary-blue);*/
 }
 
 .active:hover {
