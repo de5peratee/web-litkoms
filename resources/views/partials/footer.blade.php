@@ -1,4 +1,6 @@
 <!-- resources/views/partials/footer.blade.php -->
+@vite(['resources/css/footer.css'])
+
 <footer>
     <div class="litcoms-info">
         <p class="text-big">litcoms@mail.ru</p>

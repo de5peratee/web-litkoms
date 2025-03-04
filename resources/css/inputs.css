@@ -1,13 +1,44 @@
-input {
+.lit-form {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 460px;
+    background-color: transparent;
+    transition: opacity 0.3s ease;
+}
+
+.lit-form-row {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    width: 100%;
+}
+
+.lit-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.lit-field label {
+    color: var(--primary);
+    font-family: 'Involve', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.lit-field input {
     padding: 8px 16px;
     height: 44px;
 
     border-radius: 12px;
-    border: none;
+    border: 1px  solid var(--gray);
 
     font-family: 'Involve', sans-serif;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 140%;
     color: var(--primary);
 
@@ -16,14 +47,21 @@ input {
     transition: box-shadow 0.1s ease-in, background-color 0.3s ease-in;
 }
 
-input::placeholder {
+.lit-field input::placeholder {
     color: var(--tertiary);
 }
 
-input:focus,
-input:not(:placeholder-shown) {
+.lit-field input:focus {
     background-color: var(--white);
     border: 1px solid var(--primary-blue);
     box-shadow: 0px 16px 48px rgba(0, 90, 255, 0.08);
 }
 
+.lit-form button {
+    font-family: 'Involve', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 140%;
+    width: 100%;
+    padding: 12px;
+}

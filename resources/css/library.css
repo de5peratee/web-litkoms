@@ -1,7 +1,8 @@
-.catalog {
+.library-container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
+    width: 100%;
 }
 
 .library-header {
@@ -115,20 +116,22 @@ input[type="checkbox"] {
 .library-content {
     display: flex;
     flex-wrap: wrap;
-    gap: 24px 16px;
-    width: auto;
+    gap: 24px 8px;
+    width: 100%;
+    background-color: var(--white);
+    padding: 48px;
+    border-radius: 32px;
 }
 
 .book {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    width: auto;
+    gap: 16px;
 }
 
 .book img {
     border-radius: 12px;
-    width: auto;
+    width: 240px;
 }
 
 .book .description {
@@ -144,9 +147,9 @@ input[type="checkbox"] {
 }
 
 .book .category {
-    padding: 8px 16px;
+    padding: 4px 12px;
     border-radius: 999px;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--gray);
 }
 
 .book .about {

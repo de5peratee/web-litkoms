@@ -1,4 +1,7 @@
 <!-- resources/views/partials/header.blade.php -->
+@vite(['resources/css/buttons.css'])
+@vite(['resources/css/header.css'])
+
 <header>
     <nav class="header">
 
@@ -15,15 +18,16 @@
             <li><a href="{{ route('litar_landing') }}" class="nav-link {{ Route::currentRouteName() == 'litar_landing' ? 'active' : '' }}">Лит-AR</a></li>
         </ul>
 
-        @guest
-            <a href="{{route('auth')}}" class="primary-btn">
-                Войти
-                <img src="{{asset('../images/icons/login_icon.svg')}}" alt="icon">
-            </a>
-        @endguest
 
-        @auth
-            <div class="profile-bar">
+        <div class="account-bar">
+            @guest
+                <a href="{{route('auth')}}" class="primary-btn">
+                    Войти
+                    <img src="{{asset('../images/icons/login_icon.svg')}}" alt="icon">
+                </a>
+            @endguest
+
+            @auth
                 <div class="icon-wrapper">
                     <img src="{{ asset('images/icons/bell.svg') }}" alt="Icon">
                 </div>
@@ -41,9 +45,8 @@
                     </div>
 
                 </div>
-
-            </div>
-        @endauth
+            @endauth
+        </div>
 
     </nav>
 </header>

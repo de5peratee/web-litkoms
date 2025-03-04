@@ -61,7 +61,7 @@
     background-color: var(--primary);
 }
 
-.profile-bar {
+.account-bar {
     display: flex;
     flex-direction: row;
     justify-content: right;

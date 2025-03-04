@@ -14,6 +14,7 @@ export default defineConfig({
                 'resources/css/header.css',
                 'resources/css/library.css',
                 'resources/css/reset.css',
+                'resources/css/inputs.css',
 
                 'resources/js/app.js',
                 'resources/js/auth-tabs.js'

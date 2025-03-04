@@ -1,41 +1,45 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const loginTab = document.getElementById('loginTab');
-    const registerTab = document.getElementById('registerTab');
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    const authHeader = document.querySelector('.auth-header h3');
-    const authDescription = document.querySelector('.auth-header .text-small');
+import './bootstrap';
+import $ from 'jquery';
+window.jQuery = window.$ = $;
 
-    // Изначально показываем форму логина, скрываем регистрацию
-    loginForm.style.display = 'flex';
-    registerForm.style.display = 'none';
+$(document).ready(function() {
+    const $loginTab = $('#loginTab');
+    const $registerTab = $('#registerTab');
+    const $loginForm = $('#loginForm');
+    const $registerForm = $('#registerForm');
+    const $authHeader = $('.auth-header h3');
+    const $authDescription = $('.auth-header .text-small');
 
-    loginTab.addEventListener('click', function () {
-        // Переключаем активный класс
-        loginTab.classList.add('active');
-        registerTab.classList.remove('active');
+    // Изначально показываем форму логина
+    $loginForm.css('display', 'flex').addClass('active');
+    $registerForm.css('display', 'none');
+    $loginTab.addClass('active');
 
-        // Переключаем видимость форм
-        loginForm.style.display = 'flex';
-        registerForm.style.display = 'none';
+    // Переключение на вкладку логина
+    $loginTab.on('click', function() {
+        if (!$loginTab.hasClass('active')) {
+            $loginTab.addClass('active');
+            $registerTab.removeClass('active');
 
-        // Обновляем заголовок и описание
-        authHeader.textContent = 'Вход в аккаунт';
-        authDescription.innerHTML = 'Войдите в профиль, чтобы публиковать авторские комиксы, <br> комментировать и оценивать другие и многое другое';
+            $registerForm.css('display', 'none');
+            $loginForm.css('display', 'flex');
+
+            $authHeader.text('Вход в аккаунт');
+            $authDescription.html('Войдите в профиль, чтобы публиковать авторские комиксы, <br> комментировать и оценивать другие и многое другое');
+        }
     });
 
-    registerTab.addEventListener('click', function () {
-        // Переключаем активный класс
-        registerTab.classList.remove('active');
-        loginTab.classList.remove('active');
-        registerTab.classList.add('active');
+    // Переключение на вкладку регистрации
+    $registerTab.on('click', function() {
+        if (!$registerTab.hasClass('active')) {
+            $registerTab.addClass('active');
+            $loginTab.removeClass('active');
 
-        // Переключаем видимость форм
-        loginForm.style.display = 'none';
-        registerForm.style.display = 'flex';
+            $loginForm.css('display', 'none');
+            $registerForm.css('display', 'flex');
 
-        // Обновляем заголовок и описание
-        authHeader.textContent = 'Регистрация';
-        authDescription.innerHTML = 'Создайте аккаунт, чтобы делиться своими комиксами <br> и участвовать в жизни сообщества';
+            $authHeader.text('Регистрация');
+            $authDescription.html('Создайте аккаунт, чтобы делиться своими комиксами <br> и участвовать в жизни сообщества');
+        }
     });
 });

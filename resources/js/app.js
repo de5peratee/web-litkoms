@@ -1,11 +1,9 @@
 import './bootstrap';
-import { gsap } from 'gsap';
+import $ from 'jquery';
+window.jQuery = window.$ = $; // Делаем jQuery доступным глобально
 
-document.addEventListener('DOMContentLoaded', function() {
-    gsap.to('.page-content', {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out'
-    });
+$(document).ready(function() {
+    $('.page-content').css({ opacity: 0 }).animate({
+        opacity: 1
+    }, 500);
 });

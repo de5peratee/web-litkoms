@@ -2,7 +2,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-
     background-color: var(--gray);
     background-image: url("../../public/images/handwrite.svg");
     background-repeat: repeat;
@@ -14,31 +13,32 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    padding: 0 clamp(16px, 10vw, 135px); /* Адаптивный отступ по бокам, вертикальный остается 0 */
-    margin: 0 auto; /* Центрируем main */
+    padding: 0 clamp(16px, 10vw, 135px);
+    margin: 0 auto;
+    width: 100%;
 }
 
 /* Адаптивные боковые отступы */
 @media (max-width: 1200px) {
     main {
-        padding: 0 clamp(16px, 8vw, 120px);
+        padding: 0 clamp(16px, 8vw, 128px);
     }
 }
 
 @media (max-width: 992px) {
     main {
-        padding: 0 clamp(16px, 6vw, 100px);
+        padding: 0 clamp(16px, 6vw, 96px);
     }
 }
 
 @media (max-width: 768px) {
     main {
-        padding: 0 clamp(16px, 4vw, 80px);
+        padding: 0 clamp(16px, 4vw, 64px);
     }
 }
 
 @media (max-width: 480px) {
     main {
-        padding: 0 clamp(16px, 2vw, 40px);
+        padding: 0 clamp(16px, 2vw, 32px);
     }
 }

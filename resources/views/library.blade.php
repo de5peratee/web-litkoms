@@ -1,10 +1,12 @@
 <!-- resources/views/home.blade.php -->
 @extends('layouts.app')  <!-- Используем главный шаблон -->
 
-@section('title', 'Библиотека книг и комиксов')  <!-- Устанавливаем название страницы -->
+@section('title', 'Библиотека Литкомс')  <!-- Устанавливаем название страницы -->
 
 @section('content')
-    <section class="catalog">
+    @vite(['resources/css/library.css'])
+
+    <div class="library-container">
         <div class="library-header">
 
             <div class="search-controller">
@@ -12,7 +14,7 @@
                     <img src="{{ asset('images/icons/hw/library.svg') }}" alt="Catalog Icon">
                 </div>
 
-                <h2>Библиотека книг и комиксов</h2>
+                <h2>Библиотека Литкомс</h2>
 
                 <div class="library-search">
                     <input type="text" class="search-input" placeholder="Поиск по каталогу...">
@@ -91,6 +93,34 @@
                     </div>
                 </div>
             </div>
+            <div class="book">
+                <img src="{{ asset('images/comics_cover.png') }}" alt="" class="comics_cover">
+                <div class="description">
+                    <div class="categories">
+                        <div class="category">Хоррор</div>
+                        <div class="category">Ужасы</div>
+                        <div class="category">Триллер</div>
+                    </div>
+                    <div class="about">
+                        <p class="title text-big">BLACK MIRROR</p>
+                        <p class="author text-small">Мухва</p>
+                    </div>
+                </div>
+            </div>
+            <div class="book">
+                <img src="{{ asset('images/comics_cover.png') }}" alt="" class="comics_cover">
+                <div class="description">
+                    <div class="categories">
+                        <div class="category">Хоррор</div>
+                        <div class="category">Ужасы</div>
+                        <div class="category">Триллер</div>
+                    </div>
+                    <div class="about">
+                        <p class="title text-big">BLACK MIRROR</p>
+                        <p class="author text-small">Мухва</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
 @endsection
