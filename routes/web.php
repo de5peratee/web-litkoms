@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CatalogController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,3 +48,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/profile', function () {
     return view('user.profile');
 })->name('profile');
+
+Route::get('/catalog', [CatalogController::class, 'index'])
+    ->name('catalog.index');
