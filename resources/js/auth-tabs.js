@@ -11,7 +11,7 @@ $(document).ready(function() {
     const $authDescription = $('.auth-header .text-small');
 
     // Изначально показываем форму логина
-    $loginForm.css('display', 'flex').addClass('active');
+    $loginForm.css('display', 'flex');
     $registerForm.css('display', 'none');
     $loginTab.addClass('active');
 
