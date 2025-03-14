@@ -20,8 +20,9 @@
 
 
         <div class="account-bar">
+
             @guest
-                <a href="{{route('auth')}}" class="primary-btn">
+                <a href="{{route('auth.index')}}" class="primary-btn">
                     Войти
                     <img src="{{asset('../images/icons/login_icon.svg')}}" alt="icon">
                 </a>
@@ -38,11 +39,18 @@
 
                 <div class="profile-info">
 
-                    <p class="text-small">Владислав М.</p>
+                    <p class="text-small">
+                        {{ Auth::user()->name }} {{ mb_substr(Auth::user()->last_name, 0, 1) }}.
+                    </p>
 
                     <div class="icon-wrapper">
                         <img src="{{ asset('images/icons/arrow-down.svg') }}" alt="Icon">
                     </div>
+
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button style="cursor: pointer" type="submit">Выйти</button>
+                    </form>
 
                 </div>
             @endauth

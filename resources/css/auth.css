@@ -51,6 +51,11 @@
     background-color: var(--white);
 }
 
+.error-message {
+    color: rgba(255, 0, 0, 0.6);
+    font-size: smaller;
+}
+
 /*.auth-form {*/
 /*    display: none;*/
 /*    flex-direction: column;*/

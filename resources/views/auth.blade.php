@@ -14,7 +14,8 @@
                 <img src="{{ asset('images/icons/hw/login-hw-icon.svg') }}" alt="icon">
             </div>
             <h3>Вход в аккаунт</h3>
-            <p class="text-small">Войдите в профиль, чтобы публиковать авторские комиксы, комментировать и оценивать другие и многое другое</p>
+            <p class="text-small">Войдите в профиль, чтобы публиковать авторские комиксы, комментировать и оценивать
+                другие и многое другое</p>
         </div>
 
         <!-- Табы для переключения между логином и регистрацией -->
@@ -26,53 +27,83 @@
         <!-- Форма логина -->
         <form method="POST" action="{{ route('login') }}" id="loginForm" class="lit-form">
             @csrf
-
             <div class="lit-field">
-                <label for="login_email">Почта</label>
-                <input type="email" name="email" id="login_email" required placeholder="Введите ваш email">
+                <label for="email">Почта</label>
+                <input type="email" name="email" id="email" placeholder="Введите ваш email" value="{{old('email')}}">
+                @error('email')
+                <div class="error-message">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="lit-field">
-                <label for="login_password">Пароль</label>
-                <input type="password" name="password" id="login_password" required placeholder="Введите ваш пароль">
+                <label for="password">Пароль</label>
+                <input type="password" name="password" id="password" placeholder="Введите ваш пароль">
+                @error('password')
+                <div class="error-message">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" class="primary-btn">Войти</button>
         </form>
 
         <!-- Форма регистрации -->
-        <form method="POST" action="{{ route('register') }}" id="registerForm" class="lit-form">
+        <form method="POST" action="{{ route('register.store') }}" id="registerForm" class="lit-form">
             @csrf
             <div class="lit-form-row">
                 <div class="lit-field">
-                    <label for="full_name">ФИО</label>
-                    <input type="text" name="full_name" id="full_name" required placeholder="Введите ваше ФИО">
+                    <label for="name">Имя</label>
+                    <input type="text" name="name" id="name" placeholder="Введите ваше имя" value="{{old('name')}}">
+                    @error('name')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="lit-field">
+                    <label for="last_name">Фамилия</label>
+                    <input type="text" name="last_name" id="last_name" placeholder="Введите вашу фамилию" value="{{old('last_name')}}">
+                    @error('last_name')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="lit-form-row">
+                <div class="lit-field">
                     <label for="nickname">Ник</label>
-                    <input type="text" name="nickname" id="nickname" required placeholder="Введите ваш ник">
+                    <input type="text" name="nickname" id="nickname" placeholder="Введите ваш ник" value="{{old('nickname')}}">
+                    @error('nickname')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
 
             <div class="lit-form-row">
                 <div class="lit-field">
-                    <label for="dob">Дата рождения</label>
-                    <input type="date" name="dob" id="dob" required>
+                    <label for="birth_date">Дата рождения</label>
+                    <input type="date" name="birth_date" id="birth_date" value="{{old('birth_date')}}">
+                    @error('birth_date')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="lit-field">
-                    <label for="reg_email">Почта</label>
-                    <input type="email" name="email" id="reg_email" required placeholder="Введите ваш email">
+                    <label for="email">Почта</label>
+                    <input type="email" name="email" id="email" placeholder="Введите ваш email" value="{{old('email')}}">
+                    @error('email')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
 
             <div class="lit-form-row">
                 <div class="lit-field">
                     <label for="reg_password">Пароль</label>
-                    <input type="password" name="password" id="reg_password" required placeholder="Введите ваш пароль">
+                    <input type="password" name="password" id="reg_password" placeholder="Введите ваш пароль">
+                    @error('password')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="lit-field">
                     <label for="password_confirmation">Подтверждение пароля</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" required placeholder="Повторите пароль">
+                    <input type="password" name="password_confirmation" id="password_confirmation"
+                           placeholder="Повторите пароль">
                 </div>
             </div>
             <button type="submit" class="primary-btn">Зарегистрироваться</button>
