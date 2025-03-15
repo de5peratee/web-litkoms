@@ -18,7 +18,7 @@ class LoginController extends Controller
         return back()->withErrors(['email' => 'Неверные учётные данные']);
     }
 
-    public function logoutUser()
+    public function logout()
     {
         Auth::logout();
         return redirect('/');
