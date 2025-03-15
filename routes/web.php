@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,10 +42,7 @@ Route::get('/auth', [RegisterController::class, 'index'])
 Route::post('/auth/register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::post('/auth/login', [LoginController::class, 'loginUser'])->name('login');
-Route::post('/logout', [LoginController::class, 'logoutUser'])->name('logout');
-
-
-
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/profile', function () {
     return view('user.profile');
