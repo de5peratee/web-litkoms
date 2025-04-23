@@ -49,5 +49,5 @@ Route::get('/profile', function () {
     return view('user.profile');
 })->name('profile');
 
-Route::get('/catalog', [CatalogController::class, 'index'])
-    ->name('catalog.index');
+Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
+Route::get('/catalog/{id}', [CatalogController::class, 'show'])->name('catalog.show');

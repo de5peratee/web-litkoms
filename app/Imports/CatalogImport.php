@@ -13,16 +13,14 @@ class CatalogImport implements ToModel, WithHeadingRow, WithChunkReading
 {
     public function model(array $row)
     {
-        // Создаем запись каталога
         $catalog = Catalog::create([
             'name' => $row['name'],
             'author' => $row['author'],
             'description' => $row['description'],
-            'release_year' => (int) $row['year'], // Приводим к целому числу
+            'release_year' => (int) $row['year'],
             'cover' => null,
         ]);
 
-        // Обрабатываем теги (genres)
         if (!empty($row['genres'])) {
             $tags = array_map('trim', explode(',', $row['genres']));
             foreach ($tags as $tag) {
