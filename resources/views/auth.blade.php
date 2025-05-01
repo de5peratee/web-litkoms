@@ -1,12 +1,12 @@
 <!-- resources/views/home.blade.php -->
 @extends('layouts.app')  <!-- Используем главный шаблон -->
 
-@section('title', 'Регистрация/Вход')  <!-- Устанавливаем название страницы -->
+@section('title', 'Аутентификация')  <!-- Устанавливаем название страницы -->
 
 @section('content')
-    @vite(['resources/css/buttons.css'])
-    @vite(['resources/css/inputs.css'])
-    @vite(['resources/css/auth.css'])
+{{--    @vite(['resources/css/buttons.css'])--}}
+{{--    @vite(['resources/css/inputs.css'])--}}
+{{--    @vite(['resources/css/auth.css'])--}}
 
     <div class="auth-container">
         <div class="auth-header">

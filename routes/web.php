@@ -10,9 +10,13 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/library', function () {
-    return view('library');
-})->name('library');
+
+Route::get('/library', [CatalogController::class, 'index'])->name('library.index');
+Route::get('/library/{id}', [CatalogController::class, 'get_book'])->name('library.get_book');
+
+//Route::get('/library', function () {
+//    return view('library');
+//})->name('library');
 
 Route::get('/news', function () {
     return view('news');
@@ -48,6 +52,3 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/profile', function () {
     return view('user.profile');
 })->name('profile');
-
-Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
-Route::get('/catalog/{id}', [CatalogController::class, 'show'])->name('catalog.show');

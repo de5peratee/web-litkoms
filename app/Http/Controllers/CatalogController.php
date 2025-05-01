@@ -9,14 +9,14 @@ class CatalogController extends Controller
 {
     public function index()
     {
-        $catalogs = Catalog::with('genres')->paginate(20);
-        return view('catalog.index', compact('catalogs'));
+        $library = Catalog::with('genres')->paginate(12);
+        return view('library.index', compact('library'));
     }
 
-    public function show($id)
+    public function get_book($id)
     {
-        $catalog = Catalog::with('genres')->findOrFail($id);
-        return view('catalog.show', compact('catalog'));
+        $book = Catalog::with('genres')->findOrFail($id);
+        return view('library.book', compact('book'));
     }
 
 
