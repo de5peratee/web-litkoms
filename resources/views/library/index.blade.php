@@ -11,7 +11,7 @@
 
     <div class="search-container">
         <form id="search-form" action="{{ route('library.index') }}" method="GET">
-            <input type="text" name="search" placeholder="Поиск по названию или автору" value="{{ request('search') }}">
+            <input type="text" name="search" placeholder="Что желаете найти..." value="{{ request('search') }}">
             <button type="submit">Найти</button>
         </form>
     </div>

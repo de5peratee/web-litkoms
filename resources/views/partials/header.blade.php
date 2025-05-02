@@ -5,9 +5,9 @@
 <header>
     <nav class="header">
 
-        <div class="logo">
+        <a href="{{ route('home') }}" class="logo">
             <img src="{{ asset('images/logo.svg') }}" alt="logo">
-        </div>
+        </a>
 
         <ul class="nav-menu">
             <li><a href="{{ route('home') }}" class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">Главная</a></li>
