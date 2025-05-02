@@ -64,7 +64,7 @@ h3 {
     letter-spacing: 0;
 }
 
-span, label {
+span, label, .text-hint {
     font-size: 12px;
     font-weight: 600;
     line-height: 140%;

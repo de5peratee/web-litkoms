@@ -15,6 +15,7 @@ export default defineConfig({
                 'resources/css/library.css',
                 'resources/css/reset.css',
                 'resources/css/inputs.css',
+                'resources/css/book.css',
 
                 'resources/js/app.js',
                 'resources/js/library.js',

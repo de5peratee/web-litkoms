@@ -9,6 +9,11 @@ class CatalogController extends Controller
 {
     public function index(Request $request)
     {
+        // Сохраняем URL каталога в сессию
+        if (!$request->ajax()) {
+            session(['catalog_url' => $request->fullUrl()]);
+        }
+
         $query = Catalog::with('genres')->orderBy('created_at', 'desc');
 
         if ($request->filled('search')) {
@@ -31,6 +36,13 @@ class CatalogController extends Controller
     public function get_book($id)
     {
         $book = Catalog::with('genres')->findOrFail($id);
-        return view('library.book', compact('book'));
+
+        // Получаем сохраненный URL каталога или используем дефолтный
+        $backUrl = session('catalog_url', route('library.index'));
+
+        return view('library.book', [
+            'book' => $book,
+            'backUrl' => $backUrl
+        ]);
     }
 }
