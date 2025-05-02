@@ -6,17 +6,20 @@ use App\Http\Controllers\CatalogController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+//Главная
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
+// Основная страница библиотеки
+Route::get('/library', [CatalogController::class, 'index'])
+    ->name('library.index');
 
-Route::get('/library', [CatalogController::class, 'index'])->name('library.index');
-Route::get('/library/{id}', [CatalogController::class, 'get_book'])->name('library.get_book');
+// Страница книги
+Route::get('/library/{id}', [CatalogController::class, 'get_book'])
+    ->name('library.get_book');
 
-//Route::get('/library', function () {
-//    return view('library');
-//})->name('library');
+
 
 Route::get('/news', function () {
     return view('news');

@@ -9,8 +9,6 @@
         @vite(['resources/css/fonts.css'])
         @vite(['resources/css/colors.css'])
         @vite(['resources/css/app.css'])
-
-{{--        @vite(['resources/js/auth-tabs.js'])--}}
 </head>
 <body>
 
@@ -22,5 +20,6 @@
 
 @include('partials.footer')
 
+@vite(['resources/js/app.js'])
 </body>
 </html>

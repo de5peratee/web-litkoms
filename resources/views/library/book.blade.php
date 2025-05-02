@@ -4,7 +4,17 @@
 
 @section('content')
     <div class="book-details">
-        <h1>{{ $book->name }}</h1>
+        @if($book->cover && Storage::exists($book->cover))
+            <div class="cover_wrapper">
+                <img src="{{ Storage::url($book->cover) }}" alt="{{ $book->name }}">
+            </div>
+        @else
+            <div class="cover_wrapper">
+                <img src="{{ asset('images/default_template/comics.svg') }}" alt="comics_cover">
+            </div>
+        @endif
+
+        <h3>{{ $book->name }}</h3>
         <p>Автор: {{ $book->author }}</p>
         <p>Описание: {{ $book->description }}</p>
         <p>Год выпуска: {{ $book->release_year }}</p>
