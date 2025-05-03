@@ -19,15 +19,26 @@ Route::get('/library', [CatalogController::class, 'index'])
 Route::get('/library/{id}', [CatalogController::class, 'get_book'])
     ->name('library.get_book');
 
+Route::get('/events', function () {
+    return view('events.index');
+})->name('events.index');
+
+Route::get('/event', function () {
+    return view('events.event');
+})->name('events.get_event');
+
+
+// Мероприятия
+//Route::get('/events', [EventsController::class, 'index'])
+//    ->name('events.index');
+//
+//Route::get('/events/{id}', [EventsController::class, 'get_event'])
+//    ->name('events.get_event');
 
 
 Route::get('/news', function () {
     return view('news');
 })->name('news');
-
-Route::get('/events', function () {
-    return view('events');
-})->name('events');
 
 Route::get('/authors_comics_landing', function () {
     return view('authors_comics_landing');

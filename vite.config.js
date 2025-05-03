@@ -6,16 +6,21 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/css/auth.css',
-                'resources/css/buttons.css',
-                'resources/css/colors.css',
+                'resources/css/reset.css',
                 'resources/css/fonts.css',
+                'resources/css/colors.css',
+                'resources/css/icons.css',
+
                 'resources/css/footer.css',
                 'resources/css/header.css',
+
+                'resources/css/auth.css',
+                'resources/css/buttons.css',
                 'resources/css/library.css',
-                'resources/css/reset.css',
                 'resources/css/inputs.css',
                 'resources/css/book.css',
+                'resources/css/events.css',
+                'resources/css/event.css',
 
                 'resources/js/app.js',
                 'resources/js/library.js',

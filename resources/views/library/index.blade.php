@@ -1,34 +1,40 @@
 @extends('layouts.app')
 
-@section('title', 'Библиотека Литкомс')
+@section('title', 'Библиотека')
 
 @section('content')
     @vite(['resources/css/library.css', 'resources/js/library.js'])
 
-    <img src="{{ asset('images/icons/hw/library.svg') }}" alt="Catalog Icon">
+    <div class="library-container">
 
-    <h2>Библиотека</h2>
+        <div class="library-header">
+            <img src="{{ asset('images/icons/hw/library.svg') }}" class="icon-48" alt="icon">
 
-    <div class="search-container">
-        <form id="search-form" action="{{ route('library.index') }}" method="GET">
-            <input type="text" name="search" placeholder="Что желаете найти..." value="{{ request('search') }}">
-            <button type="submit">Найти</button>
-        </form>
-    </div>
+            <h2>Библиотека</h2>
 
-    <div class="library-grid">
-        @include('partials.books', ['library' => $library])
-    </div>
-
-    @if($library->hasMorePages())
-        <div class="load-more-container">
-            <button id="load-more" class="load-more-btn"
-                    data-page="2"
-                    data-search="{{ request('search') }}">
-                Посмотреть еще
-            </button>
+            <div class="search-container">
+                <form id="search-form" action="{{ route('library.index') }}" method="GET">
+                    <input type="text" name="search" placeholder="Что желаете найти..." value="{{ request('search') }}">
+                    <button type="submit">Найти</button>
+                </form>
+            </div>
         </div>
-    @endif
+
+        <div class="library-grid">
+            @include('partials.books', ['library' => $library])
+        </div>
+
+        @if($library->hasMorePages())
+            <div class="load-more-container">
+                <button id="load-more" class="load-more-btn"
+                        data-page="2"
+                        data-search="{{ request('search') }}">
+                    Посмотреть еще
+                </button>
+            </div>
+        @endif
+    </div>
+
 
 @endsection
 
