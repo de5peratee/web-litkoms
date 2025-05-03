@@ -30,6 +30,7 @@
     height: 520px;
     border-radius: 32px;
 
+    color: var(--white);
     background-color: var(--primary);
 }
 

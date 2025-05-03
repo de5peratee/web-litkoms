@@ -10,6 +10,7 @@
         @vite(['resources/css/fonts.css'])
         @vite(['resources/css/colors.css'])
         @vite(['resources/css/icons.css'])
+        @vite(['resources/css/buttons.css'])
 
 </head>
 <body>

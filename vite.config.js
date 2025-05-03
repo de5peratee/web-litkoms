@@ -24,6 +24,7 @@ export default defineConfig({
 
                 'resources/js/app.js',
                 'resources/js/library.js',
+                'resources/js/event-map.js',
                 'resources/js/auth-tabs.js'
             ],
             refresh: true,

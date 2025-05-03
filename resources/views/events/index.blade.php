@@ -53,7 +53,7 @@
 
                 <a href="{{ route('events.get_event') }}" class="event-card">
                     <div class="cover_wrapper">
-                        <img src="{{ asset('images/default_template/event-cover.svg') }}" alt="comics_cover">
+                        <img src="{{ asset('images/default_template/event-cover.svg') }}" alt="event_cover">
                     </div>
 
                     <div class="event-description">
