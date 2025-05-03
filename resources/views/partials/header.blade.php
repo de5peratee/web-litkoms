@@ -1,19 +1,19 @@
 <!-- resources/views/partials/header.blade.php -->
-@vite(['resources/css/buttons.css'])
 @vite(['resources/css/header.css'])
+@vite(['resources/css/buttons.css'])
 
 <header>
     <nav class="header">
 
-        <div class="logo">
+        <a href="{{ route('home') }}" class="logo">
             <img src="{{ asset('images/logo.svg') }}" alt="logo">
-        </div>
+        </a>
 
         <ul class="nav-menu">
             <li><a href="{{ route('home') }}" class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">Главная</a></li>
-            <li><a href="{{ route('library') }}" class="nav-link {{ Route::currentRouteName() == 'library' ? 'active' : '' }}">Библиотека</a></li>
+            <li><a href="{{ route('library.index') }}" class="nav-link {{ Route::currentRouteName() == 'library.index' ? 'active' : '' }}">Библиотека</a></li>
             <li><a href="{{ route('news') }}" class="nav-link {{ Route::currentRouteName() == 'news' ? 'active' : '' }}">Лента</a></li>
-            <li><a href="{{ route('events') }}" class="nav-link {{ Route::currentRouteName() == 'events' ? 'active' : '' }}">Мероприятия</a></li>
+            <li><a href="{{ route('events.index') }}" class="nav-link {{ Route::currentRouteName() == 'events.index' ? 'active' : '' }}">Мероприятия</a></li>
             <li><a href="{{ route('authors_comics_landing') }}" class="nav-link {{ Route::currentRouteName() == 'authors_comics_landing' ? 'active' : '' }}">Авторские комиксы</a></li>
             <li><a href="{{ route('litar_landing') }}" class="nav-link {{ Route::currentRouteName() == 'litar_landing' ? 'active' : '' }}">Лит-AR</a></li>
         </ul>

@@ -49,6 +49,7 @@
 
 .nav-link:hover {
     background-color: var(--light-gray); /* Цвет при наведении */
+    color: var(--primary-blue);
 }
 
 .active {
@@ -59,6 +60,7 @@
 
 .active:hover {
     background-color: var(--primary);
+    color: var(--white);
 }
 
 .account-bar {

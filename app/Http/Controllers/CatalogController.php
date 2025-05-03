@@ -7,17 +7,42 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $catalogs = Catalog::with('genres')->paginate(20);
-        return view('catalog.index', compact('catalogs'));
+        // Сохраняем URL каталога в сессию
+        if (!$request->ajax()) {
+            session(['catalog_url' => $request->fullUrl()]);
+        }
+
+        $query = Catalog::with('genres')->orderBy('created_at', 'desc');
+
+        if ($request->filled('search')) {
+            $search = trim($request->search);
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        $library = $query->paginate(12);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('partials.books', ['library' => $library])->render(),
+                'has_more' => $library->hasMorePages()
+            ]);
+        }
+
+        return view('library.index', compact('library'));
     }
 
-    public function show($id)
+    public function get_book($id)
     {
-        $catalog = Catalog::with('genres')->findOrFail($id);
-        return view('catalog.show', compact('catalog'));
+        $book = Catalog::with('genres')->findOrFail($id);
+
+        // Получаем сохраненный URL каталога или используем дефолтный
+        $backUrl = session('catalog_url', route('library.index'));
+
+        return view('library.book', [
+            'book' => $book,
+            'backUrl' => $backUrl
+        ]);
     }
-
-
 }
