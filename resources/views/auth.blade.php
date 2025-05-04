@@ -4,9 +4,9 @@
 @section('title', 'Аутентификация')  <!-- Устанавливаем название страницы -->
 
 @section('content')
-{{--    @vite(['resources/css/buttons.css'])--}}
-{{--    @vite(['resources/css/inputs.css'])--}}
-{{--    @vite(['resources/css/auth.css'])--}}
+    @vite(['resources/css/inputs.css'])
+    @vite(['resources/css/auth.css'])
+    @vite(['resources/js/auth-tabs.js'])
 
     <div class="auth-container">
         <div class="auth-header">
@@ -24,8 +24,7 @@
             <div id="registerTab" class="tab text-small">Регистрация</div>
         </div>
 
-        <!-- Форма логина -->
-        <form method="POST" action="{{ route('login') }}" id="loginForm" class="lit-form">
+        <form method="POST" action="{{ route('auth.login') }}" id="loginForm" class="lit-form">
             @csrf
             <div class="lit-field">
                 <label for="email">Почта</label>
@@ -46,8 +45,7 @@
             <button type="submit" class="primary-btn">Войти</button>
         </form>
 
-        <!-- Форма регистрации -->
-        <form method="POST" action="{{ route('register.store') }}" id="registerForm" class="lit-form">
+        <form method="POST" action="{{ route('auth.register') }}" id="registerForm" class="lit-form">
             @csrf
             <div class="lit-form-row">
                 <div class="lit-field">

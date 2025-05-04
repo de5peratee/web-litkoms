@@ -30,14 +30,14 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'password.required' => 'Поле "Пароль" обязательно для заполнения.',
-            'password.string' => 'Поле "Пароль" должно быть строкой.',
+            'password.required' => 'Поле не должно быть пустым',
+            'password.string' => 'Поле должно быть строкой',
 //            'password.min' => 'Пароль должен содержать минимум :min символов.',
 
-            'email.required' => 'Поле "Email" обязательно для заполнения.',
-            'email.string' => 'Поле "Email" должно быть строкой.',
-            'email.email' => 'Поле "Email" должно быть корректным email-адресом.',
-            'email.max' => 'Поле "Email" не должно превышать :max символов.',
+            'email.required' => 'Поле не должно быть пустым',
+            'email.string' => 'Поле должно быть строкой.',
+            'email.email' => 'Не корректный адрес почты',
+            'email.max' => 'Поле превышает лимит в :max символов.',
         ];
     }
 
