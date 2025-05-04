@@ -1,4 +1,30 @@
 .auth-container {
+    position: relative;
+}
+
+.hero {
+    z-index: -1;
+}
+
+#whiter-img {
+    position: absolute;
+
+    top: 160px;
+    left: -256px;
+
+    transform: rotate(-15deg);
+}
+
+#scientist-img {
+    position: absolute;
+
+    top: 32px;
+    right: -128px;
+
+    transform: rotate(15deg);
+}
+
+.auth-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,13 +70,13 @@
 }
 
 .auth-tabs .tab.active {
-    background-color: var(--white);
-    color: var(--primary);
+    background-color: var(--primary);
+    color: var(--white);
 }
 
-.auth-tabs .tab:hover,
-.auth-tabs .tab.active:hover {
+.auth-tabs .tab:hover:not(.active){
     background-color: var(--white);
+    color: var(--primary);
 }
 
 .error-message {
