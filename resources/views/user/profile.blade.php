@@ -1,7 +1,7 @@
-<!-- resources/views/home.blade.php -->
-@extends('layouts.app')  <!-- Используем главный шаблон -->
 
-@section('title', 'Профиль')  <!-- Устанавливаем название страницы -->
+@extends('layouts.app')
+
+@section('title', 'Имя Фамилия | @ник')
 
 @section('content')
     <div class="profile-container">

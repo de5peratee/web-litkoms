@@ -1,13 +1,14 @@
 <!-- resources/views/partials/header.blade.php -->
-@vite(['resources/css/header.css'])
-@vite(['resources/css/buttons.css'])
+@vite(['resources/css/header.css','resources/js/profile-dropdown.js'])
 
 <header>
     <nav class="header">
 
-        <a href="{{ route('home') }}" class="logo">
-            <img src="{{ asset('images/logo.svg') }}" alt="logo">
-        </a>
+        <div class="logo">
+            <a href="{{ route('home') }}">
+                <img src="{{ asset('images/logo.svg') }}" alt="logo">
+            </a>
+        </div>
 
         <ul class="nav-menu">
             <li><a href="{{ route('home') }}" class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">Главная</a></li>
@@ -29,30 +30,47 @@
             @endguest
 
             @auth
-                <div class="icon-wrapper">
+                <div class="icon-wrapper" id="notify-trigger">
                     <img src="{{ asset('images/icons/bell.svg') }}" alt="Icon">
                 </div>
 
-                <div class="avatar">
-                    <img src="{{ asset('images/nigga.png') }}" alt="Img">
-                </div>
+                <a href="{{route('profile')}}" class="profile-info">
 
-                <div class="profile-info">
+                    <div class="avatar">
+                        <img src="{{ asset('images/nigga.png') }}" alt="Img">
+                    </div>
 
                     <p class="text-small">
                         {{ Auth::user()->name }} {{ mb_substr(Auth::user()->last_name, 0, 1) }}.
                     </p>
 
-                    <div class="icon-wrapper">
-                        <img src="{{ asset('images/icons/arrow-down.svg') }}" alt="Icon">
+                    <img src="{{ asset('images/icons/arrow-down.svg') }}" alt="Icon" class="icon-24">
+
+                </a>
+
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="dropdown-content">
+
+                            <a href="{{ route('profile') }}" class="dropdown-item">
+{{--                                <img src="" alt="Профиль">--}}
+                                <p>Профиль</p>
+                            </a>
+
+                            <a href="" class="dropdown-item">
+{{--                                <img src="" alt="Настройки">--}}
+                                <p>Загрузить комикс</p>
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+{{--                                <img src="" alt="Выход">--}}
+                                <button type="submit" class="dropdown-item logout-btn">Выйти</button>
+                            </form>
+
+                        </div>
                     </div>
-
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button class="primary-btn" type="submit">Выйти</button>
-                    </form>
-
-                </div>
             @endauth
         </div>
 
