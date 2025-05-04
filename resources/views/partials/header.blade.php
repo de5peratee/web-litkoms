@@ -22,7 +22,7 @@
         <div class="account-bar">
 
             @guest
-                <a href="{{route('auth.index')}}" class="primary-btn">
+                <a href="{{route('auth')}}" class="primary-btn">
                     Войти
                     <img src="{{asset('../images/icons/login_icon.svg')}}" alt="icon">
                 </a>
@@ -49,7 +49,7 @@
 
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button style="cursor: pointer" type="submit">Выйти</button>
+                        <button class="primary-btn" type="submit">Выйти</button>
                     </form>
 
                 </div>

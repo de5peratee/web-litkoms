@@ -13,7 +13,7 @@
                     Автор1
                     Автор2
                     Автор3
-                </div>ъ
+                </div>
 
                 <div class="event-bottom-text">
                     <div class="left-part-text">
