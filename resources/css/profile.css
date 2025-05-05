@@ -1,0 +1,132 @@
+
+
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    width: 1170px;
+}
+
+
+.profile-header {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+
+    gap: 24px;
+    padding: 32px;
+    border-radius: 32px;
+
+    background-color: var(--white);
+}
+
+.profile-user-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 24px;
+}
+
+.profile-text-data {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+.profile-secondary-text-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.profile-email {
+    color: var(--secondary);
+}
+
+.user-status-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    width: fit-content;
+
+    background-color: var(--light-gray);
+
+    transition: background-color 0.3s;
+}
+
+.user-status-bar:hover {
+    background-color: var(--gray);
+}
+
+.user-avg-grade {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.hw-abstract {
+    position: absolute;
+    z-index: 1; /* Чтобы иконки были под контентом */
+}
+
+/* Иконка кисти */
+.brush-icon {
+    right: 500px;
+    top: 24px;
+    width: 32px;
+
+    transform: rotate(15deg);
+}
+
+/* Иконка ручки */
+.draw_pen-icon {
+    right: 400px;
+    bottom: -8px;
+    width: 64px;
+
+    opacity: 0.16;
+    transform: rotate(-30deg);
+}
+
+/* Иконка линейки */
+.ruler-icon {
+    right: 160px;
+    top: -16px;
+    width: 128px;
+
+    opacity: 0.32;
+    transform: rotate(15deg);
+}
+
+
+.avatar_wrapper {
+    overflow: hidden;
+
+    width: 128px;
+    height: 128px;
+    border-radius: 999px;
+
+    border: 1px solid var(--gray);
+}
+
+.avatar_wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
