@@ -34,7 +34,7 @@
                     <img src="{{ asset('images/icons/bell.svg') }}" alt="Icon">
                 </div>
 
-                <a href="{{route('profile')}}" class="profile-info">
+                <a href="{{route('profile.index', Auth::user()->nickname)}}" class="profile-info">
 
                     <div class="avatar">
                         <img src="{{ asset('images/nigga.png') }}" alt="Img">
@@ -51,7 +51,7 @@
                     <div class="profile-dropdown" id="profileDropdown">
                         <div class="dropdown-content">
 
-                            <a href="{{ route('profile') }}" class="dropdown-item">
+                            <a href="{{ route('profile.index', Auth::user()->nickname)}}" class="dropdown-item">
 {{--                                <img src="" alt="Профиль">--}}
                                 <p>Профиль</p>
                             </a>

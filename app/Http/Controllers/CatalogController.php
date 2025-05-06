@@ -9,7 +9,6 @@ class CatalogController extends Controller
 {
     public function index(Request $request)
     {
-        // Сохраняем URL каталога в сессию
         if (!$request->ajax()) {
             session(['catalog_url' => $request->fullUrl()]);
         }
@@ -37,7 +36,6 @@ class CatalogController extends Controller
     {
         $book = Catalog::with('genres')->findOrFail($id);
 
-        // Получаем сохраненный URL каталога или используем дефолтный
         $backUrl = session('catalog_url', route('library.index'));
 
         return view('library.book', [

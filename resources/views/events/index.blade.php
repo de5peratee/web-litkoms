@@ -7,28 +7,20 @@
 
     <div class="events-container">
         <div class="slider-container">
-
-            <div class="event-slide">
-                <p>Авторы</p>
-                <p>Наименование мероприятие: краткое описание</p>
-                <p>Описание мероприятия</p>
-                <p>Дата и время</p>
-                <a href="{{route('events.get_event')}}">Подробнее</a>
-            </div>
-
-            <div class="event-slide">
-                <p>Авторы</p>
-                <p>Наименование мероприятие: краткое описание</p>
-                <p>Описание мероприятия</p>
-                <p>Дата и время</p>
-                <a href="{{route('events.get_event')}}">Подробнее</a>
-            </div>
-
+            @foreach($events->take(2) as $event)
+                <div class="event-slide" >
+                    <p>{{ $event->authors }}</p>
+                    <p>{{ $event->name }}</p>
+                    <p>{{ Str::limit($event->description, 100) }}</p>
+                    <p>{{ $event->start_date->format('d.m.Y H:i') }}</p>
+                    <a href="{{ route('events.show', $event->id) }}">Подробнее</a>
+                </div>
+            @endforeach
         </div>
 
         <div class="events-explore-container">
             <h2>Ближайшие мероприятия</h2>
-            <p>Количество: n</p>
+{{--            <p>Количество: {{ $events->count() }}</p>--}}
 
             <div class="search-container">
                 <form id="search-form" action="{{ route('events.index') }}" method="GET">
@@ -38,82 +30,37 @@
             </div>
 
             <div class="filters-wrapper">
-                <div class="filter">
-                    <p>Фильтр</p>
-                </div>
-                <div class="filter">
-                    <p>Фильтр</p>
-                </div>
-                <div class="filter">
-                    <p>Фильтр</p>
-                </div>
+                <!-- Фильтры можно добавить позже -->
+                <div class="filter"><p>Фильтр</p></div>
+                <div class="filter"><p>Фильтр</p></div>
+                <div class="filter"><p>Фильтр</p></div>
             </div>
 
             <div class="events-grid">
+                @foreach($events as $event)
+                    <a href="{{ route('events.show', $event->id) }}" class="event-card">
+                        <div class="cover_wrapper">
+                            <img src="{{ $event->cover ? Storage::url('events/' . $event->cover) : asset('images/default_template/event-cover.svg') }}" alt="event_cover">
 
-                <a href="{{ route('events.get_event') }}" class="event-card">
-                    <div class="cover_wrapper">
-                        <img src="{{ asset('images/default_template/event-cover.svg') }}" alt="event_cover">
-                    </div>
-
-                    <div class="event-description">
-                        <div class="event-categories">
-                            <span class="category">Арт-мастерская</span>
-                            <span class="category">Образование</span>
                         </div>
 
-                        <h3>Наименование мероприятия</h3>
-                        <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
+                        <div class="event-description">
+                            <div class="event-categories">
+                                @foreach($event->tags as $tag)
+                                    <span class="category">{{ $tag->name }}</span>
+                                @endforeach
+                            </div>
 
-                        <p>Мастер-класс для начинающих художников, посвященный
-                            созданию персонажей в стиле комиксов.</p>
+                            <h3>{{ $event->name }}</h3>
+                            <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
 
-                        <p>Дата и время провередия</p>
-                    </div>
-                </a>
-                <a href="{{ route('events.get_event') }}" class="event-card">
-                    <div class="cover_wrapper">
-                        <img src="{{ asset('images/default_template/event-cover.svg') }}" alt="comics_cover">
-                    </div>
+                            <p>{{ Str::limit($event->description, 100) }}</p>
 
-                    <div class="event-description">
-                        <div class="event-categories">
-                            <span class="category">Арт-мастерская</span>
-                            <span class="category">Образование</span>
+                            <p>{{ $event->start_date->format('d.m.Y H:i') }}</p>
                         </div>
-
-                        <h3>Наименование мероприятия</h3>
-                        <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
-
-                        <p>Мастер-класс для начинающих художников, посвященный
-                            созданию персонажей в стиле комиксов.</p>
-
-                        <p>Дата и время провередия</p>
-                    </div>
-                </a>
-                <a href="{{ route('events.get_event') }}" class="event-card">
-                    <div class="cover_wrapper">
-                        <img src="{{ asset('images/default_template/event-cover.svg') }}" alt="comics_cover">
-                    </div>
-
-                    <div class="event-description">
-                        <div class="event-categories">
-                            <span class="category">Арт-мастерская</span>
-                            <span class="category">Образование</span>
-                        </div>
-
-                        <h3>Наименование мероприятия</h3>
-                        <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
-
-                        <p>Мастер-класс для начинающих художников, посвященный
-                            созданию персонажей в стиле комиксов.</p>
-
-                        <p>Дата и время провередия</p>
-                    </div>
-                </a>
-
+                    </a>
+                @endforeach
             </div>
         </div>
     </div>
-
-    @endsection
+@endsection

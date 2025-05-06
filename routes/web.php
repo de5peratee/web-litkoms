@@ -1,11 +1,10 @@
 <?php
 
-//use App\Http\Controllers\Auth\LoginController;
-//use App\Http\Controllers\Auth\RegisterController;
-
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogController;
 
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,13 +21,11 @@ Route::get('/library', [CatalogController::class, 'index'])
 Route::get('/library/{id}', [CatalogController::class, 'get_book'])
     ->name('library.get_book');
 
-Route::get('/events', function () {
-    return view('events.index');
-})->name('events.index');
 
-Route::get('/event', function () {
-    return view('events.event');
-})->name('events.get_event');
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
+
+
 
 // Форма авторизации
 Route::get('/auth', [AuthController::class, 'index'])->name('auth')->middleware('guest');;
@@ -59,21 +56,9 @@ Route::get('/litar_landing', function () {
     return view('litar_landing');
 })->name('litar_landing');
 
-//Route::get('/auth', function () {
-//    return view('auth');
-//})->name('auth');
 
+//Route::get('/profile', function () {
+//    return view('user.profile');
+//})->name('profile');
 
-
-//Route::get('/auth', [RegisterController::class, 'index'])
-//    ->name('auth.index')
-//    ->middleware('guest');
-//
-//Route::post('/auth/register', [RegisterController::class, 'store'])->name('register.store');
-//
-//Route::post('/auth/login', [LoginController::class, 'loginUser'])->name('login');
-//Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-Route::get('/profile', function () {
-    return view('user.profile');
-})->name('profile');
+Route::get('/profile/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
