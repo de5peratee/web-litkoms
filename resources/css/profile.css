@@ -1,20 +1,79 @@
 
-
 .profile-container{
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
 
     width: 1170px;
 }
 
-
-.profile-header {
-    position: relative;
+.info-block{
+    width: 100%;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 24px;
+
+    padding: 24px;
+    border-radius: 32px;
+
+    background-color: var(--white);
+}
+
+.subscriptions-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.subscriptions-count{
+    color: var(--secondary);
+}
+
+.subscription-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 8px;
+    border-radius: 16px;
+
+    transition: background-color 0.3s;
+}
+
+.subscription-item:hover{
+    background-color: var(--light-gray);
+}
+
+.subscription-left-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 24px;
+}
+
+.subscription-username-data {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.subscription-name {
+    color: var(--secondary);
+}
+
+.profile-header-container {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
     overflow: hidden;
 
     gap: 24px;
@@ -24,11 +83,20 @@
     background-color: var(--white);
 }
 
+.profile-sub-action {
+    display: flex;
+    flex-direction: row;
+
+    width: fit-content;
+    gap: 8px;
+}
+
 .profile-user-data {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
 
+    width: fit-content;
     gap: 24px;
 }
 
@@ -44,10 +112,10 @@
     flex-direction: row;
     align-items: center;
 
-    gap: 8px;
+    gap: 4px;
 }
 
-.profile-email {
+.profile-email, .dot {
     color: var(--secondary);
 }
 
@@ -57,10 +125,11 @@
     align-items: center;
     cursor: pointer;
 
+    width: fit-content;
+    height: 48px;
     gap: 8px;
     padding: 8px 16px;
     border-radius: 999px;
-    width: fit-content;
 
     background-color: var(--light-gray);
 
@@ -68,6 +137,12 @@
 }
 
 .user-status-bar:hover {
+    background-color: var(--gray);
+}
+
+.v-divider {
+    height: 100%;
+    width: 1px;
     background-color: var(--gray);
 }
 
@@ -115,7 +190,7 @@
 }
 
 
-.avatar_wrapper {
+.user-avatar-wrapper {
     overflow: hidden;
 
     width: 128px;
@@ -125,8 +200,31 @@
     border: 1px solid var(--gray);
 }
 
-.avatar_wrapper img {
+.subscription-avatar-wrapper {
+    overflow: hidden;
+
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+
+    border: 1px solid var(--gray);
+}
+
+.user-avatar-wrapper img, .subscription-avatar-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
+.subscribed-btn {
+    padding-left: 12px;
+    background-color: var(--light-gray);
+    color: var(--secondary);
+}
+
+.subscribed-btn:hover {
+    background-color: var(--gray);
+    color: var(--primary);
+}
+
+

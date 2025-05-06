@@ -23,9 +23,9 @@
 {{--            <p>Количество: {{ $events->count() }}</p>--}}
 
             <div class="search-container">
-                <form id="search-form" action="{{ route('events.index') }}" method="GET">
+                <form id="search-form" class="search-form" action="{{ route('events.index') }}" method="GET">
                     <input type="text" name="search" placeholder="Что желаете найти..." value="{{ request('search') }}">
-                    <button type="submit">Найти</button>
+                    <button type="submit" class="primary-btn">Найти</button>
                 </form>
             </div>
 
@@ -47,15 +47,16 @@
                         <div class="event-description">
                             <div class="event-categories">
                                 @foreach($event->tags as $tag)
-                                    <span class="category">{{ $tag->name }}</span>
+                                    <p class="text-small">{{ $tag->name }}</p>
                                 @endforeach
                             </div>
 
-                            <h3>{{ $event->name }}</h3>
-                            <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
+                            <div class="event-title-block">
+                                <h3>{{ $event->name }}</h3>
+                                <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
+                            </div>
 
                             <p>{{ Str::limit($event->description, 100) }}</p>
-
                             <p>{{ $event->start_date->format('d.m.Y H:i') }}</p>
                         </div>
                     </a>

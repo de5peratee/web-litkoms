@@ -5,6 +5,7 @@ use App\Http\Controllers\CatalogController;
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,14 +37,6 @@ Route::post('/auth/register', [AuthController::class, 'register'])->name('auth.r
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-// Мероприятия
-//Route::get('/events', [EventsController::class, 'index'])
-//    ->name('events.index');
-//
-//Route::get('/events/{id}', [EventsController::class, 'get_event'])
-//    ->name('events.get_event');
-
-
 Route::get('/news', function () {
     return view('news');
 })->name('news');
@@ -62,3 +55,5 @@ Route::get('/litar_landing', function () {
 //})->name('profile');
 
 Route::get('/profile/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
+Route::post('/subscribe/{nickname}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe');

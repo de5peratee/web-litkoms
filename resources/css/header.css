@@ -101,7 +101,7 @@
     cursor: pointer;
 }
 
-.avatar {
+.avatar-wrapper {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -118,7 +118,7 @@
     border: 1px solid var(--gray);
 }
 
-.cover img {
+.avatar-wrapper img {
     position: absolute;
     top: 0;
     left: 0;

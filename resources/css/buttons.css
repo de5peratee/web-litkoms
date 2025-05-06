@@ -10,6 +10,7 @@
     border-radius: 12px;
     cursor: pointer;
 
+    font-family: 'Involve', sans-serif;
 
     font-size: 14px;
     font-weight: 600;
@@ -19,7 +20,7 @@
     background-color: var(--primary-blue);
     color: var(--white);
 
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
 
 .primary-btn:hover {

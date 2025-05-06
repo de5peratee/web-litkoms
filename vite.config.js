@@ -27,7 +27,9 @@ export default defineConfig({
                 'resources/js/library.js',
                 'resources/js/event-map.js',
                 'resources/js/auth-tabs.js',
-                'resources/js/profile-dropdown.js'
+                'resources/js/profile-dropdown.js',
+                'resources/js/toggleSubscription.js'
+
             ],
             refresh: true,
         }),
