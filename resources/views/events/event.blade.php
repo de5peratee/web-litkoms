@@ -64,7 +64,7 @@
 
             <div class="event-location">
                 <img src="{{ asset('images/icons/location-gray.svg') }}" alt="icon">
-                <p>{{ $event->location }}</p>
+                <p>ул. Маршала Бирюзова, 9</p>
             </div>
         </div>
     </div>
