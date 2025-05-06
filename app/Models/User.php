@@ -26,13 +26,11 @@ class User extends Authenticatable
     }
 
     public function subscriptions() {
-        return $this->belongsToMany(User::class, 'subscribes', 'subscriber_id', 'subscribed_to_id')
-            ->withTimestamps();
+        return $this->belongsToMany(User::class, 'subscribes', 'subscriber_id', 'subscribed_to_id');
     }
 
     public function subscribers() {
-        return $this->belongsToMany(User::class, 'subscribes', 'subscribed_to_id', 'subscriber_id')
-            ->withTimestamps();
+        return $this->belongsToMany(User::class, 'subscribes', 'subscribed_to_id', 'subscriber_id');
     }
 
 }

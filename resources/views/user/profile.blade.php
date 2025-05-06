@@ -43,6 +43,27 @@
                             <a href="#" class="primary-btn">Подписаться</a>
                         @endif
                     @endauth
+
+                    <div>
+                        <h4>Подписки ({{ $user->subscriptions()->count() }})</h4>
+                        @if($user->subscriptions->isEmpty())
+                            <p>Нет подписок</p>
+                        @else
+                            <div>
+                                @foreach($user->subscriptions as $subscription)
+                                    <div>
+                                        <a href="{{ route('profile.index', $subscription->nickname) }}">
+                                            <img src="{{ asset('images/nigga.png') }}" alt="avatar" class="subscription-avatar">
+                                            <div>
+                                                <p>{{ $subscription->name }} {{ $subscription->last_name }}</p>
+                                                <p>{{ '@' . e($subscription->nickname) }}</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
