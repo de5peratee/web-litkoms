@@ -21,11 +21,13 @@ export default defineConfig({
                 'resources/css/book.css',
                 'resources/css/events.css',
                 'resources/css/event.css',
+                'resources/css/profile.css',
 
                 'resources/js/app.js',
                 'resources/js/library.js',
                 'resources/js/event-map.js',
-                'resources/js/auth-tabs.js'
+                'resources/js/auth-tabs.js',
+                'resources/js/profile-dropdown.js'
             ],
             refresh: true,
         }),

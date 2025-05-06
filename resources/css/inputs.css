@@ -25,7 +25,7 @@
 .lit-field label {
     color: var(--primary);
     font-family: 'Involve', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
 }
 
@@ -50,6 +50,18 @@
 .lit-field input::placeholder {
     color: var(--tertiary);
 }
+
+/*!* Специальный стиль для поля даты *!*/
+/*.lit-field input[type="date"]::-webkit-datetime-edit-text,*/
+/*.lit-field input[type="date"]::-webkit-datetime-edit-month-field,*/
+/*.lit-field input[type="date"]::-webkit-datetime-edit-day-field,*/
+/*.lit-field input[type="date"]::-webkit-datetime-edit-year-field {*/
+/*    color: var(--tertiary);*/
+/*}*/
+
+/*.lit-field input[type="date"]:valid {*/
+/*    color: var(--primary); !* ваш основной цвет текста *!*/
+/*}*/
 
 .lit-field input:focus {
     background-color: var(--white);
