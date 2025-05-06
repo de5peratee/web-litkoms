@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -12,8 +13,10 @@ class ProfileController extends Controller
         $user = User::where('nickname', $nickname)
             ->with('subscriptions')
             ->firstOrFail();
-//        dd($user->toArray());
-        return view('user.profile', compact('user'));
+
+        $isSub = Auth::check() && Auth::user()->subscriptions()->where('subscribed_to_id', $user->id)->exists();
+
+        return view('user.profile', compact('user', 'isSub'));
     }
 
 }

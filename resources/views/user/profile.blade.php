@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', '{{ $user->name }} {{ $user->last_name }} | @{{ $user->nickname }}')
-
+@section('title')
+    {{ '@' . ($user->nickname) }}
+@endsection
 @section('content')
     @vite(['resources/css/profile.css'])
 
@@ -40,7 +41,15 @@
 
                     @auth
                         @if (Auth::id() !== $user->id)
-                            <a href="#" class="primary-btn">Подписаться</a>
+                            @if ($isSub)
+                                <a href="#" class="primary-btn" style="background: lightgray" disabled>
+                                    <span>Вы подписаны</span>
+                                </a>
+                            @else
+                                <a href="#" class="primary-btn" onclick="subscribe({{ $user->id }})">
+                                    <span>Подписаться</span>
+                                </a>
+                            @endif
                         @endif
                     @endauth
 
@@ -56,7 +65,7 @@
                                             <img src="{{ asset('images/nigga.png') }}" alt="avatar" class="subscription-avatar">
                                             <div>
                                                 <p>{{ $subscription->name }} {{ $subscription->last_name }}</p>
-                                                <p>{{ '@' . e($subscription->nickname) }}</p>
+                                                <p>{{ '@' . ($subscription->nickname) }}</p>
                                             </div>
                                         </a>
                                     </div>
