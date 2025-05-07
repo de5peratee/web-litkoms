@@ -68,12 +68,3 @@
     border: 1px solid var(--primary-blue);
     box-shadow: 0px 16px 48px rgba(0, 90, 255, 0.08);
 }
-
-.lit-form button {
-    font-family: 'Involve', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 140%;
-    width: 100%;
-    padding: 12px;
-}

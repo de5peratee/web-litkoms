@@ -24,11 +24,12 @@ export default defineConfig({
                 'resources/css/profile.css',
 
                 'resources/js/app.js',
-                'resources/js/library.js',
+                'resources/js/loadBooks.js',
                 'resources/js/event-map.js',
                 'resources/js/auth-tabs.js',
                 'resources/js/profile-dropdown.js',
-                'resources/js/toggleSubscription.js'
+                'resources/js/toggleSubscription.js',
+                'resources/js/filterBooks.js'
 
             ],
             refresh: true,

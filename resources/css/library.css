@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 
     gap: 24px;
     padding: 32px;
@@ -17,6 +18,202 @@
 
     background-color: var(--white);
 }
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 24px;
+}
+
+#search-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 8px;
+}
+
+#search-form input {
+    padding: 8px 16px;
+    height: 44px;
+    width: 320px;
+
+    border-radius: 12px;
+    border: 1px  solid var(--gray);
+
+    font-family: 'Involve', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 140%;
+    color: var(--primary);
+
+    background-color: var(--light-gray);
+
+    transition: box-shadow 0.1s ease-in, background-color 0.3s ease-in;
+}
+
+#search-form input::placeholder {
+    color: var(--tertiary);
+}
+
+#search-form input:focus {
+    background-color: var(--white);
+    border: 1px solid var(--primary-blue);
+    box-shadow: 0px 16px 48px rgba(0, 90, 255, 0.08);
+}
+
+
+/* Стили для фильтров по типу */
+.library-type-filter {
+    display: flex;
+    gap: 24px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-option input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+
+    cursor: pointer;
+    position: relative;
+
+    border: 1px solid var(--gray);
+
+    transition: all 0.2s ease;
+}
+
+.filter-option input[type="checkbox"]:checked {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+/*.filter-option input[type="checkbox"]:checked::after {*/
+/*    content: "✓";*/
+/*    position: absolute;*/
+/*    color: white;*/
+/*    font-size: 12px;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*}*/
+
+
+.filter-option label {
+    cursor: pointer;
+}
+
+/* Стили для категорий (слайдер) */
+.library-categories-wrapper {
+    position: relative;
+
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.library-categories {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 8px 0;
+    scrollbar-width: none; /* Для Firefox */
+    -ms-overflow-style: none; /* Для IE и Edge */
+}
+
+.library-categories::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari и Opera */
+}
+
+.library-category-tag {
+    padding: 8px 16px;
+    border-radius: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+
+    color: var(--secondary);
+    /*background-color: var(--light-gray);*/
+
+    border: 1px solid var(--gray);
+    transition: all 0.2s ease;
+}
+
+.library-category-tag:hover {
+    background-color: var(--gray);
+}
+
+.library-category-tag.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Стили для стрелок слайдера */
+.scroll-btn {
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    top: 50%;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    z-index: 1;
+
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    background-color: white;
+    border: 1px solid var(--gray);
+
+    transform: translateY(-50%);
+    transition: all 0.2s ease;
+}
+
+.scroll-btn:hover {
+    background-color: var(--light-gray);
+}
+
+.scroll-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) scale(0.95);
+}
+
+
+.scroll-btn img {
+    width: 16px;
+    height: 16px;
+}
+
+.scroll-left {
+    left: -16px;
+}
+
+.scroll-right {
+    right: -16px;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .scroll-btn {
+        display: none;
+    }
+
+    .library-categories {
+        padding: 8px 16px;
+    }
+}
+
 
 .library-grid {
     display: flex;
@@ -38,11 +235,34 @@
     overflow: hidden;
 }
 
-.book > .description {
+.book > .book-text-data {
     display: flex;
     flex-direction: column;
 
     gap: 8px;
+}
+
+.book-author-text {
+    color: var(--secondary);
+}
+
+.book-categories {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 4px;
+    overflow: scroll;
+}
+
+.book-category-tag {
+    display: flex;
+
+    border-radius: 999px;
+    padding: 4px 12px;
+
+    border: 1px solid var(--primary);
+    color: var(--primary);
 }
 
 .cover_wrapper {
@@ -61,51 +281,12 @@
     object-fit: cover;
 }
 
-
-
-
-.search-container {
-
-}
-
-.search-container input[type="text"] {
-    padding: 12px 16px;
-    width: 340px;
-
-    border-radius: 8px;
-
-    background-color: var(--white);
-}
-
-.search-container button {
-    padding: 12px 24px;
-    border-radius: 8px;
-
-    border: none;
-    cursor: pointer;
-
-    color: white;
-    background-color: var(--primary-blue);
-}
-
-.search-container button:hover {
-    background-color: var(--primary);
-}
-
 .load-more-container {
+    display: flex;
+    justify-content:center;
+
     text-align: center;
     margin: 20px 0;
-}
-
-.load-more-btn {
-    padding: 12px 24px;
-    border-radius: 8px;
-
-    border: none;
-    cursor: pointer;
-
-    color: white;
-    background-color: var(--primary-blue);
 }
 
 .load-more-btn:hover {

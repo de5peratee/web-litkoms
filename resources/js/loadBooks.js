@@ -29,7 +29,7 @@ $(document).ready(function() {
                 console.log('Ошибка загрузки', xhr.responseText);
             },
             complete: function() {
-                $button.prop('disabled', false).text('Посмотреть еще');
+                $button.prop('disabled', false).text('Загрузить еще');
             }
         });
     });
