@@ -4,19 +4,27 @@
 
 @section('content')
     @vite(['resources/css/events.css'])
+    @vite(['resources/js/loadEvents.js'])
+    @vite(['resources/js/event-slider.js'])
 
     <div class="events-container">
-        <div class="slider-container">
-            @foreach($events->take(2) as $event)
-                <div class="event-slide" >
-                    <p>{{ $event->authors }}</p>
-                    <p>{{ $event->name }}</p>
-                    <p>{{ Str::limit($event->description, 100) }}</p>
-                    <p>{{ $event->start_date->format('d.m.Y H:i') }}</p>
-                    <a href="{{ route('events.show', $event->id) }}">Подробнее</a>
-                </div>
-            @endforeach
+        <div class="custom-slider">
+            <div class="slides-wrapper">
+                @foreach($events->sortBy('start_date')->take(3) as $event)
+                    <div class="event-slide">
+                        <p>{{ $event->name }}</p>
+                        <p>{{ Str::limit($event->description, 100) }}</p>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="slider-controls">
+                <button class="slider-prev">←</button>
+                <button class="slider-next">→</button>
+            </div>
         </div>
+
+
 
         <div class="events-explore-container">
             <h2>Ближайшие мероприятия</h2>
@@ -29,39 +37,43 @@
                 </form>
             </div>
 
-            <div class="filters-wrapper">
-                <!-- Фильтры можно добавить позже -->
-                <div class="filter"><p>Фильтр</p></div>
-                <div class="filter"><p>Фильтр</p></div>
-                <div class="filter"><p>Фильтр</p></div>
+            <div class="events-grid" id="events-grid">
+                @include('partials.event_cards', ['events' => $events])
             </div>
 
-            <div class="events-grid">
-                @foreach($events as $event)
-                    <a href="{{ route('events.show', $event->id) }}" class="event-card">
-                        <div class="cover_wrapper">
-                            <img src="{{ $event->cover ? Storage::url('events/' . $event->cover) : asset('images/default_template/event-cover.svg') }}" alt="event_cover">
+            @if ($events->hasMorePages())
+                <div class="load-more-container">
+                    <button id="load-more" data-page="2" class="primary-btn">Загрузить ещё</button>
+                </div>
+            @endif
 
-                        </div>
 
-                        <div class="event-description">
-                            <div class="event-categories">
-                                @foreach($event->tags as $tag)
-                                    <p class="text-small">{{ $tag->name }}</p>
-                                @endforeach
-                            </div>
+            {{--            <div class="events-grid">--}}
+{{--                @foreach($events as $event)--}}
+{{--                    <a href="{{ route('events.show', $event->id) }}" class="event-card">--}}
+{{--                        <div class="cover_wrapper">--}}
+{{--                            <img src="{{ $event->cover ? Storage::url('events/' . $event->cover) : asset('images/default_template/event-cover.svg') }}" alt="event_cover">--}}
 
-                            <div class="event-title-block">
-                                <h3>{{ $event->name }}</h3>
-                                <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
-                            </div>
+{{--                        </div>--}}
 
-                            <p>{{ Str::limit($event->description, 100) }}</p>
-                            <p>{{ $event->start_date->format('d.m.Y H:i') }}</p>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
+{{--                        <div class="event-description">--}}
+{{--                            <div class="event-categories">--}}
+{{--                                @foreach($event->tags as $tag)--}}
+{{--                                    <p class="text-small">{{ $tag->name }}</p>--}}
+{{--                                @endforeach--}}
+{{--                            </div>--}}
+
+{{--                            <div class="event-title-block">--}}
+{{--                                <h3>{{ $event->name }}</h3>--}}
+{{--                                <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">--}}
+{{--                            </div>--}}
+
+{{--                            <p>{{ Str::limit($event->description, 100) }}</p>--}}
+{{--                            <p>{{ $event->start_date->format('d.m.Y H:i') }}</p>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
         </div>
     </div>
 @endsection

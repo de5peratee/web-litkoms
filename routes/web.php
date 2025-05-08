@@ -14,17 +14,15 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-// Основная страница библиотеки
+
 Route::get('/library', [CatalogController::class, 'index'])
     ->name('library.index');
-
-// Страница книги
 Route::get('/library/{id}', [CatalogController::class, 'get_book'])
     ->name('library.get_book');
 
 
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
-Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
+Route::get('/events/{event}', [EventController::class, 'get_event'])->name('events.get_event');
 
 
 
