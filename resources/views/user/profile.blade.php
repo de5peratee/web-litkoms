@@ -63,6 +63,8 @@
                             @endif
                         </button>
                     @endif
+
+                        <a href="{{ route('editor.dashboard')}}" class="secondary-btn">Панель редактора</a>
                 @endauth
             </div>
         </div>

@@ -8,12 +8,25 @@
     @vite(['resources/js/event-slider.js'])
 
     <div class="events-container">
+
         <div class="custom-slider">
             <div class="slides-wrapper">
                 @foreach($events->sortBy('start_date')->take(3) as $event)
-                    <div class="event-slide">
-                        <p>{{ $event->name }}</p>
-                        <p>{{ Str::limit($event->description, 100) }}</p>
+                    <div class="event-slide" style="background-image: url('{{ $event->cover ? Storage::url('events/' . $event->cover) : asset('images/default_template/event-cover.svg') }}');">
+                        <div class="event-slide-content">
+                            <div class="event-authors">
+                                <p>{{ implode(' · ', $event->guests->pluck('name')->toArray()) }}</p>
+                            </div>
+
+                            <div class="event-bottom-text">
+                                <div class="left-part-text">
+                                    <h1>{{ $event->name }}</h1>
+                                    <p>{{ $event->start_date->format('d.m.Y H:i') }}</p>
+                                </div>
+
+                                <a href={{ route('events.get_event', $event->id) }} class="primary-btn">Подробнее</a>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -24,12 +37,8 @@
             </div>
         </div>
 
-
-
         <div class="events-explore-container">
             <h2>Ближайшие мероприятия</h2>
-{{--            <p>Количество: {{ $events->count() }}</p>--}}
-
             <div class="search-container">
                 <form id="search-form" class="search-form" action="{{ route('events.index') }}" method="GET">
                     <input type="text" name="search" placeholder="Что желаете найти..." value="{{ request('search') }}">

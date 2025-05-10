@@ -23,6 +23,11 @@ export default defineConfig({
                 'resources/css/event.css',
                 'resources/css/profile.css',
 
+                'resources/css/editor/create_event.css',
+                'resources/css/editor/create_post.css',
+                'resources/css/editor/events_list.css',
+                'resources/css/editor/news_list.css',
+
                 'resources/js/app.js',
                 'resources/js/loadBooks.js',
                 'resources/js/event-map.js',
