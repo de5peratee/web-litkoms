@@ -23,6 +23,7 @@ export default defineConfig({
                 'resources/css/event.css',
                 'resources/css/profile.css',
 
+                'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
                 'resources/css/editor/create_post.css',
                 'resources/css/editor/events_list.css',
