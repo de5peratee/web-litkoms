@@ -42,7 +42,7 @@
                             <img src="{{ Storage::url(Auth::user()->icon) }}" alt="{{ Auth::user()->icon }}">
                         </div>
                     @else
-                        <div class="avatar-wrapper">
+                        <div class="profile-avatar-wrapper">
                             <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
                         </div>
                     @endif
@@ -50,9 +50,8 @@
                     <p class="text-small">
                         {{ Auth::user()->name }} {{ mb_substr(Auth::user()->last_name, 0, 1) }}.
                     </p>
-
-                    {{--                <img src="{{ asset('images/icons/arrow-down.svg') }}" alt="Icon" class="icon-24">--}}
                 </a>
+
                 <div class="profile-dropdown" id="profileDropdown">
                     <div class="dropdown-content">
                         <a href="{{ route('profile.index', Auth::user()->nickname)}}" class="dropdown-item">
@@ -84,7 +83,7 @@
         </div>
     </div>
 
-    <!-- Мобильное меню (добавить в header) -->
+    <!-- Мобильное меню -->
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu__header">

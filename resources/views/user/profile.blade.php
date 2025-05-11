@@ -16,11 +16,11 @@
 
             <div class="profile-user-data">
                 @if($user->icon && Storage::exists($user->icon))
-                    <div class="user-avatar-wrapper">
+                    <div class="profile-user-avatar-wrapper">
                         <img src="{{ Storage::url($user->icon) }}" alt="{{ $user->icon }}">
                     </div>
                 @else
-                    <div class="user-avatar-wrapper">
+                    <div class="profile-user-avatar-wrapper">
                         <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
                     </div>
                 @endif
@@ -70,9 +70,9 @@
         </div>
         <div class="info-block">
 
-            <div class="subscriptions-header">
+            <div class="info-header">
                 <p class="text-big">Подписки</p>
-                <p class="text-big subscriptions-count">{{ $user->subscriptions()->count() }}</p>
+                <p class="text-small subscriptions-count">{{ $user->subscriptions()->count() }}</p>
             </div>
 
 
