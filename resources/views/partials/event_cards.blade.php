@@ -5,9 +5,9 @@
         </div>
 
         <div class="event-description">
-            <div class="event-categories">
+            <div class="event-categories" data-tags="{{ $event->tags->pluck('name')->join(',') }}">
                 @foreach($event->tags as $tag)
-                    <p class="text-small">{{ $tag->name }}</p>
+                    <span class="event-tag text-small">{{ $tag->name }}</span>
                 @endforeach
             </div>
 

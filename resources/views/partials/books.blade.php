@@ -11,7 +11,6 @@
         @endif
 
         <div class="book-text-data">
-{{--            <p class="book-category-tag text-hint">{{ $book->genres->pluck('name')->join(', ') }}</p>--}}
             <div class="book-categories" data-genres="{{ $book->genres->pluck('name')->join(',') }}">
                 @foreach ($book->genres as $genre)
                     <span class="book-category-tag text-hint">{{ $genre->name }}</span>

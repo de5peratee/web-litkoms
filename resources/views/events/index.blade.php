@@ -6,6 +6,7 @@
     @vite(['resources/css/events.css'])
     @vite(['resources/js/loadEvents.js'])
     @vite(['resources/js/event-slider.js'])
+    @vite(['resources/js/event-tags.js'])
 
     <div class="events-container">
 
