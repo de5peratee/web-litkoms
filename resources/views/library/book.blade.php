@@ -4,6 +4,8 @@
 
 @section('content')
     @vite(['resources/css/book.css'])
+    @vite(['resources/css/pdf-viewer.css'])
+    @vite(['resources/js/pdf-viewer.js'])
 
     <div class="book-container">
         <div class="path-bar">
@@ -44,7 +46,25 @@
                 <p class="text-medium">Описание отсутствует</p>
             @endisset
         </div>
+
+
+        <div class="info-block">
+            <div class="pdf-view">
+                <div class="pdf-controls">
+                    <button id="prev-page" class="pdf-btn">Предыдущая</button>
+                    <span id="page-num"></span> / <span id="page-count"></span>
+                    <button id="next-page" class="pdf-btn">Следующая</button>
+                    <button id="zoom-in" class="pdf-btn">+</button>
+                    <button id="zoom-out" class="pdf-btn">-</button>
+                </div>
+                <canvas id="pdf-canvas"></canvas>
+            </div>
+        </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <script>
+        window.pdfUrl = '{{ Storage::url('design_book.pdf') }}';
+    </script>
 
 @endsection

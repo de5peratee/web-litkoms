@@ -23,6 +23,7 @@ export default defineConfig({
                 'resources/css/event.css',
                 'resources/css/profile.css',
                 'resources/css/litar.css',
+                'resources/css/pdf-viewer.css',
 
                 'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
@@ -47,6 +48,7 @@ export default defineConfig({
                 'resources/js/event-slider.js',
                 'resources/js/event-map.js',
                 'resources/js/event-tags.js',
+                'resources/js/pdf-viewer.js',
 
             ],
             refresh: true,
