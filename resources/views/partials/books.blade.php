@@ -10,11 +10,16 @@
             </div>
         @endif
 
-        <div class="description">
+        <div class="book-text-data">
+            <div class="book-categories" data-genres="{{ $book->genres->pluck('name')->join(',') }}">
+                @foreach ($book->genres as $genre)
+                    <span class="book-category-tag text-hint">{{ $genre->name }}</span>
+                @endforeach
+            </div>
+
+
             <p class="text-big">{{ $book->name }}</p>
-            <p class="text-small">Автор: {{ $book->author }}</p>
-{{--            <p>Год выпуска: {{ $book->release_year }}</p>--}}
-{{--            <p>Жанры: {{ $book->genres->pluck('name')->join(', ') }}</p>--}}
+            <p class="text-small book-author-text">{{ $book->author }}</p>
         </div>
     </a>
 @endforeach

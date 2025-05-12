@@ -1,9 +1,10 @@
 .lit-form {
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 16px;
     width: 100%;
     max-width: 460px;
+
     background-color: transparent;
     transition: opacity 0.3s ease;
 }
@@ -29,7 +30,7 @@
     font-weight: 600;
 }
 
-.lit-field input {
+.lit-field input, .lit-field textarea {
     padding: 8px 16px;
     height: 44px;
 
@@ -47,33 +48,17 @@
     transition: box-shadow 0.1s ease-in, background-color 0.3s ease-in;
 }
 
-.lit-field input::placeholder {
+.lit-field textarea {
+    height: 120px;
+
+}
+
+.lit-field input::placeholder, .lit-field textarea::placeholder {
     color: var(--tertiary);
 }
 
-/*!* Специальный стиль для поля даты *!*/
-/*.lit-field input[type="date"]::-webkit-datetime-edit-text,*/
-/*.lit-field input[type="date"]::-webkit-datetime-edit-month-field,*/
-/*.lit-field input[type="date"]::-webkit-datetime-edit-day-field,*/
-/*.lit-field input[type="date"]::-webkit-datetime-edit-year-field {*/
-/*    color: var(--tertiary);*/
-/*}*/
-
-/*.lit-field input[type="date"]:valid {*/
-/*    color: var(--primary); !* ваш основной цвет текста *!*/
-/*}*/
-
-.lit-field input:focus {
+.lit-field input:focus, .lit-field textarea:focus {
     background-color: var(--white);
     border: 1px solid var(--primary-blue);
-    box-shadow: 0px 16px 48px rgba(0, 90, 255, 0.08);
-}
-
-.lit-form button {
-    font-family: 'Involve', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 140%;
-    width: 100%;
-    padding: 12px;
+    box-shadow: 0 16px 48px rgba(0, 90, 255, 0.08);
 }

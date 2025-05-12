@@ -14,24 +14,19 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-// Основная страница библиотеки
+
 Route::get('/library', [CatalogController::class, 'index'])
     ->name('library.index');
-
-// Страница книги
 Route::get('/library/{id}', [CatalogController::class, 'get_book'])
     ->name('library.get_book');
 
 
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
-Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
+Route::get('/events/{event}', [EventController::class, 'get_event'])->name('events.get_event');
 
 
-
-// Форма авторизации
+//Аутентификация
 Route::get('/auth', [AuthController::class, 'index'])->name('auth')->middleware('guest');;
-
-// Обработка форм
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/auth/register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -50,10 +45,34 @@ Route::get('/litar_landing', function () {
 })->name('litar_landing');
 
 
-//Route::get('/profile', function () {
-//    return view('user.profile');
-//})->name('profile');
-
 Route::get('/profile/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
+//Route::get('/profile/{nickname}/dashboard', [ProfileController::class, 'index'])->name('editor.dashboard');
+
+//Заменишь тут с использованием контроллера (везде учитывается ник или id редактора)
+Route::get('/dashboard', function () {
+    return view('editor.dashboard');
+})->name('editor.dashboard');
+
+Route::get('/dashboard/events_list', function () {
+    return view('editor.events.list');
+})->name('editor.events_list');
+
+Route::get('/dashboard/news_list', function () {
+    return view('editor.news.list');
+})->name('editor.news_list');
+
+Route::get('/dashboard/events_list/create_event_form', function () {
+    return view('editor.events.create');
+})->name('editor.create_event_form');
+
+Route::get('/dashboard/news_list/create_post_form', function () {
+    return view('editor.news.create');
+})->name('editor.create_post_form');
+
+//Route::post('/dashboard/events_list/create_event_form/create', [EventController::class, 'create'])->name('editor.create_event');
+//Route::post('/dashboard/news_list/create_post_form/create', [NewsController::class, 'create'])->name('editor.create_post');
+//
+
+
 Route::post('/subscribe/{nickname}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
 Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe');

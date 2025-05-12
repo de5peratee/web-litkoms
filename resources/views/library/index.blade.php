@@ -3,19 +3,44 @@
 @section('title', 'Библиотека')
 
 @section('content')
-    @vite(['resources/css/library.css', 'resources/js/library.js'])
+    @vite(['resources/css/library.css', 'resources/js/loadBooks.js', 'resources/js/filterBooks.js'])
 
     <div class="library-container">
 
         <div class="library-header">
             <img src="{{ asset('images/icons/hw/library.svg') }}" class="icon-48" alt="icon">
-
             <h2>Библиотека</h2>
 
             <div class="search-container">
                 <form id="search-form" action="{{ route('library.index') }}" method="GET">
-                    <input type="text" name="search" placeholder="Что желаете найти..." value="{{ request('search') }}">
-                    <button type="submit">Найти</button>
+                    <div class="search-input-wrapper">
+                        <input type="text" name="search" placeholder="Что желаете найти..." value="{{ request('search') }}">
+                        <button type="submit" class="primary-btn">
+                            Найти
+                        </button>
+                    </div>
+
+                    <div class="h-divider"></div>
+
+                    <div class="library-genres-input-container">
+                        <p class="text-small genres-title-text">Жанры:</p>
+
+                        <div class="genre-slider">
+                            <button type="button" class="slider-btn prev">‹</button>
+                            <div class="genre-tags-wrapper" id="genre-tags"></div>
+                            <button type="button" class="slider-btn next">›</button>
+                        </div>
+
+                        <div class="genre-input-wrapper hidden" id="genre-input-wrapper">
+                            <input type="text" id="genre-input" placeholder="Введите жанр...">
+                        </div>
+
+                        <button type="button" id="toggle-genre-input" class="genre-toggle-btn">
+                            <img src="{{ asset('images/icons/search-add.svg') }}" alt="icon" class="icon-24">
+                        </button>
+                    </div>
+
+                    <div id="genre-hidden-inputs"></div>
                 </form>
             </div>
         </div>
@@ -26,10 +51,10 @@
 
         @if($library->hasMorePages())
             <div class="load-more-container">
-                <button id="load-more" class="load-more-btn"
+                <button id="load-more" class="primary-btn"
                         data-page="2"
                         data-search="{{ request('search') }}">
-                    Посмотреть еще
+                    Загрузить еще
                 </button>
             </div>
         @endif
@@ -37,47 +62,3 @@
 
 
 @endsection
-
-
-{{--@extends('layouts.app')  <!-- Используем главный шаблон -->--}}
-
-{{--@section('title', 'Библиотека Литкомс')  <!-- Устанавливаем название страницы -->--}}
-
-{{--@section('content')--}}
-{{--    @vite(['resources/css/library.css'])--}}
-
-{{--    <img src="{{ asset('images/icons/hw/library.svg') }}" alt="Catalog Icon">--}}
-
-{{--    <h2>Библиотека</h2>--}}
-
-{{--    <div class="library-grid">--}}
-{{--        @foreach($library as $book)--}}
-{{--            <a href="{{ route('library.get_book', $book->id) }}" class="book">--}}
-
-{{--                @if($book->cover && Storage::exists($book->cover))--}}
-{{--                    <div class="cover_wrapper">--}}
-{{--                        <img src="{{ Storage::url($book->cover) }}" alt="{{ $book->name }}">--}}
-{{--                    </div>--}}
-{{--                @else--}}
-{{--                    <div class="cover_wrapper">--}}
-{{--                        <img src="{{ asset('images/default_template/comics.svg') }}" alt="comics_cover">--}}
-{{--                    </div>--}}
-{{--                @endif--}}
-
-{{--                <div class="description">--}}
-{{--                    <p class="text-big">{{ $book->name }}</p>--}}
-{{--                    <p>Автор: {{ $book->author }}</p>--}}
-{{--                    <p>Год выпуска: {{ $book->release_year }}</p>--}}
-{{--                    <p>Жанры: {{ $book->genres->pluck('name')->join(', ') }}</p>--}}
-{{--                </div>--}}
-
-{{--            </a>--}}
-{{--        @endforeach--}}
-{{--    </div>--}}
-
-{{--    <div class="pagination">--}}
-{{--        {{ $library->links() }}--}}
-{{--    </div>--}}
-
-
-{{--@endsection--}}

@@ -22,13 +22,33 @@ export default defineConfig({
                 'resources/css/events.css',
                 'resources/css/event.css',
                 'resources/css/profile.css',
+                'resources/css/litar.css',
+                'resources/css/pdf-viewer.css',
+
+                'resources/css/editor/dashboard.css',
+                'resources/css/editor/create_event.css',
+                'resources/css/editor/create_post.css',
+                'resources/css/editor/events_list.css',
+                'resources/css/editor/news_list.css',
 
                 'resources/js/app.js',
-                'resources/js/library.js',
-                'resources/js/event-map.js',
-                'resources/js/auth-tabs.js',
+
                 'resources/js/profile-dropdown.js',
-                'resources/js/toggleSubscription.js'
+                'resources/js/sticky-header.js',
+                'resources/js/mobile-menu.js',
+
+                'resources/js/loadBooks.js',
+                'resources/js/loadEvents.js',
+
+                'resources/js/auth-tabs.js',
+
+                'resources/js/toggleSubscription.js',
+                'resources/js/filterBooks.js',
+
+                'resources/js/event-slider.js',
+                'resources/js/event-map.js',
+                'resources/js/event-tags.js',
+                'resources/js/pdf-viewer.js',
 
             ],
             refresh: true,

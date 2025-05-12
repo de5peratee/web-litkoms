@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\CatalogGenre;
 use App\Models\Catalog;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -15,9 +18,24 @@ class CatalogController extends Controller
 
         $query = Catalog::with('genres')->orderBy('created_at', 'desc');
 
+        // Поиск по названию
         if ($request->filled('search')) {
             $search = trim($request->search);
             $query->where('name', 'like', "%{$search}%");
+        }
+
+        // Фильтрация по жанрам (по имени жанра!)
+        $genres = $request->input('genres');
+
+        if (!empty($genres)) {
+            if (!is_array($genres)) {
+                $genres = [$genres];
+            }
+
+            // фильтрация по названию жанра
+            $query->whereHas('genres', function ($q) use ($genres) {
+                $q->whereIn('genres.name', $genres);
+            });
         }
 
         $library = $query->paginate(12);
@@ -29,7 +47,10 @@ class CatalogController extends Controller
             ]);
         }
 
-        return view('library.index', compact('library'));
+        return view('library.index', [
+            'library' => $library,
+            'genres' => Genre::all()
+        ]);
     }
 
     public function get_book($id)

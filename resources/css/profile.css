@@ -1,4 +1,3 @@
-
 .profile-container{
     display: flex;
     flex-direction: column;
@@ -20,12 +19,13 @@
     background-color: var(--white);
 }
 
-.subscriptions-header {
+.info-header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    /*justify-content: space-between;*/
 
-    gap: 8px;
+    gap: 8px
 }
 
 .subscriptions-count{
@@ -86,6 +86,7 @@
 .profile-sub-action {
     display: flex;
     flex-direction: row;
+    align-items: center;
 
     width: fit-content;
     gap: 8px;
@@ -159,8 +160,6 @@
     position: absolute;
     z-index: 1; /* Чтобы иконки были под контентом */
 }
-
-/* Иконка кисти */
 .brush-icon {
     right: 500px;
     top: 24px;
@@ -168,8 +167,6 @@
 
     transform: rotate(15deg);
 }
-
-/* Иконка ручки */
 .draw_pen-icon {
     right: 400px;
     bottom: -8px;
@@ -178,11 +175,10 @@
     opacity: 0.16;
     transform: rotate(-30deg);
 }
-
-/* Иконка линейки */
 .ruler-icon {
     right: 160px;
     top: -16px;
+
     width: 128px;
 
     opacity: 0.32;
@@ -190,7 +186,7 @@
 }
 
 
-.user-avatar-wrapper {
+.profile-user-avatar-wrapper {
     overflow: hidden;
 
     width: 128px;
@@ -210,7 +206,8 @@
     border: 1px solid var(--gray);
 }
 
-.user-avatar-wrapper img, .subscription-avatar-wrapper img {
+.profile-user-avatar-wrapper img,
+.subscription-avatar-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;

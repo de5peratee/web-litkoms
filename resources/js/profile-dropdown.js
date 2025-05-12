@@ -1,32 +1,53 @@
-// resources/js/profile-dropdown.js
 import $ from 'jquery';
 
 $(document).ready(function() {
-    const $profileInfo = $('.profile-info');
+    const $profileContainer = $('.profile-container');
     const $profileDropdown = $('#profileDropdown');
+    let closeTimer;
 
-    if ($profileInfo.length && $profileDropdown.length) {
-        // Открытие/закрытие по клику
-        $profileInfo.on('click', function(e) {
-            e.preventDefault();
-            $profileDropdown.toggleClass('active');
-        });
+    if ($profileContainer.length && $profileDropdown.length) {
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints;
 
-        // Закрытие при клике вне меню
-        $(document).on('click', function(e) {
-            if (!$profileDropdown.is(e.target) &&
-                $profileDropdown.has(e.target).length === 0 &&
-                !$profileInfo.is(e.target) &&
-                $profileInfo.has(e.target).length === 0) {
-                $profileDropdown.removeClass('active');
-            }
-        });
+        // Для десктопов
+        if (!isTouchDevice) {
+            $profileContainer.on('mouseenter', function() {
+                clearTimeout(closeTimer);
+                $profileDropdown.css({
+                    'transition-delay': '0.1s',
+                    'visibility': 'visible',
+                    'opacity': '1',
+                    'transform': 'translateY(0)'
+                });
+            });
 
-        // Закрытие при нажатии ESC
-        $(document).on('keydown', function(e) {
-            if (e.key === 'Escape') {
-                $profileDropdown.removeClass('active');
-            }
-        });
+            $profileContainer.on('mouseleave', function() {
+                closeTimer = setTimeout(() => {
+                    $profileDropdown.css({
+                        'transition-delay': '0s',
+                        'opacity': '0',
+                        'transform': 'translateY(-10px)'
+                    });
+                    // Скрываем после завершения анимации
+                    setTimeout(() => {
+                        $profileDropdown.css('visibility', 'hidden');
+                    }, 150);
+                }, 200); // 200ms задержка перед началом анимации закрытия
+            });
+        }
+
+        // Для мобильных
+        if (isTouchDevice) {
+            $('.profile-info').on('click', function(e) {
+                e.preventDefault();
+                $profileDropdown.toggleClass('force-show');
+            });
+
+            $(document).on('click', function(e) {
+                if (!$profileContainer.is(e.target) &&
+                    $profileContainer.has(e.target).length === 0) {
+                    $profileDropdown.removeClass('force-show');
+                }
+            });
+        }
     }
 });
