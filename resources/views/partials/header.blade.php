@@ -59,10 +59,13 @@
                             <p>Профиль</p>
                         </a>
 
-                        <a href="{{ route('editor.dashboard')}}" class="dropdown-item">
-                            <img src="{{ asset('images/icons/dashboard.svg') }}" alt="icon" class="icon-24">
-                            <p>Панель редактора</p>
-                        </a>
+
+                        @if (auth()->user()->role === 'editor')
+                            <a href="{{ route('editor.dashboard') }}" class="dropdown-item">
+                                <img src="{{ asset('images/icons/dashboard.svg') }}" alt="icon" class="icon-24">
+                                <p>Панель редактора</p>
+                            </a>
+                        @endif
 
                         <div class="dropdown-divider"></div>
 

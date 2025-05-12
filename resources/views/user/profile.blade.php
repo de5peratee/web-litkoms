@@ -63,8 +63,9 @@
                             @endif
                         </button>
                     @endif
-
+                    @if (auth()->user()->role === 'editor')
                         <a href="{{ route('editor.dashboard')}}" class="secondary-btn">Панель редактора</a>
+                    @endif
                 @endauth
             </div>
         </div>
@@ -90,7 +91,8 @@
                                     </div>
                                 @else
                                     <div class="subscription-avatar-wrapper">
-                                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="subscription_ava_cover">
+                                        <img src="{{ asset('images/default_template/ava_cover.png') }}"
+                                             alt="subscription_ava_cover">
                                     </div>
                                 @endif
 

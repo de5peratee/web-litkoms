@@ -48,6 +48,7 @@ Route::get('/litar_landing', function () {
 Route::get('/profile/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
 //Route::get('/profile/{nickname}/dashboard', [ProfileController::class, 'index'])->name('editor.dashboard');
 
+
 //Заменишь тут с использованием контроллера (везде учитывается ник или id редактора)
 Route::get('/dashboard', function () {
     return view('editor.dashboard');
