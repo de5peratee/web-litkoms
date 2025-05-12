@@ -12,6 +12,7 @@ $(document).ready(function () {
     let pageRendering = false;
     let pageNumPending = null;
     let scale = 1.5; // Начальный масштаб
+    let maxScale = 1.5; // Будет вычислен позже
 
     const pageNumDisplay = $('#page-num');
     const pageCountDisplay = $('#page-count');
@@ -45,7 +46,15 @@ $(document).ready(function () {
     pdfjsLib.getDocument(url).promise.then(function (pdf) {
         pdfDoc = pdf;
         pageCountDisplay.text(pdfDoc.numPages);
-        renderPage(pageNum);
+
+        // Вычисляем максимальный масштаб на основе ширины страницы
+        pdfDoc.getPage(1).then(function (page) {
+            const viewport = page.getViewport({ scale: 1.0 });
+            const pageWidth = viewport.width; // Оригинальная ширина страницы
+            maxScale = 600 / pageWidth; // Максимальный масштаб, чтобы ширина была <= 600px
+            scale = Math.min(scale, maxScale); // Устанавливаем начальный масштаб
+            renderPage(pageNum);
+        });
     }).catch(function (error) {
         console.error('Ошибка загрузки PDF:', error);
         $('.pdf-view').html('<p class="text-medium">Не удалось загрузить комикс.</p>');
@@ -74,11 +83,14 @@ $(document).ready(function () {
 
     // Масштабирование
     $('#zoom-in').on('click', function () {
-        scale += 0.2;
-        if (pageRendering) {
-            pageNumPending = pageNum;
-        } else {
-            renderPage(pageNum);
+        const newScale = scale + 0.2;
+        if (newScale <= maxScale) { // Ограничиваем масштаб максимальным значением
+            scale = newScale;
+            if (pageRendering) {
+                pageNumPending = pageNum;
+            } else {
+                renderPage(pageNum);
+            }
         }
     });
 
