@@ -15,7 +15,9 @@ class EditorPanelMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        dd(auth()->id());
+        if (auth()->guest() || auth()->user()->role !== 'editor') {
+            return back();
+        }
 
         return $next($request);
     }

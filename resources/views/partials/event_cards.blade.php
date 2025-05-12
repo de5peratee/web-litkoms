@@ -1,7 +1,7 @@
 @foreach($events as $event)
     <a href="{{ route('events.get_event', $event->id) }}" class="event-card">
         <div class="cover_wrapper">
-            <img src="{{ $event->cover ? Storage::url('events/' . $event->cover) : asset('images/default_template/event-cover.svg') }}" alt="event_cover">
+            <img src="{{ $event->cover ? Storage::url('/' . $event->cover) : asset('images/default_template/event-cover.svg') }}" alt="event_cover">
         </div>
 
         <div class="event-description">

@@ -15,7 +15,7 @@
         <ul class="nav-menu">
             <li><a href="{{ route('home') }}" class="nav-link {{ Route::currentRouteName() == 'home' ? 'active-link' : '' }}">Главная</a></li>
             <li><a href="{{ route('library.index') }}" class="nav-link {{ Route::currentRouteName() == 'library.index' ? 'active-link' : '' }}">Библиотека</a></li>
-            <li><a href="{{ route('news') }}" class="nav-link {{ Route::currentRouteName() == 'news' ? 'active-link' : '' }}">Лента</a></li>
+            <li><a href="{{ route('mediaposts') }}" class="nav-link {{ Route::currentRouteName() == 'mediaposts' ? 'active-link' : '' }}">Лента</a></li>
             <li><a href="{{ route('events.index') }}" class="nav-link {{ Route::currentRouteName() == 'events.index' ? 'active-link' : '' }}">Мероприятия</a></li>
             <li><a href="{{ route('authors_comics_landing') }}" class="nav-link {{ Route::currentRouteName() == 'authors_comics_landing' ? 'active-link' : '' }}">Авторские комиксы</a></li>
             <li><a href="{{ route('litar_landing') }}" class="nav-link {{ Route::currentRouteName() == 'litar_landing' ? 'active-link' : '' }}">Лит-AR</a></li>
@@ -103,7 +103,7 @@
             <ul>
                 <li><a href="{{ route('home') }}" class="{{ Route::currentRouteName() == 'home' ? 'active-link' : '' }}">Главная</a></li>
                 <li><a href="{{ route('library.index') }}" class="{{ Route::currentRouteName() == 'library.index' ? 'active-link' : '' }}">Библиотека</a></li>
-                <li><a href="{{ route('news') }}" class="{{ Route::currentRouteName() == 'news' ? 'active-link' : '' }}">Лента</a></li>
+                <li><a href="{{ route('mediaposts') }}" class="{{ Route::currentRouteName() == 'mediaposts' ? 'active-link' : '' }}">Лента</a></li>
                 <li><a href="{{ route('events.index') }}" class="{{ Route::currentRouteName() == 'events.index' ? 'active-link' : '' }}">Мероприятия</a></li>
                 <li><a href="{{ route('authors_comics_landing') }}" class="{{ Route::currentRouteName() == 'authors_comics_landing' ? 'active-link' : '' }}">Авторские комиксы</a></li>
                 <li><a href="{{ route('litar_landing') }}" class="{{ Route::currentRouteName() == 'litar_landing' ? 'active-link' : '' }}">Лит-AR</a></li>
