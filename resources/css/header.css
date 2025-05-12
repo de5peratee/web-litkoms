@@ -1,27 +1,33 @@
-/* Общие стили для навигации */
-.header {
+header {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
-    padding: 16px 135px;
-    height: 68px;
-    margin-bottom: 8px;
-
-    border-radius: 0 0 16px 16px;
+    width: 100%;
+    height: 64px;
+    padding-inline: 16px;
     background-color: var(--white);
+
+    /* Стики-эффект */
+    position: sticky;
+    top: -64px; /* Скрываем хедер за верхним краем */
+    z-index: 1000;
+    transition: top 0.3s ease, box-shadow 0.3s ease;
 }
 
-.logo {
+/* Класс для прилипшего состояния */
+header.sticky {
+    top: 0;
+    box-shadow: 0 2px 32px rgba(0, 0, 0, 0.08);
+}
+
+.logo-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: left;
-    width: 280px;
-
+    width: 260px;
 }
 
-.logo img {
+.logo {
     height: 48px;
 }
 
@@ -29,7 +35,7 @@
     list-style: none;
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: 4px;
 }
 
 /* Стили для ссылок */
@@ -38,27 +44,28 @@
     font-weight: 600;
     line-height: 140%;
 
-    padding: 8px 16px;
+    padding: 8px 12px;
     border-radius: 8px;
     text-decoration: none;
 
     color: var(--primary); /* Цвет текста */
 
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .nav-link:hover {
-    background-color: var(--light-gray); /* Цвет при наведении */
+    color: var(--primary-blue);
 }
 
-.active {
+.active-link {
     background-color: var(--primary);
     color: var(--white);
     /*border-bottom: 2px solid var(--primary-blue);*/
 }
 
-.active:hover {
+.active-link:hover {
     background-color: var(--primary);
+    color: var(--white);
 }
 
 .account-bar {
@@ -68,25 +75,34 @@
     gap: 8px;
     align-items: center;
 
-    width: 280px;
+    width: 260px;
 }
 
 .profile-info {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 4px;
+
+    gap: 8px;
     cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.profile-info:hover {
+    color: var(--primary-blue);
 }
 
 .icon-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 48px;
-    height: 48px;
+
+    width: 40px !important;
+    height: 40px !important;
     border-radius: 999px;
-    transition: color 0.3s ease, background-color 0.3s ease;
+
+    transition: all 0.2s ease;
 }
 
 .icon-wrapper:hover {
@@ -94,32 +110,228 @@
     cursor: pointer;
 }
 
-.avatar {
+.profile-avatar-wrapper {
     position: relative;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
 
     border-radius: 999px;
 
     overflow: hidden;
 
-    background-color: #F3F6F6;
+    border: 1px solid var(--gray);
 }
 
-.cover img {
-    position: absolute;
-    top: 0;
-    left: 0;
+
+.profile-avatar-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    z-index: 1000;
+    padding: 8px;
+    width: 220px;
+    background-color: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 4px 64px rgba(0, 0, 0, 0.12);
+
+    /* Начальное состояние - скрыто */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition:
+        opacity 0.15s ease-out,
+        transform 0.15s ease-out,
+        visibility 0s linear 0.15s; /* Задержка перед скрытием */
+}
+
+.profile-container:hover .profile-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition:
+        opacity 0.15s ease-out 0.1s, /* Задержка перед появлением */
+        transform 0.15s ease-out 0.1s,
+        visibility 0s linear;
+}
+
+/* Для мобильных устройств */
+.profile-dropdown.force-show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition-delay: 0s;
+}
+
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+    padding: 8px 12px;
+    min-height: 44px;
+    border-radius: 8px;
+
+    color: var(--primary);
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--light-gray);
+    color: var(--primary);
+}
+
+.dropdown-item img {
+    width: 24px;
+    height: 24px;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: var(--gray);
+    margin: 8px 0;
+}
+
+.logout-btn {
+    font-family: 'Involve', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 140%;
+    letter-spacing: 0;
+
+    width: 100%;
+    /*background-color: var(--light-gray);*/
+    color: var(--primary-red);
+    border: 1px solid var(--primary-red);
+
+
+    transition: all 0.2s ease, transform 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #FFF5F3;
+    color: var(--primary-red);
+}
+
+/* Бургер-иконка (изначально скрыта) */
+#menu-trigger {
+    display: none;
+    cursor: pointer;
+}
+
+/* Затемненный оверлей */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.32);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+/* Боковое меню */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100%;
+    z-index: 1000;
+    border-radius: 16px 0 0 16px;
+
+    background: var(--white);
+
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    pointer-events: auto;
+}
+
+.mobile-menu__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 16px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.mobile-menu__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px;
+}
+
+.mobile-menu__content ul {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+    list-style: none;
+}
+
+.mobile-menu__content a {
+    display: block;
+    padding: 12px;
+    color: var(--primary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.mobile-menu__content a.active-link {
+    background-color: var(--primary); /* Изменяем на более светлый вариант */
+    color: var(--white);
+}
+
+.mobile-menu__content a:not(.active-link):hover {
+    background-color: var(--gray);
+}
+/* Состояния при открытии */
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Показываем бургер на маленьких экранах */
+@media (max-width: 1200px) {
+    #menu-trigger {
+        display: flex;
+    }
+
+    /* Скрываем обычное меню */
+    .nav-menu {
+        display: none;
+    }
+}
 
 
 

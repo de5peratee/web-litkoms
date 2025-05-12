@@ -2,47 +2,35 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    protected $guarded = false;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected static function boot()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        parent::boot();
+
+        static::deleting(function ($user) {
+            if ($user->icon) {
+                Storage::disk('public')->delete($user->icon);
+            }
+            if ($user->head_profile) {
+                Storage::disk('public')->delete($user->head_profile);
+            }
+        });
     }
+
+    public function subscriptions() {
+        return $this->belongsToMany(User::class, 'subscribes', 'subscriber_id', 'subscribed_to_id');
+    }
+
+    public function subscribers() {
+        return $this->belongsToMany(User::class, 'subscribes', 'subscribed_to_id', 'subscriber_id');
+    }
+
 }

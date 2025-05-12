@@ -1,0 +1,76 @@
+.litar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.qr-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 480px;
+    gap: 24px;
+    padding: 32px;
+    border-radius: 32px;
+
+    color: var(--white);
+    background-color: var(--primary);
+}
+
+.qr-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    text-align: center;
+}
+
+.marker {
+    color: var(--primary-blue);
+    font-size: 32px;
+}
+
+.cta-qr-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    width: fit-content;
+    gap: 24px;
+    padding: 8px;
+    border-radius: 24px;
+
+    background-color: #313131;
+}
+
+.qr-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 16px;
+}
+
+.qr-info-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.version-text, .qr-subtitle {
+    color: var(--tertiary);
+}
+
+.qr-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 180px;
+    height: 180px;
+    padding: 4px;
+    border-radius: 16px;
+
+    background-color: var(--white);
+}
