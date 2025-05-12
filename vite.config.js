@@ -39,6 +39,7 @@ export default defineConfig({
 
                 'resources/js/loadBooks.js',
                 'resources/js/loadEvents.js',
+                'resources/js/library.js',
 
                 'resources/js/auth-tabs.js',
 
