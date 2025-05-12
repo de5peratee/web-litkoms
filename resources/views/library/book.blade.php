@@ -27,7 +27,7 @@
                 @endif
 
                 <div class="book-text-description">
-                    <h2>«{{ $book->name }}»</h2>
+                    <h2 class="book-title">«{{ $book->name }}»</h2>
                     <div class="genres-wrapper">
                         @foreach ($book->genres as $genre)
                             <p class="text-small genre-tag">{{ $genre->name }}</p>

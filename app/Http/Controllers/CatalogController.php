@@ -29,9 +29,11 @@ class CatalogController extends Controller
             if (!is_array($genres)) {
                 $genres = [$genres];
             }
-            $query->whereHas('genres', function ($q) use ($genres) {
-                $q->whereIn('genres.name', $genres);
-            });
+            foreach ($genres as $genre) {
+                $query->whereHas('genres', function ($q) use ($genre) {
+                    $q->where('genres.name', $genre);
+                });
+            }
         }
 
         // Сортировка по дате

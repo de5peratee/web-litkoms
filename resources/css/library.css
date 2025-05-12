@@ -165,6 +165,10 @@
     gap: 8px;
 }
 
+.book-author-text {
+    color: var(--secondary);
+}
+
 .book-categories {
     display: flex;
     flex-wrap: nowrap;
