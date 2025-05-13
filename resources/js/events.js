@@ -1,10 +1,10 @@
 import $ from 'jquery';
 
-function handleGenreTags() {
-    $('.book-categories').each(function () {
+function handleCategoryTags() {
+    $('.event-categories').each(function () {
         const $container = $(this);
-        const $tags = $container.find('.book-category-tag').not('.more-genres');
-        $container.find('.more-genres').remove();
+        const $tags = $container.find('.event-tag').not('.more-categories');
+        $container.find('.more-categories').remove();
         $tags.removeClass('hidden');
 
         const containerWidth = $container.width();
@@ -26,15 +26,15 @@ function handleGenreTags() {
             $hiddenTags.addClass('hidden');
 
             $('<span>', {
-                class: 'book-category-tag more-genres',
-                text: `+${count} жанра`,
+                class: 'event-tag more-categories',
+                text: `+${count} категорий`,
                 title: $hiddenTags.map(function () { return $(this).text(); }).get().join(', ')
             }).appendTo($container);
         }
     });
 }
 
-function loadMoreBooks() {
+function loadMoreEvents() {
     $(document).on('click', '#load-more', function (e) {
         e.preventDefault();
         const $btn = $(this);
@@ -42,7 +42,7 @@ function loadMoreBooks() {
         const data = {
             page: $btn.data('page'),
             search: $btn.data('search') || '',
-            genres: $btn.data('genres') || [],
+            categories: $btn.data('categories') || [],
             sort: $btn.data('sort') || 'desc'
         };
 
@@ -50,35 +50,36 @@ function loadMoreBooks() {
 
         $.get(url, data)
             .done(response => {
-                $('.library-grid').append(response.html);
+                // Append new events to the grid
+                $('#events-grid').append(response.html);
                 $btn.data('page', data.page + 1);
                 if (!response.has_more) $btn.remove();
-                handleGenreTags();
+                handleCategoryTags();
             })
             .fail(xhr => console.error('Ошибка загрузки:', xhr.responseText))
-            .always(() => $btn.prop('disabled', false).text('Загрузить еще'));
+            .always(() => $btn.prop('disabled', false).text('Загрузить ещё'));
     });
 }
 
-function updateFilterCount(genres, sort) {
-    const count = genres.length + (sort !== 'desc' ? 1 : 0);
+function updateFilterCount(categories, sort) {
+    const count = categories.length + (sort !== 'desc' ? 1 : 0);
     $('#filter-count, #filter-count-modal').text(count).toggleClass('hidden', count === 0);
 }
 
 function initFilters() {
-    let selectedGenres = $('#load-more').data('genres') || [];
+    let selectedCategories = $('#load-more').data('categories') || [];
     let sortOrder = $('#load-more').data('sort') || 'desc';
-    let tempGenres = [...selectedGenres];
+    let tempCategories = [...selectedCategories];
     let tempSortOrder = sortOrder;
-    const allGenres = window.allGenres || [];
+    const allCategories = window.allCategories || [];
 
     $('#filter-btn').on('click', function () {
-        tempGenres = [...selectedGenres];
+        tempCategories = [...selectedCategories];
         tempSortOrder = sortOrder;
         $('#filter-modal').addClass('show');
-        renderSelectedGenres();
+        renderSelectedCategories();
         $('#sort-select').val(tempSortOrder);
-        updateFilterCount(tempGenres, tempSortOrder);
+        updateFilterCount(tempCategories, tempSortOrder);
     });
 
     $('#cancel-filter, #modal-close').on('click', function () {
@@ -91,10 +92,10 @@ function initFilters() {
         }
     });
 
-    $('#genre-search').on('input', function () {
+    $('#category-search').on('input', function () {
         const query = $(this).val().toLowerCase();
-        const filtered = allGenres
-            .filter(genre => genre.toLowerCase().includes(query))
+        const filtered = allCategories
+            .filter(category => category.toLowerCase().includes(query))
             .sort((a, b) => {
                 const aStarts = a.toLowerCase().startsWith(query);
                 const bStarts = b.toLowerCase().startsWith(query);
@@ -102,32 +103,32 @@ function initFilters() {
                 if (!aStarts && bStarts) return 1;
                 return a.localeCompare(b);
             });
-        showGenreSuggestions(filtered);
+        showCategorySuggestions(filtered);
     });
 
-    function showGenreSuggestions(list) {
-        let $box = $('#genre-suggestion-box');
+    function showCategorySuggestions(list) {
+        let $box = $('#category-suggestion-box');
         if ($box.length === 0) {
-            $box = $('<div>', { id: 'genre-suggestion-box', class: 'suggestion-box' }).insertAfter('#genre-search');
+            $box = $('<div>', { id: 'category-suggestion-box', class: 'suggestion-box' }).insertAfter('#category-search');
         }
         $box.empty();
 
-        if (list.length === 0 || $('#genre-search').val().trim() === '') {
+        if (list.length === 0 || $('#category-search').val().trim() === '') {
             $box.hide();
             return;
         }
 
-        list.forEach(genre => {
+        list.forEach(category => {
             $('<div>', {
                 class: 'suggestion-item',
-                text: genre,
+                text: category,
                 click: function () {
-                    if (!tempGenres.includes(genre)) {
-                        tempGenres.push(genre);
-                        renderSelectedGenres();
-                        updateFilterCount(tempGenres, tempSortOrder);
+                    if (!tempCategories.includes(category)) {
+                        tempCategories.push(category);
+                        renderSelectedCategories();
+                        updateFilterCount(tempCategories, tempSortOrder);
                     }
-                    $('#genre-search').val('');
+                    $('#category-search').val('');
                     $box.hide();
                 }
             }).appendTo($box);
@@ -137,50 +138,50 @@ function initFilters() {
     }
 
     $(document).on('click', function (e) {
-        if (!$(e.target).closest('#genre-search, #genre-suggestion-box').length) {
-            $('#genre-suggestion-box').hide();
+        if (!$(e.target).closest('#category-search, #category-suggestion-box').length) {
+            $('#category-suggestion-box').hide();
         }
     });
 
-    $(document).on('click', '.remove-genre', function () {
-        const genre = $(this).parent().data('genre');
-        tempGenres = tempGenres.filter(g => g !== genre);
-        renderSelectedGenres();
-        updateFilterCount(tempGenres, tempSortOrder);
+    $(document).on('click', '.remove-category', function () {
+        const category = $(this).parent().data('category');
+        tempCategories = tempCategories.filter(c => c !== category);
+        renderSelectedCategories();
+        updateFilterCount(tempCategories, tempSortOrder);
     });
 
     $('#sort-select').on('change', function () {
         tempSortOrder = $(this).val();
-        updateFilterCount(tempGenres, tempSortOrder);
+        updateFilterCount(tempCategories, tempSortOrder);
     });
 
     $('#save-filter').on('click', function () {
-        selectedGenres = [...tempGenres];
+        selectedCategories = [...tempCategories];
         sortOrder = tempSortOrder;
-        $('#load-more').data({ genres: selectedGenres, sort: sortOrder, page: 1 });
-        updateFilterCount(selectedGenres, sortOrder);
+        $('#load-more').data({ categories: selectedCategories, sort: sortOrder, page: 1 });
+        updateFilterCount(selectedCategories, sortOrder);
         updateHiddenFilters();
         $('#filter-modal').removeClass('show');
     });
 
-    function renderSelectedGenres() {
-        const $wrapper = $('.selected-genres-wrapper').empty();
-        tempGenres.forEach(genre => {
+    function renderSelectedCategories() {
+        const $wrapper = $('.selected-categories-wrapper').empty();
+        tempCategories.forEach(category => {
             $('<div>', {
-                class: 'selected-genre-tag',
-                'data-genre': genre,
-                html: `<p class="text-hint">${genre}</p><span class="remove-genre text-medium">×</span>`
+                class: 'selected-category-tag',
+                'data-category': category,
+                html: `<p class="text-hint">${category}</p><span class="remove-category text-medium">×</span>`
             }).appendTo($wrapper);
         });
     }
 
     function updateHiddenFilters() {
-        $('#search-form input[name="genres[]"]').remove();
-        selectedGenres.forEach(function (genre) {
+        $('#search-form input[name="categories[]"]').remove();
+        selectedCategories.forEach(function (category) {
             $('<input>', {
                 type: 'hidden',
-                name: 'genres[]',
-                value: genre
+                name: 'categories[]',
+                value: category
             }).appendTo('#search-form');
         });
 
@@ -219,8 +220,8 @@ function initSearchClear() {
 }
 
 $(function () {
-    handleGenreTags();
-    loadMoreBooks();
+    handleCategoryTags();
+    loadMoreEvents();
     initFilters();
     initSearchClear();
 });

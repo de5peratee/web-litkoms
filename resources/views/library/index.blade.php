@@ -12,20 +12,19 @@
 
             <div class="search-container">
                 <form id="search-form" action="{{ route('library.index') }}" method="GET" class="search-form">
-                    <input type="text" name="search" placeholder="Что желаете найти..." value="{{ request('search') }}">
-{{--                    <div class="search-input-wrapper">--}}
-{{--                        <input type="text" name="search" placeholder="Что желаете найти..." value="{{ request('search') }}">--}}
-{{--                        <div class="clear-search hidden">--}}
-{{--                            <img src="{{ asset('images/icons/close-primary.svg') }}" class="icon-16" alt="clear">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-                    <button type="submit" class="primary-btn">Найти</button>
+
+                    <div class="search-input-wrapper">
+                        <input type="text" name="search" placeholder="Что желаете найти..." value="{{ request('search') }}">
+                        <div class="clear-search hidden">
+                            <img src="{{ asset('images/icons/close-primary.svg') }}" class="icon-20" alt="clear">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="primary-btn">Искать</button>
 
                     <div class="filter-btn" id="filter-btn">
                         <img src="{{ asset('images/icons/filter.svg') }}" class="icon-20" alt="icon">
-                        <div class="filter-count hidden">
-                            <p class="text-hint" id="filter-count">0</p>
-                        </div>
+                        <p class="text-hint filter-count hidden" id="filter-count">0</p>
                     </div>
                 </form>
             </div>
@@ -60,7 +59,7 @@
 
             <div class="modal-section">
                 <p class="text-hint">Жанры</p>
-                <input type="text" id="genre-search" list="genre-options" placeholder="Введите жанр...">
+                <input type="text" id="genre-search" placeholder="Введите жанр...">
                 <datalist id="genre-options">
                     @foreach ($genres as $genre)
                         <option value="{{ $genre->name }}">
@@ -91,4 +90,8 @@
             </div>
         </div>
     </div>
+
+    <script>
+        window.allGenres = @json($genres->pluck('name'));
+    </script>
 @endsection
