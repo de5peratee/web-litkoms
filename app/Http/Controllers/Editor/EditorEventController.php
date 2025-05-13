@@ -39,7 +39,7 @@ class EditorEventController extends Controller
             ]);
 
             $this->syncGuests($event, $request->guests ?? '');
-            $this->syncTags($event, $request->genres);
+            $this->syncTags($event, $request->tags);
 
             DB::commit();
 
@@ -52,45 +52,45 @@ class EditorEventController extends Controller
 
 
     //update, edit для редактирования
-    public function edit(Event $event)
-    {
-        return view('editor.events.edit', compact('event'));
-    }
-
-    public function update(Request $request, Event $event)
-    {
-        $validated = $request->validate([
-            'cover' => 'nullable|image|max:2048',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
-            'guests' => 'nullable|string|max:1000',
-            'genres' => 'required|string|max:1000',
-        ]);
-
-        try {
-            if ($request->hasFile('cover')) {
-                if ($event->cover) {
-                    Storage::disk('public')->delete($event->cover);
-                }
-                $event->cover = $request->file('cover')->store('event_covers', 'public');
-            }
-
-            $event->update([
-                'title' => $validated['title'],
-                'description' => $validated['description'],
-                'start_date' => $validated['date'] . ' ' . $validated['time'],
-            ]);
-
-            $this->syncGuests($event, $validated['guests'] ?? '');
-            $this->syncTags($event, $validated['genres']);
-
-            return redirect()->route('events.index')->with('success', trans('messages.event_updated'));
-        } catch (\Exception $e) {
-            return back()->withErrors(['cover' => 'Ошибка при обновлении мероприятия']);
-        }
-    }
+//    public function edit(Event $event)
+//    {
+//        return view('editor.events.edit', compact('event'));
+//    }
+//
+//    public function update(Request $request, Event $event)
+//    {
+//        $validated = $request->validate([
+//            'cover' => 'nullable|image|max:2048',
+//            'title' => 'required|string|max:255',
+//            'description' => 'required|string',
+//            'date' => 'required|date',
+//            'time' => 'required|date_format:H:i',
+//            'guests' => 'nullable|string|max:1000',
+//            'genres' => 'required|string|max:1000',
+//        ]);
+//
+//        try {
+//            if ($request->hasFile('cover')) {
+//                if ($event->cover) {
+//                    Storage::disk('public')->delete($event->cover);
+//                }
+//                $event->cover = $request->file('cover')->store('event_covers', 'public');
+//            }
+//
+//            $event->update([
+//                'title' => $validated['title'],
+//                'description' => $validated['description'],
+//                'start_date' => $validated['date'] . ' ' . $validated['time'],
+//            ]);
+//
+//            $this->syncGuests($event, $validated['guests'] ?? '');
+//            $this->syncTags($event, $validated['genres']);
+//
+//            return redirect()->route('events.index')->with('success', trans('messages.event_updated'));
+//        } catch (\Exception $e) {
+//            return back()->withErrors(['cover' => 'Ошибка при обновлении мероприятия']);
+//        }
+//    }
 
     private function syncGuests(Event $event, string $guestsString)
     {
@@ -109,9 +109,9 @@ class EditorEventController extends Controller
         Guest::doesntHave('events')->delete();
     }
 
-    private function syncTags(Event $event, string $genresString)
+    private function syncTags(Event $event, string $tagsString)
     {
-        $tags = array_filter(array_map('trim', explode(',', $genresString)));
+        $tags = array_filter(array_map('trim', explode(',', $tagsString)));
         $ids = Tag::whereIn('name', $tags)->pluck('id')->toArray();
 
         foreach ($tags as $name) {

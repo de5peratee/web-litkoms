@@ -49,7 +49,6 @@ export default defineConfig({
                 'resources/js/event-map.js',
                 'resources/js/event-tags.js',
                 'resources/js/pdf-viewer.js',
-
             ],
             refresh: true,
         }),

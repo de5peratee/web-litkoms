@@ -86,7 +86,6 @@
         </div>
     </div>
 
-    <!-- Мобильное меню -->
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu__header">
