@@ -1,8 +1,13 @@
 @foreach($events as $event)
     <a href="{{ route('events.get_event', $event->id) }}" class="event-card">
         <div class="cover_wrapper">
-            <img src="{{ $event->cover ? Storage::url('events/' . $event->cover) : asset('images/default_template/event-cover.svg') }}" alt="event_cover">
+            @isset($event->cover)
+                <img src="{{ Storage::url('events/' . $event->cover) }}" alt="event_cover">
+            @else
+                <img src="{{ asset('images/default_template/event-cover.svg') }}" alt="event_cover">
+            @endisset
         </div>
+
 
         <div class="event-description">
             <div class="event-categories" data-tags="{{ $event->tags->pluck('name')->join(',') }}">

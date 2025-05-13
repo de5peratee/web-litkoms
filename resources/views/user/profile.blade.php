@@ -62,9 +62,10 @@
                                 <span>Подписаться</span>
                             @endif
                         </button>
-                    @endif
 
+                    @else
                         <a href="{{ route('editor.dashboard')}}" class="secondary-btn">Панель редактора</a>
+                    @endif
                 @endauth
             </div>
         </div>
