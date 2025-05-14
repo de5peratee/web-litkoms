@@ -5,8 +5,59 @@
 @section('content')
     @vite(['resources/css/events.css'])
     @vite(['resources/js/events.js'])
+    @vite(['resources/js/swiper-slider.js'])
 
     <div class="events-container">
+        <div class="events-slider-container">
+            <div class="slider">
+                @foreach($upcomingEvents as $event)
+                    <div class="slide" style="background-image: url('{{ $event->cover ? Storage::url('/' . $event->cover) : asset('images/default_template/event-cover.svg') }}');">
+                        <div class="slide-content">
+                            <div class="slide-event-authors">
+                                <p>{{ implode(' · ', $event->guests->pluck('name')->toArray()) }}</p>
+                            </div>
+
+                            <div class="slide-center-data">
+                                <h1>{{ $event->name }}</h1>
+
+                                <div class="slide-event-tags-wrapper">
+                                    @foreach ($event->tags as $tag)
+                                        <div class="slide-event-tag">{{ $tag->name }}</div>
+                                    @endforeach
+                                </div>
+
+                                <div class="slide-event-datetime">
+                                    <p class="slide-event-card-date">{{ $event->start_date->translatedFormat('j F Y', 'ru') }}</p>
+                                    <p>·</p>
+                                    <p class="slide-event-card-date">{{ $event->start_date->translatedFormat('H:i', 'ru') }}</p>
+                                </div>
+                            </div>
+
+
+                            <a href="{{ route('events.get_event', $event->id) }}" class="primary-btn">
+                                Подробнее
+                                <img src="{{ asset('images/icons/arrow-top-right-white.svg') }}" class="icon-24" alt="icon">
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+
+{{--                <img src="image1.jpg" alt="Слайд 1" class="slide">--}}
+{{--                <img src="image2.jpg" alt="Слайд 2" class="slide">--}}
+{{--                <img src="image3.jpg" alt="Слайд 3" class="slide">--}}
+            </div>
+
+            <button class="prev-button">
+                <img src="{{ asset('images/icons/arrow-left-white.svg') }}" class="icon-24" alt="icon">
+            </button>
+            <button class="next-button">
+                <img src="{{ asset('images/icons/arrow-right-white.svg') }}" class="icon-24" alt="icon">
+            </button>
+
+            <div class="dots"></div>
+
+        </div>
+
         <div class="events-explore-container">
             <div class="events-explore-header">
                 <h2>Мероприятия</h2>
