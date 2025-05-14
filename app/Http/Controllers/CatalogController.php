@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\CatalogGenre;
 use App\Models\Catalog;
 use App\Models\Genre;
 use Illuminate\Http\Request;
@@ -16,13 +18,11 @@ class CatalogController extends Controller
 
         $query = Catalog::with('genres');
 
-        // Поиск по названию
         if ($request->filled('search')) {
             $search = trim($request->search);
             $query->where('name', 'like', "%{$search}%");
         }
 
-        // Фильтрация по жанрам
         $genres = $request->input('genres', []);
 
         if (!empty($genres)) {

@@ -8,16 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-//    public function index($nickname)
-//    {
-//        $user = User::where('nickname', $nickname)
-//            ->with('subscriptions')
-//            ->firstOrFail();
-//
-//        $isSub = Auth::check() && Auth::user()->subscriptions()->where('subscribed_to_id', $user->id)->exists();
-//
-//        return view('user.profile', compact('user', 'isSub'));
-//    }
     public function index($nickname)
     {
         $user = User::withCount(['subscribers', 'subscriptions'])

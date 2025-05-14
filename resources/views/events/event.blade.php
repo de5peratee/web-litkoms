@@ -6,7 +6,7 @@
     @vite(['resources/css/event.css', 'resources/js/event-map.js'])
 
     <div class="event-container">
-        <div class="event-preview" style="background-image: url('{{ $event->cover ? Storage::url('events/' . $event->cover) : asset('images/default_template/event-cover.svg') }}');">
+        <div class="event-preview" style="background-image: url('{{ $event->cover ? Storage::url('/' . $event->cover) : asset('images/default_template/event-cover.svg') }}');">
             <div class="event-preview-content">
                 <div class="event-authors">
                     <p>{{ implode(' · ', $event->guests->pluck('name')->toArray()) }}</p>

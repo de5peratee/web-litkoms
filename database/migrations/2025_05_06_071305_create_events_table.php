@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('end_date')->nullable();
             $table->text('description')->nullable();
             $table->string('cover')->nullable();
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
             $table->softDeletes();
         });

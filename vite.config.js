@@ -26,7 +26,7 @@ export default defineConfig({
                 'resources/css/editor/create_event.css',
                 'resources/css/editor/create_post.css',
                 'resources/css/editor/events_list.css',
-                'resources/css/editor/news_list.css',
+                'resources/css/editor/multimedia_post.css',
 
                 'resources/js/app.js',
                 'resources/js/profile-dropdown.js',
@@ -38,7 +38,6 @@ export default defineConfig({
                 'resources/js/toggleSubscription.js',
                 'resources/js/event-map.js',
                 'resources/js/pdf-viewer.js',
-
             ],
             refresh: true,
         }),

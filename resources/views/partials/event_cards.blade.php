@@ -8,7 +8,6 @@
             @endisset
         </div>
 
-
         <div class="event-description">
             <div class="event-categories" data-tags="{{ $event->tags->pluck('name')->join(',') }}">
                 @foreach($event->tags as $tag)
