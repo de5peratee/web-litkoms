@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 $(document).ready(function() {
-    const $profileContainer = $('.profile-container');
+    const $profileContainer = $('#headerProfileContainer');
     const $profileDropdown = $('#profileDropdown');
     let closeTimer;
 

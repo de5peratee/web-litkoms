@@ -21,7 +21,7 @@
         </ul>
     </nav>
 
-    <div class="account-bar">
+    <div class="header-account-wrapper">
         @guest
             <a href="{{route('auth')}}" class="primary-btn">
                 Войти
@@ -34,14 +34,14 @@
                 <img src="{{ asset('images/icons/bell.svg') }}" alt="icon">
             </div>
 
-            <div class="profile-container">
-                <a href="{{route('profile.index', Auth::user()->nickname)}}" class="profile-info">
+                <div class="header-profile-container" id="headerProfileContainer">
+                <a href="{{route('profile.index', Auth::user()->nickname)}}" class="header-profile-info">
                     @if(Auth::user()->icon && Storage::exists(Auth::user()->icon))
-                        <div class="avatar-wrapper">
+                        <div class="header-avatar-wrapper">
                             <img src="{{ Storage::url(Auth::user()->icon) }}" alt="{{ Auth::user()->icon }}">
                         </div>
                     @else
-                        <div class="profile-avatar-wrapper">
+                        <div class="header-avatar-wrapper">
                             <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
                         </div>
                     @endif
