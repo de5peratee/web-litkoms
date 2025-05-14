@@ -33,6 +33,7 @@
 .lit-field input, .lit-field textarea {
     padding: 8px 16px;
     height: 44px;
+    width: 100%;
 
     border-radius: 12px;
     border: 1px  solid var(--gray);
