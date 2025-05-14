@@ -18,8 +18,6 @@ return new class extends Migration
 
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->foreign('guest_id')->references('id')->on('guests')->onDelete('cascade');
-
-//            $table->unique(['event_id', 'guest_id']);
             $table->timestamps();
         });
     }

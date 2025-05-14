@@ -8,21 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class SubscriptionController extends Controller
 {
-//    public function subscribe($nickname)
-//    {
-//        $userToSubscribe = User::where('nickname', $nickname)->firstOrFail();
-//        Auth::user()->subscriptions()->syncWithoutDetaching([$userToSubscribe->id]);
-//        //ажаксом принимай ответы и обновляй кнопку
-//        return response()->json(['status' => 'subscribed']);
-//    }
-//
-//    public function unsubscribe($nickname)
-//    {
-//        $userToUnsubscribe = User::where('nickname', $nickname)->firstOrFail();
-//        Auth::user()->subscriptions()->detach($userToUnsubscribe->id);
-//        return response()->json(['status' => 'unsubscribed']);
-//    }
-
     public function subscribe($nickname)
     {
         $user = User::where('nickname', $nickname)->firstOrFail();

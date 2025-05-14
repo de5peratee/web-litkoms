@@ -3,10 +3,11 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogController;
 
+use App\Http\Controllers\Editor\EditorEventController;
+use App\Http\Controllers\Editor\EditorPostController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 //Главная
@@ -32,9 +33,9 @@ Route::post('/auth/register', [AuthController::class, 'register'])->name('auth.r
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::get('/news', function () {
+Route::get('/mediaposts', function () {
     return view('news');
-})->name('news');
+})->name('mediaposts');
 
 Route::get('/authors_comics_landing', function () {
     return view('authors_comics_landing');
@@ -46,32 +47,19 @@ Route::get('/litar_landing', function () {
 
 
 Route::get('/profile/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
-//Route::get('/profile/{nickname}/dashboard', [ProfileController::class, 'index'])->name('editor.dashboard');
 
-//Заменишь тут с использованием контроллера (везде учитывается ник или id редактора)
-Route::get('/dashboard', function () {
-    return view('editor.dashboard');
-})->name('editor.dashboard');
+Route::prefix('dashboard')->middleware('editor')->group(function () {
+    Route::view('/', 'editor.dashboard')->name('editor.dashboard');
 
-Route::get('/dashboard/events_list', function () {
-    return view('editor.events.list');
-})->name('editor.events_list');
+    Route::get('/event', [EditorEventController::class, 'index'])->name('editor.events_index');
+    Route::get('/event/create', [EditorEventController::class, 'create'])->name('editor.create_event');
+    Route::post('/event/store', [EditorEventController::class, 'store'])->name('editor.store_event');
 
-Route::get('/dashboard/news_list', function () {
-    return view('editor.news.list');
-})->name('editor.news_list');
+    Route::get('/mediapost', [EditorPostController::class, 'index'])->name('editor.mediapost_index');
+    Route::get('/mediapost/create', [EditorPostController::class, 'create'])->name('editor.create_mediapost');
+    Route::post('/mediapost/store', [EditorPostController::class, 'store'])->name('editor.store_mediapost');
+});
 
-Route::get('/dashboard/events_list/create_event_form', function () {
-    return view('editor.events.create');
-})->name('editor.create_event_form');
-
-Route::get('/dashboard/news_list/create_post_form', function () {
-    return view('editor.news.create');
-})->name('editor.create_post_form');
-
-//Route::post('/dashboard/events_list/create_event_form/create', [EventController::class, 'create'])->name('editor.create_event');
-//Route::post('/dashboard/news_list/create_post_form/create', [NewsController::class, 'create'])->name('editor.create_post');
-//
 
 
 Route::post('/subscribe/{nickname}', [SubscriptionController::class, 'subscribe'])->name('subscribe');

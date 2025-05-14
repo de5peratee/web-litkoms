@@ -18,13 +18,11 @@ class CatalogController extends Controller
 
         $query = Catalog::with('genres')->orderBy('created_at', 'desc');
 
-        // Поиск по названию
         if ($request->filled('search')) {
             $search = trim($request->search);
             $query->where('name', 'like', "%{$search}%");
         }
 
-        // Фильтрация по жанрам (по имени жанра!)
         $genres = $request->input('genres');
 
         if (!empty($genres)) {
@@ -32,7 +30,6 @@ class CatalogController extends Controller
                 $genres = [$genres];
             }
 
-            // фильтрация по названию жанра
             $query->whereHas('genres', function ($q) use ($genres) {
                 $q->whereIn('genres.name', $genres);
             });

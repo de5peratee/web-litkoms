@@ -13,7 +13,7 @@
         <div class="custom-slider">
             <div class="slides-wrapper">
                 @foreach($events->sortBy('start_date')->take(3) as $event)
-                    <div class="event-slide" style="background-image: url('{{ $event->cover ? Storage::url('events/' . $event->cover) : asset('images/default_template/event-cover.svg') }}');">
+                    <div class="event-slide" style="background-image: url('{{ $event->cover ? Storage::url('/' . $event->cover) : asset('images/default_template/event-cover.svg') }}');">
                         <div class="event-slide-content">
                             <div class="event-authors">
                                 <p>{{ implode(' · ', $event->guests->pluck('name')->toArray()) }}</p>
