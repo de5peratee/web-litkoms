@@ -22,11 +22,12 @@ export default defineConfig({
                 'resources/css/profile.css',
                 'resources/css/litar.css',
                 'resources/css/pdf-viewer.css',
+
                 'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
                 'resources/css/editor/create_post.css',
                 'resources/css/editor/events_list.css',
-                'resources/css/editor/multimedia_post.css',
+                'resources/css/editor/multimedia_list.css',
 
                 'resources/js/app.js',
                 'resources/js/profile-dropdown.js',
