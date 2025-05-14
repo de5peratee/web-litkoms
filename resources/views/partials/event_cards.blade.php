@@ -2,7 +2,7 @@
     <a href="{{ route('events.get_event', $event->id) }}" class="event-card">
         <div class="cover_wrapper">
             @isset($event->cover)
-                <img src="{{ Storage::url('events/' . $event->cover) }}" alt="event_cover">
+                <img src="{{ Storage::url('' . $event->cover) }}" alt="event_cover">
             @else
                 <img src="{{ asset('images/default_template/event-cover.svg') }}" alt="event_cover">
             @endisset

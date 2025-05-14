@@ -34,7 +34,7 @@ class StoreEventRequest extends FormRequest
                 if (count(array_unique(array_map('strtolower', $guests))) < $guestCount) {
                     $validator->errors()->add('guests', 'Гости не должны повторяться.');
                 }
-                if ($guestCount > 7) {
+                if ($guestCount > 10) {
                     $validator->errors()->add('guests', 'Количество гостей не должно превышать 7.');
                 }
             }
@@ -45,7 +45,7 @@ class StoreEventRequest extends FormRequest
             if (count(array_unique(array_map('strtolower', $tags))) < $tagsCount) {
                 $validator->errors()->add('tags', 'Теги не должны повторяться.');
             }
-            if ($tagsCount > 7) {
+            if ($tagsCount > 5) {
                 $validator->errors()->add('tags', 'Количество тегов не должно превышать 7.');
             }
         });
