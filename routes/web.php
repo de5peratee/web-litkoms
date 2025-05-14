@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogController;
-
 use App\Http\Controllers\Editor\EditorEventController;
 use App\Http\Controllers\Editor\EditorPostController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionController;
+
 use Illuminate\Support\Facades\Route;
 
 //Главная
@@ -51,13 +51,13 @@ Route::get('/profile/{nickname}', [ProfileController::class, 'index'])->name('pr
 Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::view('/', 'editor.dashboard')->name('editor.dashboard');
 
-    Route::get('/event', [EditorEventController::class, 'index'])->name('editor.events_index');
-    Route::get('/event/create', [EditorEventController::class, 'create'])->name('editor.create_event');
-    Route::post('/event/store', [EditorEventController::class, 'store'])->name('editor.store_event');
+    Route::get('/events', [EditorEventController::class, 'index'])->name('editor.events_index');
+    Route::get('/events/create', [EditorEventController::class, 'create'])->name('editor.create_event');
+    Route::post('/events/store', [EditorEventController::class, 'store'])->name('editor.store_event');
 
-    Route::get('/mediapost', [EditorPostController::class, 'index'])->name('editor.mediapost_index');
-    Route::get('/mediapost/create', [EditorPostController::class, 'create'])->name('editor.create_mediapost');
-    Route::post('/mediapost/store', [EditorPostController::class, 'store'])->name('editor.store_mediapost');
+    Route::get('/mediaposts', [EditorPostController::class, 'index'])->name('editor.mediapost_index');
+    Route::get('/mediaposts/create', [EditorPostController::class, 'create'])->name('editor.create_mediapost');
+    Route::post('/mediaposts/store', [EditorPostController::class, 'store'])->name('editor.store_mediapost');
 });
 
 

@@ -8,8 +8,7 @@
 
 
     <div class="profile-container">
-
-        <div class="profile-header-container">
+        <div class="profile-header">
             <img src="{{ asset('images/icons/hw/hw_brush.svg') }}" alt="icon" class="hw-abstract brush-icon">
             <img src="{{ asset('images/icons/hw/hw_draw_pen.svg') }}" alt="icon" class="hw-abstract draw_pen-icon">
             <img src="{{ asset('images/icons/hw/hw_ruler.svg') }}" alt="icon" class="hw-abstract ruler-icon">
@@ -111,7 +110,6 @@
                 </div>
             @endif
         </div>
-
     </div>
 
 @endsection

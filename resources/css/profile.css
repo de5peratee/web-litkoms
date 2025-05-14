@@ -67,7 +67,7 @@
     color: var(--secondary);
 }
 
-.profile-header-container {
+.profile-header {
     position: relative;
 
     display: flex;

@@ -15,7 +15,8 @@ class EditorEventController extends Controller
 {
 
     public function index(){
-        return view('editor.events.list');
+        $events = Event::orderBy('created_at', 'desc')->get();
+        return view('editor.events.list', compact('events'));
     }
 
     public function create()
