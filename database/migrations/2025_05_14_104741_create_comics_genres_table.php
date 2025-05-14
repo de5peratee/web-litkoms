@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('multimedia_posts', function (Blueprint $table) {
+        Schema::create('comics_genres', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('comics_id');
+            $table->unsignedBigInteger('genre_id');
+
+            $table->foreign('comics_id')->references('id')->on('authorсomics')->onDelete('cascade');
+            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('multimedia_posts');
+        Schema::dropIfExists('comics_genres');
     }
 };

@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('multimedia_posts', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->unsignedBigInteger('created_by');
-
             $table->timestamps();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('comics_to');
+            $table->text('comment');
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('multimedia_posts');
+        Schema::dropIfExists('comments');
     }
 };

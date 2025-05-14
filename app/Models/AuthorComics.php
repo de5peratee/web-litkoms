@@ -4,17 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Genre extends Model
+class AuthorComics extends Model
 {
     protected $guarded = false;
 
-    public function catalogs()
-    {
-        return $this->belongsToMany(Catalog::class, 'catalog_genres');
-    }
-    public function comics()
+    public function genres()
     {
         return $this->belongsToMany(Genre::class, 'comics_genres');
     }
-
 }
