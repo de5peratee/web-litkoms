@@ -11,14 +11,13 @@ class StoreMultimediaPostRequest extends FormRequest
         return true;
     }
 
-
     public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'media' => ['nullable', 'array'],
-            'media.*' => ['file', 'mimetypes:image/*,video/*', 'max:10240'], // до 10MB на файл
+            'media' => ['nullable', 'array', 'max:10'],
+            'media.*' => ['file', 'mimetypes:image/*,video/*', 'max:10240'],
         ];
     }
 
@@ -30,6 +29,7 @@ class StoreMultimediaPostRequest extends FormRequest
             'media.*.file' => 'Каждый медиафайл должен быть файлом.',
             'media.*.mimetypes' => 'Допустимы только изображения и видео.',
             'media.*.max' => 'Максимальный размер файла: 10MB.',
+            'media.max' => 'Максимальное количество медиафайлов: 10.',
         ];
     }
 }

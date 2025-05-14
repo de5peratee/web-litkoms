@@ -10,10 +10,8 @@ export default defineConfig({
                 'resources/css/fonts.css',
                 'resources/css/colors.css',
                 'resources/css/icons.css',
-
                 'resources/css/footer.css',
                 'resources/css/header.css',
-
                 'resources/css/auth.css',
                 'resources/css/buttons.css',
                 'resources/css/library.css',
@@ -24,7 +22,6 @@ export default defineConfig({
                 'resources/css/profile.css',
                 'resources/css/litar.css',
                 'resources/css/pdf-viewer.css',
-
                 'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
                 'resources/css/editor/create_post.css',
@@ -32,22 +29,14 @@ export default defineConfig({
                 'resources/css/editor/multimedia_post.css',
 
                 'resources/js/app.js',
-
                 'resources/js/profile-dropdown.js',
                 'resources/js/sticky-header.js',
                 'resources/js/mobile-menu.js',
-
-                'resources/js/loadBooks.js',
-                'resources/js/loadEvents.js',
-
+                'resources/js/library.js',
+                'resources/js/events.js',
                 'resources/js/auth-tabs.js',
-
                 'resources/js/toggleSubscription.js',
-                'resources/js/filterBooks.js',
-
-                'resources/js/event-slider.js',
                 'resources/js/event-map.js',
-                'resources/js/event-tags.js',
                 'resources/js/pdf-viewer.js',
             ],
             refresh: true,

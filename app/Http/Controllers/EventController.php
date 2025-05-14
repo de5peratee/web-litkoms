@@ -3,20 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $perPage = 4;
+        $selectedCategories = $request->get('categories', []);
+        $sortOrder = $request->get('sort', 'desc');
+        $perPage = 6;
 
-        $query = Event::with(['tags', 'guests'])->orderBy('start_date');
+        $query = Event::with(['tags', 'guests'])->orderBy('start_date', $sortOrder);
 
         if ($search) {
             $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        if (!empty($selectedCategories)) {
+            $query->whereHas('tags', function ($q) use ($selectedCategories) {
+                $q->whereIn('name', $selectedCategories);
+            });
         }
 
         $events = $query->paginate($perPage);
@@ -28,14 +36,13 @@ class EventController extends Controller
             ]);
         }
 
-        return view('events.index', compact('events'));
-    }
+        $categories = Tag::orderBy('name')->get();
 
+        return view('events.index', compact('events', 'categories'));
+    }
 
     public function get_event(Event $event)
     {
-//        dd($event->toArray());
         return view('events.event', compact('event'));
     }
-
 }

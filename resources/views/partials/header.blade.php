@@ -1,8 +1,7 @@
 <!-- resources/views/partials/header.blade.php -->
 @vite(['resources/css/header.css',
 'resources/js/profile-dropdown.js',
-'resources/js/mobile-menu.js',
-'resources/js/sticky-header.js'])
+'resources/js/mobile-menu.js'])
 
 <header>
     <div class="logo-wrapper">
@@ -107,6 +106,17 @@
                 <li><a href="{{ route('authors_comics_landing') }}" class="{{ Route::currentRouteName() == 'authors_comics_landing' ? 'active-link' : '' }}">Авторские комиксы</a></li>
                 <li><a href="{{ route('litar_landing') }}" class="{{ Route::currentRouteName() == 'litar_landing' ? 'active-link' : '' }}">Лит-AR</a></li>
             </ul>
+
+            <div class="h-divider"></div>
+
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="dropdown-item logout-btn">
+                    <img src="{{ asset('images/icons/exit.svg') }}" alt="icon" class="icon-24">
+                    Выйти
+                </button>
+            </form>
+
         </nav>
     </div>
 

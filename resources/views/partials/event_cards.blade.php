@@ -1,7 +1,11 @@
 @foreach($events as $event)
     <a href="{{ route('events.get_event', $event->id) }}" class="event-card">
         <div class="cover_wrapper">
-            <img src="{{ $event->cover ? Storage::url('/' . $event->cover) : asset('images/default_template/event-cover.svg') }}" alt="event_cover">
+            @isset($event->cover)
+                <img src="{{ Storage::url('' . $event->cover) }}" alt="event_cover">
+            @else
+                <img src="{{ asset('images/default_template/event-cover.svg') }}" alt="event_cover">
+            @endisset
         </div>
 
         <div class="event-description">
@@ -17,7 +21,11 @@
             </div>
 
             <p>{{ Str::limit($event->description, 100) }}</p>
-            <p>{{ $event->start_date->format('d.m.Y H:i') }}</p>
+            <div class="event-card-datetime">
+                <p class="event-card-date">{{ $event->start_date->translatedFormat('j F Y', 'ru') }}</p>
+                <p>·</p>
+                <p class="event-card-date">{{ $event->start_date->translatedFormat('H:i', 'ru') }}</p>
+            </div>
         </div>
     </a>
 @endforeach

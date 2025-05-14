@@ -27,7 +27,7 @@
                 @endif
 
                 <div class="book-text-description">
-                    <h2>«{{ $book->name }}»</h2>
+                    <h2 class="book-title">«{{ $book->name }}»</h2>
                     <div class="genres-wrapper">
                         @foreach ($book->genres as $genre)
                             <p class="text-small genre-tag">{{ $genre->name }}</p>
@@ -66,7 +66,8 @@
         </div>
         <div class="info-block">
             <div class="info-header">
-                <h3>Читайте онлайн</h3>
+                <img src="{{ asset('images/icons/hw/book.svg') }}" class="icon-32" alt="icon">
+                <h3>«{{ $book->name }}»</h3>
             </div>
 
             <div class="h-divider"></div>
@@ -74,7 +75,7 @@
             <div class="pdf-view">
                 <div class="pdf-controls">
                     <div class="pdf-desc">
-                        <p class="text-big">PDF-Viewer (beta)</p>
+                        <p class="text-big">Литкомс</p>
                     </div>
                     <div class="page-controls">
                         <button id="prev-page" class="pdf-btn">Назад</button>
@@ -87,11 +88,11 @@
                     </div>
 
                     <div class="zoom-controls">
-                        <button id="zoom-in" class="pdf-btn">
-                            <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-20" alt="icon">
-                        </button>
                         <button id="zoom-out" class="pdf-btn">
                             <img src="{{ asset('images/icons/minus-icon-white.svg') }}" class="icon-20" alt="icon">
+                        </button>
+                        <button id="zoom-in" class="pdf-btn">
+                            <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-20" alt="icon">
                         </button>
                     </div>
                 </div>
