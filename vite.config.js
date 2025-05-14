@@ -30,7 +30,6 @@ export default defineConfig({
 
                 'resources/js/app.js',
                 'resources/js/profile-dropdown.js',
-                'resources/js/sticky-header.js',
                 'resources/js/mobile-menu.js',
                 'resources/js/library.js',
                 'resources/js/events.js',
