@@ -30,6 +30,13 @@ class EventController extends Controller
 
         $events = $query->paginate($perPage);
 
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('partials.event_cards', ['events' => $events])->render(),
+                'has_more' => $events->hasMorePages(),
+            ]);
+        }
+
         // Ближайшие 3 мероприятия для слайдера
         $upcomingEvents = Event::with('tags')
             ->where('start_date', '>=', now())

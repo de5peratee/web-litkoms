@@ -92,6 +92,13 @@
                 </div>
             @endif
         </div>
+
+        <div class="info-block">
+            <div class="info-header">
+                <h2>Прошедшие мероприятия</h2>
+                <h3>5</h3>
+            </div>
+        </div>
     </div>
 
     <div class="modal hidden" id="filter-modal">
