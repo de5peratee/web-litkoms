@@ -5,6 +5,7 @@ body {
     gap: 8px;
     min-height: 100vh;
     scroll-padding-top: 64px;
+    overflow-x: hidden;
 
     background-repeat: repeat;
     background-color: var(--gray);

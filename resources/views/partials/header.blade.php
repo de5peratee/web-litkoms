@@ -1,8 +1,7 @@
 <!-- resources/views/partials/header.blade.php -->
 @vite(['resources/css/header.css',
 'resources/js/profile-dropdown.js',
-'resources/js/mobile-menu.js',
-'resources/js/sticky-header.js'])
+'resources/js/mobile-menu.js'])
 
 <header>
     <div class="logo-wrapper">

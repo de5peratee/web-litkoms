@@ -22,7 +22,11 @@
             </div>
 
             <p>{{ Str::limit($event->description, 100) }}</p>
-            <p>{{ $event->start_date->format('d.m.Y H:i') }}</p>
+            <div class="event-card-datetime">
+                <p class="event-card-date">{{ $event->start_date->translatedFormat('j F Y', 'ru') }}</p>
+                <p>·</p>
+                <p class="event-card-date">{{ $event->start_date->translatedFormat('H:i', 'ru') }}</p>
+            </div>
         </div>
     </a>
 @endforeach

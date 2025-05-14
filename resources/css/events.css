@@ -4,6 +4,8 @@
 
     gap: 24px;
     width: 1170px;
+
+    height: 2000px;
 }
 
 .events-explore-container {
@@ -153,16 +155,18 @@
     gap: 24px;
     padding-bottom: 24px;
     border-radius: 24px;
-    width: 49%;
+    width: 532px;
 
-    border: 1px solid var(--gray);
+    border: 1px solid var(--light-gray);
     background-color: var(--light-gray);
 
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .event-card:hover {
-    background-color: var(--gray);
+    scale: 0.98;
+    /*background-color: var(--gray);*/
+    /*border: 1px solid var(--primary-blue);*/
 }
 
 .event-description {
@@ -170,14 +174,31 @@
     flex-direction: column;
     gap: 16px;
 
-    padding-inline: 16px;
+    padding-inline: 24px;
+}
+
+.event-card-datetime {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+
+    color: var(--secondary);
 }
 
 .event-title-block {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+}
+
+.event-title-block h3 {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .event-categories {
