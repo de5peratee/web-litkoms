@@ -40,7 +40,6 @@
     }
 }
 
-/* Скрытие пустых ошибок */
 .input-error:empty {
     opacity: 0;
     height: 0;

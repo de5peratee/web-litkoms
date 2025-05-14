@@ -54,10 +54,14 @@ Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::get('/events', [EditorEventController::class, 'index'])->name('editor.events_index');
     Route::get('/events/create', [EditorEventController::class, 'create'])->name('editor.create_event');
     Route::post('/events/store', [EditorEventController::class, 'store'])->name('editor.store_event');
+    Route::patch('/events/{event}', [EditorEventController::class, 'update'])->name('editor.update_event');
+    Route::delete('/events/{event}', [EditorEventController::class, 'destroy'])->name('editor.delete_event');
 
     Route::get('/mediaposts', [EditorPostController::class, 'index'])->name('editor.mediapost_index');
     Route::get('/mediaposts/create', [EditorPostController::class, 'create'])->name('editor.create_mediapost');
     Route::post('/mediaposts/store', [EditorPostController::class, 'store'])->name('editor.store_mediapost');
+    Route::patch('/mediaposts/{mediaPost}', [EditorPostController::class, 'update'])->name('editor.update_mediapost');
+    Route::delete('/mediaposts/{mediaPost}', [EditorPostController::class, 'destroy'])->name('editor.delete_mediapost');
 });
 
 

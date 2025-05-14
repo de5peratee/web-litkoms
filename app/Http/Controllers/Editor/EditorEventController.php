@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Editor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use App\Models\Guest;
 use App\Models\Tag;
@@ -13,9 +14,11 @@ use Illuminate\Support\Facades\Storage;
 
 class EditorEventController extends Controller
 {
-
-    public function index(){
-        $events = Event::orderBy('created_at', 'desc')->get();
+    public function index()
+    {
+        $events = Event::with(['tags', 'guests'])
+            ->orderBy('start_date', 'desc')
+            ->get();
         return view('editor.events.list', compact('events'));
     }
 
@@ -51,47 +54,61 @@ class EditorEventController extends Controller
         }
     }
 
+    public function update(UpdateEventRequest $request, Event $event)
+    {
+        try {
+            DB::beginTransaction();
 
-    //update, edit для редактирования
-//    public function edit(Event $event)
-//    {
-//        return view('editor.events.edit', compact('event'));
-//    }
-//
-//    public function update(Request $request, Event $event)
-//    {
-//        $validated = $request->validate([
-//            'cover' => 'nullable|image|max:2048',
-//            'title' => 'required|string|max:255',
-//            'description' => 'required|string',
-//            'date' => 'required|date',
-//            'time' => 'required|date_format:H:i',
-//            'guests' => 'nullable|string|max:1000',
-//            'genres' => 'required|string|max:1000',
-//        ]);
-//
-//        try {
-//            if ($request->hasFile('cover')) {
-//                if ($event->cover) {
-//                    Storage::disk('public')->delete($event->cover);
-//                }
-//                $event->cover = $request->file('cover')->store('event_covers', 'public');
-//            }
-//
-//            $event->update([
-//                'title' => $validated['title'],
-//                'description' => $validated['description'],
-//                'start_date' => $validated['date'] . ' ' . $validated['time'],
-//            ]);
-//
-//            $this->syncGuests($event, $validated['guests'] ?? '');
-//            $this->syncTags($event, $validated['genres']);
-//
-//            return redirect()->route('events.index')->with('success', trans('messages.event_updated'));
-//        } catch (\Exception $e) {
-//            return back()->withErrors(['cover' => 'Ошибка при обновлении мероприятия']);
-//        }
-//    }
+            if ($request->hasFile('cover')) {
+                if ($event->cover) {
+                    Storage::disk('public')->delete($event->cover);
+                }
+                $event->cover = $request->file('cover')->store('event_covers', 'public');
+            }
+
+            $event->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'start_date' => $request->start_date . ' ' . $request->time,
+                'cover' => $event->cover,
+            ]);
+
+            $this->syncGuests($event, $request->guests ?? '');
+            $this->syncTags($event, $request->tags);
+
+            DB::commit();
+
+            return redirect()->route('editor.events_index')->with('success', trans('messages.event_updated'));
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['cover' => 'Ошибка при обновлении мероприятия: ' . $e->getMessage()]);
+        }
+    }
+
+    public function destroy(Event $event)
+    {
+        try {
+            DB::beginTransaction();
+
+            if ($event->cover) {
+                Storage::disk('public')->delete($event->cover);
+            }
+
+            $event->guests()->detach();
+            $event->tags()->detach();
+            $event->delete();
+
+            Guest::doesntHave('events')->delete();
+            Tag::doesntHave('events')->delete();
+
+            DB::commit();
+
+            return redirect()->route('editor.events_index')->with('success', trans('messages.event_deleted'));
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['error' => 'Ошибка при удалении мероприятия: ' . $e->getMessage()]);
+        }
+    }
 
     private function syncGuests(Event $event, string $guestsString)
     {
