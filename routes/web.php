@@ -48,6 +48,25 @@ Route::get('/litar_landing', function () {
 
 Route::get('/profile/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
 
+//Route::get('/profile/{nickname}/author_comics', function () {
+//    return view('user.author_comics.list');
+//})->name('user.author_comics');
+
+Route::get('/user/author_comics', function () {
+    return view('user.author_comics.list');
+})->name('user.author_comics');
+
+Route::get('/author_comics/create', function () {
+    return view('user.author_comics.create');
+})->name('user.create_author_comics');
+
+
+
+
+Route::post('/subscribe/{nickname}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe');
+
+
 Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::view('/', 'editor.dashboard')->name('editor.dashboard');
 
@@ -63,8 +82,3 @@ Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::patch('/mediaposts/{mediaPost}', [EditorPostController::class, 'update'])->name('editor.update_mediapost');
     Route::delete('/mediaposts/{mediaPost}', [EditorPostController::class, 'destroy'])->name('editor.delete_mediapost');
 });
-
-
-
-Route::post('/subscribe/{nickname}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
-Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe');

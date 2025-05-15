@@ -43,14 +43,13 @@ function loadMoreEvents() {
             page: $btn.data('page'),
             search: $btn.data('search') || '',
             categories: $btn.data('categories') || [],
-            sort: $btn.data('sort') || 'desc'
+            sort: $btn.data('sort') || 'asc'
         };
 
         $btn.prop('disabled', true).text('Загрузка...');
 
         $.get(url, data)
             .done(response => {
-                // Append new events to the grid
                 $('#events-grid').append(response.html);
                 $btn.data('page', data.page + 1);
                 if (!response.has_more) $btn.remove();
@@ -62,13 +61,13 @@ function loadMoreEvents() {
 }
 
 function updateFilterCount(categories, sort) {
-    const count = categories.length + (sort !== 'desc' ? 1 : 0);
+    const count = categories.length + (sort !== 'asc' ? 1 : 0);
     $('#filter-count, #filter-count-modal').text(count).toggleClass('hidden', count === 0);
 }
 
 function initFilters() {
     let selectedCategories = $('#load-more').data('categories') || [];
-    let sortOrder = $('#load-more').data('sort') || 'desc';
+    let sortOrder = $('#load-more').data('sort') || 'asc';
     let tempCategories = [...selectedCategories];
     let tempSortOrder = sortOrder;
     const allCategories = window.allCategories || [];
