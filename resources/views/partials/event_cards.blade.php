@@ -22,9 +22,16 @@
 
             <p>{{ Str::limit($event->description, 100) }}</p>
             <div class="event-card-datetime">
-                <p class="event-card-date">{{ $event->start_date->translatedFormat('j F Y', 'ru') }}</p>
-                <p>·</p>
-                <p class="event-card-date">{{ $event->start_date->translatedFormat('H:i', 'ru') }}</p>
+
+                <div class="event-card-datetime-title">
+                    <img src="{{ asset('images/icons/calendar-secondary.svg') }}" class="icon-20" alt="icon">
+                </div>
+
+                <div class="event-card-datetime-data">
+                    <p class="event-card-date">{{ $event->start_date->translatedFormat('j F', 'ru') }}</p>
+                    <p>·</p>
+                    <p class="event-card-date">{{ $event->start_date->translatedFormat('H:i', 'ru') }}</p>
+                </div>
             </div>
         </div>
     </a>

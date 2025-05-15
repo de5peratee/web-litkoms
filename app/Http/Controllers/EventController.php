@@ -12,9 +12,10 @@ class EventController extends Controller
     {
         $search = $request->get('search');
         $selectedCategories = $request->get('categories', []);
-        $sortOrder = $request->get('sort', 'desc');
+        $sortOrder = $request->get('sort', 'asc');
         $perPage = 6;
 
+        // Основной список
         $query = Event::with(['tags', 'guests'])->orderBy('start_date', $sortOrder);
 
         if ($search) {
@@ -36,10 +37,18 @@ class EventController extends Controller
             ]);
         }
 
+        // Ближайшие 3 мероприятия для слайдера
+        $upcomingEvents = Event::with('tags')
+            ->where('start_date', '>=', now())
+            ->orderBy('start_date', 'asc')
+            ->limit(3)
+            ->get();
+
         $categories = Tag::orderBy('name')->get();
 
-        return view('events.index', compact('events', 'categories'));
+        return view('events.index', compact('events', 'categories', 'upcomingEvents'));
     }
+
 
     public function get_event(Event $event)
     {

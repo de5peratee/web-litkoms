@@ -37,6 +37,8 @@ export default defineConfig({
                 'resources/js/toggleSubscription.js',
                 'resources/js/event-map.js',
                 'resources/js/pdf-viewer.js',
+                'resources/js/swiper-slider.js',
+
 
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',
