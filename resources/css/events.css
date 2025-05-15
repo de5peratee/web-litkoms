@@ -200,13 +200,16 @@
     padding-inline: 24px;
 }
 
-.event-card-datetime {
+.event-card-datetime, .event-card-datetime-data, .event-card-datetime-title {
     display: flex;
     align-items: center;
-
     gap: 4px;
 
     color: var(--secondary);
+}
+
+.event-card-datetime > .event-card-datetime-data {
+    gap: 2px;
 }
 
 .event-title-block {
