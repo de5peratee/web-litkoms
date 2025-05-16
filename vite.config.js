@@ -25,8 +25,10 @@ export default defineConfig({
                 'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
                 'resources/css/editor/create_post.css',
+                'resources/css/editor/create_catalog.css',
                 'resources/css/editor/events_list.css',
                 'resources/css/editor/multimedia_list.css',
+                'resources/css/editor/catalog_list.css',
 
                 'resources/js/app.js',
                 'resources/js/profile-dropdown.js',
@@ -42,6 +44,7 @@ export default defineConfig({
 
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',
+                'resources/js/editor/catalog-list-modal.js',
             ],
             refresh: true,
         }),

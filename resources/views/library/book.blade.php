@@ -16,7 +16,7 @@
 
         <div class="info-block">
             <div class="book-preview-info">
-                @if($book->cover && Storage::exists($book->cover))
+                @if($book->cover)
                     <div class="cover_wrapper">
                         <img src="{{ Storage::url($book->cover) }}" alt="{{ $book->name }}">
                     </div>
