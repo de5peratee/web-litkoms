@@ -41,10 +41,6 @@
                         </div>
                     </div>
                 @endforeach
-
-{{--                <img src="image1.jpg" alt="Слайд 1" class="slide">--}}
-{{--                <img src="image2.jpg" alt="Слайд 2" class="slide">--}}
-{{--                <img src="image3.jpg" alt="Слайд 3" class="slide">--}}
             </div>
 
             <button class="prev-button">
@@ -124,8 +120,8 @@
             <div class="modal-section">
                 <p class="text-hint">Сортировка по дате</p>
                 <select id="sort-select">
-                    <option value="desc" {{ request('sort', 'desc') == 'desc' ? 'selected' : '' }}>Новые сначала</option>
-                    <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Старые сначала</option>
+                    <option value="asc" {{ request('sort', 'asc') == 'asc' ? 'selected' : '' }}>Ближайшие сначала</option>
+                    <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Дальние сначала</option>
                 </select>
             </div>
 

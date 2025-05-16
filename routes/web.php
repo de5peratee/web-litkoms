@@ -48,6 +48,34 @@ Route::get('/litar_landing', function () {
 
 Route::get('/profile/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
 
+//Список комиксов для пользователя (по ID, допилишь с контроллером)
+//Route::get('/profile/{nickname}/author_comics', function () {
+//    return view('user.author_comics.list');
+//})->name('user.author_comics');
+
+//Вместо этого то, что выше
+Route::get('/user/author_comics', function () {
+    return view('user.author_comics.list');
+})->name('user.author_comics');
+
+//И для всех нижних также важно учитывать ID пользователя
+Route::get('/user/author_comics/create', function () {
+    return view('user.author_comics.create');
+})->name('user.create_author_comics');
+
+Route::post('/user/author_comics/store', [AKController::class, 'store'])->name('user.store_author_comics');
+
+Route::get('/user/author_comics/moderation-confirm', function () {
+    return view('user.author_comics.moderation-confirm-comics');
+})->name('user.moderation-confirm-comics');
+
+
+
+
+Route::post('/subscribe/{nickname}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe');
+
+
 Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::view('/', 'editor.dashboard')->name('editor.dashboard');
 
@@ -64,7 +92,6 @@ Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::delete('/mediaposts/{mediaPost}', [EditorPostController::class, 'destroy'])->name('editor.delete_mediapost');
 });
 
-
-
-Route::post('/subscribe/{nickname}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
-Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe');
+Route::get('/manuals/policy', function () {
+    return view('manuals.policy');
+})->name('manuals.policy');

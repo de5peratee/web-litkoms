@@ -12,7 +12,7 @@ class EventController extends Controller
     {
         $search = $request->get('search');
         $selectedCategories = $request->get('categories', []);
-        $sortOrder = $request->get('sort', 'asc');
+        $sortOrder = $request->input('sort', 'asc') === 'desc' ? 'desc' : 'asc';
         $perPage = 6;
 
         // Основной список

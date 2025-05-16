@@ -1,0 +1,60 @@
+.author_comics-form-container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+    padding: 32px;
+    border-radius: 32px;
+    width: 1170px;
+
+    background-color: var(--white);
+}
+
+.author_comics-form-container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.author_comics-form-container-header > h3 {
+    white-space: nowrap;
+}
+
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+
+    width: 50%;
+    gap: 12px;
+}
+
+.progress-bar-endpoint {
+    display: flex;
+    justify-content: center;
+
+    gap: 8px;
+    white-space: nowrap;
+    border-radius: 12px;
+}
+
+.active-endpoint {
+    color: var(--primary-blue);
+}
+
+
+.lit-form-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 24px;
+}
+
+.lit-fields-group {
+    display: flex;
+    flex-direction: column;
+
+    /*width: 100%;*/
+    gap: 16px;
+}
