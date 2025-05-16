@@ -1,0 +1,43 @@
+.moderation-confirm-container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+    padding: 32px;
+    border-radius: 32px;
+    width: 1170px;
+
+    background-color: var(--white);
+}
+
+.moderation-confirm-container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.moderation-confirm-container-header > h3 {
+    white-space: nowrap;
+}
+
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+
+    width: 50%;
+    gap: 12px;
+}
+
+.progress-bar-endpoint {
+    display: flex;
+    justify-content: center;
+
+    gap: 8px;
+    white-space: nowrap;
+    border-radius: 12px;
+}
+
+.active-endpoint {
+    color: var(--primary-blue);
+}
