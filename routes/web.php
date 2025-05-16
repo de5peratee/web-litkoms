@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\Editor\EditorCatalogController;
 use App\Http\Controllers\Editor\EditorEventController;
 use App\Http\Controllers\Editor\EditorPostController;
 use App\Http\Controllers\EventController;
@@ -90,6 +91,12 @@ Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::post('/mediaposts/store', [EditorPostController::class, 'store'])->name('editor.store_mediapost');
     Route::patch('/mediaposts/{mediaPost}', [EditorPostController::class, 'update'])->name('editor.update_mediapost');
     Route::delete('/mediaposts/{mediaPost}', [EditorPostController::class, 'destroy'])->name('editor.delete_mediapost');
+
+    Route::get('/catalogs', [EditorCatalogController::class, 'index'])->name('editor.catalogs_index');
+    Route::get('/catalogs/create', [EditorCatalogController::class, 'create'])->name('editor.create_catalog');
+    Route::post('/catalogs/store', [EditorCatalogController::class, 'store'])->name('editor.store_catalog');
+    Route::patch('/catalogs/{catalog}', [EditorCatalogController::class, 'update'])->name('editor.update_catalog');
+    Route::delete('/catalogs/{catalog}', [EditorCatalogController::class, 'destroy'])->name('editor.delete_catalog');
 });
 
 Route::get('/manuals/policy', function () {

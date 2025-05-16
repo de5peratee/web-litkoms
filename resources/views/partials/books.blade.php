@@ -1,6 +1,6 @@
 @foreach($library as $book)
     <a href="{{ route('library.get_book', $book->id) }}" class="book">
-        @if($book->cover && Storage::exists($book->cover))
+        @if($book->cover)
             <div class="cover_wrapper">
                 <img src="{{ Storage::url($book->cover) }}" alt="{{ $book->name }}">
             </div>
