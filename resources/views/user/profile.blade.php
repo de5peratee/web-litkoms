@@ -68,6 +68,7 @@
                 @endauth
             </div>
         </div>
+
         <div class="info-block">
 
             <div class="info-header">
@@ -75,6 +76,7 @@
                 <p class="text-small subscriptions-count">{{ $user->subscriptions()->count() }}</p>
             </div>
 
+            <div class="h-divider"></div>
 
             @if($user->subscriptions->isEmpty())
                 <h3>Нет подписок</h3>
@@ -110,6 +112,21 @@
                 </div>
             @endif
         </div>
+
+        <div class="info-block">
+
+            <div class="info-header">
+                <p class="text-big">Авторские комиксы</p>
+                <p class="text-small author-comics-count">0</p>
+            </div>
+
+            <div class="h-divider"></div>
+
+            <div class="author-comics-list">
+                <a href="{{ route('user.author_comics')}}" class="primary-btn">Все комиксы</a>
+            </div>
+        </div>
+
     </div>
 
 @endsection

@@ -475,7 +475,7 @@ option {
     height: 400px;
     background-size: cover;
     background-position: center;
-    border-radius: 32px;
+    /*border-radius: 32px;*/
 
     background-color: var(--primary-blue);
 }
@@ -570,10 +570,10 @@ option {
     width: 12px;
     height: 12px;
     border-radius: 999px;
-    background-color: var(--primary);
-    /*background: rgba(255, 255, 255, 0.16);*/
-    /*backdrop-filter: blur(24px); !* Эффект размытия *!*/
-    /*-webkit-backdrop-filter: blur(24px); !* Для поддержки в Safari *!*/
+    /*background-color: var(--primary);*/
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(24px); /* Эффект размытия */
+    -webkit-backdrop-filter: blur(24px); /* Для поддержки в Safari */
 
     cursor: pointer;
 }
