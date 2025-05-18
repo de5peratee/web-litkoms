@@ -69,6 +69,17 @@
             </div>
         </div>
 
+        <div class="profile-tabs-wrapper">
+            <div class="profile-tab active-tab author-comics-tab">
+                <img src="{{ asset('images/icons/comics-icon-primary.svg') }}" alt="icon" class="icon-24">
+                Авторские комиксы
+            </div>
+            <div class="profile-tab subscriptions-tab">
+                <img src="{{ asset('images/icons/subs-icon-primary.svg') }}" alt="icon" class="icon-24">
+                Подписки
+            </div>
+        </div>
+
         <div class="info-block">
 
             <div class="info-header">
@@ -121,6 +132,8 @@
             </div>
 
             <div class="h-divider"></div>
+
+            <h3>Нет комиксов</h3>
 
             <div class="author-comics-list">
                 <a href="{{ route('user.author_comics')}}" class="primary-btn">Все комиксы</a>

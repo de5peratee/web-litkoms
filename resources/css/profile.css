@@ -28,6 +28,41 @@
     gap: 8px
 }
 
+.profile-tabs-wrapper {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+    border-radius: 16px;
+    padding: 4px;
+    width: fit-content;
+
+    background-color: var(--white);
+}
+
+.profile-tab {
+    display: flex;
+    justify-content: center;
+
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 12px;
+
+    background-color: var(--white);
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.profile-tab.active-tab {
+    background-color: var(--gray);
+}
+
+.profile-tab:hover {
+    background-color: var(--light-gray);
+}
+
+
 .subscriptions-count, .author-comics-count{
     color: var(--secondary);
 }
