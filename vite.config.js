@@ -22,6 +22,9 @@ export default defineConfig({
                 'resources/css/profile.css',
                 'resources/css/litar.css',
                 'resources/css/pdf-viewer.css',
+                'resources/css/authors-comics-landing.css',
+                'resources/css/authors-comics-library.css',
+                'resources/css/comic.css',
 
                 'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
@@ -45,6 +48,8 @@ export default defineConfig({
                 'resources/js/event-map.js',
                 'resources/js/pdf-viewer.js',
                 'resources/js/swiper-slider.js',
+                'resources/js/rating.js',
+                'resources/js/profile-tabs.js',
 
 
                 'resources/js/editor/multimedia-list-modal.js',

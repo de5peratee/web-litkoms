@@ -1,9 +1,9 @@
 import $ from 'jquery';
 
 function handleGenreTags() {
-    $('.book-categories').each(function () {
+    $('.book-genres').each(function () {
         const $container = $(this);
-        const $tags = $container.find('.book-category-tag').not('.more-genres');
+        const $tags = $container.find('.book-genre-tag').not('.more-genres');
         $container.find('.more-genres').remove();
         $tags.removeClass('hidden');
 
@@ -26,7 +26,7 @@ function handleGenreTags() {
             $hiddenTags.addClass('hidden');
 
             $('<span>', {
-                class: 'book-category-tag more-genres',
+                class: 'book-genre-tag more-genres',
                 text: `+${count} жанра`,
                 title: $hiddenTags.map(function () { return $(this).text(); }).get().join(', ')
             }).appendTo($container);

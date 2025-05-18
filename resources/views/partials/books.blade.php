@@ -11,9 +11,9 @@
         @endif
 
         <div class="book-text-data">
-            <div class="book-categories" data-genres="{{ $book->genres->pluck('name')->join(',') }}">
+            <div class="book-genres" data-genres="{{ $book->genres->pluck('name')->join(',') }}">
                 @foreach ($book->genres as $genre)
-                    <span class="book-category-tag text-hint">{{ $genre->name }}</span>
+                    <span class="book-genre-tag text-hint">{{ $genre->name }}</span>
                 @endforeach
             </div>
 

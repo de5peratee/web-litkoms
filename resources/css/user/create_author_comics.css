@@ -26,14 +26,15 @@
     align-items: center;
 
     width: 50%;
-    gap: 12px;
+    gap: 16px;
 }
 
 .progress-bar-endpoint {
     display: flex;
     justify-content: center;
+    align-items: center;
 
-    gap: 8px;
+    gap: 4px;
     white-space: nowrap;
     border-radius: 12px;
 }
