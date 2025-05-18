@@ -49,6 +49,7 @@ export default defineConfig({
                 'resources/js/pdf-viewer.js',
                 'resources/js/swiper-slider.js',
                 'resources/js/rating.js',
+                'resources/js/profile-tabs.js',
 
 
                 'resources/js/editor/multimedia-list-modal.js',

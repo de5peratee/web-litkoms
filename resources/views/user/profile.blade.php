@@ -5,6 +5,7 @@
 @section('content')
     @vite(['resources/css/profile.css'])
     @vite(['resources/js/toggleSubscription.js'])
+    @vite(['resources/js/profile-tabs.js'])
 
 
     <div class="profile-container">
@@ -70,17 +71,17 @@
         </div>
 
         <div class="profile-tabs-wrapper">
-            <div class="profile-tab active-tab author-comics-tab">
+            <div class="profile-tab active-tab author-comics-tab" data-tab="author-comics">
                 <img src="{{ asset('images/icons/comics-icon-primary.svg') }}" alt="icon" class="icon-24">
                 Авторские комиксы
             </div>
-            <div class="profile-tab subscriptions-tab">
+            <div class="profile-tab subscriptions-tab" data-tab="subscriptions">
                 <img src="{{ asset('images/icons/subs-icon-primary.svg') }}" alt="icon" class="icon-24">
                 Подписки
             </div>
         </div>
 
-        <div class="info-block">
+        <div class="info-block tab-content" data-content="subscriptions">
 
             <div class="info-header">
                 <p class="text-big">Подписки</p>
@@ -124,11 +125,18 @@
             @endif
         </div>
 
-        <div class="info-block">
+        <div class="info-block tab-content" data-content="author-comics">
 
             <div class="info-header">
-                <p class="text-big">Авторские комиксы</p>
-                <p class="text-small author-comics-count">0</p>
+                <div class="info-header-title">
+                    <p class="text-big">Авторские комиксы</p>
+                    <p class="text-small author-comics-count">0</p>
+                </div>
+
+                <a href="{{ route('user.author_comics')}}" class="primary-btn">
+                    Мои комиксы
+                    <img src="{{ asset('images/icons/arrow-top-right-white.svg') }}" alt="icon" class="icon-24">
+                </a>
             </div>
 
             <div class="h-divider"></div>
@@ -136,7 +144,7 @@
             <h3>Нет комиксов</h3>
 
             <div class="author-comics-list">
-                <a href="{{ route('user.author_comics')}}" class="primary-btn">Все комиксы</a>
+
             </div>
         </div>
 
