@@ -104,8 +104,8 @@ header {
     justify-content: center;
     align-items: center;
 
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
 
     border-radius: 999px;
 
@@ -121,19 +121,7 @@ header {
     object-fit: cover;
 }
 
-.icon-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 999px;
-
-    transition: all 0.2s ease;
-}
-
-.icon-wrapper:hover {
+header .icon-wrapper:hover {
     background-color: var(--light-gray);
     cursor: pointer;
 }
