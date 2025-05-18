@@ -4,8 +4,6 @@
 
 @section('content')
     @vite(['resources/css/book.css'])
-    @vite(['resources/css/pdf-viewer.css'])
-    @vite(['resources/js/pdf-viewer.js'])
 
     <div class="book-container">
         <div class="path-bar">
@@ -64,46 +62,5 @@
                 <p class="text-medium">Описание отсутствует</p>
             @endisset
         </div>
-        <div class="info-block">
-            <div class="info-header">
-                <img src="{{ asset('images/icons/hw/book.svg') }}" class="icon-32" alt="icon">
-                <h3>«{{ $book->name }}»</h3>
-            </div>
-
-            <div class="h-divider"></div>
-
-            <div class="pdf-view">
-                <div class="pdf-controls">
-                    <div class="pdf-desc">
-                        <p class="text-big">Литкомс</p>
-                    </div>
-                    <div class="page-controls">
-                        <button id="prev-page" class="pdf-btn">Назад</button>
-                        <div class="page-count-wrapper">
-                            <p id="page-num"></p>
-                            <p>/</p>
-                            <p id="page-count"></p>
-                        </div>
-                        <button id="next-page" class="pdf-btn">Вперед</button>
-                    </div>
-
-                    <div class="zoom-controls">
-                        <button id="zoom-out" class="pdf-btn">
-                            <img src="{{ asset('images/icons/minus-icon-white.svg') }}" class="icon-20" alt="icon">
-                        </button>
-                        <button id="zoom-in" class="pdf-btn">
-                            <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-20" alt="icon">
-                        </button>
-                    </div>
-                </div>
-                <canvas id="pdf-canvas"></canvas>
-            </div>
-        </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
-    <script>
-        window.pdfUrl = '{{ Storage::url('design_book.pdf') }}';
-    </script>
-
 @endsection

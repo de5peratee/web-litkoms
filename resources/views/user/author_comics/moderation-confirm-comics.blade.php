@@ -49,23 +49,39 @@
             </div>
 
             <div class="comics-preview-text">
-                <div class="author-text-wraper">
-
+                <div class="author-wrapper">
+                    <div class="comics-author-avatar-wrapper">
+                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="avatar">
+                    </div>
+                    <p class="author-nickname-text">@nickname</p>
                 </div>
-                <h3>«Тетрадь смерти»</h3>
-                <p class="text-small">Присоединяйтесь к уникальному вечеру, посвященному искусству, инновациям и общению.</p>
+
+                <h3>«Название комикса»</h3>
+
+                <p class="text-small">Сокращенное описание комикса, перекрытие троеточием в конце при большом колчестве символов...</p>
+
+                <div class=comics-genres">
+                    <div class="comics-genre-tag text-hint">Тег1</div>
+                    <div class="comics-genre-tag text-hint">Тег2</div>
+                    <div class="comics-genre-tag text-hint">Тег3</div>
+                    <div class="comics-genre-tag more-genres text-hint">+N тегов</div>
+                </div>
+{{--                <div class="comics-genres" data-genres="{{ $comics->genres->pluck('name')->join(',') }}">--}}
+{{--                    @foreach ($comics->genres as $genre)--}}
+{{--                        <span class="comics-genre-tag text-hint">{{ $genre->name }}</span>--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+
             </div>
             {{--        Тут можешь вывести для теста данные комикса (например название и обложку, чтоб протестить)--}}
         </div>
 
-{{--        <div class="moderation-confirm-actions">--}}
+        <div class="h-divider"></div>
+
+        <div class="moderation-confirm-actions">
 {{--            <a href="{{ route('user.author_comics')}}" class="secondary-btn">--}}
 {{--                Мои авторские комиксы--}}
 {{--            </a>--}}
-{{--        </div>--}}
-
-        <div class="h-divider"></div>
-        <div class="moderation-confirm-actions">
             <a href="{{ route('user.author_comics')}}" class="secondary-btn">
                 В черновики
             </a>

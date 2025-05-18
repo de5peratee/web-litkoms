@@ -1,4 +1,4 @@
-.book-container {
+.comic-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -28,8 +28,7 @@
     color: var(--primary-blue);
 }
 
-
-.info-block{
+.info-block {
     width: 100%;
 
     display: flex;
@@ -47,16 +46,50 @@
     flex-direction: row;
     align-items: center;
 
-    gap: 16px
+    gap: 16px;
 }
 
-.h-divider {
-    width: 100%; /* Растягиваем линию на всю ширину контейнера */
-    height: 1px; /* Толщина линии */
-    background-color: var(--light-gray); /* Цвет линии (используем вашу переменную) */
+.double-header {
+    justify-content: space-between;
 }
 
-.book-preview-info {
+
+.grade-wrapper, .header-title {
+    display: flex;
+    justify-self: end;
+    align-items: center;
+
+    gap: 16px;
+}
+
+.grade-title {
+    display: flex;
+
+    padding: 8px 16px;
+    border-radius: 999px;
+
+    color: var(--secondary);
+    background-color: var(--light-gray);
+}
+
+.rating-stars {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    gap: 4px;
+}
+
+.star-icon {
+    transition: transform 0.2s ease;
+}
+
+.star-icon:hover {
+    transform: scale(1.1);
+}
+
+
+.comic-preview-info {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -64,14 +97,38 @@
     gap: 32px;
 }
 
-.book-text-description {
+.comic-main-text-data {
     display: flex;
     flex-direction: column;
 
-    gap: 16px;
+    gap: 24px;
 }
 
-.book-title {
+.comic-near-text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.user-analyse-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-avg-grade, .user-views {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 12px;
+
+    background-color: var(--light-gray);
+}
+
+.comic-title {
     max-width: 780px;
 }
 
@@ -100,11 +157,13 @@
     gap: 8px;
 }
 
-.author-info-wrapper, .year-info-wrapper {
+.author-info-wrapper,
+.year-info-wrapper {
     display: flex;
     flex-direction: column;
 
     min-width: 220px;
+    max-height: 96px;
     gap: 8px;
     padding: 24px;
     border-radius: 16px;
@@ -112,7 +171,15 @@
     background-color: var(--light-gray);
 }
 
-.author-title, .year-title {
+.author-data {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.author-title,
+.year-title {
     color: var(--secondary);
 }
 
@@ -126,7 +193,17 @@
     border: 1px solid var(--gray);
 }
 
-.cover_wrapper img {
+.comics-author-avatar-wrapper {
+    overflow: hidden;
+
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+
+    border: 1px solid var(--gray);
+}
+
+.cover_wrapper img, .comics-author-avatar-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;

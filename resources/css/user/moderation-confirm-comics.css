@@ -96,26 +96,88 @@
     background-color: var(--light-gray);
 }
 
+.author-wrapper {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+}
+
+.author-nickname-text {
+    color: var(--secondary);
+}
+
 .comics-preview-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
 
     padding-block: 16px;
-    gap: 16px;
+    gap: 8px;
+    max-width: 380px;
+}
+
+.comics-preview-text > h3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    max-height: 2.5em; /* Примерная высота 2 строк */
+    margin: 0;
+    width: 100%; /* Важно для правильного расчета */
+}
+
+.comics-genres {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    position: relative;
+    gap: 4px;
+}
+
+.comics-genre-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+    text-transform: capitalize;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+
+    /*background-color: var(--gray);*/
+}
+
+.comics-genre-tag.more-genres {
+    background-color: var(--primary);
+    color: var(--white);
+    cursor: default;
 }
 
 .comics-preview-wrapper {
     overflow: hidden;
 
-    width: 300px;
+    width: 320px;
     aspect-ratio: 2/3;
     border-radius: 20px;
 
     border: 1px solid var(--gray);
 }
 
-.comics-preview-wrapper img {
+.comics-author-avatar-wrapper {
+    overflow: hidden;
+
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+
+    border: 1px solid var(--gray);
+}
+
+.comics-preview-wrapper img, .comics-author-avatar-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;

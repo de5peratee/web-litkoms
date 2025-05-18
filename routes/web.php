@@ -38,9 +38,21 @@ Route::get('/mediaposts', function () {
     return view('news');
 })->name('mediaposts');
 
-Route::get('/authors_comics_landing', function () {
-    return view('authors_comics_landing');
+
+
+Route::get('/authors_comics', function () {
+    return view('authors_comics.landing');
 })->name('authors_comics_landing');
+
+Route::get('/authors_comics/library', function () {
+    return view('authors_comics.library');
+})->name('authors_comics_library');
+
+Route::get('/authors_comics/author_comics', function () {
+    return view('authors_comics.comic');
+})->name('author_comic');
+
+
 
 Route::get('/litar_landing', function () {
     return view('litar_landing');

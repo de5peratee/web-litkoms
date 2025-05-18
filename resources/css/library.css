@@ -171,7 +171,7 @@
     color: var(--secondary);
 }
 
-.book-categories {
+.book-genres {
     display: flex;
     flex-wrap: nowrap;
     overflow: hidden;
@@ -179,7 +179,7 @@
     gap: 4px;
 }
 
-.book-category-tag {
+.book-genre-tag {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -191,7 +191,7 @@
     color: var(--primary);
 }
 
-.book-category-tag.more-genres {
+.book-genre-tag.more-genres {
     background-color: var(--primary);
     color: var(--white);
     cursor: default;
