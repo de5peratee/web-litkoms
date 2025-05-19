@@ -41,7 +41,7 @@
                         <div class="user-avg-grade">
                             <p>Средняя оценка: </p>
                             <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                            <p>x.x</p>
+                            <p>{{ number_format($averageRating, 1) }}</p>
                         </div>
 
                     </div>

@@ -18,10 +18,20 @@ class ProfileController extends Controller
                 ->where('subscribed_to_id', $user->id)
                 ->exists();
 
+        $comics = $user->authorComics()
+            ->where('is_published', true)
+            ->where('is_moderated', 'successful')
+            ->get();
+
+        $averageRating = $comics->isNotEmpty()
+            ? $comics->avg('average_assessment')
+            : 0;
+
         return view('user.profile', [
             'user' => $user,
             'isSub' => $isSub,
-            'subscribersCount' => $user->subscribers_count
+            'subscribersCount' => $user->subscribers_count,
+            'averageRating' => $averageRating
         ]);
     }
 }
