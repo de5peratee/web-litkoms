@@ -31,9 +31,23 @@ class AuthorComics extends Model
         return $this->belongsToMany(Genre::class, 'comics_genres', 'comics_id', 'genre_id');
     }
 
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'comics_to');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class, 'comics_to');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';
     }
-
 }

@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rating extends Model
 {
-    //
+    protected $fillable = [
+        'graded_by',
+        'grade',
+        'comics_to'
+    ];
 }

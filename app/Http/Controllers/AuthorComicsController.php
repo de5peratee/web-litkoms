@@ -35,7 +35,6 @@ class AuthorComicsController extends Controller
         return view('user.author_comics.list', compact('comics'));
     }
 
-
     public function showModerationConfirm(AuthorComics $comic)
     {
         if ($comic->created_by !== auth()->id()) {

@@ -1,29 +1,49 @@
-import $ from 'jquery';
+document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.rating-stars .star-icon');
+    const ratingInput = document.getElementById('comic-rating');
+    const avgGradeElement = document.querySelector('.user-avg-grade p');
 
-$(document).ready(function () {
-    const filledStar = window.filledStar;
-    const outlineStar = window.outlineStar;
+    if (!stars.length || !window.rateUrl || !avgGradeElement || !ratingInput) return;
 
-    $('.rating-stars .star-icon').on('mouseenter', function () {
-        const index = $(this).data('index');
-        $(this).parent().children().each(function () {
-            const currentIndex = $(this).data('index');
-            $(this).attr('src', currentIndex <= index ? filledStar : outlineStar);
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const selected = parseInt(star.dataset.index);
+            const current = parseInt(ratingInput.value || 0);
+
+            let newRating = selected;
+            if (current === selected) {
+                newRating = 0;
+            }
+
+            stars.forEach(s => {
+                s.src = s.dataset.index <= newRating ? window.filledStar : window.outlineStar;
+            });
+
+            ratingInput.value = newRating;
+
+            fetch(window.rateUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+                body: JSON.stringify({ rating: newRating }),
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Ошибка при сохранении рейтинга');
+                    return response.json();
+                })
+                .then(data => {
+                    avgGradeElement.textContent = data.average_rating;
+                    ratingInput.value = data.user_rating;
+                })
+                .catch(error => {
+                    console.error('Ошибка при отправке рейтинга:', error);
+                    stars.forEach(s => {
+                        s.src = s.dataset.index <= current ? window.filledStar : window.outlineStar;
+                    });
+                    ratingInput.value = current;
+                });
         });
-    });
-
-    $('.rating-stars .star-icon').on('mouseleave', function () {
-        const selected = $(this).parent().data('selected');
-        $(this).parent().children().each(function () {
-            const currentIndex = $(this).data('index');
-            $(this).attr('src', currentIndex <= selected ? filledStar : outlineStar);
-        });
-    });
-
-    $('.rating-stars .star-icon').on('click', function () {
-        const selected = $(this).data('index');
-        $(this).parent().data('selected', selected);
-        $('#comic-rating').val(selected);
-        $(this).trigger('mouseleave'); // Обновить отображение
     });
 });
