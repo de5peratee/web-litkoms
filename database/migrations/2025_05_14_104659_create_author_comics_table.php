@@ -15,12 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('created_by');
             $table->string('name');
+            $table->string('slug')->unique();
             $table->text('description');
-            $table->integer('views')->default('0');
+            $table->integer('views')->default(0);
             $table->string('cover');
             $table->string('comics_file');
-            $table->integer('age_restriction')->default('0');
+            $table->integer('age_restriction')->default(0);
             $table->integer('average_assessment')->nullable();
+            $table->enum('is_moderated', ['successful', 'unsuccessful', 'under review'])->default('under review');
+            $table->boolean('is_published')->default(false);
             $table->timestamps();
         });
     }

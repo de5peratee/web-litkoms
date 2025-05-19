@@ -14,7 +14,6 @@ class Genre extends Model
     }
     public function comics()
     {
-        return $this->belongsToMany(Genre::class, 'comics_genres');
+        return $this->belongsToMany(AuthorComics::class, 'comics_genres', 'genre_id', 'comics_id');
     }
-
 }

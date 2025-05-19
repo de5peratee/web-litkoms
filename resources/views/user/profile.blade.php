@@ -133,7 +133,7 @@
                     <p class="text-small author-comics-count">0</p>
                 </div>
 
-                <a href="{{ route('user.author_comics')}}" class="primary-btn">
+                <a href="{{ route('user.author_comics', Auth::user()->nickname) }}" class="primary-btn">
                     Мои комиксы
                     <img src="{{ asset('images/icons/arrow-top-right-white.svg') }}" alt="icon" class="icon-24">
                 </a>
