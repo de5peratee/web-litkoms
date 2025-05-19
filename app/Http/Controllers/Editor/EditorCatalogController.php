@@ -97,7 +97,6 @@ class EditorCatalogController extends Controller
             $catalog->genres()->detach();
             $catalog->delete();
 
-            Genre::doesntHave('catalogs')->delete();
 
             DB::commit();
 
@@ -122,6 +121,6 @@ class EditorCatalogController extends Controller
 
         $catalog->genres()->sync($ids);
 
-        Genre::doesntHave('catalogs')->delete();
+//        Genre::doesntHave('catalogs')->delete();
     }
 }

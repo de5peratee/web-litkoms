@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EditorPanelMiddleware
+class AuthMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,9 @@ class EditorPanelMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        if (auth()->guest() || auth()->user()->role !== 'editor') {
+        if (auth()->guest()) {
             return back();
         }
-
         return $next($request);
     }
 }

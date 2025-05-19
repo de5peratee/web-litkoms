@@ -11,17 +11,17 @@
             <h3>Форма публикации</h3>
             <div class="progress-bar">
                 <div class="progress-bar-endpoint active-endpoint">
-{{--                    <img src="{{ asset('images/icons/moderation/success-icon.svg') }}" class="icon-24" alt="icon">--}}
+                    {{-- <img src="{{ asset('images/icons/moderation/success-icon.svg') }}" class="icon-24" alt="icon"> --}}
                     <p>Загрузка комикса</p>
                 </div>
                 <div class="h-divider"></div>
                 <div class="progress-bar-endpoint">
-{{--                    <img src="{{ asset('images/icons/moderation/hold-on-icon.svg') }}" class="icon-24" alt="icon">--}}
+                    {{-- <img src="{{ asset('images/icons/moderation/hold-on-icon.svg') }}" class="icon-24" alt="icon"> --}}
                     <p>Модерация</p>
                 </div>
                 <div class="h-divider"></div>
                 <div class="progress-bar-endpoint">
-{{--                    <img src="{{ asset('images/icons/moderation/success-icon.svg') }}" class="icon-24" alt="icon">--}}
+                    {{-- <img src="{{ asset('images/icons/moderation/success-icon.svg') }}" class="icon-24" alt="icon"> --}}
                     <p>Подтверждение</p>
                 </div>
             </div>
@@ -44,7 +44,7 @@
 
                     <div class="lit-field">
                         <label for="genres">Жанры</label>
-                        <input type="text" name="genres" id="genres" placeholder="Укажите жанры через запятую" value="{{ old('genres') }}" class="{{ $errors->has('genres') ? 'is-invalid' : '' }}">
+                        <input type="text" name="genres" id="genres" placeholder="Укажите жанры через запятую (например, Фэнтези, Комедия)" value="{{ old('genres') }}" class="{{ $errors->has('genres') ? 'is-invalid' : '' }}">
                         @error('genres')
                         <div class="input-error">{{ $message }}</div>
                         @enderror
@@ -65,6 +65,20 @@
                         <div class="input-error">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <div class="lit-field">
+                        <label for="age_restriction">Возрастное ограничение</label>
+                        <select name="age_restriction" id="age_restriction" class="{{ $errors->has('age_restriction') ? 'is-invalid' : '' }}">
+                            <option value="" {{ old('age_restriction') == null ? 'selected' : '' }}>Выберите возрастное ограничение</option>
+                            <option value="6" {{ old('age_restriction') == '6' ? 'selected' : '' }}>6+</option>
+                            <option value="12" {{ old('age_restriction') == '12' ? 'selected' : '' }}>12+</option>
+                            <option value="16" {{ old('age_restriction') == '16' ? 'selected' : '' }}>16+</option>
+                            <option value="18" {{ old('age_restriction') == '18' ? 'selected' : '' }}>18+</option>
+                        </select>
+                        @error('age_restriction')
+                        <div class="input-error">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
                 <div class="lit-fields-group">
                     <div class="lit-field">
@@ -76,7 +90,6 @@
                     </div>
                 </div>
             </div>
-
 
             <div class="lit-field">
                 <label>
@@ -90,6 +103,5 @@
 
             <button type="submit" class="primary-btn">Отправить на модерацию</button>
         </form>
-
     </div>
 @endsection

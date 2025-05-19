@@ -7,9 +7,33 @@ use Illuminate\Database\Eloquent\Model;
 class AuthorComics extends Model
 {
     protected $guarded = false;
+    protected $fillable = [
+        'created_by',
+        'name',
+        'slug',
+        'description',
+        'views',
+        'cover',
+        'comics_file',
+        'age_restriction',
+        'average_assessment',
+        'is_moderated',
+        'is_published',
+    ];
+
+    protected $casts = [
+        'is_moderated' => 'string',
+        'is_published' => 'boolean',
+    ];
 
     public function genres()
     {
-        return $this->belongsToMany(Genre::class, 'comics_genres');
+        return $this->belongsToMany(Genre::class, 'comics_genres', 'comics_id', 'genre_id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 }

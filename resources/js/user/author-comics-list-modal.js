@@ -14,7 +14,7 @@ $(function () {
 
     function clearErrors() {
         $('.input-error').text('').removeClass('error');
-        $('input, textarea').removeClass('is-invalid');
+        $('input, textarea, select').removeClass('is-invalid');
     }
 
     function showError(fieldId, message) {
@@ -25,11 +25,11 @@ $(function () {
     // Удаление комикса
     $('.delete-comic-btn').on('click', function (e) {
         e.preventDefault();
-        const comicId = $(this).data('comic-id');
+        const comicSlug = $(this).data('comic-slug');
         const comicName = $(this).data('comic-name');
 
         $('#delete-comic-modal-text').text(`Вы уверены, что хотите удалить авторский комикс "${comicName}"?`);
-        $('#delete-comic-form').attr('action', `/dashboard/author_comics/${comicId}`);
+        $('#delete-comic-form').attr('action', `/profile/comics/${comicSlug}`);
 
         openModal($('#delete-comic-modal'));
     });
@@ -43,17 +43,20 @@ $(function () {
     $('.edit-comic-btn').on('click', function (e) {
         e.preventDefault();
 
-        const comicId = $(this).data('comic-id');
+        const comicSlug = $(this).data('comic-slug');
         const comicName = $(this).data('comic-name');
         const comicDescription = $(this).data('comic-description');
         const comicGenres = $(this).data('comic-genres');
+        const comicAgeRestriction = $(this).data('comic-age-restriction');
         const comicCover = $(this).data('comic-cover');
 
-        $('#edit-comic-id').val(comicId);
+
+        $('#edit-comic-slug').val(comicSlug);
         $('#edit-comic-name').val(comicName);
         $('#edit-comic-description').val(comicDescription);
         $('#edit-comic-genres').val(comicGenres);
-        $('#edit-comic-form').attr('action', `/dashboard/author_comics/${comicId}`);
+        $('#edit-comic-age-restriction').val(comicAgeRestriction || '0+');
+        $('#edit-comic-form').attr('action', `/profile/comics/${comicSlug}`);
 
         if (comicCover) {
             $('#edit-comic-cover-preview').html(`<img src="${comicCover}" alt="Текущая обложка" style="max-width: 100%; border-radius: 16px;">`);
@@ -74,38 +77,25 @@ $(function () {
         e.preventDefault();
         clearErrors();
 
-        let isValid = true;
-        const form = $(this);
-        const name = $('#edit-comic-name').val().trim();
-        const description = $('#edit-comic-description').val().trim();
-
-        if (!name) {
-            showError('edit-comic-name', 'Название обязательно');
-            isValid = false;
-        }
-        if (!description) {
-            showError('edit-comic-description', 'Описание обязательно');
-            isValid = false;
-        }
-
-        if (isValid) {
-            $.ajax({
-                url: `/dashboard/author_comics/${$('#edit-comic-id').val()}`,
-                method: 'POST',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: function () {
-                    window.location.reload();
-                },
-                error: function (xhr) {
-                    const errors = xhr.responseJSON.errors || {};
-                    for (const [field, messages] of Object.entries(errors)) {
-                        showError(`edit-comic-${field}`, messages[0]);
-                    }
+        $.ajax({
+            url: $(this).attr('action'),
+            method: 'POST',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function () {
+                window.location.reload();
+            },
+            error: function (xhr) {
+                const errors = xhr.responseJSON?.errors || {};
+                for (const [field, messages] of Object.entries(errors)) {
+                    showError(`edit-comic-${field}`, messages[0]);
                 }
-            });
-        }
+            }
+        });
     });
 
     // Обработка выбора новой обложки
@@ -118,5 +108,25 @@ $(function () {
             };
             reader.readAsDataURL(file);
         }
+    });
+
+    // Обработка кнопки публикации
+    $('.publish-comic-btn').on('click', function (e) {
+        e.preventDefault();
+        const comicSlug = $(this).data('comic-slug');
+
+        $.ajax({
+            url: `/profile/comics/${comicSlug}/publish`,
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function () {
+                window.location.reload();
+            },
+            error: function (xhr) {
+                alert('Ошибка при публикации комикса: ' + (xhr.responseJSON?.message || 'Неизвестная ошибка'));
+            }
+        });
     });
 });
