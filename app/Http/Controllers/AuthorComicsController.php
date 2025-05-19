@@ -26,7 +26,8 @@ class AuthorComicsController extends Controller
                 $comic->status = match (true) {
                     $comic->is_published => 'Опубликован',
                     $comic->is_moderated === 'under review' => 'На модерации',
-                    $comic->is_moderated === 'rejected' => 'Не принят',
+                    $comic->is_moderated === 'unsuccessful' => 'Не принят',
+                    $comic->is_moderated === 'successful' => 'Принят',
                     default => 'Черновик',
                 };
                 return $comic;
