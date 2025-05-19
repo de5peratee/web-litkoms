@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorComicsController;
+use App\Http\Controllers\AuthorComicsListController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\Editor\EditorCatalogController;
 use App\Http\Controllers\Editor\EditorEventController;
@@ -38,17 +39,14 @@ Route::get('/mediaposts', function () {
 })->name('mediaposts');
 
 // авторский комикс
-Route::get('/authors_comics', function () {
-    return view('authors_comics.landing');
-})->name('authors_comics_landing');
-
-Route::get('/authors_comics/library', function () {
-    return view('authors_comics.library');
-})->name('authors_comics_library');
-
-Route::get('/authors_comics/author_comics', function () {
-    return view('authors_comics.comic');
-})->name('author_comic');
+Route::prefix('authors_comics')->group(function () {
+    Route::get('/', [AuthorComicsListController::class, 'library'])->name('authors_comics_library');
+    Route::get('/{authorComic:slug}', [AuthorComicsListController::class, 'show'])->name('author_comic');
+    Route::post('/{authorComic:slug}/rate', [AuthorComicsListController::class, 'rate'])->name('author_comic.rate')->middleware('authorized');
+    Route::post('/{authorComic:slug}/comment', [AuthorComicsListController::class, 'comment'])->name('author_comic.comment')->middleware('authorized');
+    Route::get('/{authorComic:slug}/download', [AuthorComicsListController::class, 'download'])->name('author_comic.download');
+});
+Route::get('/landing', [AuthorComicsListController::class, 'landing'])->name('authors_comics_landing');
 
 // Лендинг Litar
 Route::get('/litar_landing', function () {
@@ -62,7 +60,6 @@ Route::get('/{nickname}', [ProfileController::class, 'index'])->name('profile.in
 Route::prefix('/profile/comics')
     ->middleware('authorized')
     ->group(function () {
-
         Route::get('/', [AuthorComicsController::class, 'index'])->name('user.author_comics');
 
         Route::get('/create', [AuthorComicsController::class, 'create'])->name('user.create_author_comics');
@@ -85,7 +82,6 @@ Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscr
 // Панель редактора
 Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::view('/', 'editor.dashboard')->name('editor.dashboard');
-
     // События
     Route::get('/events', [EditorEventController::class, 'index'])->name('editor.events_index');
     Route::get('/events/create', [EditorEventController::class, 'create'])->name('editor.create_event');

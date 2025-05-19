@@ -19,10 +19,7 @@
                     <p>Модерация</p>
                 </div>
                 <div class="h-divider {{ $comic->is_moderated === 'successful' ? 'completed-divider' : '' }}"></div>
-                <div class="progress-bar-endpoint {{ $comic->is_moderated === 'successful' ? 'completed-endpoint' : '' }}">
-                    @if ($comic->is_moderated === 'successful')
-                        <img src="{{ asset('images/icons/moderation/success-icon.svg') }}" alt="Success">
-                    @endif
+                <div class="progress-bar-endpoint {{ $comic->is_moderated === 'successful' ? 'active-endpoint' : '' }}">
                     <p>Подтверждение</p>
                 </div>
             </div>
