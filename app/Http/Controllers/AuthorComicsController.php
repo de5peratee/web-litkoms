@@ -149,6 +149,8 @@ class AuthorComicsController extends Controller
 
         try {
             DB::beginTransaction();
+            $comic->comments()->delete();
+            $comic->ratings()->delete();
 
             if ($comic->cover) {
                 Storage::disk('public')->delete($comic->cover);
@@ -156,18 +158,18 @@ class AuthorComicsController extends Controller
             if ($comic->comics_file) {
                 Storage::disk('public')->delete($comic->comics_file);
             }
-
             $comic->genres()->detach();
+
             $comic->delete();
 
             DB::commit();
 
             return redirect()->route('user.author_comics')
-                ->with('success', 'Комикс успешно удален!');
+                ->with('success', 'Комикс и связанные с ним данные успешно удалены!');
         } catch (\Throwable $e) {
             DB::rollBack();
 
-            Log::error('Error deleting comic: ' . $e->getMessage());
+            Log::error('Error deleting comic and related data: ' . $e->getMessage());
 
             return redirect()->back()
                 ->withErrors(['error' => 'Произошла ошибка при удалении комикса: ' . $e->getMessage()]);
