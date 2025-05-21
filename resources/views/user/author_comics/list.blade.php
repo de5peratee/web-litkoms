@@ -18,13 +18,24 @@
                 <div href="{{ route('author_comic', $comic->slug) }}" target="_blank" class="comic-item">
                     <div class="comic-data">
                         <p>{{ $comic->name }}</p>
-                        <p>Статус: {{ $comic->status }}</p>
-                        <a href="{{ route('author_comic', $comic->slug) }}" target="_blank" class="tertiary-bt">
+
+                        <a href="{{ route('author_comic', $comic->slug) }}" target="_blank" class="tertiary-btn">
                             Перейти на страницу
+                            <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
                         </a>
+
+                        @if ($comic->is_moderated !== 'successful' || !$comic->is_published)
+                            <a href="{{ route('user.moderation-confirm-comics', $comic->slug) }}" target="_blank" class="tertiary-btn">
+                                Проверить статус модерации
+                                <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
+                            </a>
+                        @endif
+
                     </div>
 
                     <div class="comic-actions">
+                        <p>Статус: {{ $comic->status }}</p>
+
                         <a href="#" class="list-action-btn edit-comic-btn"
                            data-comic-id="{{ $comic->id }}"
                            data-comic-name="{{ $comic->name }}"

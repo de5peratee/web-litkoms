@@ -23,9 +23,9 @@ $(document).ready(function() {
                     $btn.toggleClass('subscribed-btn');
 
                     if (data.isSub) {
-                        $btn.html('<img src="/images/icons/check-gray.svg" class="icon-24"><span>Вы подписаны</span>');
+                        $btn.html('<img src="/images/icons/check-gray.svg" class="icon-24"><p>Вы подписаны</p>');
                     } else {
-                        $btn.html('<span>Подписаться</span>');
+                        $btn.html('<p>Подписаться</p>');
                     }
 
                     $('.user-subscribers').text('Подписчиков: ' + data.subscribersCount);

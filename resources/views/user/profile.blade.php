@@ -57,9 +57,9 @@
                                 data-issub="{{ $isSub ? 'true' : 'false' }}">
                             @if($isSub)
                                 <img src="{{ asset('images/icons/check-gray.svg') }}" alt="✓" class="icon-24">
-                                <span>Вы подписаны</span>
+                                <p>Вы подписаны</p>
                             @else
-                                <span>Подписаться</span>
+                                <p>Подписаться</p>
                             @endif
                         </button>
                     @endif
@@ -137,9 +137,9 @@
                             <p class="text-small author-comics-count">0</p>
                         </div>
 
-                        <a href="{{ route('user.author_comics', Auth::user()->nickname) }}" class="primary-btn">
+                        <a href="{{ route('user.author_comics', Auth::user()->nickname) }}" class="tertiary-btn">
                             Мои комиксы
-                            <img src="{{ asset('images/icons/arrow-top-right-white.svg') }}" alt="icon" class="icon-24">
+                            <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
                         </a>
                     </div>
 

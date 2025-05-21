@@ -5,6 +5,8 @@
 @section('content')
     @vite(['resources/css/comic.css'])
     @vite(['resources/css/pdf-viewer.css'])
+    @vite(['resources/css/inputs.css'])
+
     @vite(['resources/js/pdf-viewer.js'])
     @vite(['resources/js/rating.js'])
     @vite(['resources/js/comment.js'])
@@ -135,32 +137,68 @@
         <!-- Комментарии -->
         <div class="info-block">
             <div class="info-header">
-                <h3>Комментарии (<span class="counter" id="comments-count">{{ $comments->count() }}</span>)</h3>
+                <h3>Комментарии</h3>
+                <p class="text-medium counter" id="comments-count">{{ $comments->count() }}</p>
             </div>
             <div class="h-divider"></div>
 
-            @auth
-                <form id="comment-form" action="{{ route('author_comic.comment', $authorComic->slug) }}" method="POST"
-                      class="comments-form-wrapper">
-                    @csrf
-                    <div class="input-comment-wrapper">
-                        <input type="text" name="comment" id="comment-input"
-                               placeholder="Поделитесь мнением о комиксе..." required class="comment-input">
-                        <span class="error-message" id="comment-error" style="display: none;"></span>
-                    </div>
-                    <button type="submit" class="primary-btn">Отправить</button>
-                </form>
-            @else
-                <p class="text-medium">Войдите, чтобы оставить комментарий.</p>
-            @endauth
+            <div class="info-content">
+                <div class="comment-part-block">
+                    @auth
+                        <form id="comment-form" action="{{ route('author_comic.comment', $authorComic->slug) }}" method="POST" class="lit-form">
+                            @csrf
 
-            <div class="comment-list-wrapper" id="comment-list">
-                @forelse ($comments as $comment)
-                    @include('partials._comment', ['comment' => $comment])
-                @empty
-                    <p class="no-comments" id="no-comments">Комментариев пока нет.</p>
-                @endforelse
+                            <div class="input-comment-wrapper">
+                                <div class="lit-field">
+                                    <input type="text" name="comment" id="comment-input" placeholder="Введите текст комментария..." required>
+                                    <p class="error-message" id="comment-error" style="display: none;"></p>
+                                </div>
+
+                                <button type="submit" class="primary-btn send-btn">
+                                    <img src="{{ asset('images/icons/send.svg') }}" class="icon-24" alt="icon">
+                                </button>
+                            </div>
+
+                        </form>
+                    @else
+                        <p class="text-medium">Войдите, чтобы оставить комментарий.</p>
+                    @endauth
+
+                    <div class="comment-list-wrapper" id="comment-list">
+                        @forelse ($comments as $comment)
+                            @include('partials._comment', ['comment' => $comment])
+                        @empty
+                            <p class="no-comments" id="no-comments">Комментариев пока нет.</p>
+                        @endforelse
+
+                        <a href="" class="secondary-btn comment-btn-load">Загрузить еще</a>
+                    </div>
+                </div>
+
+                <div class="author-part-block">
+                    <div class="author-profile-data">
+                        <div class="big-author-avatar-wrapper">
+                            <img src="{{ $authorComic->createdBy->icon ? Storage::url($authorComic->createdBy->icon) : asset('images/default_template/ava_cover.png') }}"
+                                 alt="{{ '@' . $authorComic->createdBy->nickname }}" class="author-avatar">
+                        </div>
+
+                        <div class="author-profile-text-data">
+                            <h3>{{ '@' . $authorComic->createdBy->nickname }}</h3>
+                            <p class="author-name-text">{{$authorComic->createdBy->name }} {{$authorComic->createdBy->last_name }}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="author-actions">
+                        <a href="" class="primary-btn">Подписаться</a>
+                        <a href="" class="tertiary-btn">
+                            В профиль
+                            <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
+                        </a>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 
