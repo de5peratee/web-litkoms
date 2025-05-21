@@ -197,7 +197,7 @@
 
 .cup-icon {
     position: absolute;
-    top: 0px;
+    top: 0;
     left: 32%;
     transform: rotate(15deg);
     opacity: 0.32;

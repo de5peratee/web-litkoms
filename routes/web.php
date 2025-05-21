@@ -79,6 +79,17 @@ Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscr
 // Панель редактора
 Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::view('/', 'editor.dashboard')->name('editor.dashboard');
+
+    //Заявки на модерацию
+    Route::get('/comics_submissions', function () {
+        return view('editor.comics.submissions');
+    })->name('editor.comics_submissions_index');
+
+    //Страница модерации
+    Route::get('/comic_moderation', function () {
+        return view('editor.comics.moderation');
+    })->name('editor.comic_moderation');
+
     // События
     Route::get('/events', [EditorEventController::class, 'index'])->name('editor.events_index');
     Route::get('/events/create', [EditorEventController::class, 'create'])->name('editor.create_event');

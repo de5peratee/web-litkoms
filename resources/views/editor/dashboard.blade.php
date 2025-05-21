@@ -28,7 +28,7 @@
                 <a href="{{ route('editor.catalogs_index') }}" class="cta-block-redirect">
                     <p class="text-big">Каталог</p>
                 </a>
-                <a href="" class="cta-block-redirect disable-cta">
+                <a href="{{ route('editor.comics_submissions_index') }}" class="cta-block-redirect">
                     <p class="text-big">Заявки на модерацию</p>
                 </a>
             </div>

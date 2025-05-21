@@ -33,6 +33,7 @@ export default defineConfig({
                 'resources/css/editor/events_list.css',
                 'resources/css/editor/multimedia_list.css',
                 'resources/css/editor/catalog_list.css',
+                'resources/css/editor/authors_сomics_submissions_list.css',
 
                 'resources/css/user/author_comics_list.css',
                 'resources/css/user/create_author_comics.css',
@@ -56,6 +57,7 @@ export default defineConfig({
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',
                 'resources/js/editor/catalog-list-modal.js',
+
                 'resources/js/user/author-comics-list-modal.js',
             ],
             refresh: true,
