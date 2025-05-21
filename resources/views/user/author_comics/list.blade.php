@@ -7,64 +7,45 @@
     @vite(['resources/css/user/author_comics_list.css'])
     @vite(['resources/js/user/author-comics-list-modal.js'])
 
-    <div class="author-comics-list-container">
-        <div class="author-comics-list-container-header">
-            <h2>Авторские комиксы</h2>
-            <a href="{{ route('user.create_author_comics') }}" class="primary-btn">Новый авторский комикс</a>
+    <div class="comics-list-container">
+        <div class="comics-list-container-header">
+            <h2>Мои комиксы</h2>
+            <a href="{{ route('user.create_author_comics') }}" class="primary-btn">Создать комикс</a>
         </div>
 
-        <div class="author-comics-list">
-            @forelse ($comics as $comic)
-                <div class="author-comic-item">
-                    <div class="author-comic-data">
-                        <p><strong>{{ $comic->name }}</strong></p>
-                        <p>{{ $comic->description ?: 'Нет описания' }}</p>
-                        <p>Жанры: {{ $comic->genres_string }}</p>
-                        <p>Статус: {{ $comic->status }}</p>
-                        @if ($comic->is_moderated !== 'successful' || !$comic->is_published)
-                        <p>
-                            <a href="{{ route('user.moderation-confirm-comics', $comic->slug) }}" class="text-hint">
-                                Проверить статус модерации
-                            </a>
-                        </p>
-                        @endif
-                        @if($comic->cover)
-                            <div class="comic-cover-preview">
-                                <img src="{{ $comic->cover ? Storage::url('' . $comic->cover) : '' }}" alt="{{ $comic->name }} обложка"
-                                     class="comic-cover-thumb">
-                            </div>
-                        @endif
-                    </div>
-                    <div class="author-comic-actions">
-                        @if($comic->is_moderated !== 'successful' && !$comic->is_published)
+        <a class="comic-list">
+            @foreach ($comics as $comic)
 
-                            <a href="#" class="list-action-btn edit-comic-btn"
-                               data-comic-slug="{{ $comic->slug }}"
-                               data-comic-name="{{ $comic->name }}"
-                               data-comic-description="{{ $comic->description ?: '' }}"
-                               data-comic-genres="{{ $comic->genres_string }}"
-                               data-comic-age-restriction="{{ $comic->age_restriction ?? '0+' }}"
-                               data-comic-cover="{{ $comic->cover ? Storage::url($comic->cover) : '' }}"
-                               data-action="{{ route('user.update_author_comics', $comic->slug) }}">
-                                <img src="{{ asset('images/icons/edit-primary.svg') }}" class="icon-24" alt="edit-icon">
-                            </a>
-                        @endif
-                        <a href="#" class="list-action-btn delete-comic-btn"
-                           data-comic-slug="{{ $comic->slug }}"
+                <a href="{{ route('author_comic', $comic) }}" target="_blank" class="comic-item">
+                    <div class="comic-data">
+                        <p>{{ $comic->name }}</p>
+                        <p>Статус: {{ $comic->status }}</p>
+                    </div>
+                    <div class="comic-actions">
+                        <a href="#" class="list-action-btn edit-comic-btn"
+                           data-comic-id="{{ $comic->id }}"
                            data-comic-name="{{ $comic->name }}"
-                           data-action="{{ route('user.delete_author_comics', $comic->slug) }}">
-                            <img src="{{ asset('images/icons/trash-primary-red.svg') }}" class="icon-24"
-                                 alt="delete-icon">
+                           data-comic-description="{{ $comic->description }}"
+                           data-comic-age_restriction="{{ $comic->age_restriction }}"
+                           data-comic-genres="{{ $comic->genres_string }}"
+                           data-comic-cover="{{ $comic->cover ? Storage::url($comic->cover) : '' }}"
+                           data-comic-file="{{ $comic->comics_file ? Storage::url($comic->comics_file) : '' }}"
+                           data-comic-file-name="{{ $comic->comics_file ? basename($comic->comics_file) : '' }}">
+                            <img src="{{ asset('images/icons/edit-primary.svg') }}" class="icon-24" alt="edit-icon">
+                        </a>
+
+                        <a href="#" class="list-action-btn delete-comic-btn"
+                           data-comic-id="{{ $comic->id }}"
+                           data-comic-name="{{ $comic->name }}">
+                            <img src="{{ asset('images/icons/trash-primary-red.svg') }}" class="icon-24" alt="delete-icon">
                         </a>
                     </div>
-                </div>
-            @empty
-                <p>Пока нет загруженных комиксов.</p>
-            @endforelse
+                </a>
+            @endforeach
         </div>
     </div>
 
-    <!-- Модалка удаления -->
+    <!-- Delete Modal -->
     <div class="modal hidden" id="delete-comic-modal">
         <div class="modal-content">
             <div class="modal-close" id="delete-comic-modal-close">
@@ -84,63 +65,72 @@
         </div>
     </div>
 
-    <!-- Модальное окно редактирования комикса -->
-    <div id="edit-comic-modal" class="modal hidden">
+    <!-- Edit Modal -->
+    <div class="modal hidden" id="edit-comic-modal">
         <div class="modal-content">
-            <button id="edit-comic-modal-close" class="modal-close">×</button>
-
-            <form id="edit-comic-form" method="POST" enctype="multipart/form-data">
+            <div class="modal-close" id="edit-comic-modal-close">
+                <img src="{{ asset('images/icons/close-primary.svg') }}" class="icon-24" alt="close">
+            </div>
+            <h3>Редактирование комикса</h3>
+            <div class="h-divider"></div>
+            <form method="POST" action="" enctype="multipart/form-data" class="lit-form" id="edit-comic-form">
                 @csrf
                 @method('PATCH')
+                <input type="hidden" name="id" id="edit-comic-id">
 
-                <input type="hidden" id="edit-comic-slug" name="slug">
+                <div class="lit-field">
+                    <label for="edit-comic-cover">Обложка комикса</label>
+                    <div class="cover-upload">
+                        <input type="file" name="cover" id="edit-comic-cover" accept="image/*">
+                        <div class="cover-preview" id="edit-comic-cover-preview"></div>
+                        <div class="input-error" id="edit-comic-cover-error"></div>
+                    </div>
+                </div>
 
-                <div class="modal-section">
+                <div class="lit-field">
+                    <label for="edit-comic-file">Файл комикса</label>
+                    <div class="file-upload">
+                        <div class="file-input-wrapper">
+                            <input type="file" name="comic_file" id="edit-comic-file" accept=".pdf,.cbr,.cbz">
+                            <span class="file-input-label" id="edit-comic-file-label">Выберите файл</span>
+                        </div>
+                        <div class="input-error" id="edit-comic-file-error"></div>
+                    </div>
+                </div>
+
+                <div class="lit-field">
                     <label for="edit-comic-name">Название комикса</label>
-                    <input type="text" id="edit-comic-name" name="title" placeholder="Введите название" value="{{ old('title') }}">
-                    <div id="edit-comic-name-error" class="input-error">@error('title') {{ $message }} @enderror</div>
+                    <input type="text" name="title" id="edit-comic-name" placeholder="Введите название" required>
+                    <div class="input-error" id="edit-comic-name-error"></div>
                 </div>
 
-                <div class="modal-section">
+                <div class="lit-field">
                     <label for="edit-comic-description">Описание</label>
-                    <textarea id="edit-comic-description" name="description" placeholder="Введите описание">{{ old('description') }}</textarea>
-                    <div id="edit-comic-description-error" class="input-error">@error('description') {{ $message }} @enderror</div>
+                    <textarea name="description" id="edit-comic-description" rows="5" placeholder="Подробное описание комикса" required></textarea>
+                    <div class="input-error" id="edit-comic-description-error"></div>
                 </div>
 
-                <div class="modal-section">
-                    <label for="edit-comic-genres">Жанры (через запятую)</label>
-                    <input type="text" id="edit-comic-genres" name="genres" placeholder="Фантастика, боевик" value="{{ old('genres') }}">
-                    <div id="edit-comic-genres-error" class="input-error">@error('genres') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="modal-section">
-                    <label for="edit-comic-age-restriction">Возрастное ограничение</label>
-                    <select id="edit-comic-age-restriction" name="age_restriction">
-                        <option value="0+" {{ old('age_restriction') == '0+' ? 'selected' : '' }}>0+</option>
-                        <option value="6+" {{ old('age_restriction') == '6+' ? 'selected' : '' }}>6+</option>
-                        <option value="12+" {{ old('age_restriction') == '12+' ? 'selected' : '' }}>12+</option>
-                        <option value="16+" {{ old('age_restriction') == '16+' ? 'selected' : '' }}>16+</option>
-                        <option value="18+" {{ old('age_restriction') == '18+' ? 'selected' : '' }}>18+</option>
+                <div class="lit-field">
+                    <label for="edit-comic-age_restriction">Возрастное ограничение</label>
+                    <select name="age_restriction" id="edit-comic-age_restriction" required>
+                        <option value="0+">0+</option>
+                        <option value="6+">6+</option>
+                        <option value="12+">12+</option>
+                        <option value="16+">16+</option>
+                        <option value="18+">18+</option>
                     </select>
-                    <div id="edit-comic-age-restriction-error" class="input-error">@error('age_restriction') {{ $message }} @enderror</div>
+                    <div class="input-error" id="edit-comic-age_restriction-error"></div>
                 </div>
 
-                <div class="modal-section cover-upload">
-                    <label for="edit-comic-cover">Обложка</label>
-                    <input type="file" id="edit-comic-cover" name="cover" accept="image/*">
-                    <div id="edit-comic-cover-preview"></div>
-                    <div id="edit-comic-cover-error" class="input-error">@error('cover') {{ $message }} @enderror</div>
-                </div>
-
-                <div class="modal-section">
-                    <label for="edit-comic-file">Файл комикса (PDF или архив)</label>
-                    <input type="file" id="edit-comic-file" name="comic_file" accept=".pdf,.zip,.rar">
-                    <div id="edit-comic-file-error" class="input-error">@error('comic_file') {{ $message }} @enderror</div>
+                <div class="lit-field">
+                    <label for="edit-comic-genres">Жанры</label>
+                    <input type="text" name="genres" id="edit-comic-genres" placeholder="Жанры через запятую">
+                    <div class="input-error" id="edit-comic-genres-error"></div>
                 </div>
 
                 <div class="modal-actions">
-                    <button type="button" id="cancel-edit-comic" class="secondary-btn">Отмена</button>
-                    <button type="submit" class="primary-btn">Сохранить</button>
+                    <button type="button" class="secondary-btn" id="cancel-edit-comic">Отмена</button>
+                    <button type="submit" class="primary-btn">Сохранить изменения</button>
                 </div>
             </form>
         </div>

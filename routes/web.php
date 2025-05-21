@@ -46,7 +46,7 @@ Route::prefix('authors_comics')->group(function () {
     Route::post('/{authorComic:slug}/comment', [AuthorComicsListController::class, 'comment'])->name('author_comic.comment')->middleware('authorized');
     Route::get('/{authorComic:slug}/download', [AuthorComicsListController::class, 'download'])->name('author_comic.download');
 });
-Route::get('/landing', [AuthorComicsListController::class, 'landing'])->name('authors_comics_landing');
+Route::get('/authors_comics_landing', [AuthorComicsListController::class, 'landing'])->name('authors_comics_landing');
 
 // Лендинг Litar
 Route::get('/litar_landing', function () {

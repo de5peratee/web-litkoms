@@ -35,13 +35,13 @@
             <div class="message-text">
                 @if($comic->is_moderated === 'under review')
                     <p class="message-title text-big">Комикс на модерации</p>
-                    <p class="message-description text-hint">Ваш комикс находится на проверке. Пожалуйста, дождитесь завершения модерации.</p>
+                    <p class="message-description text-hint">Ваш комикс находится на проверке. <br>Пожалуйста, дождитесь завершения модерации.</p>
                 @elseif($comic->is_moderated === 'successful' && !$comic->is_published)
                     <p class="message-title text-big">Модерация успешно пройдена</p>
-                    <p class="message-description text-hint">Ваш комикс полностью соответствует авторским правам. Теперь вы можете его опубликовать!</p>
+                    <p class="message-description text-hint">Ваш комикс полностью соответствует авторским правам. <br>Теперь вы можете его опубликовать!</p>
                 @elseif($comic->is_moderated === 'unsuccessful')
                     <p class="message-title text-big">Комикс не принят</p>
-                    <p class="message-description text-hint">Ваш комикс не прошел модерацию. Пожалуйста, проверьте замечания модератора и внесите изменения.</p>
+                    <p class="message-description text-hint">Ваш комикс не прошел модерацию. <br>Пожалуйста, проверьте замечания модератора и внесите изменения.</p>
                 @endif
             </div>
         </div>
@@ -53,9 +53,16 @@
 
             <div class="comics-preview-text">
                 <div class="author-wrapper">
-                    <div class="comics-author-avatar-wrapper">
-                        <img src="{{ asset('images/icons/user-profile.svg') }}" alt="icon" class="icon-24">
-                    </div>
+                    @if(Auth::user()->icon && Storage::exists(Auth::user()->icon))
+                        <div class="comics-author-avatar-wrapper">
+                            <img src="{{ Storage::url(Auth::user()->icon) }}" alt="{{ Auth::user()->icon }}">
+                        </div>
+                    @else
+                        <div class="comics-author-avatar-wrapper">
+                            <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
+                        </div>
+                    @endif
+
                     <p class="author-nickname-text">{{ '@' . Auth::user()->nickname }}</p>
                 </div>
 

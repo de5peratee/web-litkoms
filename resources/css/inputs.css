@@ -31,7 +31,8 @@
 
 /* Общие поля input и textarea (кроме чекбокса) */
 .lit-field input:not([type="checkbox"]),
-.lit-field textarea {
+.lit-field textarea,
+.lit-field select{
     padding: 8px 16px;
     height: 44px;
     width: 100%;
@@ -51,16 +52,19 @@
 }
 
 .lit-field textarea {
-    height: 120px;
+    resize: none;
+    height: 128px;
 }
 
 .lit-field input:not([type="checkbox"])::placeholder,
-.lit-field textarea::placeholder {
+.lit-field textarea::placeholder,
+.lit-field select::placeholder{
     color: var(--tertiary);
 }
 
 .lit-field input:not([type="checkbox"]):focus,
-.lit-field textarea:focus {
+.lit-field textarea:focus,
+.lit-field select:focus {
     background-color: var(--white);
     border: 1px solid var(--primary-blue);
     box-shadow: 0 16px 48px rgba(0, 90, 255, 0.08);
