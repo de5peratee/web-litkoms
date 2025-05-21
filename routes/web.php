@@ -53,9 +53,6 @@ Route::get('/litar_landing', function () {
     return view('litar_landing');
 })->name('litar_landing');
 
-// Профиль пользователя
-Route::get('/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
-
 // Комиксы пользователя
 Route::prefix('/profile/comics')
     ->middleware('authorized')
@@ -108,3 +105,6 @@ Route::prefix('dashboard')->middleware('editor')->group(function () {
 Route::get('/manuals/policy', function () {
     return view('manuals.policy');
 })->name('manuals.policy');
+
+// Профиль пользователя
+Route::get('/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
