@@ -66,9 +66,9 @@ Route::prefix('/profile/comics')
         Route::post('/', [AuthorComicsController::class, 'store'])->name('user.store_author_comics');
 
         Route::get('/{comic}/edit', [AuthorComicsController::class, 'edit'])->name('user.edit_author_comics');
-        Route::patch('/{comic}', [AuthorComicsController::class, 'update'])->name('user.update_author_comics');
+        Route::patch('/{comic:id}', [AuthorComicsController::class, 'update'])->name('user.update_author_comics');
 
-        Route::delete('/{comic}', [AuthorComicsController::class, 'destroy'])->name('user.delete_author_comics');
+        Route::delete('/{comic:id}', [AuthorComicsController::class, 'destroy'])->name('user.delete_author_comics');
 
         Route::get('/{comic}/moderation', [AuthorComicsController::class, 'showModerationConfirm'])->name('user.moderation-confirm-comics');
 

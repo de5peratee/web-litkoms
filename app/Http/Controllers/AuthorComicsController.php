@@ -20,6 +20,7 @@ class AuthorComicsController extends Controller
     {
         $comics = AuthorComics::where('created_by', auth()->id())
             ->with('genres')
+            ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($comic) {
                 $comic->genres_string = $comic->genres->pluck('name')->implode(', ') ?: 'Не указаны';
@@ -98,6 +99,8 @@ class AuthorComicsController extends Controller
 
     public function update(AuthorComicUpdateRequest $request, AuthorComics $comic)
     {
+
+        Log::info('Request Data', ['request' => $request->all()]);
 
         if ($comic->created_by !== auth()->id()) {
             abort(403, 'Unauthorized action.');

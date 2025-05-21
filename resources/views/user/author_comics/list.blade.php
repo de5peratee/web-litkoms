@@ -13,20 +13,23 @@
             <a href="{{ route('user.create_author_comics') }}" class="primary-btn">Создать комикс</a>
         </div>
 
-        <a class="comic-list">
+        <div class="comic-list">
             @foreach ($comics as $comic)
-
-                <a href="{{ route('author_comic', $comic) }}" target="_blank" class="comic-item">
+                <div href="{{ route('author_comic', $comic->slug) }}" target="_blank" class="comic-item">
                     <div class="comic-data">
                         <p>{{ $comic->name }}</p>
                         <p>Статус: {{ $comic->status }}</p>
+                        <a href="{{ route('author_comic', $comic->slug) }}" target="_blank" class="tertiary-bt">
+                            Перейти на страницу
+                        </a>
                     </div>
+
                     <div class="comic-actions">
                         <a href="#" class="list-action-btn edit-comic-btn"
                            data-comic-id="{{ $comic->id }}"
                            data-comic-name="{{ $comic->name }}"
                            data-comic-description="{{ $comic->description }}"
-                           data-comic-age_restriction="{{ $comic->age_restriction }}"
+                           data-comic-age_restriction="{{ $comic->age_restriction ? $comic->age_restriction . '+' : '0+' }}"
                            data-comic-genres="{{ $comic->genres_string }}"
                            data-comic-cover="{{ $comic->cover ? Storage::url($comic->cover) : '' }}"
                            data-comic-file="{{ $comic->comics_file ? Storage::url($comic->comics_file) : '' }}"
@@ -40,7 +43,7 @@
                             <img src="{{ asset('images/icons/trash-primary-red.svg') }}" class="icon-24" alt="delete-icon">
                         </a>
                     </div>
-                </a>
+                </div>
             @endforeach
         </div>
     </div>
@@ -91,7 +94,7 @@
                     <label for="edit-comic-file">Файл комикса</label>
                     <div class="file-upload">
                         <div class="file-input-wrapper">
-                            <input type="file" name="comic_file" id="edit-comic-file" accept=".pdf,.cbr,.cbz">
+                            <input type="file" name="comics_file" id="edit-comic-file" accept=".pdf,.cbr,.cbz">
                             <span class="file-input-label" id="edit-comic-file-label">Выберите файл</span>
                         </div>
                         <div class="input-error" id="edit-comic-file-error"></div>
