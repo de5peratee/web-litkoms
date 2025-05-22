@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorComicsController;
+use App\Http\Controllers\AuthorComicsLandingController;
 use App\Http\Controllers\AuthorComicsListController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\Editor\EditorCatalogController;
@@ -46,7 +47,8 @@ Route::prefix('authors_comics')->group(function () {
     Route::post('/{authorComic:slug}/comment', [AuthorComicsListController::class, 'comment'])->name('author_comic.comment')->middleware('authorized');
     Route::get('/{authorComic:slug}/download', [AuthorComicsListController::class, 'download'])->name('author_comic.download');
 });
-Route::get('/authors_comics_landing', [AuthorComicsListController::class, 'landing'])->name('authors_comics_landing');
+
+Route::get('/authors_comics_landing', [AuthorComicsLandingController::class, 'index'])->name('authors_comics_landing');
 
 // Лендинг Litar
 Route::get('/litar_landing', function () {
@@ -62,7 +64,6 @@ Route::prefix('/profile/comics')
         Route::get('/create', [AuthorComicsController::class, 'create'])->name('user.create_author_comics');
         Route::post('/', [AuthorComicsController::class, 'store'])->name('user.store_author_comics');
 
-        Route::get('/{comic}/edit', [AuthorComicsController::class, 'edit'])->name('user.edit_author_comics');
         Route::patch('/{comic:id}', [AuthorComicsController::class, 'update'])->name('user.update_author_comics');
 
         Route::delete('/{comic:id}', [AuthorComicsController::class, 'destroy'])->name('user.delete_author_comics');

@@ -19,28 +19,6 @@ class AuthorComicsListController extends Controller
         $this->viewCounterService = $viewCounterService;
     }
 
-    public function landing(Request $request)
-    {
-        $search = $request->query('search');
-        $genre = $request->query('genre');
-        $comics = AuthorComics::where('is_published', true)
-            ->where('is_moderated', 'successful')
-            ->when($search, function ($query, $search) {
-                return $query->where('name', 'like', '%' . $search . '%');
-            })
-            ->when($genre, function ($query, $genre) {
-                return $query->whereHas('genres', function ($q) use ($genre) {
-                    $q->where('slug', $genre);
-                });
-            })
-            ->with(['genres', 'createdBy'])
-            ->paginate(12);
-
-        $genres = Genre::all();
-
-        return view('authors_comics.landing', compact('comics', 'search', 'genres'));
-    }
-
     public function library(Request $request)
     {
         $search = $request->query('search');

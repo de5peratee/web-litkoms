@@ -35,7 +35,7 @@
 
                     <div class="comic-actions">
                         <p>Статус: {{ $comic->status }}</p>
-
+                        @if($comic->is_published!==true)
                         <a href="#" class="list-action-btn edit-comic-btn"
                            data-comic-id="{{ $comic->id }}"
                            data-comic-name="{{ $comic->name }}"
@@ -47,6 +47,7 @@
                            data-comic-file-name="{{ $comic->comics_file ? basename($comic->comics_file) : '' }}">
                             <img src="{{ asset('images/icons/edit-primary.svg') }}" class="icon-24" alt="edit-icon">
                         </a>
+                        @endif
 
                         <a href="#" class="list-action-btn delete-comic-btn"
                            data-comic-id="{{ $comic->id }}"

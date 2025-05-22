@@ -53,8 +53,8 @@
                     </div>
                 </div>
 
-{{--                Добавить проверку, если не авторизировать, перенаправлять на аторизацию--}}
-                <a href="{{ route('user.create_author_comics') }}" class="primary-btn">
+                <a href="{{ auth()->check() ? route('user.create_author_comics') : route('auth') }}"
+                   class="primary-btn">
                     Загрузить комикс
                     <img src="{{ asset('images/icons/arrow-top-right-white.svg') }}" alt="icon" class="icon-24">
                 </a>
@@ -73,101 +73,37 @@
             <div class="h-divider"></div>
 
             <div class="comics-list-wrapper">
-                <div class="comic">
-                    <div class="comic-cover-wrapper"></div>
+                @forelse ($newComics as $comic)
+                    <div class="comic">
+                        <a href="{{ route('author_comic', $comic->slug) }}">
+                            <div class="comic-cover-wrapper">
+                                <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}"
+                                     alt="{{ $comic->name }}" class="comic-cover">
+                            </div>
+                        </a>
 
-                    <div class="comic-tags-wrapper">
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag more-tag">+n жанров</p>
-                    </div>
+                        <div class="comic-tags-wrapper">
+                            @foreach ($comic->genres->take(2) as $genre)
+                                <p class="text-hint comic-tag">{{ $genre->name }}</p>
+                            @endforeach
+                            @if ($comic->genres->count() > 2)
+                                <p class="text-hint comic-tag more-tag">+{{ $comic->genres->count() - 2 }} жанров</p>
+                            @endif
+                        </div>
 
-                    <div class="comic-title">
-                        <p class="text-big">Название комикса</p>
-                        <p class="comic-author-text">ФИО Автора</p>
-                    </div>
+                        <div class="comic-title">
+                            <p class="text-big">{{ $comic->name }}</p>
+                            <p class="comic-author-text">{{ $comic->createdBy->nickname }}</p>
+                        </div>
 
-                    <div class="comic-avg-grade">
-                        <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                        <p>0.0</p>
+                        <div class="comic-avg-grade">
+                            <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
+                            <p>{{ number_format($comic->average_assessment ?? 0, 1) }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="comic">
-                    <div class="comic-cover-wrapper"></div>
-
-                    <div class="comic-tags-wrapper">
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag more-tag">+n жанров</p>
-                    </div>
-
-                    <div class="comic-title">
-                        <p class="text-big">Название комикса</p>
-                        <p class="comic-author-text">ФИО Автора</p>
-                    </div>
-
-                    <div class="comic-avg-grade">
-                        <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                        <p>0.0</p>
-                    </div>
-                </div>
-                <div class="comic">
-                    <div class="comic-cover-wrapper"></div>
-
-                    <div class="comic-tags-wrapper">
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag more-tag">+n жанров</p>
-                    </div>
-
-                    <div class="comic-title">
-                        <p class="text-big">Название комикса</p>
-                        <p class="comic-author-text">ФИО Автора</p>
-                    </div>
-
-                    <div class="comic-avg-grade">
-                        <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                        <p>0.0</p>
-                    </div>
-                </div>
-                <div class="comic">
-                    <div class="comic-cover-wrapper"></div>
-
-                    <div class="comic-tags-wrapper">
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag more-tag">+n жанров</p>
-                    </div>
-
-                    <div class="comic-title">
-                        <p class="text-big">Название комикса</p>
-                        <p class="comic-author-text">ФИО Автора</p>
-                    </div>
-
-                    <div class="comic-avg-grade">
-                        <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                        <p>0.0</p>
-                    </div>
-                </div>
-                <div class="comic">
-                    <div class="comic-cover-wrapper"></div>
-
-                    <div class="comic-tags-wrapper">
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag more-tag">+n жанров</p>
-                    </div>
-
-                    <div class="comic-title">
-                        <p class="text-big">Название комикса</p>
-                        <p class="comic-author-text">ФИО Автора</p>
-                    </div>
-
-                    <div class="comic-avg-grade">
-                        <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                        <p>0.0</p>
-                    </div>
-                </div>
+                @empty
+                    <p class="no-results">Новые комиксы не найдены.</p>
+                @endforelse
             </div>
 
 
@@ -184,224 +120,75 @@
             </div>
 
             <div class="authors-grid">
-                <div class="author-item">
-                    <div class="author-avatar-wrapper">
-                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                    </div>
-
-                    <div class="author-item-text-wrapper">
-                        <p class="text-big">nick</p>
-                        <p class="author-name-text">Имя Фамилия</p>
-                    </div>
-                </div>
-                <div class="author-item">
-                    <div class="author-avatar-wrapper">
-                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                    </div>
-
-                    <div class="author-item-text-wrapper">
-                        <p class="text-big">nick</p>
-                        <p class="author-name-text">Имя Фамилия</p>
-                    </div>
-                </div>
-                <div class="author-item">
-                    <div class="author-avatar-wrapper">
-                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                    </div>
-
-                    <div class="author-item-text-wrapper">
-                        <p class="text-big">nick</p>
-                        <p class="author-name-text">Имя Фамилия</p>
-                    </div>
-                </div>
-                <div class="author-item">
-                    <div class="author-avatar-wrapper">
-                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                    </div>
-
-                    <div class="author-item-text-wrapper">
-                        <p class="text-big">nick</p>
-                        <p class="author-name-text">Имя Фамилия</p>
-                    </div>
-                </div>
-                <div class="author-item">
-                    <div class="author-avatar-wrapper">
-                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                    </div>
-
-                    <div class="author-item-text-wrapper">
-                        <p class="text-big">nick</p>
-                        <p class="author-name-text">Имя Фамилия</p>
-                    </div>
-                </div>
-                <div class="author-item">
-                    <div class="author-avatar-wrapper">
-                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                    </div>
-
-                    <div class="author-item-text-wrapper">
-                        <p class="text-big">nick</p>
-                        <p class="author-name-text">Имя Фамилия</p>
-                    </div>
-                </div>
-                <div class="author-item">
-                    <div class="author-avatar-wrapper">
-                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                    </div>
-
-                    <div class="author-item-text-wrapper">
-                        <p class="text-big">nick</p>
-                        <p class="author-name-text">Имя Фамилия</p>
-                    </div>
-                </div>
-                <div class="author-item">
-                    <div class="author-avatar-wrapper">
-                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                    </div>
-
-                    <div class="author-item-text-wrapper">
-                        <p class="text-big">nick</p>
-                        <p class="author-name-text">Имя Фамилия</p>
-                    </div>
-                </div>
-                <div class="author-item">
-                    <div class="author-avatar-wrapper">
-                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                    </div>
-
-                    <div class="author-item-text-wrapper">
-                        <p class="text-big">nick</p>
-                        <p class="author-name-text">Имя Фамилия</p>
-                    </div>
-                </div>
-                <div class="author-item">
-                    <div class="author-avatar-wrapper">
-                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                    </div>
-
-                    <div class="author-item-text-wrapper">
-                        <p class="text-big">nick</p>
-                        <p class="author-name-text">Имя Фамилия</p>
-                    </div>
-                </div>
+                @forelse ($topAuthors as $author)
+                    <a href="{{ route('profile.index', ['nickname' => $author->nickname]) }}" class="author-item">
+                        <div class="author-avatar-wrapper">
+                            <img src="{{ $author->avatar ? Storage::url($author->avatar) : asset('images/default_template/ava_cover.png') }}"
+                                 alt="{{ $author->nickname }}">
+                        </div>
+                        <div class="author-item-text-wrapper">
+                            <p class="text-big">{{ '@' . $author->nickname }}</p>
+                            <p class="author-name-text">{{ $author->name }}</p>
+                        </div>
+                    </a>
+                @empty
+                    <p class="no-results">Авторы не найдены.</p>
+                @endforelse
             </div>
 
-            <a href="{{ route('user.create_author_comics') }}" class="secondary-btn">
+            <a href="{{ auth()->check() ? route('user.create_author_comics') : route('auth') }}" class="secondary-btn">
                 Стать автором
                 <img src="{{ asset('images/icons/arrow-top-right-white.svg') }}" alt="icon" class="icon-24">
             </a>
         </div>
-
-        <div class="info-block subs-comics">
-            <div class="info-header">
-                <h3>От любимых авторов</h3>
-                <a href="{{ route('authors_comics_library') }}" class="tertiary-btn">
-                    Перейти в каталог
-                    <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
-                </a>
-            </div>
-
-            <div class="h-divider"></div>
-
-            <div class="comics-list-wrapper">
-                <div class="comic">
-                    <div class="comic-cover-wrapper"></div>
-
-                    <div class="comic-tags-wrapper">
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag more-tag">+n жанров</p>
-                    </div>
-
-                    <div class="comic-title">
-                        <p class="text-big">Название комикса</p>
-                        <p class="comic-author-text">ФИО Автора</p>
-                    </div>
-
-                    <div class="comic-avg-grade">
-                        <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                        <p>0.0</p>
-                    </div>
+        @if (auth()->user())
+            <div class="info-block subs-comics">
+                <div class="info-header">
+                    <h3>От любимых авторов</h3>
+                    <a href="{{ route('authors_comics_library') }}" class="tertiary-btn">
+                        Перейти в каталог
+                        <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
+                    </a>
                 </div>
-                <div class="comic">
-                    <div class="comic-cover-wrapper"></div>
 
-                    <div class="comic-tags-wrapper">
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag more-tag">+n жанров</p>
-                    </div>
+                <div class="h-divider"></div>
+                <div class="comics-list-wrapper">
+                    @forelse ($subscribedComics as $comic)
+                        <div class="comic">
+                            <a href="{{ route('author_comic', $comic->slug) }}">
+                                <div class="comic-cover-wrapper">
+                                    <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}"
+                                         alt="{{ $comic->name }}" class="comic-cover">
+                                </div>
+                            </a>
 
-                    <div class="comic-title">
-                        <p class="text-big">Название комикса</p>
-                        <p class="comic-author-text">ФИО Автора</p>
-                    </div>
+                            <div class="comic-tags-wrapper">
+                                @foreach ($comic->genres->take(2) as $genre)
+                                    <p class="text-hint comic-tag">{{ $genre->name }}</p>
+                                @endforeach
+                                @if ($comic->genres->count() > 2)
+                                    <p class="text-hint comic-tag more-tag">+{{ $comic->genres->count() - 2 }}
+                                        жанров</p>
+                                @endif
+                            </div>
 
-                    <div class="comic-avg-grade">
-                        <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                        <p>0.0</p>
-                    </div>
-                </div>
-                <div class="comic">
-                    <div class="comic-cover-wrapper"></div>
+                            <div class="comic-title">
+                                <p class="text-big">{{ $comic->name }}</p>
+                                <p class="comic-author-text">{{ $comic->createdBy->nickname }}</p>
+                            </div>
 
-                    <div class="comic-tags-wrapper">
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag more-tag">+n жанров</p>
-                    </div>
-
-                    <div class="comic-title">
-                        <p class="text-big">Название комикса</p>
-                        <p class="comic-author-text">ФИО Автора</p>
-                    </div>
-
-                    <div class="comic-avg-grade">
-                        <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                        <p>0.0</p>
-                    </div>
-                </div>
-                <div class="comic">
-                    <div class="comic-cover-wrapper"></div>
-
-                    <div class="comic-tags-wrapper">
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag more-tag">+n жанров</p>
-                    </div>
-
-                    <div class="comic-title">
-                        <p class="text-big">Название комикса</p>
-                        <p class="comic-author-text">ФИО Автора</p>
-                    </div>
-
-                    <div class="comic-avg-grade">
-                        <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                        <p>0.0</p>
-                    </div>
-                </div>
-                <div class="comic">
-                    <div class="comic-cover-wrapper"></div>
-
-                    <div class="comic-tags-wrapper">
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag">Жанр</p>
-                        <p class="text-hint comic-tag more-tag">+n жанров</p>
-                    </div>
-
-                    <div class="comic-title">
-                        <p class="text-big">Название комикса</p>
-                        <p class="comic-author-text">ФИО Автора</p>
-                    </div>
-
-                    <div class="comic-avg-grade">
-                        <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                        <p>0.0</p>
-                    </div>
+                            <div class="comic-avg-grade">
+                                <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
+                                <p>{{ number_format($comic->average_assessment ?? 0, 1) }}</p>
+                            </div>
+                        </div>
+                    @empty
+                        <p class="no-results">Комиксы от любимых авторов не найдены.</p>
+                    @endforelse
                 </div>
             </div>
-
-        </div>
+        @endif
+    </div>
     </div>
 
 @endsection

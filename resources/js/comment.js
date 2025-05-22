@@ -43,10 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const newComment = temp.firstElementChild;
 
-            // Добавляем анимацию
             newComment.classList.add('animate-in');
 
-            // Удаляем класс после завершения анимации
             newComment.addEventListener('animationend', () => {
                 newComment.classList.remove('animate-in');
             });
