@@ -46,15 +46,12 @@ Route::prefix('authors_comics')->group(function () {
     Route::post('/{authorComic:slug}/comment', [AuthorComicsListController::class, 'comment'])->name('author_comic.comment')->middleware('authorized');
     Route::get('/{authorComic:slug}/download', [AuthorComicsListController::class, 'download'])->name('author_comic.download');
 });
-Route::get('/landing', [AuthorComicsListController::class, 'landing'])->name('authors_comics_landing');
+Route::get('/authors_comics_landing', [AuthorComicsListController::class, 'landing'])->name('authors_comics_landing');
 
 // Лендинг Litar
 Route::get('/litar_landing', function () {
     return view('litar_landing');
 })->name('litar_landing');
-
-// Профиль пользователя
-Route::get('/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
 
 // Комиксы пользователя
 Route::prefix('/profile/comics')
@@ -66,9 +63,9 @@ Route::prefix('/profile/comics')
         Route::post('/', [AuthorComicsController::class, 'store'])->name('user.store_author_comics');
 
         Route::get('/{comic}/edit', [AuthorComicsController::class, 'edit'])->name('user.edit_author_comics');
-        Route::patch('/{comic}', [AuthorComicsController::class, 'update'])->name('user.update_author_comics');
+        Route::patch('/{comic:id}', [AuthorComicsController::class, 'update'])->name('user.update_author_comics');
 
-        Route::delete('/{comic}', [AuthorComicsController::class, 'destroy'])->name('user.delete_author_comics');
+        Route::delete('/{comic:id}', [AuthorComicsController::class, 'destroy'])->name('user.delete_author_comics');
 
         Route::get('/{comic}/moderation', [AuthorComicsController::class, 'showModerationConfirm'])->name('user.moderation-confirm-comics');
 
@@ -82,6 +79,17 @@ Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscr
 // Панель редактора
 Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::view('/', 'editor.dashboard')->name('editor.dashboard');
+
+    //Заявки на модерацию
+    Route::get('/comics_submissions', function () {
+        return view('editor.comics.submissions');
+    })->name('editor.comics_submissions_index');
+
+    //Страница модерации
+    Route::get('/comic_moderation', function () {
+        return view('editor.comics.moderation');
+    })->name('editor.comic_moderation');
+
     // События
     Route::get('/events', [EditorEventController::class, 'index'])->name('editor.events_index');
     Route::get('/events/create', [EditorEventController::class, 'create'])->name('editor.create_event');
@@ -108,3 +116,6 @@ Route::prefix('dashboard')->middleware('editor')->group(function () {
 Route::get('/manuals/policy', function () {
     return view('manuals.policy');
 })->name('manuals.policy');
+
+// Профиль пользователя
+Route::get('/{nickname}', [ProfileController::class, 'index'])->name('profile.index');

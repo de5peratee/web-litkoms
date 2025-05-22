@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('#comment-form');
     const input = document.querySelector('#comment-input');
@@ -39,12 +41,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 noCommentsText.remove();
             }
 
-            commentList.prepend(temp.firstElementChild);
+            const newComment = temp.firstElementChild;
+
+            // Добавляем анимацию
+            newComment.classList.add('animate-in');
+
+            // Удаляем класс после завершения анимации
+            newComment.addEventListener('animationend', () => {
+                newComment.classList.remove('animate-in');
+            });
+
+            commentList.prepend(newComment);
             input.value = '';
             commentsCount.textContent = parseInt(commentsCount.textContent) + 1;
         } catch (err) {
             errorEl.textContent = err.message;
-            errorEl.style.display = 'block';
+            errorEl.style.display = 'flex';
         }
     });
 });
