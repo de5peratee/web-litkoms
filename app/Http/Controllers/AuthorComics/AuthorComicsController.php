@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AuthorComics;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthorComicRequest;
 use App\Http\Requests\AuthorComicUpdateRequest;
 use App\Models\AuthorComics;
@@ -114,6 +115,8 @@ class AuthorComicsController extends Controller
                 'name' => $validated['title'],
                 'description' => $validated['description'],
                 'age_restriction' => $validated['age_restriction'],
+                'is_moderated' => 'under review',
+                'feedback' => '',
             ];
 
             if ($request->hasFile('cover')) {

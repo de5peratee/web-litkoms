@@ -35,6 +35,8 @@ export default defineConfig({
                 'resources/css/editor/catalog_list.css',
                 'resources/css/editor/authors_сomics_submissions_list.css',
 
+                'resources/css/editor/authors_comics_moderation.css',
+
                 'resources/css/user/author_comics_list.css',
                 'resources/css/user/create_author_comics.css',
                 'resources/css/user/moderation-confirm-comics.css',
@@ -52,7 +54,6 @@ export default defineConfig({
                 'resources/js/rating.js',
                 'resources/js/profile-tabs.js',
                 'resources/js/comment.js',
-
 
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',

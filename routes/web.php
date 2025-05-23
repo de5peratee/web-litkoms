@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AuthorComicsController;
-use App\Http\Controllers\AuthorComicsLandingController;
-use App\Http\Controllers\AuthorComicsListController;
+use App\Http\Controllers\AuthorComics\AuthorComicsController;
+use App\Http\Controllers\AuthorComics\AuthorComicsLandingController;
+use App\Http\Controllers\AuthorComics\AuthorComicsListController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\Editor\EditorCatalogController;
 use App\Http\Controllers\Editor\EditorEventController;
+use App\Http\Controllers\Editor\EditorModerationController;
 use App\Http\Controllers\Editor\EditorPostController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
@@ -81,15 +82,10 @@ Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscr
 Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::view('/', 'editor.dashboard')->name('editor.dashboard');
 
-    //Заявки на модерацию
-    Route::get('/comics_submissions', function () {
-        return view('editor.comics.submissions');
-    })->name('editor.comics_submissions_index');
 
-    //Страница модерации
-    Route::get('/comic_moderation', function () {
-        return view('editor.comics.moderation');
-    })->name('editor.comic_moderation');
+    Route::get('/comics_submissions', [EditorModerationController::class, 'index'])->name('editor.comics_submissions_index');
+    Route::get('/editor/moderation/{slug}', [EditorModerationController::class, 'show'])->name('editor.comic_moderation');
+    Route::put('/editor/moderation/{slug}', [EditorModerationController::class, 'update'])->name('editor.comic_moderation');
 
     // События
     Route::get('/events', [EditorEventController::class, 'index'])->name('editor.events_index');
