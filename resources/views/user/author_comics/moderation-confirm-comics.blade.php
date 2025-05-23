@@ -42,6 +42,9 @@
                 @elseif($comic->is_moderated === 'unsuccessful')
                     <p class="message-title text-big">Комикс не принят</p>
                     <p class="message-description text-hint">Ваш комикс не прошел модерацию. <br>Пожалуйста, проверьте замечания модератора и внесите изменения.</p>
+                    @if($comic->feedback)
+                        <p class="message-feedback text-hint"><strong>Замечания модератора:</strong> {{ $comic->feedback }}</p>
+                    @endif
                 @endif
             </div>
         </div>

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AuthorComics;
 
+use App\Http\Controllers\Controller;
 use App\Models\AuthorComics;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class AuthorComicsLandingController extends Controller
 {

@@ -19,6 +19,7 @@ class AuthorComics extends Model
         'average_assessment',
         'is_moderated',
         'is_published',
+        'feedback',
     ];
 
     protected $casts = [

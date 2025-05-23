@@ -15,7 +15,6 @@ class EventController extends Controller
         $sortOrder = $request->input('sort', 'asc') === 'desc' ? 'desc' : 'asc';
         $perPage = 6;
 
-        // Основной список
         $query = Event::with(['tags', 'guests'])->orderBy('start_date', $sortOrder);
 
         if ($search) {
@@ -37,7 +36,6 @@ class EventController extends Controller
             ]);
         }
 
-        // Ближайшие 3 мероприятия для слайдера
         $upcomingEvents = Event::with('tags')
             ->where('start_date', '>=', now())
             ->orderBy('start_date', 'asc')

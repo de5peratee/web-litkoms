@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AuthorComics;
 
+use App\Http\Controllers\Controller;
 use App\Models\AuthorComics;
 use App\Models\Genre;
 use App\Services\ViewCounterService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AuthorComicsListController extends Controller
 {
