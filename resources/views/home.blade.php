@@ -6,6 +6,12 @@
 @section('content')
     @vite(['resources/css/news.css'])
 
-    <h1>Добро пожаловать на главную страницу!</h1>
-    <p>Здесь будет контент вашей главной страницы.</p>
+    <div class="hone-container">
+        <h2>Главная</h2>
+    </div>
+
+{{--    <div class="web-radio-cta" id="floating-blob">--}}
+{{--        <img src="{{ asset('images/blob.svg') }}" alt="icon">--}}
+{{--    </div>--}}
+
 @endsection

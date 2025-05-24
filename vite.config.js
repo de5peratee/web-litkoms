@@ -56,6 +56,7 @@ export default defineConfig({
                 'resources/js/rating.js',
                 'resources/js/profile-tabs.js',
                 'resources/js/comment.js',
+                'resources/js/blob.js',
 
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',
