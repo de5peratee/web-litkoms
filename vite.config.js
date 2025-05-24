@@ -25,6 +25,8 @@ export default defineConfig({
                 'resources/css/authors-comics-landing.css',
                 'resources/css/authors-comics-library.css',
                 'resources/css/comic.css',
+                'resources/css/home.css',
+                'resources/css/news.css',
 
                 'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
