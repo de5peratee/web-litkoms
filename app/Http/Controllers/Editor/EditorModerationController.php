@@ -43,7 +43,6 @@ class EditorModerationController extends Controller
             'age_restriction' => $request->age_restriction,
             'is_moderated' => $request->moderation_status,
             'feedback' => $request->moderation_status === 'unsuccessful' ? $request->feedback : null,
-            'is_published' => $request->moderation_status === 'successful' ? true : false,
         ]);
 
         $message = $request->moderation_status === 'successful'
