@@ -4,6 +4,7 @@
 
 @section('content')
     @vite(['resources/css/user/moderation-confirm-comics.css'])
+    @vite(['resources/js/moderation-confirm-comics.js'])
 
     <div class="moderation-confirm-container">
         <div class="moderation-confirm-container-header">
@@ -35,15 +36,15 @@
             <div class="message-text">
                 @if($comic->is_moderated === 'under review')
                     <p class="message-title text-big">Комикс на модерации</p>
-                    <p class="message-description text-hint">Ваш комикс находится на проверке. <br>Пожалуйста, дождитесь завершения модерации.</p>
+                    <p class="message-description">Ваш комикс находится на проверке. <br>Пожалуйста, дождитесь завершения модерации.</p>
                 @elseif($comic->is_moderated === 'successful' && !$comic->is_published)
                     <p class="message-title text-big">Модерация успешно пройдена</p>
-                    <p class="message-description text-hint">Ваш комикс полностью соответствует авторским правам. <br>Теперь вы можете его опубликовать!</p>
+                    <p class="message-description">Ваш комикс полностью соответствует авторским правам. <br>Теперь вы можете его опубликовать!</p>
                 @elseif($comic->is_moderated === 'unsuccessful')
                     <p class="message-title text-big">Комикс не принят</p>
-                    <p class="message-description text-hint">Ваш комикс не прошел модерацию. <br>Пожалуйста, проверьте замечания модератора и внесите изменения.</p>
+                    <p class="message-description">Ваш комикс не прошел модерацию. <br>Пожалуйста, проверьте замечания модератора и внесите изменения.</p>
                     @if($comic->feedback)
-                        <p class="message-feedback text-hint"><strong>Замечания модератора:</strong> {{ $comic->feedback }}</p>
+                        <p class="message-feedback"><strong>Замечания модератора:</strong> {{ $comic->feedback }}</p>
                     @endif
                 @endif
             </div>
@@ -65,15 +66,13 @@
                             <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
                         </div>
                     @endif
-
                     <p class="author-nickname-text">{{ '@' . Auth::user()->nickname }}</p>
                 </div>
 
                 <h3>{{ $comic->name }}</h3>
-
                 <p class="text-small">{{ Str::limit($comic->description, 100) }}</p>
 
-                <div class="comics-genres">
+                <div class="comics-genres" data-genres="{{ $comic->genres->pluck('name')->join(',') }}">
                     @foreach ($comic->genres as $genre)
                         <span class="comics-genre-tag text-hint">{{ $genre->name }}</span>
                     @endforeach

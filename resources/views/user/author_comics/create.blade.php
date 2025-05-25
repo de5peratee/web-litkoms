@@ -45,7 +45,7 @@
 
                     <div class="lit-field">
                         <label for="genres">Жанры</label>
-                        <input type="text" name="genres" id="genres" placeholder="Укажите жанры через запятую (например, Фэнтези, Комедия)" value="{{ old('genres') }}" class="{{ $errors->has('genres') ? 'is-invalid' : '' }}">
+                        <input type="text" name="genres" id="genres" placeholder="Укажите жанры через запятую (например: Фэнтези, Комедия)" value="{{ old('genres') }}" class="{{ $errors->has('genres') ? 'is-invalid' : '' }}">
                         @error('genres')
                         <div class="input-error">{{ $message }}</div>
                         @enderror
