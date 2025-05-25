@@ -9,15 +9,34 @@
 
     <div class="comics-list-container">
         <div class="comics-list-container-header">
-            <h2>Мои комиксы</h2>
-            <a href="{{ route('user.create_author_comics') }}" class="primary-btn">Создать комикс</a>
+            <h3>Мои комиксы</h3>
+            <a href="{{ route('user.create_author_comics') }}" class="primary-btn">
+                <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="edit-icon">
+                Новый комикс
+            </a>
         </div>
 
         <div class="comic-list">
             @foreach ($comics as $comic)
                 <div href="{{ route('author_comic', $comic->slug) }}" target="_blank" class="comic-item">
-                    <div class="comic-data">
-                        <p>{{ $comic->name }}</p>
+                    <div class="comic-preview-wrapper">
+                        <div class="comic-cover-wrapper">
+                            <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}" class="comic-cover">
+                        </div>
+
+                        <div class="comic-preview-text-wrapper">
+                            <p class="text-big">{{ $comic->name }}</p>
+                            @if ($comic->age_restriction >= 18)
+                                <p class="text-hint age-restriction-tag">18+</p>
+                            @endif
+
+                            <p class="text-hint comic-datetime-tag">
+                                {{ $comic->updated_at->diffForHumans() }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="comic-links">
 
                         <a href="{{ route('author_comic', $comic->slug) }}" target="_blank" class="tertiary-btn">
                             Перейти на страницу
@@ -26,15 +45,14 @@
 
                         @if ($comic->is_moderated !== 'successful' || !$comic->is_published)
                             <a href="{{ route('user.moderation-confirm-comics', $comic->slug) }}" target="_blank" class="tertiary-btn">
-                                Проверить статус модерации
+                                Статус модерации
                                 <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
                             </a>
                         @endif
-
                     </div>
 
                     <div class="comic-actions">
-                        <p>Статус: {{ $comic->status }}</p>
+{{--                        <p>Статус: {{ $comic->status }}</p>--}}
                         @if($comic->is_published!==true)
                         <a href="#" class="list-action-btn edit-comic-btn"
                            data-comic-id="{{ $comic->id }}"

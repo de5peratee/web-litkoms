@@ -13,7 +13,7 @@
         @vite(['resources/css/colors.css'])
         @vite(['resources/css/icons.css'])
         @vite(['resources/css/buttons.css'])
-        @vite(['resources/js/blob.js'])
+{{--        @vite(['resources/js/blob.js'])--}}
 
 </head>
 <body>
@@ -23,9 +23,9 @@
 <main>
     @yield('content')
 
-    <div class="web-radio-cta" id="floating-blob">
-        <img src="{{ asset('images/blob.svg') }}" alt="icon">
-    </div>
+{{--    <div class="web-radio-cta" id="floating-blob">--}}
+{{--        <img src="{{ asset('images/blob.svg') }}" alt="icon">--}}
+{{--    </div>--}}
 
 </main>
 
