@@ -4,7 +4,7 @@
 @section('title', 'Главная')  <!-- Устанавливаем название страницы -->
 
 @section('content')
-    @vite(['resources/css/news.css'])
+    @vite(['resources/css/home.css'])
 
     <div class="hone-container">
         <h2>Главная</h2>

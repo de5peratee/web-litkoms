@@ -5,6 +5,7 @@
 @section('content')
     @vite(['resources/css/inputs.css'])
     @vite(['resources/css/user/create_author_comics.css'])
+    @vite(['resources/js/dynamic-cover.js'])
 
     <div class="author_comics-form-container">
         <div class="author_comics-form-container-header">
@@ -69,7 +70,7 @@
                     <div class="lit-field">
                         <label for="age_restriction">Возрастное ограничение</label>
                         <select name="age_restriction" id="age_restriction" class="{{ $errors->has('age_restriction') ? 'is-invalid' : '' }}">
-                            <option value="" {{ old('age_restriction') == null ? 'selected' : '' }}>Выберите возрастное ограничение</option>
+                            <option value="" {{ old('age_restriction') == null ? 'selected' : '' }}>Не выбрано</option>
                             <option value="6" {{ old('age_restriction') == '6' ? 'selected' : '' }}>6+</option>
                             <option value="12" {{ old('age_restriction') == '12' ? 'selected' : '' }}>12+</option>
                             <option value="16" {{ old('age_restriction') == '16' ? 'selected' : '' }}>16+</option>
@@ -81,9 +82,29 @@
                     </div>
                 </div>
                 <div class="lit-fields-group">
+{{--                    <div class="lit-field">--}}
+{{--                        <label for="cover">Обложка комикса</label>--}}
+{{--                        <input--}}
+{{--                            type="file"--}}
+{{--                            name="cover"--}}
+{{--                            id="cover"--}}
+{{--                            accept="image/*"--}}
+{{--                            class="{{ $errors->has('cover') ? 'is-invalid' : '' }}">--}}
+
+{{--                        @error('cover')--}}
+{{--                        <div class="input-error">{{ $message }}</div>--}}
+{{--                        @enderror--}}
+{{--                    </div>--}}
+
                     <div class="lit-field">
                         <label for="cover">Обложка комикса</label>
-                        <input type="file" name="cover" id="cover" accept="image/*" class="{{ $errors->has('cover') ? 'is-invalid' : '' }}">
+
+                        <div class="comic-cover-wrapper" id="coverPreview">
+                            <img src="{{ asset('images/icons/load-tertiary-icon.svg') }}" class="icon-24 default-icon" alt="icon">
+                            <img src="{{ asset('images/icons/load-white-icon.svg') }}" class="icon-24 hover-icon" alt="change cover icon">
+                            <input type="file" name="cover" id="cover" accept="image/*" class="{{ $errors->has('cover') ? 'is-invalid' : '' }}">
+                        </div>
+
                         @error('cover')
                         <div class="input-error">{{ $message }}</div>
                         @enderror
@@ -93,8 +114,9 @@
 
             <div class="lit-field">
                 <label>
-                    <input type="checkbox" name="agree" {{ old('agree') ? 'checked' : '' }}>
-                    Я подтверждаю согласие с <a href="{{ route('manuals.policy') }}" target="_blank" class="link-text">политикой конфиденциальности</a> и правилами сообщества.
+                    <input type="checkbox" class="lit-checkbox" name="agree" {{ old('agree') ? 'checked' : '' }}>
+                    Я подтверждаю согласие с <a href="{{ route('manuals.policy') }}" target="_blank" class="link-text">политикой конфиденциальности</a> и
+                    <a href="#" target="_blank" class="link-text">правилами сообщества</a>.
                 </label>
                 @error('agree')
                 <div class="input-error">{{ $message }}</div>
