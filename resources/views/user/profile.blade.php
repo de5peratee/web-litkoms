@@ -63,8 +63,8 @@
                             @endif
                         </button>
                     @endif
-                    @if (auth()->user()->role === 'editor' && Auth::id() == $user->id)
-                        <a href="{{ route('editor.dashboard')}}" class="secondary-btn">Панель редактора</a>
+                    @if (auth()->user()->role === 'editor' && auth()->id() === $user->id)
+                        <a href="{{ route('editor.dashboard') }}" class="secondary-btn">Панель редактора</a>
                     @endif
                 @endauth
             </div>
@@ -99,7 +99,8 @@
                     @else
                         <div class="subscriptions-list">
                             @foreach($user->subscriptions as $subscription)
-                                <a href="{{ route('profile.index', $subscription->nickname) }}" class="subscription-item">
+                                <a href="{{ route('profile.index', $subscription->nickname) }}"
+                                   class="subscription-item">
 
                                     <div class="subscription-left-data">
                                         @if($user->icon && Storage::exists($user->icon))

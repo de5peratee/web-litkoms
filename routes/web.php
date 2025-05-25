@@ -10,6 +10,7 @@ use App\Http\Controllers\Editor\EditorEventController;
 use App\Http\Controllers\Editor\EditorModerationController;
 use App\Http\Controllers\Editor\EditorPostController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\NewsFeedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
@@ -36,9 +37,7 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Медиапосты
-Route::get('/mediaposts', function () {
-    return view('news');
-})->name('mediaposts');
+Route::get('/news', [NewsFeedController::class, 'index'])->name('mediaposts');
 
 // авторский комикс
 Route::prefix('authors_comics')->group(function () {

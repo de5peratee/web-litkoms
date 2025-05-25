@@ -113,7 +113,7 @@
                 <div class="lit-field">
                     <label for="edit-post-media">Медиафайлы</label>
                     <div class="media-upload">
-                        <input type="file" name="media[]" id="edit-post-media" accept="image/*,video/*,audio/*" multiple>
+                        <input type="file" name="media[]" id="media" accept="image/*,video/*,application/pdf" multiple class="{{ $errors->has('media') ? 'is-invalid' : '' }}">
                         <div class="media-preview" id="edit-post-media-preview"></div>
                     </div>
                     <div class="input-error" id="edit-post-media-error"></div>
