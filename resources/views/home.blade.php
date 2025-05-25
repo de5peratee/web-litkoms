@@ -4,6 +4,14 @@
 @section('title', 'Главная')  <!-- Устанавливаем название страницы -->
 
 @section('content')
-    <h1>Добро пожаловать на главную страницу!</h1>
-    <p>Здесь будет контент вашей главной страницы.</p>
+    @vite(['resources/css/news.css'])
+
+    <div class="hone-container">
+        <h2>Главная</h2>
+    </div>
+
+{{--    <div class="web-radio-cta" id="floating-blob">--}}
+{{--        <img src="{{ asset('images/blob.svg') }}" alt="icon">--}}
+{{--    </div>--}}
+
 @endsection

@@ -25,6 +25,8 @@ export default defineConfig({
                 'resources/css/authors-comics-landing.css',
                 'resources/css/authors-comics-library.css',
                 'resources/css/comic.css',
+                'resources/css/home.css',
+                'resources/css/news.css',
 
                 'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
@@ -54,6 +56,7 @@ export default defineConfig({
                 'resources/js/rating.js',
                 'resources/js/profile-tabs.js',
                 'resources/js/comment.js',
+                'resources/js/blob.js',
 
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',

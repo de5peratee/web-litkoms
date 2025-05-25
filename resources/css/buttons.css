@@ -56,7 +56,7 @@
     justify-content: center;
     gap: 8px;
 
-    padding: 8px 24px;
+    padding: 8px 0;
     height: 44px;
     border-radius: 12px;
     cursor: pointer;
