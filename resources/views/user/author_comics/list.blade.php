@@ -39,13 +39,13 @@
 
         <div class="comic-list">
             @foreach ($comics as $comic)
-                <div href="{{ route('author_comic', $comic->slug) }}" target="_blank" class="comic-item">
+                <div href="{{ route('author_comic', $comic->slug) }}" class="comic-item">
                     <div class="comic-item-left-part">
                         <div class="item-sell num-cell">{{ $loop->iteration }}</div>
 
                         <div class="item-cell comic-preview-cell">
                             <div class="comic-cover-wrapper">
-                                <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}" class="comic-cover">
+                                <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}" class="comic-cover" alt="icon">
                             </div>
 
                             <div class="comic-preview-text-wrapper">
