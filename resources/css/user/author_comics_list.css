@@ -119,6 +119,7 @@
     padding: 32px;
     border-radius: 32px;
     background-color: var(--white);
+    counter-reset: comic-counter;
 }
 
 .comic-item {
@@ -144,12 +145,37 @@
     width: 100%;
 }
 
-.comic-preview-wrapper {
+.comic-item-left-part {
+    display: flex;
+    align-items: center;
+
+    gap: 24px;
+}
+
+.item-cell {
+    display: flex;
+
+    width: 320px;
+}
+
+.item-cell.status-cell {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+    width: 140px;
+}
+
+.item-cell.num-cell {
+    width: 64px;
+}
+
+
+.comic-preview-cell {
     display: flex;
     align-items: center;
 
     gap: 16px;
-    min-width: 240px;
 }
 
 .comic-preview-text-wrapper {
@@ -164,20 +190,29 @@
     align-items: center;
 
     gap: 8px;
+    max-width: 100%;
+}
+
+.comic-title-flex > p.text-big {
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Ограничиваем заголовок одной строкой */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Разрешаем перенос слов */
+    word-break: break-word;
+    margin: 0;
+    flex: 1; /* Заголовок занимает доступное пространство */
 }
 
 .age-restriction-tag {
     width: fit-content;
-}
-
-.age-restriction-tag {
-    padding: 6px;
+    padding: 6px 8px;
     border-radius: 999px;
 
-    width: 32px;
-    height: 32px;
     background-color: var(--primary);
     color: var(--white);
+    flex-shrink: 0;
 }
 
 .comic-datetime-tag,
@@ -194,19 +229,19 @@
 }
 
 .comic-cover-wrapper {
-    overflow: hidden;
-    width: 64px;
+    flex: 0 0 64px; /* Фиксированная ширина, предотвращаем сжатие */
     aspect-ratio: 2/3;
     border-radius: 12px;
-
     border: 1px solid var(--gray);
     background-color: var(--light-gray);
+    overflow: hidden;
 }
 
 .comic-cover-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center; /* Центрируем изображение */
 }
 
 .comic-data, .comic-actions {
@@ -222,6 +257,7 @@
     width: 44px;
     height: 44px;
     border-radius: 12px;
+    border: 1px solid var(--gray);;
     transition: all 0.2s ease;
 }
 
