@@ -63,7 +63,7 @@
                             @endif
                         </button>
                     @endif
-                    @if (auth()->user()->role === 'editor')
+                    @if (auth()->user()->role === 'editor' && Auth::id() == $user->id)
                         <a href="{{ route('editor.dashboard')}}" class="secondary-btn">Панель редактора</a>
                     @endif
                 @endauth

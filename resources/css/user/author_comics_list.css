@@ -16,7 +16,7 @@
 .comic-list {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
     padding: 32px;
     border-radius: 32px;
     background-color: var(--white);
@@ -28,15 +28,67 @@
     align-items: center;
 
     gap: 16px;
-    padding: 8px;
-    border-radius: 16px;
-    cursor: pointer;
+    padding-bottom: 8px;
     transition: all 0.2s ease;
     overflow: hidden;
+
+    border-bottom: 1px solid var(--light-gray);
 }
 
-.comic-item:hover {
+.comic-preview-wrapper {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+    min-width: 240px;
+}
+
+.comic-preview-text-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.age-restriction-tag {
+    width: fit-content;
+}
+
+.age-restriction-tag {
+    padding: 6px;
+    border-radius: 999px;
+
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.comic-datetime-tag {
+    color: var(--secondary);
+}
+
+.comic-links {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.comic-cover-wrapper {
+    overflow: hidden;
+    width: 64px;
+    aspect-ratio: 2/3;
+    border-radius: 12px;
+
+    border: 1px solid var(--gray);
     background-color: var(--light-gray);
+}
+
+.comic-cover-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .comic-data, .comic-actions {
@@ -45,8 +97,8 @@
     gap: 8px;
 }
 
-.comic-data {
-    padding-inline: 8px;
+.comic-actions {
+    padding-inline: 16px;
 }
 
 .list-action-btn {

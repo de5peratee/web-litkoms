@@ -68,9 +68,11 @@
 }
 
 .age-restriction-tag {
-    padding: 6px 12px;
+    padding: 6px;
     border-radius: 999px;
 
+    width: 32px;
+    height: 32px;
     background-color: var(--primary);
     color: var(--white);
 }
