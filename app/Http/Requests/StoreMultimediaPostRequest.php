@@ -17,7 +17,7 @@ class StoreMultimediaPostRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'media' => ['nullable', 'array', 'max:10'],
-            'media.*' => ['file', 'mimetypes:image/*,video/*', 'max:10240'],
+            'media.*' => ['file', 'mimetypes:image/*,video/*,application/pdf', 'max:10240'],
         ];
     }
 
@@ -27,7 +27,7 @@ class StoreMultimediaPostRequest extends FormRequest
             'name.required' => 'Введите название поста.',
             'description.required' => 'Введите описание.',
             'media.*.file' => 'Каждый медиафайл должен быть файлом.',
-            'media.*.mimetypes' => 'Допустимы только изображения и видео.',
+            'media.*.mimetypes' => 'Допустимы только изображения, видео и PDF-файлы.',
             'media.*.max' => 'Максимальный размер файла: 10MB.',
             'media.max' => 'Максимальное количество медиафайлов: 10.',
         ];

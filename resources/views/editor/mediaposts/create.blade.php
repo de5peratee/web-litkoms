@@ -15,7 +15,7 @@
             <div class="lit-field">
                 <label for="media">Медиафайлы</label>
                 <div class="media-upload">
-                    <input type="file" name="media[]" id="media" accept="image/*,video/*" multiple class="{{ $errors->has('media') ? 'is-invalid' : '' }}">
+                    <input type="file" name="media[]" id="media" accept="image/*,video/*,application/pdf" multiple class="{{ $errors->has('media') ? 'is-invalid' : '' }}">
                     <div class="media-preview" id="mediaPreview"></div>
                 </div>
                 @error('media')
