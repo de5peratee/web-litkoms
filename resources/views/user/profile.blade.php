@@ -138,10 +138,17 @@
                             <p class="text-small author-comics-count">0</p>
                         </div>
 
-                        <a href="{{ route('user.author_comics', Auth::user()->nickname) }}" class="tertiary-btn">
-                            Мои комиксы
-                            <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
-                        </a>
+                        <div class="author-comics-action">
+                            <a href="{{ route('user.author_comics', Auth::user()->nickname) }}" class="tertiary-btn">
+                                Мои комиксы
+                                <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
+                            </a>
+
+                            <a href="{{ route('user.create_author_comics') }}" class="primary-btn">
+                                Новый комикс
+                                <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="edit-icon">
+                            </a>
+                        </div>
                     </div>
 
                     <div class="h-divider"></div>

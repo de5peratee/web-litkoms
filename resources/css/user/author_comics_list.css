@@ -13,6 +13,105 @@
     background-color: var(--white);
 }
 
+.left-header {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    gap: 24px;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 8px;
+}
+
+.search-form input {
+    padding: 8px 16px;
+    height: 44px;
+    width: 320px;
+    border-radius: 12px;
+    border: 1px solid var(--gray);
+    font-family: 'Involve', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 140%;
+    color: var(--primary);
+    background-color: var(--light-gray);
+    transition: box-shadow 0.1s ease-in, background-color 0.3s ease-in;
+}
+
+.search-form input::placeholder {
+    color: var(--tertiary);
+}
+
+.search-form input:focus {
+    background-color: var(--white);
+    border: 1px solid var(--primary-blue);
+    box-shadow: 0 16px 48px rgba(0, 90, 255, 0.08);
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 320px;
+}
+
+.clear-search {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+
+    background: transparent;
+    transition: background-color 0.2s ease;
+}
+
+.clear-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+
+    transition: all 0.2s ease;
+}
+
+.clear-search:hover {
+    background-color: var(--light-gray);
+}
+
+
 .comic-list {
     display: flex;
     flex-direction: column;
@@ -31,8 +130,18 @@
     padding-bottom: 8px;
     transition: all 0.2s ease;
     overflow: hidden;
+}
 
+.comic-item:not(:last-child) {
     border-bottom: 1px solid var(--light-gray);
+}
+
+.load-more-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
 }
 
 .comic-preview-wrapper {
@@ -46,6 +155,13 @@
 .comic-preview-text-wrapper {
     display: flex;
     flex-direction: column;
+
+    gap: 8px;
+}
+
+.comic-title-flex {
+    display: flex;
+    align-items: center;
 
     gap: 8px;
 }
@@ -64,12 +180,14 @@
     color: var(--white);
 }
 
-.comic-datetime-tag {
+.comic-datetime-tag,
+.comics-count-text{
     color: var(--secondary);
 }
 
 .comic-links {
     display: flex;
+    justify-content: left;
     align-items: center;
 
     gap: 8px;
@@ -97,10 +215,6 @@
     gap: 8px;
 }
 
-.comic-actions {
-    padding-inline: 16px;
-}
-
 .list-action-btn {
     display: flex;
     justify-content: center;
@@ -108,12 +222,11 @@
     width: 44px;
     height: 44px;
     border-radius: 12px;
-    background-color: var(--light-gray);
     transition: all 0.2s ease;
 }
 
 .list-action-btn:hover {
-    background-color: var(--white);
+    background-color: var(--light-gray);
 }
 
 /* Модальное окно */

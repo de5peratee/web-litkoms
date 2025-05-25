@@ -71,6 +71,13 @@
     background-color: var(--light-gray);
 }
 
+.author-comics-action {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
 
 .subscriptions-count, .author-comics-count{
     color: var(--secondary);

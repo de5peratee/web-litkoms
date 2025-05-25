@@ -9,11 +9,32 @@
 
     <div class="comics-list-container">
         <div class="comics-list-container-header">
-            <h3>Мои комиксы</h3>
-            <a href="{{ route('user.create_author_comics') }}" class="primary-btn">
-                <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="edit-icon">
-                Новый комикс
-            </a>
+            <div class="left-header">
+                <div class="title-container">
+                    <h3>Авторские комиксы</h3>
+                    <p class="text-big comics-count-text">({{ $comics->count() }})</p>
+                </div>
+
+                <a href="{{ route('user.create_author_comics') }}" class="primary-btn">
+                    Новый комикс
+                    <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="edit-icon">
+                </a>
+            </div>
+
+            <div class="search-container">
+                <form id="search-form" action="" method="GET" class="search-form">
+
+                    <div class="search-input-wrapper">
+                        <input type="text" name="search" placeholder="Что желаете найти..." value="{{ request('search') }}">
+                        <div class="clear-search hidden">
+                            <img src="{{ asset('images/icons/close-primary.svg') }}" class="icon-20" alt="clear">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="primary-btn">Искать</button>
+
+                </form>
+            </div>
         </div>
 
         <div class="comic-list">
@@ -25,10 +46,12 @@
                         </div>
 
                         <div class="comic-preview-text-wrapper">
-                            <p class="text-big">{{ $comic->name }}</p>
-                            @if ($comic->age_restriction >= 18)
-                                <p class="text-hint age-restriction-tag">18+</p>
-                            @endif
+                            <div class="comic-title-flex">
+                                <p class="text-big">{{ $comic->name }}</p>
+                                @if ($comic->age_restriction >= 18)
+                                    <p class="text-hint age-restriction-tag">18+</p>
+                                @endif
+                            </div>
 
                             <p class="text-hint comic-datetime-tag">
                                 {{ $comic->updated_at->diffForHumans() }}
@@ -75,6 +98,9 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+        <div class="load-more-container">
+            <a href="" class="primary-btn">Загрузить еще</a>
         </div>
     </div>
 
