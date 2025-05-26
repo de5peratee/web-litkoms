@@ -32,7 +32,7 @@
                 <div class="comic-main-text-data">
                     <div class="user-analyse-wrapper">
                         <div class="user-avg-grade">
-                            <img src="{{ asset('images/icons/star.svg') }}" class="icon-24" alt="icon">
+                            <img src="{{ asset('images/icons/grade_star_fill.svg') }}" class="icon-24" alt="icon">
                             <p>{{ number_format($averageRating, 1) }}</p>
                         </div>
                         <div class="user-views">

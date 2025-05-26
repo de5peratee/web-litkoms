@@ -10,9 +10,18 @@
             <div class="info-header">
                 <h3>Панель управления</h3>
                 <div class="create-actions">
-                    <a href="{{route('editor.create_event')}}" class="primary-btn">Создать мероприятие</a>
-                    <a href="{{route('editor.create_mediapost')}}" class="primary-btn">Создать пост</a>
-                    <a href="{{route('editor.create_catalog')}}" class="primary-btn">Добавить в каталог</a>
+                    <a href="{{route('editor.create_event')}}" class="primary-btn">
+                        Создать мероприятие
+                        <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
+                    </a>
+                    <a href="{{route('editor.create_mediapost')}}" class="primary-btn">
+                        Создать пост
+                        <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
+                    </a>
+                    <a href="{{route('editor.create_catalog')}}" class="primary-btn">
+                        Загрузить комикс в каталог
+                        <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
+                    </a>
                 </div>
             </div>
         </div>

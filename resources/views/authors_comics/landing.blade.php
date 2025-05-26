@@ -4,6 +4,7 @@
 
 @section('content')
     @vite(['resources/css/authors-comics-landing.css'])
+    @vite(['resources/js/comics-list-wrapper-fix.js'])
 
     <div class="authors-comics-container">
 
@@ -53,12 +54,14 @@
                     </div>
                 </div>
 
-                <a href="{{ auth()->check() ? route('user.create_author_comics') : route('auth') }}"
-                   class="primary-btn">
-                    Загрузить комикс
-                    <img src="{{ asset('images/icons/arrow-top-right-white.svg') }}" alt="icon" class="icon-24">
-                </a>
             </div>
+
+            <a href="{{ auth()->check() ? route('user.create_author_comics') : route('auth') }}"
+               class="primary-btn">
+                Загрузить комикс
+                <img src="{{ asset('images/icons/arrow-top-right-white.svg') }}" alt="icon" class="icon-24">
+            </a>
+
         </div>
 
         <div class="info-block new-comics">
@@ -73,39 +76,43 @@
             <div class="h-divider"></div>
 
             <div class="comics-list-wrapper">
-                @forelse ($newComics as $comic)
-                    <div class="comic">
-                        <a href="{{ route('author_comic', $comic->slug) }}">
-                            <div class="comic-cover-wrapper">
-                                <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}"
-                                     alt="{{ $comic->name }}" class="comic-cover">
+                <button class="scroll-btn scroll-left" style="display: none;">
+                    <img src="{{ asset('images/icons/arrow-full-left-white.svg') }}" alt="left" class="scroll-icon">
+                </button>
+                <div class="comics-scroll-container">
+                    @forelse ($newComics as $comic)
+                        <div class="comic">
+                            <a href="{{ route('author_comic', $comic->slug) }}">
+                                <div class="comic-cover-wrapper">
+                                    <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}"
+                                         alt="{{ $comic->name }}" class="comic-cover">
+                                </div>
+                            </a>
+
+                            <div class="comic-tags-wrapper" data-genres="{{ $comic->genres->pluck('name')->join(',') }}">
+                                @foreach ($comic->genres as $genre)
+                                    <p class="text-hint comic-tag">{{ $genre->name }}</p>
+                                @endforeach
                             </div>
-                        </a>
 
-                        <div class="comic-tags-wrapper">
-                            @foreach ($comic->genres->take(2) as $genre)
-                                <p class="text-hint comic-tag">{{ $genre->name }}</p>
-                            @endforeach
-                            @if ($comic->genres->count() > 2)
-                                <p class="text-hint comic-tag more-tag">+{{ $comic->genres->count() - 2 }} жанров</p>
-                            @endif
-                        </div>
+                            <div class="comic-title">
+                                <p class="text-big">{{ $comic->name }}</p>
+                                <p class="comic-author-text">{{ $comic->createdBy->nickname }}</p>
+                            </div>
 
-                        <div class="comic-title">
-                            <p class="text-big">{{ $comic->name }}</p>
-                            <p class="comic-author-text">{{ $comic->createdBy->nickname }}</p>
+                            <div class="comic-avg-grade">
+                                <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">
+                                <p>{{ number_format($comic->average_assessment ?? 0, 1) }}</p>
+                            </div>
                         </div>
-
-                        <div class="comic-avg-grade">
-                            <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                            <p>{{ number_format($comic->average_assessment ?? 0, 1) }}</p>
-                        </div>
-                    </div>
-                @empty
-                    <p class="no-results">Новые комиксы не найдены.</p>
-                @endforelse
+                    @empty
+                        <p class="no-results">Новые комиксы не найдены.</p>
+                    @endforelse
+                </div>
+                <button class="scroll-btn scroll-right" style="display: none;">
+                    <img src="{{ asset('images/icons/arrow-full-right-white.svg') }}" alt="right" class="scroll-icon">
+                </button>
             </div>
-
 
         </div>
 
@@ -152,40 +159,46 @@
                 </div>
 
                 <div class="h-divider"></div>
+
                 <div class="comics-list-wrapper">
-                    @forelse ($subscribedComics as $comic)
-                        <div class="comic">
-                            <a href="{{ route('author_comic', $comic->slug) }}">
-                                <div class="comic-cover-wrapper">
-                                    <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}"
-                                         alt="{{ $comic->name }}" class="comic-cover">
+                    <button class="scroll-btn scroll-left" style="display: none;">
+                        <img src="{{ asset('images/icons/arrow-full-left-white.svg') }}" alt="left" class="scroll-icon">
+                    </button>
+                    <div class="comics-scroll-container">
+                        @forelse ($subscribedComics as $comic)
+                            <div class="comic">
+                                <a href="{{ route('author_comic', $comic->slug) }}">
+                                    <div class="comic-cover-wrapper">
+                                        <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}"
+                                             alt="{{ $comic->name }}" class="comic-cover">
+                                    </div>
+                                </a>
+
+                                <div class="comic-tags-wrapper" data-genres="{{ $comic->genres->pluck('name')->join(',') }}">
+                                    @foreach ($comic->genres as $genre)
+                                        <p class="text-hint comic-tag">{{ $genre->name }}</p>
+                                    @endforeach
                                 </div>
-                            </a>
 
-                            <div class="comic-tags-wrapper">
-                                @foreach ($comic->genres->take(2) as $genre)
-                                    <p class="text-hint comic-tag">{{ $genre->name }}</p>
-                                @endforeach
-                                @if ($comic->genres->count() > 2)
-                                    <p class="text-hint comic-tag more-tag">+{{ $comic->genres->count() - 2 }}
-                                        жанров</p>
-                                @endif
-                            </div>
+                                <div class="comic-title">
+                                    <p class="text-big">{{ $comic->name }}</p>
+                                    <p class="comic-author-text">{{ $comic->createdBy->nickname }}</p>
+                                </div>
 
-                            <div class="comic-title">
-                                <p class="text-big">{{ $comic->name }}</p>
-                                <p class="comic-author-text">{{ $comic->createdBy->nickname }}</p>
+                                <div class="comic-avg-grade">
+                                    <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">
+                                    <p>{{ number_format($comic->average_assessment ?? 0, 1) }}</p>
+                                </div>
                             </div>
-
-                            <div class="comic-avg-grade">
-                                <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
-                                <p>{{ number_format($comic->average_assessment ?? 0, 1) }}</p>
-                            </div>
-                        </div>
-                    @empty
-                        <p class="no-results">Комиксы от любимых авторов не найдены.</p>
-                    @endforelse
+                        @empty
+                            <p class="no-results">Комиксы от любимых авторов не найдены.</p>
+                        @endforelse
+                    </div>
+                    <button class="scroll-btn scroll-right" style="display: none;">
+                        <img src="{{ asset('images/icons/arrow-full-right-white.svg') }}" alt="right" class="icon-24">
+                    </button>
                 </div>
+
             </div>
         @endif
     </div>

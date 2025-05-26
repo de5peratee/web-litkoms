@@ -40,7 +40,7 @@
                         <div class="v-divider"></div>
                         <div class="user-avg-grade">
                             <p>Средняя оценка: </p>
-                            <img src="{{ asset('images/icons/star.svg') }}" alt="icon" class="icon-24">
+                            <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">
                             <p>{{ number_format($averageRating, 1) }}</p>
                         </div>
 
