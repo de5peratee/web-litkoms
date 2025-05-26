@@ -36,16 +36,13 @@
 
                 <div class="header-profile-container" id="headerProfileContainer">
                 <a href="{{route('profile.index', Auth::user()->nickname)}}" class="header-profile-info">
-                    @if(Auth::user()->icon && Storage::exists(Auth::user()->icon))
-                        <div class="header-avatar-wrapper">
-                            <img src="{{ Storage::url(Auth::user()->icon) }}" alt="{{ Auth::user()->icon }}">
-                        </div>
-                    @else
-                        <div class="header-avatar-wrapper">
-                            <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                        </div>
-                    @endif
-
+                    <div class="header-avatar-wrapper">
+                        @if(Auth::user()->icon && Storage::disk('public')->exists(Auth::user()->icon))
+                            <img src="{{ Storage::url(Auth::user()->icon) }}" alt="avatar">
+                        @else
+                            <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="default avatar">
+                        @endif
+                    </div>
                     <p class="text-small">
                         {{ Auth::user()->name }} {{ mb_substr(Auth::user()->last_name, 0, 1) }}.
                     </p>
