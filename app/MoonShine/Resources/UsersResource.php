@@ -85,8 +85,9 @@ class UsersResource extends ModelResource
 
                         Password::make('Пароль', 'password')
                             ->customAttributes(['autocomplete' => 'new-password']),
-                        PasswordRepeat::make('Повторите пароль')
-                            ->customAttributes(['autocomplete' => 'confirm-password'])
+
+                        PasswordRepeat::make('Повторите пароль', 'password_repeat')
+                            ->customAttributes(['autocomplete' => 'confirm-password']),
                     ]),
                 ]),
             ]),
