@@ -208,8 +208,8 @@
                                             data-nickname="{{ $authorComic->createdBy->nickname }}"
                                             data-issub="{{ $isSub ? 'true' : 'false' }}">
                                         @if($isSub)
-                                            <img src="{{ asset('images/icons/check-gray.svg') }}" alt="✓" class="icon-24">
                                             <p>Вы подписаны</p>
+                                            <img src="{{ asset('images/icons/check-gray.svg') }}" alt="✓" class="icon-24">
                                         @else
                                             <p>Подписаться</p>
                                         @endif

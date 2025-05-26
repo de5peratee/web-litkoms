@@ -159,6 +159,36 @@
     gap: 16px;
 }
 
+.profile-title-flex {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.profile-settings-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 12px;
+
+    transition: all 0.2s ease;
+}
+
+.profile-settings-btn:hover {
+    background-color: var(--light-gray);
+}
+
+.profile-settings-btn:active {
+    background-color: var(--gray);
+
+    scale: 0.95;
+}
+
 .profile-secondary-text-data {
     display: flex;
     flex-direction: row;
@@ -175,7 +205,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    cursor: pointer;
 
     width: fit-content;
     height: 48px;
@@ -186,10 +215,6 @@
     background-color: var(--light-gray);
 
     transition: background-color 0.3s;
-}
-
-.user-status-bar:hover {
-    background-color: var(--gray);
 }
 
 .v-divider {
@@ -265,7 +290,7 @@
 }
 
 .subscribed-btn {
-    padding-left: 12px;
+    padding-right: 12px;
     background-color: var(--light-gray);
     color: var(--secondary);
 }
@@ -275,4 +300,165 @@
     color: var(--primary);
 }
 
+
+
+
+.comics-list-wrapper {
+    display: flex;
+    position: relative; /* Для абсолютного позиционирования кнопок */
+    width: 100%;
+    overflow: hidden;
+    gap: 8px;
+}
+
+.comics-scroll-container {
+    display: flex;
+    overflow-x: auto; /* Включаем горизонтальный скролл */
+    scroll-behavior: smooth; /* Плавная прокрутка */
+    gap: 8px;
+    width: 100%;
+    -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
+    scrollbar-width: none; /* Скрываем скроллбар в Firefox */
+}
+
+.comics-scroll-container::-webkit-scrollbar {
+    display: none; /* Скрываем скроллбар в WebKit-браузерах */
+}
+
+/* Эффект осветления по бокам */
+/* Убираем градиенты из CSS */
+.comics-list-wrapper::before,
+.comics-list-wrapper::after {
+    content: none; /* Убираем псевдоэлементы */
+}
+
+.comics-list-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--white), transparent);
+}
+
+.comics-list-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--white), transparent);
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 35%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-blue);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    z-index: 2;
+    transition: background-color 0.2s ease;
+}
+
+.scroll-btn:hover {
+    background-color: var(--primary-blue-dark);
+}
+
+.scroll-left {
+    left: 8px; /* Отступ от края */
+}
+
+.scroll-right {
+    right: 8px; /* Отступ от края */
+}
+
+.comic {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+    max-width: 220px;
+    flex-shrink: 0;
+}
+
+.comic-cover-wrapper {
+    overflow: hidden;
+    width: 220px;
+    aspect-ratio: 2/3;
+    border-radius: 24px;
+
+    border: 1px solid var(--gray);
+    background-color: var(--light-gray);
+}
+
+.comic-cover-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.comic-tags-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow: hidden;
+
+    gap: 4px;
+}
+
+.comic-tag {
+    display: flex;
+    white-space: nowrap; /* Запрещаем перенос текста внутри тега */
+
+    padding: 6px 12px;
+    border-radius: 999px;
+
+    border: 1px solid var(--primary);
+}
+
+.comic-tag.hidden {
+    display: none; /* Скрываем теги, которые не помещаются */
+}
+
+
+.comic-tag.more-tag {
+    color: var(--white);
+    background-color: var(--primary);
+}
+
+.comic-title {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 100%;
+    gap: 8px;
+}
+
+.comic-title > .text-big {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Одна строка без переносов */
+    margin: 0;
+}
+
+.comic-title > .comic-author-text {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Одна строка без переносов */
+    margin: 0;
+    color: var(--secondary); /* Улучшаем читаемость автора */
+}
+
+.comic-avg-grade {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
 

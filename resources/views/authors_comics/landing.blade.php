@@ -97,7 +97,7 @@
 
                             <div class="comic-title">
                                 <p class="text-big">{{ $comic->name }}</p>
-                                <p class="comic-author-text">{{ $comic->createdBy->nickname }}</p>
+                                <p class="comic-author-text">{{ '@' }}{{ $comic->createdBy->nickname }}</p>
                             </div>
 
                             <div class="comic-avg-grade">
@@ -182,7 +182,7 @@
 
                                 <div class="comic-title">
                                     <p class="text-big">{{ $comic->name }}</p>
-                                    <p class="comic-author-text">{{ $comic->createdBy->nickname }}</p>
+                                    <p class="comic-author-text">{{ '@' }}{{ $comic->createdBy->nickname }}</p>
                                 </div>
 
                                 <div class="comic-avg-grade">
@@ -201,7 +201,6 @@
 
             </div>
         @endif
-    </div>
     </div>
 
 @endsection

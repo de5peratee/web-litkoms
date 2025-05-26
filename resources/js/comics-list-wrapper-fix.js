@@ -46,13 +46,48 @@ $(document).ready(function() {
             const $scrollLeftBtn = $wrapper.find('.scroll-left');
             const $scrollRightBtn = $wrapper.find('.scroll-right');
 
-            // Проверяем, есть ли скролл
+            if ($container.length === 0) {
+                return; // Пропускаем, если контейнер не найден
+            }
+
+            // Удаляем существующие градиенты, если они есть
+            $wrapper.find('.gradient-left, .gradient-right').remove();
+
             const canScroll = $container[0].scrollWidth > $container[0].clientWidth;
 
             if (canScroll) {
-                // Показываем кнопки, если есть скролл
+                // Показываем кнопки
                 $scrollLeftBtn.show();
                 $scrollRightBtn.show();
+
+                // Добавляем градиенты только при наличии скролла
+                $('<div>', {
+                    class: 'gradient-left',
+                    css: {
+                        position: 'absolute',
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        width: '40px',
+                        background: 'linear-gradient(to right, var(--white), transparent)',
+                        zIndex: 1,
+                        pointerEvents: 'none'
+                    }
+                }).appendTo($wrapper);
+
+                $('<div>', {
+                    class: 'gradient-right',
+                    css: {
+                        position: 'absolute',
+                        top: 0,
+                        bottom: 0,
+                        right: 0,
+                        width: '40px',
+                        background: 'linear-gradient(to left, var(--white), transparent)',
+                        zIndex: 1,
+                        pointerEvents: 'none'
+                    }
+                }).appendTo($wrapper);
 
                 // Обновляем видимость кнопок в зависимости от положения скролла
                 function updateButtons() {
@@ -60,7 +95,11 @@ $(document).ready(function() {
                     const maxScroll = $container[0].scrollWidth - $container[0].clientWidth;
 
                     $scrollLeftBtn.toggle(scrollLeft > 0);
-                    $scrollRightBtn.toggle(scrollLeft < maxScroll - 1); // -1 для учета погрешности
+                    $scrollRightBtn.toggle(scrollLeft < maxScroll - 1);
+
+                    // Показываем/скрываем градиенты в зависимости от положения скролла
+                    $wrapper.find('.gradient-left').toggle(scrollLeft > 0);
+                    $wrapper.find('.gradient-right').toggle(scrollLeft < maxScroll - 1);
                 }
 
                 updateButtons();
@@ -68,14 +107,13 @@ $(document).ready(function() {
 
                 // Обработчики кнопок
                 $scrollLeftBtn.on('click', function() {
-                    $container[0].scrollBy({ left: -220, behavior: 'smooth' }); // 220px — ширина комикса
+                    $container[0].scrollBy({ left: -220, behavior: 'smooth' });
                 });
 
                 $scrollRightBtn.on('click', function() {
                     $container[0].scrollBy({ left: 220, behavior: 'smooth' });
                 });
             } else {
-                // Скрываем кнопки, если скролл не нужен
                 $scrollLeftBtn.hide();
                 $scrollRightBtn.hide();
             }

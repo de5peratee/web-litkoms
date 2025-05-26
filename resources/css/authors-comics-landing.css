@@ -242,16 +242,6 @@
 
 
 
-
-/*.comics-list-wrapper {*/
-/*    display: flex;*/
-/*    overflow: hidden;*/
-/*    width: 100%;*/
-
-/*    gap: 8px;*/
-/*}*/
-
-
 .comics-list-wrapper {
     display: flex;
     position: relative; /* Для абсолютного позиционирования кнопок */
@@ -265,7 +255,6 @@
     overflow-x: auto; /* Включаем горизонтальный скролл */
     scroll-behavior: smooth; /* Плавная прокрутка */
     gap: 8px;
-    padding: 0 40px; /* Отступы для градиента */
     width: 100%;
     -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
     scrollbar-width: none; /* Скрываем скроллбар в Firefox */
@@ -278,13 +267,7 @@
 /* Эффект осветления по бокам */
 .comics-list-wrapper::before,
 .comics-list-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 40px;
-    z-index: 1;
-    pointer-events: none; /* Чтобы градиент не мешал взаимодействию */
+    content: none; /* Убираем псевдоэлементы */
 }
 
 .comics-list-wrapper::before {

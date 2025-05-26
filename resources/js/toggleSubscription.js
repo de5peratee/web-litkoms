@@ -23,7 +23,7 @@ $(document).ready(function() {
                     $btn.toggleClass('subscribed-btn');
 
                     if (data.isSub) {
-                        $btn.html('<img src="/images/icons/check-gray.svg" class="icon-24"><p>Вы подписаны</p>');
+                        $btn.html('<p>Вы подписаны</p><img src="/images/icons/check-gray.svg" class="icon-24">');
                     } else {
                         $btn.html('<p>Подписаться</p>');
                     }
