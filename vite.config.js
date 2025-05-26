@@ -57,6 +57,8 @@ export default defineConfig({
                 'resources/js/profile-tabs.js',
                 'resources/js/comment.js',
                 'resources/js/blob.js',
+                'dynamic-cover.js',
+                'moderation-confirm-comics.js',
 
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',

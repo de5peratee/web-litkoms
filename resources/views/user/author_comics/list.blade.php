@@ -31,7 +31,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="primary-btn">Искать</button>
+                    <button type="submit" class="secondary-btn">Искать</button>
 
                 </form>
             </div>
@@ -39,43 +39,55 @@
 
         <div class="comic-list">
             @foreach ($comics as $comic)
-                <div href="{{ route('author_comic', $comic->slug) }}" target="_blank" class="comic-item">
-                    <div class="comic-preview-wrapper">
-                        <div class="comic-cover-wrapper">
-                            <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}" class="comic-cover">
-                        </div>
+                <div href="{{ route('author_comic', $comic->slug) }}" class="comic-item">
+                    <div class="comic-item-left-part">
+                        <div class="item-sell num-cell">{{ $loop->iteration }}</div>
 
-                        <div class="comic-preview-text-wrapper">
-                            <div class="comic-title-flex">
-                                <p class="text-big">{{ $comic->name }}</p>
-                                @if ($comic->age_restriction >= 18)
-                                    <p class="text-hint age-restriction-tag">18+</p>
-                                @endif
+                        <div class="item-cell comic-preview-cell">
+                            <div class="comic-cover-wrapper">
+                                <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}" class="comic-cover" alt="icon">
                             </div>
 
-                            <p class="text-hint comic-datetime-tag">
-                                {{ $comic->updated_at->diffForHumans() }}
-                            </p>
+                            <div class="comic-preview-text-wrapper">
+                                <div class="comic-title-flex">
+                                    <p class="text-big">{{ $comic->name }}</p>
+                                    @if ($comic->age_restriction >= 18)
+                                        <p class="text-hint age-restriction-tag">18+</p>
+                                    @endif
+                                </div>
+
+                                <p class="text-hint comic-datetime-tag">
+                                    {{ $comic->updated_at->diffForHumans() }}
+                                </p>
+                            </div>
                         </div>
+
+                        <div class="item-cell status-cell">
+                            <img src="{{ asset('images/icons/moderation/' . ($comic->is_moderated === 'successful' ? 'success-icon.svg' : ($comic->is_moderated === 'unsuccessful' ? 'reject-icon.svg' : 'hold-on-icon.svg')) ) }}" class="icon-24" alt="icon">
+                             <p>{{ $comic->status }}</p>
+                        </div>
+
+                        <div class="comic-links">
+                            @if ($comic->is_published === true )
+                                <a href="{{ route('author_comic', $comic->slug) }}" target="_blank" class="tertiary-btn">
+                                    Читать комикс
+                                    <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
+                                </a>
+                            @endif
+
+                            @if ($comic->is_moderated !== 'successful' || !$comic->is_published)
+                                <a href="{{ route('user.moderation-confirm-comics', $comic->slug) }}" target="_blank" class="tertiary-btn">
+                                    Модерация
+                                    <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
+                                </a>
+                            @endif
+                        </div>
+
                     </div>
 
-                    <div class="comic-links">
 
-                        <a href="{{ route('author_comic', $comic->slug) }}" target="_blank" class="tertiary-btn">
-                            Перейти на страницу
-                            <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
-                        </a>
-
-                        @if ($comic->is_moderated !== 'successful' || !$comic->is_published)
-                            <a href="{{ route('user.moderation-confirm-comics', $comic->slug) }}" target="_blank" class="tertiary-btn">
-                                Статус модерации
-                                <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
-                            </a>
-                        @endif
-                    </div>
 
                     <div class="comic-actions">
-{{--                        <p>Статус: {{ $comic->status }}</p>--}}
                         @if($comic->is_published!==true)
                         <a href="#" class="list-action-btn edit-comic-btn"
                            data-comic-id="{{ $comic->id }}"
@@ -99,6 +111,7 @@
                 </div>
             @endforeach
         </div>
+
         <div class="load-more-container">
             <a href="" class="primary-btn">Загрузить еще</a>
         </div>
