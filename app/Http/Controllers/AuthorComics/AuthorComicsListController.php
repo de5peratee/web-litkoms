@@ -55,7 +55,11 @@ class AuthorComicsListController extends Controller
         $userRating = Auth::check() ? $authorComic->ratings()->where('graded_by', Auth::id())->first()?->grade : 0;
         $comments = $authorComic->comments()->with('createdBy')->latest()->paginate(10);
 
-        return view('authors_comics.comic', compact('authorComic', 'averageRating', 'userRating', 'comments'));
+        $isSub = Auth::check() && Auth::user()->subscriptions()
+                ->where('subscribed_to_id', $authorComic->createdBy->id)
+                ->exists();
+
+        return view('authors_comics.comic', compact('authorComic', 'averageRating', 'userRating', 'comments', 'isSub'));
     }
 
     public function rate(Request $request, AuthorComics $authorComic)

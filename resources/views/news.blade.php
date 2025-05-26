@@ -31,7 +31,6 @@
                 @php
                     $allItems = [];
                     foreach ($comics as $comic) {
-                        // Показываем комикс, только если пользователь подписан или это не гость
                         if (auth()->check() && auth()->user()->isSubscribedTo($comic->created_by)) {
                             $allItems[] = ['type' => 'comic', 'item' => $comic, 'created_at' => $comic->created_at];
                         }
@@ -158,13 +157,11 @@
                             $post = $item['item'];
                             $mediaPreviewExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
-                            // Отдельно изображения
                             $imageMedias = $post->medias->filter(function($media) use ($mediaPreviewExtensions) {
                                 $ext = strtolower(pathinfo($media->file, PATHINFO_EXTENSION));
                                 return in_array($ext, $mediaPreviewExtensions);
                             });
 
-                            // Отдельно все не-изображения
                             $fileMedias = $post->medias->filter(function($media) use ($mediaPreviewExtensions) {
                                 $ext = strtolower(pathinfo($media->file, PATHINFO_EXTENSION));
                                 return !in_array($ext, $mediaPreviewExtensions);

@@ -342,3 +342,75 @@
     animation: fadeInUp 0.4s ease-out;
 }
 
+
+
+
+/*Комментарии*/
+
+.profile-sub-action {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    gap: 8px;
+}
+
+.subscribed-btn {
+    padding-left: 12px;
+    background-color: var(--light-gray);
+    color: var(--secondary);
+}
+
+.subscribed-btn:hover {
+    background-color: var(--gray);
+    color: var(--primary);
+}
+
+.subscriptions-count {
+    color: var(--secondary);
+}
+
+.subscription-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    border-radius: 16px;
+    transition: background-color 0.3s;
+}
+
+.subscription-item:hover {
+    background-color: var(--light-gray);
+}
+
+.subscription-left-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+
+.subscription-username-data {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.subscription-name {
+    color: var(--secondary);
+}
+
+.subscription-avatar-wrapper {
+    overflow: hidden;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    border: 1px solid var(--gray);
+}
+
+.subscription-avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

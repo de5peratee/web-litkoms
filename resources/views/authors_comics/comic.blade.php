@@ -10,6 +10,8 @@
     @vite(['resources/js/pdf-viewer.js'])
     @vite(['resources/js/rating.js'])
     @vite(['resources/js/comment.js'])
+    @vite(['resources/js/toggleSubscription.js'])
+
 
     <div class="comic-container">
         <!-- Навигация -->
@@ -198,11 +200,30 @@
                     </div>
 
                     <div class="author-actions">
-                        <a href="" class="primary-btn">Подписаться</a>
-                        <a href="" class="tertiary-btn">
-                            В профиль
-                            <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
-                        </a>
+                        <div class="profile-sub-action">
+                            @auth
+                                @if (Auth::id() !== $authorComic->created_by)
+                                    <button class="primary-btn {{ $isSub ? 'subscribed-btn' : '' }}"
+                                            id="subscribeBtn"
+                                            data-nickname="{{ $authorComic->createdBy->nickname }}"
+                                            data-issub="{{ $isSub ? 'true' : 'false' }}">
+                                        @if($isSub)
+                                            <img src="{{ asset('images/icons/check-gray.svg') }}" alt="✓" class="icon-24">
+                                            <p>Вы подписаны</p>
+                                        @else
+                                            <p>Подписаться</p>
+                                        @endif
+                                    </button>
+                                @endif
+                                @if (auth()->user()->role === 'editor' && auth()->id() === $authorComic->created_by)
+                                    <a href="{{ route('editor.dashboard') }}" class="secondary-btn">Панель редактора</a>
+                                @endif
+                            @endauth
+                            <a href="{{ route('profile.index', ['nickname' => $authorComic->createdBy->nickname]) }}" class="tertiary-btn">
+                                В профиль
+                                <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
