@@ -53,7 +53,7 @@ class AuthorComicsListController extends Controller
 
         $averageRating = $authorComic->ratings()->avg('grade') ?? 0.0;
         $userRating = Auth::check() ? $authorComic->ratings()->where('graded_by', Auth::id())->first()?->grade : 0;
-        $comments = $authorComic->comments()->with('createdBy')->latest()->get();
+        $comments = $authorComic->comments()->with('createdBy')->latest()->paginate(10);
 
         return view('authors_comics.comic', compact('authorComic', 'averageRating', 'userRating', 'comments'));
     }
@@ -108,6 +108,30 @@ class AuthorComicsListController extends Controller
         return response()->json([
             'message' => 'Комментарий добавлен.',
             'commentHtml' => view('partials._comment', ['comment' => $comment])->render(),
+        ]);
+    }
+
+    public function getComments(Request $request, AuthorComics $authorComic)
+    {
+        if (!$authorComic->is_published || $authorComic->is_moderated !== 'successful') {
+            abort(404, 'Комикс не найден или не опубликован.');
+        }
+
+        $perPage = 10;
+        $comments = $authorComic->comments()
+            ->with('createdBy')
+            ->latest()
+            ->paginate($perPage);
+
+        $commentsHtml = '';
+        foreach ($comments as $comment) {
+            $commentsHtml .= view('partials._comment', ['comment' => $comment])->render();
+        }
+
+        return response()->json([
+            'commentsHtml' => $commentsHtml,
+            'nextPageUrl' => $comments->nextPageUrl(),
+            'totalComments' => $comments->total(),
         ]);
     }
 

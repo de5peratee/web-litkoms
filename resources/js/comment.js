@@ -1,60 +1,94 @@
-import $ from 'jquery';
+document.addEventListener('DOMContentLoaded', function () {
+    const commentForm = document.getElementById('comment-form');
+    const commentList = document.getElementById('comment-list');
+    const commentsCount = document.getElementById('comments-count');
+    const loadMoreBtn = document.getElementById('load-more-comments');
+    const noComments = document.getElementById('no-comments');
 
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('#comment-form');
-    const input = document.querySelector('#comment-input');
-    const errorEl = document.querySelector('#comment-error');
-    const commentList = document.querySelector('#comment-list');
-    const commentsCount = document.querySelector('#comments-count');
-    const noCommentsText = document.querySelector('#no-comments');
+    // Обработка отправки комментария
+    if (commentForm) {
+        commentForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(commentForm);
+            const commentInput = document.getElementById('comment-input');
+            const errorMessage = document.getElementById('comment-error');
 
-    if (!form) return;
+            try {
+                const response = await fetch(commentForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                });
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        errorEl.style.display = 'none';
+                const data = await response.json();
 
-        const comment = input.value.trim();
-        if (!comment) return;
+                if (response.ok) {
+                    commentList.insertAdjacentHTML('afterbegin', data.commentHtml);
 
-        try {
-            const response = await fetch(form.getAttribute('action') || window.location.pathname, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                body: JSON.stringify({ comment }),
-            });
+                    commentsCount.textContent = parseInt(commentsCount.textContent) + 1;
 
-            const data = await response.json();
+                    if (noComments) {
+                        noComments.style.display = 'none';
+                    }
 
-            if (!response.ok) {
-                throw new Error(data.message || 'Ошибка при добавлении комментария.');
+                    commentInput.value = '';
+                    errorMessage.style.display = 'none';
+                } else {
+                    errorMessage.textContent = data.message || 'Ошибка при добавлении комментария';
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                errorMessage.textContent = 'Произошла ошибка. Попробуйте позже.';
+                errorMessage.style.display = 'block';
             }
+        });
+    }
 
-            const temp = document.createElement('div');
-            temp.innerHTML = data.commentHtml;
+    // Обработка пагинации комментариев
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', async function (e) {
+            e.preventDefault(); // Предотвращаем переход по ссылке
+            const url = loadMoreBtn.getAttribute('data-url');
 
-            if (noCommentsText) {
-                noCommentsText.remove();
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    commentList.insertAdjacentHTML('beforeend', data.commentsHtml);
+
+                    if (data.nextPageUrl) {
+                        loadMoreBtn.setAttribute('data-url', data.nextPageUrl);
+                    } else {
+                        loadMoreBtn.style.display = 'none';
+                    }
+
+                    commentsCount.textContent = data.totalComments;
+
+                    if (noComments && data.totalComments > 0) {
+                        noComments.style.display = 'none';
+                    }
+                } else {
+                    console.error('Ошибка при загрузке комментариев:', data.message);
+                    loadMoreBtn.textContent = 'Ошибка загрузки';
+                    loadMoreBtn.disabled = true;
+                }
+            } catch (error) {
+                console.error('Ошибка при загрузке комментариев:', error);
+                loadMoreBtn.textContent = 'Ошибка загрузки';
+                loadMoreBtn.disabled = true;
             }
-
-            const newComment = temp.firstElementChild;
-
-            newComment.classList.add('animate-in');
-
-            newComment.addEventListener('animationend', () => {
-                newComment.classList.remove('animate-in');
-            });
-
-            commentList.prepend(newComment);
-            input.value = '';
-            commentsCount.textContent = parseInt(commentsCount.textContent) + 1;
-        } catch (err) {
-            errorEl.textContent = err.message;
-            errorEl.style.display = 'flex';
-        }
-    });
+        });
+    }
 });

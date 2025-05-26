@@ -45,6 +45,7 @@ Route::prefix('authors_comics')->group(function () {
     Route::get('/{authorComic:slug}', [AuthorComicsListController::class, 'show'])->name('author_comic');
     Route::post('/{authorComic:slug}/rate', [AuthorComicsListController::class, 'rate'])->name('author_comic.rate')->middleware('authorized');
     Route::post('/{authorComic:slug}/comment', [AuthorComicsListController::class, 'comment'])->name('author_comic.comment')->middleware('authorized');
+    Route::get('/{authorComic:slug}/comments', [AuthorComicsListController::class, 'getComments'])->name('author_comic.comments');
     Route::get('/{authorComic:slug}/download', [AuthorComicsListController::class, 'download'])->name('author_comic.download');
 });
 

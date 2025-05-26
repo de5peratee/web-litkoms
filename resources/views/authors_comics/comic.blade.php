@@ -164,15 +164,23 @@
                         <p class="text-medium">Войдите, чтобы оставить комментарий.</p>
                     @endauth
 
-                    <div class="comment-list-wrapper" id="comment-list">
-                        @forelse ($comments as $comment)
-                            @include('partials._comment', ['comment' => $comment])
-                        @empty
-                            <p class="no-comments" id="no-comments">Комментариев пока нет.</p>
-                        @endforelse
+                        <div class="comment-list-wrapper">
+                            <div id="comment-list">
+                                @forelse ($comments as $comment)
+                                    @include('partials._comment', ['comment' => $comment])
+                                @empty
+                                    <p class="no-comments" id="no-comments">Комментариев пока нет.</p>
+                                @endforelse
+                            </div>
 
-                        <a href="" class="secondary-btn comment-btn-load">Загрузить еще</a>
-                    </div>
+                            @if ($comments->hasMorePages())
+                                <button class="secondary-btn comment-btn-load"
+                                        id="load-more-comments"
+                                        data-url="{{ route('author_comic.comments', $authorComic->slug) . '?page=2' }}">
+                                    Загрузить еще
+                                </button>
+                            @endif
+                        </div>
                 </div>
 
                 <div class="author-part-block">
