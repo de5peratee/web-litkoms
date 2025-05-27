@@ -34,9 +34,6 @@ class TagsResource extends ModelResource
         ];
     }
 
-    /**
-     * @return list<ComponentContract|FieldContract>
-     */
     protected function formFields(): iterable
     {
         return [
@@ -47,9 +44,6 @@ class TagsResource extends ModelResource
         ];
     }
 
-    /**
-     * @return list<FieldContract>
-     */
     protected function detailFields(): iterable
     {
         return [
@@ -58,12 +52,6 @@ class TagsResource extends ModelResource
         ];
     }
 
-    /**
-     * @param Tags $item
-     *
-     * @return array<string, string[]|string>
-     * @see https://laravel.com/docs/validation#available-validation-rules
-     */
     protected function rules(mixed $item): array
     {
         return [

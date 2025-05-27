@@ -59,12 +59,4 @@ class StoreRequest extends FormRequest
             'last_name.regex' => 'Поле должно содержать только буквы.',
         ];
     }
-
-//    protected function withValidator(Validator $validator)
-//    {
-//        dd([
-//            'input_data' => $this->all(),
-//            'validation_result' => $validator->errors()->toArray(),
-//        ]);
-//    }
 }

@@ -58,7 +58,7 @@ class AuthorComicsListController extends Controller
         $isSub = Auth::check() && Auth::user()->subscriptions()
                 ->where('subscribed_to_id', $authorComic->createdBy->id)
                 ->exists();
-
+//        dd($comments->toArray());
         return view('authors_comics.comic', compact('authorComic', 'averageRating', 'userRating', 'comments', 'isSub'));
     }
 

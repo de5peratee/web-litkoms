@@ -93,6 +93,7 @@ class UsersResource extends ModelResource
                             ->extraAttributes(fn(string $filename, int $index): ?FileItemExtra => new FileItemExtra(wide: false, auto: true, styles: 'width: 250px;'))
                             ->dir('icon_user')
                             ->nullable()
+                            ->removable()
                             ->allowedExtensions(['png', 'jpg', 'jpeg']),
 
                         Image::make('Шапка профиля', 'head_profile')
@@ -100,6 +101,7 @@ class UsersResource extends ModelResource
                             ->disk('public')
                             ->extraAttributes(fn(string $filename, int $index): ?FileItemExtra => new FileItemExtra(wide: false, auto: true, styles: 'width: 250px;'))
                             ->nullable()
+                            ->removable()
                             ->allowedExtensions(['png', 'jpg', 'jpeg']),
                     ])->columnSpan(6),
 

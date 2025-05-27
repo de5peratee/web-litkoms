@@ -32,8 +32,6 @@ class LoginRequest extends FormRequest
         return [
             'password.required' => 'Поле не должно быть пустым',
             'password.string' => 'Поле должно быть строкой',
-//            'password.min' => 'Пароль должен содержать минимум :min символов.',
-
             'email.required' => 'Поле не должно быть пустым',
             'email.string' => 'Поле должно быть строкой.',
             'email.email' => 'Не корректный адрес почты',
