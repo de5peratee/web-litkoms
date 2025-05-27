@@ -1,7 +1,6 @@
-<!-- resources/views/home.blade.php -->
-@extends('layouts.app')  <!-- Используем главный шаблон -->
+@extends('layouts.app')
 
-@section('title', 'Главная')  <!-- Устанавливаем название страницы -->
+@section('title', 'Главная')
 
 @section('content')
     @vite(['resources/css/home.css'])

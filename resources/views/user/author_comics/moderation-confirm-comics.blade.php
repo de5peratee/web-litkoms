@@ -70,13 +70,14 @@
                 </div>
 
                 <h3>{{ $comic->name }}</h3>
-                <p class="text-small">{{ Str::limit($comic->description, 100) }}</p>
 
                 <div class="comics-genres" data-genres="{{ $comic->genres->pluck('name')->join(',') }}">
                     @foreach ($comic->genres as $genre)
                         <span class="comics-genre-tag text-hint">{{ $genre->name }}</span>
                     @endforeach
                 </div>
+
+                <p class="text-small">{{ Str::limit($comic->description, 100) }}</p>
             </div>
         </div>
 

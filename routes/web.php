@@ -116,3 +116,8 @@ Route::get('/manuals/policy', function () {
 
 // Профиль пользователя
 Route::get('/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
+
+//Настройки пользователя (profile на ник замени)
+Route::get('/user/settings', function () {
+    return view('user.settings');
+})->name('profile.settings');

@@ -18,9 +18,16 @@ class ProfileController extends Controller
                 ->where('subscribed_to_id', $user->id)
                 ->exists();
 
+//        $comics = $user->authorComics()
+//            ->where('is_published', true)
+//            ->where('is_moderated', 'successful')
+//            ->get();
+
         $comics = $user->authorComics()
             ->where('is_published', true)
             ->where('is_moderated', 'successful')
+            ->orderBy('created_at', 'desc') // Сначала новые
+            ->limit(10) // Ограничиваем 10 записями
             ->get();
 
         $averageRating = $comics->isNotEmpty()
@@ -31,7 +38,8 @@ class ProfileController extends Controller
             'user' => $user,
             'isSub' => $isSub,
             'subscribersCount' => $user->subscribers_count,
-            'averageRating' => $averageRating
+            'averageRating' => $averageRating,
+            'comics' => $comics
         ]);
     }
 }

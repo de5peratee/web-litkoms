@@ -42,6 +42,7 @@ export default defineConfig({
                 'resources/css/user/author_comics_list.css',
                 'resources/css/user/create_author_comics.css',
                 'resources/css/user/moderation-confirm-comics.css',
+                'resources/css/user/settings.css',
 
                 'resources/js/app.js',
                 'resources/js/profile-dropdown.js',
@@ -59,6 +60,7 @@ export default defineConfig({
                 'resources/js/blob.js',
                 'resources/js/dynamic-cover.js',
                 'resources/js/moderation-confirm-comics.js',
+                'resources/js/comics-list-wrapper-fix.js',
 
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',
