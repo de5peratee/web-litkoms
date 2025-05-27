@@ -12,6 +12,7 @@ class MultimediaPost extends Model
     {
         return $this->belongsToMany(Media::class, 'multimedia_post_media');
     }
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');

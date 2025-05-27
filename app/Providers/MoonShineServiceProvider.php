@@ -12,6 +12,17 @@ use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
 use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
 use App\MoonShine\Resources\UsersResource;
+use App\MoonShine\Resources\CatalogResource;
+use App\MoonShine\Resources\GenreResource;
+use App\MoonShine\Resources\AuthorComicsResource;
+use App\MoonShine\Resources\RatingResource;
+use App\MoonShine\Resources\SubscribeResource;
+use App\MoonShine\Resources\CommentsResource;
+use App\MoonShine\Resources\EventsResource;
+use App\MoonShine\Resources\GuestsResource;
+use App\MoonShine\Resources\TagsResource;
+use App\MoonShine\Resources\MultimediaPostResource;
+use App\MoonShine\Resources\MediaResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -27,6 +38,17 @@ class MoonShineServiceProvider extends ServiceProvider
                 MoonShineUserResource::class,
                 MoonShineUserRoleResource::class,
                 UsersResource::class,
+                CatalogResource::class,
+                GenreResource::class,
+                AuthorComicsResource::class,
+                RatingResource::class,
+                SubscribeResource::class,
+                CommentsResource::class,
+                EventsResource::class,
+                GuestsResource::class,
+                TagsResource::class,
+                MultimediaPostResource::class,
+                MediaResource::class,
             ])
             ->pages([
                 ...$config->getPages(),
