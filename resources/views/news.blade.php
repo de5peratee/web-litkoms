@@ -32,7 +32,7 @@
                     $allItems = [];
                     foreach ($comics as $comic) {
                         if (auth()->check() && auth()->user()->isSubscribedTo($comic->created_by)) {
-                            $allItems[] = ['type' => 'comic', 'item' => $comic, 'created_at' => $comic->created_at];
+                            $allItems[] = ['type' => 'comic', 'item' => $comic, 'published_at' => $comic->created_at];
                         }
                     }
                     foreach ($events as $event) {
@@ -50,7 +50,7 @@
                     @if ($item['type'] === 'comic')
                         @php
                             $comic = $item['item'];
-                            $isNew = $comic->created_at->diffInDays(now()) <= 3 && $comic->is_published && $comic->is_moderated === 'successful';
+                            $isNew = $comic->published_at->diffInDays(now()) <= 3 && $comic->is_published && $comic->is_moderated === 'successful';
                         @endphp
                         <div class="post-wrapper author-comic-post">
                             <div class="comic-flex-wrapper">
@@ -105,7 +105,7 @@
                                         </div>
                                     @endif
                                 </div>
-                                <p class="post-datetime-text text-hint">{{ $comic->created_at->diffForHumans() }}</p>
+                                <p class="post-datetime-text text-hint">{{ $comic->published_at->diffForHumans() }}</p>
                             </div>
                         </div>
 

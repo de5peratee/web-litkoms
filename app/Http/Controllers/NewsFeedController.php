@@ -12,6 +12,7 @@ class NewsFeedController extends Controller
     public function index()
     {
         $comics = AuthorComics::with(['createdBy', 'genres'])->where('is_published', true)->where('is_moderated', 'successful')->get();
+//        dd($comics->toArray());
         $events = Event::with(['tags'])->get();
         $posts = MultimediaPost::with(['createdBy', 'medias'])->get();
         return view('news', compact('comics', 'events', 'posts'));

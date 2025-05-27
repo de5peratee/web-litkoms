@@ -18,6 +18,7 @@ use MoonShine\UI\Components\Layout\Column;
 use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Components\When;
 use MoonShine\UI\Fields\Checkbox;
+use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\File;
 use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
@@ -134,6 +135,7 @@ class AuthorComicsResource extends ModelResource
                 ])->required(),
                 Textarea::make('Обратная связь (при непринятом комиксе)', 'feedback')->nullable(),
                 Switcher::make('Опубликовать', 'is_published'),
+                Date::make('Дата публикации', 'published_at')->withTime()->default(now()->toDateTimeString()),
                 Slug::make('Идентификация ресурса', 'slug')
                     ->from('name')->unique()->live()->locked(),
             ]),
@@ -176,6 +178,7 @@ class AuthorComicsResource extends ModelResource
             ]),
             Slug::make('Идентификация ресурса', 'slug')->from('name'),
             Textarea::make('Обратная связь (при непринятом комиксе)', 'feedback'),
+            Date::make('Дата публикации', 'published_at')->withTime(),
         ];
     }
 
@@ -191,7 +194,7 @@ class AuthorComicsResource extends ModelResource
             'name' => ['required', 'string', 'max:255', 'min:3'],
             'genres' => ['required', 'max:255'],
             'description' => ['required', 'string', 'min:10', 'max:5000'],
-
+            'published_at' => ['nullable', 'date', 'before_or_equal:now'],
             'comics_file' => [
                 $item?->comics_file ? 'nullable' : 'required',
                 'file',
@@ -206,6 +209,13 @@ class AuthorComicsResource extends ModelResource
             ],
 
             'age_restriction' => ['required', 'in:6,12,16,18'],
+        ];
+    }
+
+    public function validationMessages(): array
+    {
+        return [
+            'published_at.before_or_equal' => 'Дата публикации не может быть позже текущего момента.',
         ];
     }
 }

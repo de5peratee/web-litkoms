@@ -68,13 +68,13 @@ final class MoonShineLayout extends AppLayout
 
             MenuDivider::make(),
 
-            MenuGroup::make('Авторский комикс', [
+            MenuGroup::make('Комикс', [
+                MenuItem::make('Каталог', CatalogResource::class),
                 MenuItem::make('Авторский комикс', AuthorComicsResource::class),
                 MenuItem::make('Рейтинг', RatingResource::class),
                 MenuItem::make('Комментарии', CommentsResource::class),
+                MenuItem::make('Жанры', GenreResource::class),
             ]),
-            MenuItem::make('Каталог', CatalogResource::class),
-            MenuItem::make('Жанры', GenreResource::class),
 
             MenuDivider::make(),
 

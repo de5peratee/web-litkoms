@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('average_assessment')->nullable();
             $table->enum('is_moderated', ['successful', 'unsuccessful', 'under review'])->default('under review');
             $table->boolean('is_published')->default(false);
+            $table->timestamp('published_at')->nullable();
             $table->string('feedback')->nullable();
             $table->timestamps();
         });

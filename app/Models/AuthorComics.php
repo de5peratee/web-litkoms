@@ -20,12 +20,16 @@ class AuthorComics extends Model
         'is_moderated',
         'is_published',
         'feedback',
+        'published_at',
     ];
 
     protected $casts = [
         'is_moderated' => 'string',
         'is_published' => 'boolean',
+        'published_at' => 'datetime',
     ];
+
+
 
     public function genres()
     {
