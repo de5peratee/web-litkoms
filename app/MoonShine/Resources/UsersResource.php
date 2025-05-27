@@ -45,51 +45,77 @@ class UsersResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Grid::make([
-                Column::make([
-                    Box::make('Общая информация', [
-                        ID::make()->sortable(),
 
+            Box::make('Общая информация', [
+                ID::make()->sortable(),
+
+                Grid::make([
+                    Column::make([
                         Text::make('Никнейм', 'nickname')->required(),
+                    ])->columnSpan(3),
+
+                    Column::make([
                         Email::make('Email', 'email')->required(),
-
+                    ])->columnSpan(3),
+                    Column::make([
                         Text::make('Имя', 'name')->required(),
+                    ])->columnSpan(3),
+                    Column::make([
                         Text::make('Фамилия', 'last_name')->required(),
-                        Date::make('Дата рождения', 'birth_date')->required(),
+                    ])->columnSpan(3),
 
+                ]),
+
+                Grid::make([
+                    Column::make([
+                        Date::make('Дата рождения', 'birth_date')->required(),
+                    ])->columnSpan(6),
+
+                    Column::make([
+                        Select::make('Роль', 'role')
+                            ->options([
+                                'user' => 'Пользователь',
+                                'editor' => 'Редактор',
+                            ]),
+                        ])->columnSpan(6),
+
+                ]),
+
+                Grid::make([
+                    Column::make([
                         Textarea::make('Описание', 'about')->nullable(),
 
+                    ])->columnSpan(6),
+
+                    Column::make([
                         Image::make('Иконка', 'icon')
                             ->disk('public')
                             ->extraAttributes(fn(string $filename, int $index): ?FileItemExtra => new FileItemExtra(wide: false, auto: true, styles: 'width: 250px;'))
                             ->dir('icon_user')
-                            ->nullable(),
+                            ->nullable()
+                            ->allowedExtensions(['png', 'jpg', 'jpeg']),
 
                         Image::make('Шапка профиля', 'head_profile')
                             ->dir('head_profile')
                             ->disk('public')
                             ->extraAttributes(fn(string $filename, int $index): ?FileItemExtra => new FileItemExtra(wide: false, auto: true, styles: 'width: 250px;'))
-                            ->nullable(),
+                            ->nullable()
+                            ->allowedExtensions(['png', 'jpg', 'jpeg']),
+                    ])->columnSpan(6),
 
-                        Select::make('Роль', 'role')
-                            ->options([
-                                'user' => 'Пользователь',
-                                'editor' => 'Редактор',
-                            ])
-
-                    ]),
-
-                    LineBreak::make(),
-
-                    Box::make('Пароль', [
-
-                        Password::make('Пароль', 'password')
-                            ->customAttributes(['autocomplete' => 'new-password']),
-
-                        PasswordRepeat::make('Повторите пароль', 'password_repeat')
-                            ->customAttributes(['autocomplete' => 'confirm-password']),
-                    ]),
                 ]),
+
+            ]),
+
+            LineBreak::make(),
+
+            Box::make('Пароль', [
+
+                Password::make('Пароль', 'password')
+                    ->customAttributes(['autocomplete' => 'new-password']),
+
+                PasswordRepeat::make('Повторите пароль', 'password_repeat')
+                    ->customAttributes(['autocomplete' => 'confirm-password']),
             ]),
         ];
     }

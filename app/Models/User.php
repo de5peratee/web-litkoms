@@ -30,6 +30,12 @@ class User extends Authenticatable
         return $this->hasMany(AuthorComics::class, 'created_by');
     }
 
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'graded_by');
+    }
+
     public function subscriptions() {
         return $this->belongsToMany(User::class, 'subscribes', 'subscriber_id', 'subscribed_to_id');
     }

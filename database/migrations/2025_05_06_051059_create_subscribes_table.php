@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subscribes', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('subscriber_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('subscribed_to_id')->constrained('users')->onDelete('cascade');
 

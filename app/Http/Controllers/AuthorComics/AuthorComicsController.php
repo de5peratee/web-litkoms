@@ -21,7 +21,7 @@ class AuthorComicsController extends Controller
     {
         $comics = AuthorComics::where('created_by', auth()->id())
             ->with('genres')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('published_at', 'desc')
             ->get()
             ->map(function ($comic) {
                 $comic->genres_string = $comic->genres->pluck('name')->implode(', ') ?: 'Не указаны';
@@ -195,6 +195,7 @@ class AuthorComicsController extends Controller
         try {
             DB::beginTransaction();
             $comic->update(['is_published' => true]);
+            $comic->update(['published_at' => now()]);
             DB::commit();
             return redirect()->route('user.moderation-confirm-comics', $comic->slug)
                 ->with('success', 'Комикс успешно опубликован!');

@@ -20,7 +20,7 @@ class AuthorComicUpdateRequest extends FormRequest
         Log::info('Request files:', ['files' => $this->files->all()]);
 
         return [
-            'title' => ['required', 'string', 'max:255', 'min:3'],
+            'name' => ['required', 'string', 'max:255', 'min:3'],
             'genres' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'min:10', 'max:5000'],
             'comic_file' => ['file', 'mimes:pdf', 'max:20480'],
@@ -35,9 +35,9 @@ class AuthorComicUpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'Название комикса обязательно для заполнения.',
-            'title.min' => 'Название комикса должно содержать не менее 3 символов.',
-            'title.max' => 'Название комикса не должно превышать 255 символов.',
+            'name.required' => 'Название комикса обязательно для заполнения.',
+            'name.min' => 'Название комикса должно содержать не менее 3 символов.',
+            'name.max' => 'Название комикса не должно превышать 255 символов.',
             'genres.required' => 'Укажите хотя бы один жанр.',
             'genres.max' => 'Список жанров не должен превышать 255 символов.',
             'description.required' => 'Описание комикса обязательно для заполнения.',

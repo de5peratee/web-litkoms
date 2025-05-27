@@ -24,4 +24,23 @@ class Event extends Model
     {
         return $this->belongsToMany(Tag::class, 'event_tags');
     }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    protected static function booted()
+    {
+        static::saving(function ($event) {
+            if ($event->start_date && $event->start_time) {
+                $event->start_datetime = $event->start_date . ' ' . $event->start_time;
+            }
+
+            if ($event->end_date && $event->end_time) {
+                $event->end_datetime = $event->end_date . ' ' . $event->end_time;
+            }
+        });
+    }
+
 }
