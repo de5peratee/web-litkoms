@@ -9,7 +9,6 @@
     @vite(['resources/js/profile-tabs.js'])
     @vite(['resources/js/comics-list-wrapper-fix.js'])
 
-
     <div class="profile-container">
         <div class="profile-header">
             <img src="{{ asset('images/icons/hw/hw_brush.svg') }}" alt="icon" class="hw-abstract brush-icon">
