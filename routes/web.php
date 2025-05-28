@@ -10,15 +10,15 @@ use App\Http\Controllers\Editor\EditorEventController;
 use App\Http\Controllers\Editor\EditorModerationController;
 use App\Http\Controllers\Editor\EditorPostController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsFeedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\UserSettingsController;
 use Illuminate\Support\Facades\Route;
 
 // Главная страница
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Библиотека
 Route::get('/library', [CatalogController::class, 'index'])->name('library.index');
@@ -117,7 +117,7 @@ Route::get('/manuals/policy', function () {
 // Профиль пользователя
 Route::get('/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
 
-//Настройки пользователя (profile на ник замени)
-Route::get('/user/settings', function () {
-    return view('user.settings');
-})->name('profile.settings');
+Route::prefix('user')->middleware('auth')->group(function () {
+    Route::get('/settings', [UserSettingsController::class, 'show'])->name('settings.show');
+    Route::put('/settings', [UserSettingsController::class, 'update'])->name('settings.update');
+});

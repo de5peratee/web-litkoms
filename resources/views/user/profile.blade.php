@@ -27,7 +27,7 @@
                 <div class="profile-text-data">
                     <div class="profile-title-flex">
                         <h3>{{ $user->name }} {{ $user->last_name }}</h3>
-                        <a href="{{ route('profile.settings') }}" class="profile-settings-btn">
+                        <a href="{{ route('settings.show') }}" class="profile-settings-btn">
                             <img src="{{ asset('images/icons/edit-primary.svg') }}" class="icon-24" alt="icon">
                         </a>
                     </div>

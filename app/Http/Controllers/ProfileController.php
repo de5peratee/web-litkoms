@@ -18,16 +18,11 @@ class ProfileController extends Controller
                 ->where('subscribed_to_id', $user->id)
                 ->exists();
 
-//        $comics = $user->authorComics()
-//            ->where('is_published', true)
-//            ->where('is_moderated', 'successful')
-//            ->get();
-
         $comics = $user->authorComics()
             ->where('is_published', true)
             ->where('is_moderated', 'successful')
-            ->orderBy('created_at', 'desc') // Сначала новые
-            ->limit(10) // Ограничиваем 10 записями
+            ->orderBy('created_at', 'desc')
+            ->limit(10)
             ->get();
 
         $averageRating = $comics->isNotEmpty()
