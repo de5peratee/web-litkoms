@@ -32,7 +32,7 @@
                     $allItems = [];
                     foreach ($comics as $comic) {
                         if (auth()->check() && auth()->user()->isSubscribedTo($comic->created_by)) {
-                            $allItems[] = ['type' => 'comic', 'item' => $comic, 'published_at' => $comic->created_at];
+                            $allItems[] = ['type' => 'comic', 'item' => $comic, 'created_at' => $comic->published_at];
                         }
                     }
                     foreach ($events as $event) {
