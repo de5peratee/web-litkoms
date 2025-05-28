@@ -82,7 +82,6 @@ Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscr
 Route::prefix('dashboard')->middleware('editor')->group(function () {
     Route::view('/', 'editor.dashboard')->name('editor.dashboard');
 
-
     Route::get('/comics_submissions', [EditorModerationController::class, 'index'])->name('editor.comics_submissions_index');
     Route::get('/editor/moderation/{slug}', [EditorModerationController::class, 'show'])->name('editor.comic_moderation');
     Route::put('/editor/moderation/{slug}', [EditorModerationController::class, 'update'])->name('editor.comic_moderation');
