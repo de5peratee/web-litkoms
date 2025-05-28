@@ -45,6 +45,8 @@ export default defineConfig({
                 'resources/css/user/settings.css',
 
                 'resources/js/app.js',
+                'resources/js/home.js',
+                'resources/js/news.js',
                 'resources/js/profile-dropdown.js',
                 'resources/js/mobile-menu.js',
                 'resources/js/library.js',

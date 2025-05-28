@@ -4,6 +4,7 @@
 
 @section('content')
     @vite(['resources/css/news.css'])
+    @vite(['resources/js/news.js'])
 
     <div class="news-container">
         <div class="news-header">
@@ -11,20 +12,20 @@
             <h2>Лента</h2>
         </div>
 
-        <div class="news-tabs-wrapper">
-            <div class="news-tab active-tab">
-                <img src="{{ asset('images/icons/comics-icon-white.svg') }}" alt="icon" class="icon-24">
-                Комиксы
-            </div>
-            <div class="news-tab">
-                <img src="{{ asset('images/icons/event-primary.svg') }}" alt="icon" class="icon-24">
-                Мероприятия
-            </div>
-            <div class="news-tab">
-                <img src="{{ asset('images/icons/post-primary.svg') }}" alt="icon" class="icon-24">
-                Посты
-            </div>
-        </div>
+{{--        <div class="news-tabs-wrapper">--}}
+{{--            <div class="news-tab active-tab">--}}
+{{--                <img src="{{ asset('images/icons/comics-icon-white.svg') }}" alt="icon" class="icon-24">--}}
+{{--                Комиксы--}}
+{{--            </div>--}}
+{{--            <div class="news-tab">--}}
+{{--                <img src="{{ asset('images/icons/event-primary.svg') }}" alt="icon" class="icon-24">--}}
+{{--                Мероприятия--}}
+{{--            </div>--}}
+{{--            <div class="news-tab">--}}
+{{--                <img src="{{ asset('images/icons/post-primary.svg') }}" alt="icon" class="icon-24">--}}
+{{--                Посты--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="newsfeed-container">
             <div class="posts-list">
@@ -68,17 +69,10 @@
 
                                     <h3>{{ $comic->name }}</h3>
 
-                                    <div class="comic-genres">
-                                        @if (collect($comic->genres)->count() > 0)
-                                            @foreach (collect($comic->genres)->take(3) as $genre)
-                                                <p class="comic-genre-tag text-hint">{{ $genre->name }}</p>
-                                            @endforeach
-                                            @if (collect($comic->genres)->count() > 3)
-                                                <p class="comic-genre-tag text-hint more-genres">+{{ collect($comic->tags)->count() + 3 }} жанров</p>
-                                            @endif
-                                        @else
-                                            <p class="comic-genre-tag text-hint">Нет жанров</p>
-                                        @endif
+                                    <div class="comic-genres" data-genres="{{ collect($comic->genres)->pluck('name')->join(',') }}">
+                                        @foreach (collect($comic->genres) as $genre)
+                                            <p class="comic-genre-tag text-hint">{{ $genre->name }}</p>
+                                        @endforeach
                                     </div>
 
                                     <p class="text-small comic-description">{{ Str::limit($comic->description, 100) }}</p>
@@ -95,9 +89,14 @@
                             <div class="post-meta-wrapper">
                                 <div class="post-author-wrapper">
                                     <div class="post-author-avatar-wrapper">
-                                        <img src="{{ asset($comic->createdBy->icon ?? 'images/default_template/ava_cover.png') }}" alt="author_avatar">
+                                        @if($comic->createdBy->icon && Storage::disk('public')->exists($comic->createdBy->icon))
+                                            <img src="{{ Storage::url($comic->createdBy->icon) }}" alt="avatar">
+                                        @else
+                                            <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="default avatar">
+                                        @endif
+{{--                                        <img src="{{ asset($comic->createdBy->icon ?? 'images/default_template/ava_cover.png') }}" alt="author_avatar">--}}
                                     </div>
-                                    <p class="post-author-text">{{'@' . $comic->createdBy->nickname }}</p>
+                                    <p class="post-author-text">{{ '@' . $comic->createdBy->nickname }}</p>
                                     @if (auth()->check() && auth()->user()->isSubscribedTo($comic->created_by))
                                         <div class="subscribed-wrapper">
                                             Вы подписаны
@@ -119,13 +118,10 @@
                             </div>
 
                             <div class="post-text-data">
-                                <div class="event-categories">
-                                    @foreach (collect($event->tags)->take(2) as $tag)
-                                        <p class="event-category-tag text-hint">{{ $tag->name}}</p>
+                                <div class="event-categories" data-categories="{{ collect($event->tags)->pluck('name')->join(',') }}">
+                                    @foreach (collect($event->tags) as $tag)
+                                        <p class="event-category-tag text-hint">{{ $tag->name }}</p>
                                     @endforeach
-                                    @if (collect($event->tags)->count() > 2)
-                                        <p class="event-category-tag text-hint more-categories">+{{ collect($event->tags)->count() - 2 }} категорий</p>
-                                    @endif
                                 </div>
 
                                 <div class="event-title-wrapper">
@@ -199,7 +195,12 @@
                                 <div class="post-meta-wrapper">
                                     <div class="post-author-wrapper">
                                         <div class="post-author-avatar-wrapper">
-                                            <img src="{{ asset($post->createdBy->icon ?? 'images/default_template/ava_cover.png') }}" alt="author_avatar">
+                                            @if($post->createdBy->icon && Storage::disk('public')->exists($post->createdBy->icon))
+                                                <img src="{{ Storage::url($post->createdBy->icon) }}" alt="avatar">
+                                            @else
+                                                <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="default avatar">
+                                            @endif
+{{--                                            <img src="{{ asset($post->createdBy->icon ?? 'images/default_template/ava_cover.png') }}" alt="author_avatar">--}}
                                         </div>
                                         <p class="post-author-text">{{ '@' . $post->createdBy->nickname }}</p>
                                     </div>

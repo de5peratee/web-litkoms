@@ -14,7 +14,9 @@
                     <div class="slide" style="background-image: url('{{ $event->cover ? Storage::url('/' . $event->cover) : asset('images/default_template/event-cover.svg') }}');">
                         <div class="slide-content">
                             <div class="slide-event-authors">
-                                <p>{{ implode(' · ', $event->guests->pluck('name')->toArray()) }}</p>
+                                <p>{{ implode(' · ', $event->guests->map(function($guest) {
+                                                        return $guest->name . ' ' . $guest->surname;
+                                                    })->toArray()) }}</p>
                             </div>
 
                             <div class="slide-center-data">

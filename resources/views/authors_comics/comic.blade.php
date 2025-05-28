@@ -53,8 +53,13 @@
                             <p class="author-title">Автор</p>
                             <div class="author-data">
                                 <div class="comics-author-avatar-wrapper">
-                                    <img src="{{ $authorComic->createdBy->icon ? Storage::url($authorComic->createdBy->icon) : asset('images/default_template/ava_cover.png') }}"
-                                         alt="{{ '@' . $authorComic->createdBy->nickname }}" class="author-avatar">
+                                    @if($authorComic->createdBy->icon && Storage::disk('public')->exists($authorComic->createdBy->icon))
+                                        <img src="{{ Storage::url($authorComic->createdBy->icon) }}" alt="avatar">
+                                    @else
+                                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="default avatar">
+                                    @endif
+{{--                                    <img src="{{ $authorComic->createdBy->icon ? Storage::url($authorComic->createdBy->icon) : asset('images/default_template/ava_cover.png') }}"--}}
+{{--                                         alt="{{ '@' . $authorComic->createdBy->nickname }}" class="author-avatar">--}}
                                 </div>
                                 <a href="{{ route('profile.index', ['nickname' => $authorComic->createdBy->nickname]) }}">
                                     <p class="text-big">{{ '@' . $authorComic->createdBy->nickname }}</p>
