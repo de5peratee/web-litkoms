@@ -96,28 +96,28 @@
             <h2>Команда разработчиков</h2>
             <div class="team-members">
                 <div class="member">
-                    <img src="images/litar/razrabi.jpg" alt="Ларин А.А." class="member-photo" />
+                    <img src="images/default_template/ava_cover.png" alt="Ларин А.А." class="member-photo" />
                     <div class="member-info">
                         <p><strong>Ларин А.А.</strong></p>
                         <span>PM</span>
                     </div>
                 </div>
                 <div class="member">
-                    <img src="images/litar/razrabi.jpg" alt="Мельничук В.В." class="member-photo" />
+                    <img src="images/default_template/ava_cover.png" alt="Мельничук В.В." class="member-photo" />
                     <div class="member-info">
                         <p><strong>Мельничук В.В.</strong></p>
                         <span>UX/UI дизайнер</span>
                     </div>
                 </div>
                 <div class="member">
-                    <img src="images/litar/razrabi.jpg" alt="Польбицев П.П." class="member-photo" />
+                    <img src="images/default_template/ava_cover.png" alt="Польбицев П.П." class="member-photo" />
                     <div class="member-info">
                         <p><strong>Польбицев П.П.</strong></p>
                         <span>Backend разработчик</span>
                     </div>
                 </div>
                 <div class="member">
-                    <img src="images/litar/razrabi.jpg" alt="Пасечник В.В." class="member-photo" />
+                    <img src="images/default_template/ava_cover.png" alt="Пасечник В.В." class="member-photo" />
                     <div class="member-info">
                         <p><strong>Пасечник В.В.</strong></p>
                         <span>3D дизайнер</span>

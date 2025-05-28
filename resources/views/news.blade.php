@@ -138,7 +138,10 @@
                                 <div class="post-meta-wrapper">
                                     <div class="event-datetime-wrapper">
                                         <img src="{{ asset('images/icons/calendar-tertiary.svg') }}" class="icon-20" alt="icon">
-                                        <p class="text-small">{{ $event->start_date->format('d M H:i') }}</p>
+
+                                        <p class="slide-event-card-date">{{ $event->start_date->translatedFormat('j F Y', 'ru') }}</p>
+                                        <p>·</p>
+                                        <p class="slide-event-card-date">{{ $event->start_date->translatedFormat('H:i', 'ru') }}</p>
                                     </div>
                                     <div class="event-location-wrapper">
                                         <img src="{{ asset('images/icons/location-tertiary.svg') }}" class="icon-20" alt="icon">

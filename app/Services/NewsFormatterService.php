@@ -9,7 +9,7 @@ class NewsFormatterService
 {
     public static function formatEvent(Event $event)
     {
-        return [
+        return (object)[
             'type' => 'event',
             'id' => $event->id,
             'title' => $event->name,
@@ -21,7 +21,7 @@ class NewsFormatterService
 
     public static function formatMultimedia(MultimediaPost $post)
     {
-        return [
+        return (object)[
             'type' => 'multimedia',
             'id' => $post->id,
             'title' => $post->name,

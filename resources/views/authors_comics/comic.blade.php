@@ -220,9 +220,6 @@
                                         @endif
                                     </button>
                                 @endif
-                                @if (auth()->user()->role === 'editor' && auth()->id() === $authorComic->created_by)
-                                    <a href="{{ route('editor.dashboard') }}" class="secondary-btn">Панель редактора</a>
-                                @endif
                             @endauth
                             <a href="{{ route('profile.index', ['nickname' => $authorComic->createdBy->nickname]) }}" class="tertiary-btn">
                                 В профиль

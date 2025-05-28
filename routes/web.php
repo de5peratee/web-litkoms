@@ -117,7 +117,7 @@ Route::get('/manuals/policy', function () {
 // Профиль пользователя
 Route::get('/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
 
-Route::prefix('user')->middleware('auth')->group(function () {
+Route::prefix('profile')->middleware('auth')->group(function () {
     Route::get('/settings', [UserSettingsController::class, 'show'])->name('settings.show');
     Route::put('/settings', [UserSettingsController::class, 'update'])->name('settings.update');
 });
