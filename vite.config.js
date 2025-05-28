@@ -10,10 +10,8 @@ export default defineConfig({
                 'resources/css/fonts.css',
                 'resources/css/colors.css',
                 'resources/css/icons.css',
-
                 'resources/css/footer.css',
                 'resources/css/header.css',
-
                 'resources/css/auth.css',
                 'resources/css/buttons.css',
                 'resources/css/library.css',
@@ -24,32 +22,53 @@ export default defineConfig({
                 'resources/css/profile.css',
                 'resources/css/litar.css',
                 'resources/css/pdf-viewer.css',
+                'resources/css/authors-comics-landing.css',
+                'resources/css/authors-comics-library.css',
+                'resources/css/comic.css',
+                'resources/css/home.css',
+                'resources/css/news.css',
 
                 'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
                 'resources/css/editor/create_post.css',
+                'resources/css/editor/create_catalog.css',
                 'resources/css/editor/events_list.css',
-                'resources/css/editor/news_list.css',
+                'resources/css/editor/multimedia_list.css',
+                'resources/css/editor/catalog_list.css',
+                'resources/css/editor/authors_сomics_submissions_list.css',
+
+                'resources/css/editor/authors_comics_moderation.css',
+
+                'resources/css/user/author_comics_list.css',
+                'resources/css/user/create_author_comics.css',
+                'resources/css/user/moderation-confirm-comics.css',
+                'resources/css/user/settings.css',
 
                 'resources/js/app.js',
-
+                'resources/js/home.js',
+                'resources/js/news.js',
                 'resources/js/profile-dropdown.js',
-                'resources/js/sticky-header.js',
                 'resources/js/mobile-menu.js',
-
-                'resources/js/loadBooks.js',
-                'resources/js/loadEvents.js',
-
+                'resources/js/library.js',
+                'resources/js/events.js',
                 'resources/js/auth-tabs.js',
-
                 'resources/js/toggleSubscription.js',
-                'resources/js/filterBooks.js',
-
-                'resources/js/event-slider.js',
                 'resources/js/event-map.js',
-                'resources/js/event-tags.js',
                 'resources/js/pdf-viewer.js',
+                'resources/js/swiper-slider.js',
+                'resources/js/rating.js',
+                'resources/js/profile-tabs.js',
+                'resources/js/comment.js',
+                'resources/js/blob.js',
+                'resources/js/dynamic-cover.js',
+                'resources/js/moderation-confirm-comics.js',
+                'resources/js/comics-list-wrapper-fix.js',
 
+                'resources/js/editor/multimedia-list-modal.js',
+                'resources/js/editor/events-list-modal.js',
+                'resources/js/editor/catalog-list-modal.js',
+
+                'resources/js/user/author-comics-list-modal.js',
             ],
             refresh: true,
         }),

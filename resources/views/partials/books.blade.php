@@ -1,6 +1,6 @@
 @foreach($library as $book)
     <a href="{{ route('library.get_book', $book->id) }}" class="book">
-        @if($book->cover && Storage::exists($book->cover))
+        @if($book->cover)
             <div class="cover_wrapper">
                 <img src="{{ Storage::url($book->cover) }}" alt="{{ $book->name }}">
             </div>
@@ -11,9 +11,9 @@
         @endif
 
         <div class="book-text-data">
-            <div class="book-categories" data-genres="{{ $book->genres->pluck('name')->join(',') }}">
+            <div class="book-genres" data-genres="{{ $book->genres->pluck('name')->join(',') }}">
                 @foreach ($book->genres as $genre)
-                    <span class="book-category-tag text-hint">{{ $genre->name }}</span>
+                    <span class="book-genre-tag text-hint">{{ $genre->name }}</span>
                 @endforeach
             </div>
 

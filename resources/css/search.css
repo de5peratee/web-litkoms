@@ -1,0 +1,115 @@
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 24px;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 8px;
+}
+
+.search-form input {
+    padding: 8px 16px;
+    height: 44px;
+    width: 320px;
+    border-radius: 12px;
+    border: 1px solid var(--gray);
+    font-family: 'Involve', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 140%;
+    color: var(--primary);
+    background-color: var(--light-gray);
+    transition: box-shadow 0.1s ease-in, background-color 0.3s ease-in;
+}
+
+.search-form input::placeholder {
+    color: var(--tertiary);
+}
+
+.search-form input:focus {
+    background-color: var(--white);
+    border: 1px solid var(--primary-blue);
+    box-shadow: 0 16px 48px rgba(0, 90, 255, 0.08);
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 320px;
+}
+
+.clear-search {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+
+    background: transparent;
+    transition: background-color 0.2s ease;
+}
+
+.clear-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+
+    transition: all 0.2s ease;
+}
+
+.clear-search:hover {
+    background-color: var(--light-gray);
+}
+
+.filter-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 44px;
+    height: 44px;
+
+    border-radius: 12px;
+    padding: 8px;
+    gap: 2px;
+    cursor: pointer;
+
+    font-family: 'Involve', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.filter-btn:hover {
+    background-color: var(--secondary);
+}
+
+.hidden {
+    visibility: hidden;
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+}

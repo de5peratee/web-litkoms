@@ -49,15 +49,44 @@
     transition:border 0.3s, color 0.3s, transform 0.2s;
 }
 
+.tertiary-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 8px 0;
+    height: 44px;
+    border-radius: 12px;
+    cursor: pointer;
+
+    font-family: 'Involve', sans-serif;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 140%;
+    letter-spacing: 0;
+
+    background-color: transparent;
+    border: none;
+    color: var(--primary-blue);
+
+    transition:border 0.3s, color 0.3s, transform 0.2s;
+}
+
 .primary-btn:hover {
-    background-color: var(--secondary-blue);
+    background-color: var(--primary-blue-dark);
 }
 
 .secondary-btn:hover {
-    border-color: var(--secondary-blue);
+    border-color: var(--primary-blue-dark);
 }
 
-.primary-btn:active, .secondary-btn:active {
+
+
+
+.primary-btn:active, .secondary-btn:active, .tertiary-btn {
     transform: scale(0.95); /* Мелкое сжатие при нажатии */
 }
 

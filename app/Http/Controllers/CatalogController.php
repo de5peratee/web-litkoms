@@ -16,27 +16,29 @@ class CatalogController extends Controller
             session(['catalog_url' => $request->fullUrl()]);
         }
 
-        $query = Catalog::with('genres')->orderBy('created_at', 'desc');
+        $query = Catalog::with('genres');
 
-        // Поиск по названию
         if ($request->filled('search')) {
             $search = trim($request->search);
             $query->where('name', 'like', "%{$search}%");
         }
 
-        // Фильтрация по жанрам (по имени жанра!)
-        $genres = $request->input('genres');
+        $genres = $request->input('genres', []);
 
         if (!empty($genres)) {
             if (!is_array($genres)) {
                 $genres = [$genres];
             }
-
-            // фильтрация по названию жанра
-            $query->whereHas('genres', function ($q) use ($genres) {
-                $q->whereIn('genres.name', $genres);
-            });
+            foreach ($genres as $genre) {
+                $query->whereHas('genres', function ($q) use ($genre) {
+                    $q->where('genres.name', $genre);
+                });
+            }
         }
+
+        // Сортировка по дате
+        $sort = $request->input('sort', 'desc') === 'asc' ? 'asc' : 'desc';
+        $query->orderBy('release_year', $sort);
 
         $library = $query->paginate(12);
 
@@ -56,7 +58,6 @@ class CatalogController extends Controller
     public function get_book($id)
     {
         $book = Catalog::with('genres')->findOrFail($id);
-
         $backUrl = session('catalog_url', route('library.index'));
 
         return view('library.book', [

@@ -3,7 +3,6 @@
     flex-direction: column;
     gap: 16px;
     width: 100%;
-    max-width: 460px;
 
     background-color: transparent;
     transition: opacity 0.3s ease;
@@ -30,12 +29,16 @@
     font-weight: 600;
 }
 
-.lit-field input, .lit-field textarea {
+/* Общие поля input и textarea (кроме чекбокса) */
+.lit-field input:not([type="checkbox"]),
+.lit-field textarea,
+.lit-field select{
     padding: 8px 16px;
     height: 44px;
+    width: 100%;
 
     border-radius: 12px;
-    border: 1px  solid var(--gray);
+    border: 1px solid var(--gray);
 
     font-family: 'Involve', sans-serif;
     font-size: 14px;
@@ -49,16 +52,47 @@
 }
 
 .lit-field textarea {
-    height: 120px;
-
+    resize: none;
+    height: 128px;
 }
 
-.lit-field input::placeholder, .lit-field textarea::placeholder {
+.lit-field input:not([type="checkbox"])::placeholder,
+.lit-field textarea::placeholder,
+.lit-field select::placeholder{
     color: var(--tertiary);
 }
 
-.lit-field input:focus, .lit-field textarea:focus {
+.lit-field input:not([type="checkbox"]):focus,
+.lit-field textarea:focus,
+.lit-field select:focus {
     background-color: var(--white);
     border: 1px solid var(--primary-blue);
     box-shadow: 0 16px 48px rgba(0, 90, 255, 0.08);
 }
+
+.lit-field .input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    accent-color: var(--primary-blue);
+    cursor: pointer;
+    vertical-align: middle;
+}
+/*.checkbox-field label {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    cursor: pointer;*/
+/*    font-size: 14px;*/
+/*    font-weight: 500;*/
+/*    color: var(--primary);*/
+/*}*/
+
+.checkbox-field a {
+    color: var(--primary-blue);
+    text-decoration: underline;
+}
+
+.link-text {
+    color: var(--primary-blue);
+}
+

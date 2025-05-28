@@ -32,3 +32,36 @@
 
     flex-shrink: 0;
 }
+
+.icon-64 {
+    width: 64px;
+    height: 64px;
+
+    flex-shrink: 0;
+}
+
+.icon-96 {
+    width: 96px;
+    height: 96px;
+
+    flex-shrink: 0;
+}
+
+.icon-128 {
+    width: 128px;
+    height: 128px;
+
+    flex-shrink: 0;
+}
+
+.icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+
+    transition: all 0.2s ease;
+}

@@ -1,0 +1,575 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 1170px;
+}
+
+.info-block{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 16px;
+    padding: 32px;
+    border-radius: 32px;
+
+    background-color: var(--white);
+}
+
+.info-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    gap: 16px
+}
+
+
+
+
+
+.news-slider-container {
+    position: relative;
+    overflow: hidden;
+
+    width: 1170px;
+    margin: 0 auto;
+    border-radius: 32px;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    min-width: 100%;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    /*border-radius: 32px;*/
+
+    background-color: var(--primary-blue);
+}
+
+.slide-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 32px 32px 48px 32px;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.32);
+    color: var(--white);
+}
+
+.slide-center-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 16px;
+}
+
+.slide-event-tags-wrapper {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+}
+
+.slide-event-tag {
+    display: flex;
+
+    padding: 8px 16px;
+    border-radius: 999px;
+
+    background-color: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(24px); /* Эффект размытия */
+    -webkit-backdrop-filter: blur(24px); /* Для поддержки в Safari */
+    text-transform: capitalize;
+}
+
+.slide-event-datetime {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    color: rgba(255, 255, 255, 0.96);
+}
+
+.prev-button, .next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 8px;
+    border-radius: 999px;
+    cursor: pointer;
+
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(24px); /* Эффект размытия */
+    -webkit-backdrop-filter: blur(24px); /* Для поддержки в Safari */
+}
+
+.prev-button { left: 16px; }
+.next-button { right: 16px; }
+
+.prev-button:hover, .next-button:hover {
+    background: rgba(255, 255, 255, 0.24);
+}
+
+.dots {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    /*background-color: var(--primary);*/
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(24px); /* Эффект размытия */
+    -webkit-backdrop-filter: blur(24px); /* Для поддержки в Safari */
+
+    cursor: pointer;
+}
+
+.dot.active {
+    background: white;
+}
+
+
+
+
+
+.events-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    width:100%;
+}
+
+.event-card {
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+    padding-bottom: 24px;
+    border-radius: 24px;
+    width: 548px;
+
+    border: 1px solid var(--light-gray);
+    background-color: var(--light-gray);
+}
+
+.event-description {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding-inline: 24px;
+}
+
+.event-card-datetime, .event-card-datetime-data, .event-card-datetime-title {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    color: var(--secondary);
+}
+
+.event-card-datetime > .event-card-datetime-data {
+    gap: 2px;
+}
+
+.event-title-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+}
+
+.event-title-block h3 {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.event-categories {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    gap: 4px;
+}
+
+.event-tag {
+    display: flex;
+    align-items: center;
+
+    padding: 8px 16px;
+    border-radius: 999px;
+    white-space: nowrap;
+
+    text-transform: capitalize;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.event-tag.more-tags {
+    background-color: var(--primary);
+    color: var(--white);
+    cursor: default;
+}
+
+.event-tag.hidden {
+    display: none;
+}
+
+.cover_wrapper {
+    overflow: hidden;
+
+    width: 100%;
+    aspect-ratio: 2/1;
+}
+
+.cover_wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.authors-comics-promo-container {
+    position: relative;
+    overflow: hidden; /* Чтобы картинки не вылезали за блок */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 24px;
+    width: 100%;
+    border-radius: 32px;
+    padding: 48px;
+
+    color: var(--white);
+    background: linear-gradient(45deg, #FF1D7F, #FFD428);
+}
+.big-comics {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    width: 340px;
+    transform: rotate(-10deg);
+    z-index: 1;
+}
+
+.hero-block > *:not(img) {
+    position: relative;
+    z-index: 2;
+}
+
+/* Малая комикс-картинка справа */
+.small-comics {
+    position: absolute;
+    bottom: -80px;
+    right: 0;
+    width: 240px;
+    transform: rotate(10deg);
+    z-index: 1;
+}
+
+.hero-tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 8px 20px;
+    border-radius: 999px;
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.hero-title-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    gap: 8px;
+}
+
+.steps-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 16px;
+    padding-block: 16px;
+}
+
+.steps-wrapper > .primary-btn {
+    width: fit-content;
+}
+
+.steps-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+}
+
+.step-block {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+    border-radius: 24px;
+    padding: 24px;
+    width: 260px;
+
+    color: var(--primary);
+    background-color: var(--white);
+
+    transition: all 0.2s ease;
+}
+
+.step-block:hover {
+    color: var(--primary);
+
+    scale: 1.02;
+}
+
+.step-img {
+    max-width: 96px;
+}
+
+.step-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.step-num, .author-name-text, .comic-author-text {
+    color: var(--secondary);
+}
+
+
+
+
+.comics-list-wrapper {
+    display: flex;
+    position: relative; /* Для абсолютного позиционирования кнопок */
+    width: 100%;
+    overflow: hidden;
+    gap: 8px;
+}
+
+.comics-scroll-container {
+    display: flex;
+    overflow-x: auto; /* Включаем горизонтальный скролл */
+    scroll-behavior: smooth; /* Плавная прокрутка */
+    gap: 8px;
+    width: 100%;
+    -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
+    scrollbar-width: none; /* Скрываем скроллбар в Firefox */
+}
+
+.comics-scroll-container::-webkit-scrollbar {
+    display: none; /* Скрываем скроллбар в WebKit-браузерах */
+}
+
+/* Эффект осветления по бокам */
+.comics-list-wrapper::before,
+.comics-list-wrapper::after {
+    content: none; /* Убираем псевдоэлементы */
+}
+
+.comics-list-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--white), transparent);
+}
+
+.comics-list-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--white), transparent);
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 35%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-blue);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    z-index: 2;
+    transition: background-color 0.2s ease;
+}
+
+.scroll-btn:hover {
+    background-color: var(--primary-blue-dark);
+}
+
+.scroll-left {
+    left: 8px; /* Отступ от края */
+}
+
+.scroll-right {
+    right: 8px; /* Отступ от края */
+}
+
+.comic {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+    max-width: 220px;
+    flex-shrink: 0;
+}
+
+.comic-cover-wrapper {
+    overflow: hidden;
+    width: 220px;
+    aspect-ratio: 2/3;
+    border-radius: 24px;
+
+    border: 1px solid var(--gray);
+    background-color: var(--light-gray);
+}
+
+.comic-cover-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.comic-tags-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow: hidden;
+
+    gap: 4px;
+}
+
+.comic-tag {
+    display: flex;
+    white-space: nowrap; /* Запрещаем перенос текста внутри тега */
+
+    padding: 6px 12px;
+    border-radius: 999px;
+
+    border: 1px solid var(--primary);
+}
+
+.comic-tag.hidden {
+    display: none; /* Скрываем теги, которые не помещаются */
+}
+
+
+.comic-tag.more-tag {
+    color: var(--white);
+    background-color: var(--primary);
+}
+
+.comic-title {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 100%;
+    gap: 8px;
+}
+
+.comic-title > .text-big {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Одна строка без переносов */
+    margin: 0;
+}
+
+.comic-title > .comic-author-text {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Одна строка без переносов */
+    margin: 0;
+    color: var(--secondary); /* Улучшаем читаемость автора */
+}
+
+.comic-avg-grade {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/*.web-radio-cta {*/
+/*    position: fixed;*/
+/*    z-index: 1000;*/
+/*    width: 64px;*/
+/*    height: 64px;*/
+/*    cursor: grab;*/
+/*    user-select: none;*/
+/*    transition: transform 0.2s ease-out, left 0.3s ease, top 0.3s ease, right 0.3s ease, bottom 0.3s ease;*/
+/*    cursor: pointer;*/
+/*    transform: translate(0, 0);*/
+/*}*/
+
+/*.web-radio-cta img {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    object-fit: contain;*/
+/*}*/
+
+/*.web-radio-cta:active {*/
+/*    cursor: grabbing;*/
+/*    transition: none;*/
+/*    transform: scale(0.95);*/
+/*}*/

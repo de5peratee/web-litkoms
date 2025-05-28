@@ -22,6 +22,7 @@ class EventFactory extends Factory
             'description' => $faker->realText(200),
             'created_at' => now(),
             'updated_at' => now(),
+            'created_by' => $faker->numberBetween(1, 100),
         ];
     }
 }

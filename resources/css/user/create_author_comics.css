@@ -1,0 +1,187 @@
+.author_comics-form-container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+    padding: 32px;
+    border-radius: 32px;
+    width: 1170px;
+
+    background-color: var(--white);
+}
+
+.author_comics-form-container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.author_comics-form-container-header > h3 {
+    white-space: nowrap;
+}
+
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+
+    width: 50%;
+    gap: 16px;
+}
+
+.progress-bar-endpoint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 4px;
+    white-space: nowrap;
+    border-radius: 12px;
+}
+
+.active-endpoint {
+    color: var(--primary-blue);
+}
+
+
+.lit-form-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 32px;
+}
+
+.lit-fields-group {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    gap: 16px;
+}
+
+.lit-checkbox {
+    width: 16px; /* Увеличенный размер чекбокса */
+    height: 16px;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.input-error {
+    color: #d32f2f;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #ffebee;
+    border-radius: 4px;
+    display: inline-block;
+    width: fit-content;
+    word-break: break-word;
+    transition: opacity 0.2s ease-in-out;
+    opacity: 1;
+}
+
+.is-invalid {
+    border: 2px solid #d32f2f !important;
+    box-shadow: 0 0 5px rgba(211, 47, 47, 0.3);
+}
+
+.is-invalid:focus {
+    border-color: #d32f2f;
+    box-shadow: 0 0 8px rgba(211, 47, 47, 0.5);
+}
+
+.input-error:empty {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+
+.comic-cover-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    width: 220px;
+    aspect-ratio: 2 / 3;
+    border-radius: 24px;
+    border: 1px solid var(--gray);
+    background-color: var(--light-gray);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.comic-cover-wrapper:hover {
+    background-color: var(--gray);
+}
+
+.comic-cover-wrapper input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.comic-cover-wrapper .default-icon,
+.comic-cover-wrapper .hover-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.comic-cover-wrapper .hover-icon {
+    z-index: 4;
+    opacity: 0;
+}
+
+.comic-cover-wrapper .loaded-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: none;
+    pointer-events: none;
+}
+
+.comic-cover-wrapper.hovered:hover .hover-icon {
+    opacity: 1;
+}
+
+.comic-cover-wrapper.hovered::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.32);
+    border-radius: 24px;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.comic-cover-wrapper:hover.hovered::after {
+    opacity: 1;
+}
+
+.comic-cover-wrapper:has(input.is-invalid) {
+    border: 2px solid #d32f2f;
+    box-shadow: 0 0 5px rgba(211, 47, 47, 0.3);
+}
+
+.primary-btn {
+    width: fit-content;
+}
