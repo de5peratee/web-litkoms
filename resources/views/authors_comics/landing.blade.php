@@ -130,8 +130,13 @@
                 @forelse ($topAuthors as $author)
                     <a href="{{ route('profile.index', ['nickname' => $author->nickname]) }}" class="author-item">
                         <div class="author-avatar-wrapper">
-                            <img src="{{ $author->avatar ? Storage::url($author->avatar) : asset('images/default_template/ava_cover.png') }}"
-                                 alt="{{ $author->nickname }}">
+                            @if($author->icon && Storage::disk('public')->exists($author->icon))
+                                <img src="{{ Storage::url($author->icon) }}" alt="avatar">
+                            @else
+                                <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="default avatar">
+                            @endif
+{{--                            <img src="{{ $author->avatar ? Storage::url($author->avatar) : asset('images/default_template/ava_cover.png') }}"--}}
+{{--                                 alt="{{ $author->nickname }}">--}}
                         </div>
                         <div class="author-item-text-wrapper">
                             <p class="text-big">{{ '@' . $author->nickname }}</p>
