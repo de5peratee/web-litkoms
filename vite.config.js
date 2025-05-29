@@ -36,6 +36,7 @@ export default defineConfig({
                 'resources/css/editor/multimedia_list.css',
                 'resources/css/editor/catalog_list.css',
                 'resources/css/editor/authors_сomics_submissions_list.css',
+                'resources/css/editor/moderation.css',
 
                 'resources/css/editor/authors_comics_moderation.css',
 

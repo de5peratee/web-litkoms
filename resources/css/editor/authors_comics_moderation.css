@@ -21,26 +21,20 @@
 }
 
 
-.progress-bar {
-    display: flex;
-    align-items: center;
+.cover_wrapper {
+    overflow: hidden;
 
-    width: 50%;
-    gap: 16px;
+    width: 280px;
+    aspect-ratio: 2/3;
+    border-radius: 24px;
+
+    border: 1px solid var(--gray);
 }
 
-.progress-bar-endpoint {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    gap: 4px;
-    white-space: nowrap;
-    border-radius: 12px;
-}
-
-.active-endpoint {
-    color: var(--primary-blue);
+.cover_wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 
@@ -86,25 +80,24 @@
     box-shadow: 0 0 8px rgba(211, 47, 47, 0.5);
 }
 
-@media (max-width: 640px) {
-    .input-error {
-        font-size: 0.75rem;
-        padding: 0.2rem 0.4rem;
-    }
-    .is-invalid {
-        border-width: 1.5px;
-    }
-    input[type="file"].is-invalid {
-        outline-width: 1.5px;
-    }
-    .cover-upload:has(input.is-invalid) {
-        border-width: 1.5px;
-    }
-}
-
 .input-error:empty {
     opacity: 0;
     height: 0;
     margin: 0;
     padding: 0;
+}
+
+.lit-form {
+    width: 100%;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+}
+
+.form-actions button {
+    width: 100%;
 }
