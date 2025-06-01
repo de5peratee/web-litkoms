@@ -1,4 +1,5 @@
 import $ from 'jquery';
+
 $(document).ready(function() {
     $('#subscribeBtn').click(function(e) {
         e.preventDefault();
@@ -8,7 +9,6 @@ $(document).ready(function() {
         const isSub = $btn.hasClass('subscribed-btn');
         const url = isSub ? '/unsubscribe/' + nickname : '/subscribe/' + nickname;
 
-        // Получаем CSRF-токен из мета-тега
         const token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
@@ -16,9 +16,14 @@ $(document).ready(function() {
             method: 'POST',
             dataType: 'json',
             data: {
-                _token: token  // Явно передаем токен в данных
+                _token: token
             },
             success: function(data) {
+                if (data.redirect_url) {
+                    window.location.href = data.redirect_url;
+                    return;
+                }
+
                 if (data.status) {
                     $btn.toggleClass('subscribed-btn');
 
@@ -32,7 +37,19 @@ $(document).ready(function() {
                 }
             },
             error: function(xhr) {
-                if (xhr.status === 419) { // Код ошибки CSRF
+                let json;
+                try {
+                    json = xhr.responseJSON || JSON.parse(xhr.responseText);
+                } catch (e) {
+                    json = null;
+                }
+
+                if (json && json.redirect_url) {
+                    window.location.href = json.redirect_url;
+                    return;
+                }
+
+                if (xhr.status === 419) {
                     alert('Сессия истекла. Пожалуйста, перезагрузите страницу.');
                     location.reload();
                 } else {

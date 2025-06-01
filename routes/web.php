@@ -15,6 +15,7 @@ use App\Http\Controllers\NewsFeedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserSettingsController;
+use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
 
 // Главная страница
@@ -38,10 +39,21 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-//Подтверждение почты
-Route::get('/verify-email', function () {
-    return view('verify-email');
-})->name('verification.notice');
+
+Route::middleware(['authorized', 'not.verified'])->group(function () {
+    Route::get('/verify-email', [VerificationController::class, 'notice'])
+        ->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])
+        ->middleware('signed')
+        ->name('verification.verify');
+
+    Route::post('/email/verification-notification', [VerificationController::class, 'send'])
+        ->middleware('throttle:6,1')
+        ->name('verification.send');
+});
+
+
 
 
 
@@ -55,7 +67,7 @@ Route::prefix('authors_comics')->group(function () {
     Route::post('/{authorComic:slug}/rate', [AuthorComicsListController::class, 'rate'])->name('author_comic.rate')->middleware('authorized');
     Route::post('/{authorComic:slug}/comment', [AuthorComicsListController::class, 'comment'])->name('author_comic.comment')->middleware('authorized');
     Route::get('/{authorComic:slug}/comments', [AuthorComicsListController::class, 'getComments'])->name('author_comic.comments');
-    Route::get('/{authorComic:slug}/download', [AuthorComicsListController::class, 'download'])->name('author_comic.download');
+    Route::get('/{authorComic:slug}/download', [AuthorComicsListController::class, 'download'])->name('author_comic.download')->middleware('authorized');
 });
 
 Route::get('/authors_comics_landing', [AuthorComicsLandingController::class, 'index'])->name('authors_comics_landing');
@@ -84,8 +96,11 @@ Route::prefix('/profile/comics')
     });
 
 // Подписки
-Route::post('/subscribe/{nickname}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
-Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe');
+Route::middleware('authorized')->group(function () {
+    Route::post('/subscribe/{nickname}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+    Route::post('/unsubscribe/{nickname}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe');
+});
+
 
 // Панель редактора
 Route::prefix('dashboard')->middleware('editor')->group(function () {
@@ -126,7 +141,7 @@ Route::get('/manuals/policy', function () {
 // Профиль пользователя
 Route::get('/{nickname}', [ProfileController::class, 'index'])->name('profile.index');
 
-Route::prefix('profile')->middleware('auth')->group(function () {
+Route::prefix('profile')->middleware('authorized')->group(function () {
     Route::get('/settings', [UserSettingsController::class, 'show'])->name('settings.show');
     Route::put('/settings', [UserSettingsController::class, 'update'])->name('settings.update');
 });

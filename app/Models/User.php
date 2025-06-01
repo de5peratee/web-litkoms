@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
+    use Notifiable;
+
     protected $guarded = false;
 
     protected static function boot()
@@ -36,11 +39,13 @@ class User extends Authenticatable
         return $this->hasMany(Rating::class, 'graded_by');
     }
 
-    public function subscriptions() {
+    public function subscriptions()
+    {
         return $this->belongsToMany(User::class, 'subscribes', 'subscriber_id', 'subscribed_to_id');
     }
 
-    public function subscribers() {
+    public function subscribers()
+    {
         return $this->belongsToMany(User::class, 'subscribes', 'subscribed_to_id', 'subscriber_id');
     }
 
@@ -49,4 +54,21 @@ class User extends Authenticatable
         return $this->subscriptions()->where('subscribed_to_id', $userId)->exists();
     }
 
+    public function getAverageRatingAttribute()
+    {
+        $comics = $this->authorComics()
+            ->where('is_published', true)
+            ->where('is_moderated', 'successful')
+            ->get();
+
+        return $comics->isNotEmpty() ? $comics->avg('average_assessment') : 0;
+    }
+
+    public function getComicsCountAttribute()
+    {
+        return $this->authorComics()
+            ->where('is_published', true)
+            ->where('is_moderated', 'successful')
+            ->count();
+    }
 }

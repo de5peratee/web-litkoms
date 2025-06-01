@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\EditorPanelMiddleware;
+use App\Http\Middleware\EnsureEmailIsNotVerified;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -15,7 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'editor' => EditorPanelMiddleware::class,
-            'authorized' => AuthMiddleware::class
+            'authorized' => AuthMiddleware::class,
+            'not.verified' => EnsureEmailIsNotVerified::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
