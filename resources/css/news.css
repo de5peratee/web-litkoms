@@ -75,12 +75,41 @@
 .post-wrapper {
     display: flex;
     flex-direction: column;
+
     gap: 16px;
     border-radius: 24px;
     width: 100%;
     padding: 4px;
     height: fit-content;
+
     background-color: var(--light-gray);
+}
+
+.post-wrapper.event-post {
+    overflow: visible;
+    position: relative;
+}
+
+.past-sign {
+    position: absolute;
+    top: 24px;
+    right: -16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+    padding: 6px 8px;
+
+    transform: rotate(8deg); /* Поворот на 15 градусов */
+
+    transform-origin: right top; /* Точка вращения - правый верхний угол */
+    z-index: 1; /* Чтобы было поверх контента карточки */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
+    background-color: var(--primary);
+    color: var(--white);
 }
 
 .post-text-data {
@@ -230,8 +259,11 @@
 .new-tag {
     display: flex;
     align-items: center;
+
     gap: 8px;
     padding-bottom: 4px;
+
+    text-transform: uppercase;
     color: var(--primary-blue);
 }
 
@@ -255,6 +287,12 @@
     text-transform: capitalize;
     border: 1px solid var(--primary);
     color: var(--primary);
+}
+
+.event-category-tag {
+    background-color: var(--gray);
+    color: var(--secondary);
+    border: none;
 }
 
 .comic-genre-tag.hidden,

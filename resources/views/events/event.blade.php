@@ -37,21 +37,45 @@
                 <div class="event-action-block">
                     <h3>О мероприятии</h3>
                     <p>{{ $event->description }}</p>
-                    <a href="#" class="primary-btn">Буду на мероприятии</a>
+{{--                    <a href="#" class="primary-btn">Буду на мероприятии</a>--}}
                 </div>
 
-                <div class="event-datetime-wrapper">
-                    <div class="event-date">
-                        <p class="text-small">Дата</p>
-                        <h3>{{ $event->start_date->format('d') }}</h3>
-                        <p class="text-small">{{ $event->start_date->translatedFormat('F') }}</p>
+                @if(\Carbon\Carbon::parse($event->start_date)->isPast())
+                    <div class="past-sign-wrapper">
+                        <img src="{{ asset('images/icons/hw/event-ready-icon.svg') }}" class="icon-48" alt="icon">
+
+                        <div class="past-sign-text-flex">
+                            <p class="text-big sign-title-text">Мероприятие уже прошло</p>
+                            <p class="text-small sign-description-text">Вы можете ознакомится с отчетом о событии <br> в ленте новостей</p>
+                        </div>
                     </div>
-                    <div class="event-time">
-                        <p class="text-small">Время</p>
-                        <h3>{{ $event->start_date->format('H:i') }}</h3>
-                        <p class="text-small">по МСК</p>
+                @else
+                    <div class="event-datetime-wrapper">
+                        <div class="event-date">
+                            <p class="text-small">Дата</p>
+                            <h3>{{ $event->start_date->format('d') }}</h3>
+                            <p class="text-small">{{ $event->start_date->translatedFormat('F') }}</p>
+                        </div>
+                        <div class="event-time">
+                            <p class="text-small">Время</p>
+                            <h3>{{ $event->start_date->format('H:i') }}</h3>
+                            <p class="text-small">по МСК</p>
+                        </div>
                     </div>
-                </div>
+                @endif
+
+{{--                <div class="event-datetime-wrapper">--}}
+{{--                    <div class="event-date">--}}
+{{--                        <p class="text-small">Дата</p>--}}
+{{--                        <h3>{{ $event->start_date->format('d') }}</h3>--}}
+{{--                        <p class="text-small">{{ $event->start_date->translatedFormat('F') }}</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="event-time">--}}
+{{--                        <p class="text-small">Время</p>--}}
+{{--                        <h3>{{ $event->start_date->format('H:i') }}</h3>--}}
+{{--                        <p class="text-small">по МСК</p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
 

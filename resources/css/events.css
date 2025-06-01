@@ -170,7 +170,8 @@
 }
 
 .event-card {
-    overflow: hidden;
+    position: relative;
+    /*overflow: hidden;*/
 
     display: flex;
     flex-direction: column;
@@ -180,8 +181,30 @@
     border-radius: 24px;
     width: 548px;
 
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--gray);
     background-color: var(--light-gray);
+}
+
+.past-sign {
+    position: absolute;
+    top: 24px;
+    right: -16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+    padding: 6px 8px;
+
+    transform: rotate(8deg); /* Поворот на 15 градусов */
+
+    transform-origin: right top; /* Точка вращения - правый верхний угол */
+    z-index: 1; /* Чтобы было поверх контента карточки */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
+    background-color: var(--primary);
+    color: var(--white);
 }
 
 .event-description {
@@ -192,16 +215,19 @@
     padding-inline: 24px;
 }
 
-.event-card-datetime, .event-card-datetime-data, .event-card-datetime-title {
+.bottom-event-flex-data {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 4px;
 
-    color: var(--secondary);
+    gap: 24px;
 }
 
-.event-card-datetime > .event-card-datetime-data {
-    gap: 2px;
+.event-datetime-wrapper,
+.event-location-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .event-title-block {
@@ -235,8 +261,8 @@
     white-space: nowrap;
 
     text-transform: capitalize;
-    border: 1px solid var(--primary);
-    color: var(--primary);
+    background-color: var(--gray);
+    color: var(--secondary);
 }
 
 .event-tag.more-tags {

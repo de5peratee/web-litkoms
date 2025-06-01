@@ -109,7 +109,7 @@
 
         <div class="info-block new-comics-list-container">
             <div class="info-header">
-                <h2>Новые комиксы в Литкомс</h2>
+                <h3>Новые комиксы в Литкомс</h3>
                 <a href="{{ route('library.index') }}" class="tertiary-btn">
                     Перейти в библиотеку
                     <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">

@@ -14,7 +14,7 @@
                     @if ($isNew)
                         <div class="new-tag">
                             <img src="{{ asset('images/icons/energy-blue.svg') }}" class="icon-20" alt="icon">
-                            НОВЫЙ КОМИКС
+                            Новый комикс
                         </div>
                     @endif
 
@@ -63,6 +63,13 @@
             $event = $item['item'];
         @endphp
         <div class="post-wrapper event-post" data-type="event">
+            @if(\Carbon\Carbon::parse($event->start_date)->isPast())
+                <div class="past-sign">
+                    <img src="{{ asset('images/icons/lock-secondary.svg') }}" class="icon-20" alt="icon">
+                    <p class="text-hint">Уже прошло</p>
+                </div>
+            @endif
+
             <div class="post-event-wrapper">
                 <img src="{{ $event->cover ? Storage::url($event->cover) : asset('images/default_template/event-cover.svg') }}" alt="{{ $event->name }}">
             </div>
