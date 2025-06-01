@@ -27,6 +27,7 @@ export default defineConfig({
                 'resources/css/comic.css',
                 'resources/css/home.css',
                 'resources/css/news.css',
+                'resources/css/verify-email.css',
 
                 'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
@@ -64,6 +65,7 @@ export default defineConfig({
                 'resources/js/moderation-confirm-comics.js',
                 'resources/js/comics-list-wrapper-fix.js',
                 'resources/js/authors-comics-library.js',
+                'resources/js/verify-email.js',
 
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',

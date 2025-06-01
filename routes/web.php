@@ -34,7 +34,16 @@ Route::middleware('guest')->group(function () {
     Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('/auth/register', [AuthController::class, 'register'])->name('auth.register');
 });
+
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//Подтверждение почты
+Route::get('/verify-email', function () {
+    return view('verify-email');
+})->name('verification.notice');
+
+
 
 // Медиапосты
 Route::get('/news', [NewsFeedController::class, 'index'])->name('mediaposts');

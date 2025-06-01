@@ -1,0 +1,25 @@
+.verify-email-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    gap: 16px;
+    padding: 32px;
+    border-radius: 32px;
+    width:fit-content;
+
+    background-color: var(--white);
+}
+
+#resend-timer {
+    display: none;
+
+    color: var(--secondary);
+}
+
+.secondary-btn:disabled {
+    opacity: 0.32;
+    cursor: auto;
+}
