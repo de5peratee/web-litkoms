@@ -402,12 +402,4 @@
 
 .no-results {
     text-align: center;
-    color: var(--secondary);
-    font-size: 16px;
-    margin: 20px 0;
-}
-
-
-.no-results {
-    text-align: center;
 }
