@@ -25,19 +25,32 @@
                 </div>
 
                 <div class="profile-text-data">
-                    <div class="profile-title-flex">
-                        <h3>{{ $user->name }} {{ $user->last_name }}</h3>
-                        <a href="{{ route('settings.show') }}" class="profile-settings-btn">
-                            <img src="{{ asset('images/icons/edit-primary.svg') }}" class="icon-24" alt="icon">
-                        </a>
-                    </div>
+                    <div class="profile-nearby-text-wrapper">
+                        @if ($user->role === 'editor')
+                            <div class="editor-role-tag">
+                                Редактор
+                            </div>
+                        @endif
 
-                    <div class="profile-secondary-text-data">
-                        <p class="text-medium">{{ '@' }}{{ $user->nickname }}</p>
-                        <p class="text-medium dot">·</p>
-                        <p class="text-medium profile-email">{{ $user->email }}</p>
-                    </div>
 
+                        <div class="profile-title-flex">
+                            <h3>{{ $user->name }} {{ $user->last_name }}</h3>
+
+                            @auth
+                                @if (Auth::id() == $user->id)
+                                    <a href="{{ route('settings.show') }}" class="profile-settings-btn">
+                                        <img src="{{ asset('images/icons/edit-primary.svg') }}" class="icon-24" alt="icon">
+                                    </a>
+                                @endif
+                            @endauth
+                        </div>
+
+                        <div class="profile-secondary-text-data">
+                            <p class="text-medium">{{ '@' }}{{ $user->nickname }}</p>
+                            <p class="text-medium dot">·</p>
+                            <p class="text-medium profile-email">{{ $user->email }}</p>
+                        </div>
+                    </div>
                     <div class="user-status-bar">
 
                         <p class="user-subscribers">Подписчиков: {{ $user->subscribers()->count() }}</p>
@@ -74,6 +87,40 @@
             </div>
         </div>
 
+        @if(!empty($user->description))
+            <div class="info-block profile-description-wrapper">
+                <div class="info-header">
+                    <h3>Об авторе</h3>
+                </div>
+
+                <div class="h-divider"></div>
+
+                <p>{{ $user->description }}</p>
+            </div>
+        @endif
+
+{{--        <div class="info-block profile-description-wrapper">--}}
+{{--            <div class="info-header">--}}
+{{--                <h3>Об авторе</h3>--}}
+{{--            </div>--}}
+
+{{--            <div class="h-divider"></div>--}}
+
+{{--            <p>Современные технологии кардинально изменили нашу жизнь.--}}
+{{--                Интернет позволяет мгновенно получать информацию,--}}
+{{--                общаться с людьми по всему миру и работать удалённо.--}}
+{{--                Искусственный интеллект уже сегодня помогает в медицине,--}}
+{{--                анализе данных и творчестве. Однако важно помнить о балансе:--}}
+{{--                цифровые инструменты должны упрощать жизнь, а не усложнять её.--}}
+{{--                Регулярные перерывы от гаджетов, живое общение и физическая--}}
+{{--                активность остаются ключевыми элементами здорового образа жизни.--}}
+{{--                Развитие технологий неизбежно, но человек всегда должен оставаться--}}
+{{--                в центре внимания. Этичный подход к инновациям, защита персональных данных--}}
+{{--                и осознанное использование цифровых сервисов — вот главные принципы--}}
+{{--                гармоничного будущего. Наука не стоит на месте: уже завтра нас ждут новые--}}
+{{--                открытия, которые перевернут представление о возможном.</p>--}}
+{{--        </div>--}}
+
         <div class="profile-tabs-wrapper">
             <div class="profile-tab active-tab author-comics-tab" data-tab="author-comics">
                 <img src="{{ asset('images/icons/comics-icon-primary.svg') }}" alt="icon" class="icon-24">
@@ -101,20 +148,27 @@
             @else
                 <div class="subscriptions-list">
                     @foreach($user->subscriptions as $subscription)
-                        <a href="{{ route('profile.index', $subscription->nickname) }}"
-                           class="subscription-item">
+                        <a href="{{ route('profile.index', $subscription->nickname) }}" class="subscription-item">
 
                             <div class="subscription-left-data">
-                                @if($user->icon && Storage::exists($user->icon))
-                                    <div class="subscription-avatar-wrapper">
-                                        <img src="{{ Storage::url($user->icon) }}" alt="{{ $user->icon }}">
-                                    </div>
-                                @else
-                                    <div class="subscription-avatar-wrapper">
-                                        <img src="{{ asset('images/default_template/ava_cover.png') }}"
-                                             alt="subscription_ava_cover">
-                                    </div>
-                                @endif
+                                <div class="subscription-avatar-wrapper">
+                                    @if($subscription->icon && Storage::disk('public')->exists($subscription->icon))
+                                        <img src="{{ Storage::url($subscription->icon) }}" alt="avatar">
+                                    @else
+                                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="default avatar">
+                                    @endif
+                                </div>
+
+{{--                                @if($user->icon && Storage::exists($user->icon))--}}
+{{--                                    <div class="subscription-avatar-wrapper">--}}
+{{--                                        <img src="{{ Storage::url($user->icon) }}" alt="{{ $user->icon }}">--}}
+{{--                                    </div>--}}
+{{--                                @else--}}
+{{--                                    <div class="subscription-avatar-wrapper">--}}
+{{--                                        <img src="{{ asset('images/default_template/ava_cover.png') }}"--}}
+{{--                                             alt="subscription_ava_cover">--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
 
                                 <div class="subscription-username-data">
                                     <p class="text-medium">{{ '@' . ($subscription->nickname) }}</p>
@@ -122,8 +176,19 @@
                                 </div>
                             </div>
 
-                            <div class="subscription-right-data primary-btn">
-                                Профиль
+                            <div class="subscription-right-data">
+{{--                                <div class="subscription-comics-count subscription-wrapper-flex">--}}
+{{--                                    n комиксов--}}
+{{--                                </div>--}}
+
+                                <div class="subscription-subs-count subscription-wrapper-flex">
+                                    Подписчиков: {{$subscription->subscribers()->count()}}
+                                </div>
+
+{{--                                <div class="subscription-avg-grade subscription-wrapper-flex">--}}
+{{--                                    <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">--}}
+{{--                                    <p>{{ number_format($subscription->$averageRating, 1) }}</p>--}}
+{{--                                </div>--}}
                             </div>
 
                         </a>
@@ -203,9 +268,6 @@
                     <img src="{{ asset('images/icons/arrow-full-right-white.svg') }}" alt="right" class="icon-24">
                 </button>
             </div>
-
-
-
         </div>
     </div>
 

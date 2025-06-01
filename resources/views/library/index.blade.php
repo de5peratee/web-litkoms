@@ -7,8 +7,10 @@
 
     <div class="library-container">
         <div class="library-header">
-            <img src="{{ asset('images/icons/hw/library.svg') }}" class="icon-48" alt="icon">
-            <h2>Библиотека</h2>
+            <div class="library-header-title">
+                <img src="{{ asset('images/icons/hw/library.svg') }}" class="icon-48" alt="icon">
+                <h2>Библиотека комиксов</h2>
+            </div>
 
             <div class="search-container">
                 <form id="search-form" action="{{ route('library.index') }}" method="GET" class="search-form">
@@ -20,7 +22,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="primary-btn">Искать</button>
+                    <button type="submit" class="primary-btn">Наити</button>
 
                     <div class="filter-btn" id="filter-btn">
                         <img src="{{ asset('images/icons/filter.svg') }}" class="icon-20" alt="icon">
@@ -31,7 +33,7 @@
         </div>
 
         <div class="library-grid">
-            @include('partials.books', ['library' => $library])
+            @include('partials.comics', ['comics' => $library])
         </div>
 
         @if($library->hasMorePages())

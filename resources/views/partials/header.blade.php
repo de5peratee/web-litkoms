@@ -50,15 +50,20 @@
 
                 <div class="profile-dropdown" id="profileDropdown">
                     <div class="dropdown-content">
+
                         <a href="{{ route('profile.index', Auth::user()->nickname)}}" class="dropdown-item">
                             <img src="{{ asset('images/icons/user-profile.svg') }}" alt="icon" class="icon-24">
                             <p>Профиль</p>
                         </a>
 
+                        <a href="{{ route('settings.show') }}" class="dropdown-item">
+                            <img src="{{ asset('images/icons/settings-icon-primary.svg') }}" alt="icon" class="icon-24">
+                            <p>Настройки</p>
+                        </a>
 
                         @if (auth()->user()->role === 'editor')
                             <a href="{{ route('editor.dashboard') }}" class="dropdown-item">
-                                <img src="{{ asset('images/icons/dashboard.svg') }}" alt="icon" class="icon-24">
+                                <img src="{{ asset('images/icons/chart-icon-primary.svg') }}" alt="icon" class="icon-24">
                                 <p>Панель редактора</p>
                             </a>
                         @endif

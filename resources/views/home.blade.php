@@ -75,7 +75,7 @@
 
         <div class="info-block events-container">
             <div class="info-header">
-                <h2>Мероприятия</h2>
+                <h3>Мероприятия</h3>
                 <a href="{{ route('events.index') }}" class="tertiary-btn">
                     Подробнее
                     <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
