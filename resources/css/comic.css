@@ -291,11 +291,12 @@
     height: 44px;
 }
 
-.comment-list-wrapper {
+.comment-list-wrapper,
+#comment-list{
     display: flex;
     flex-direction: column;
 
-    gap: 16px;
+    gap: 24px;
 }
 
 .comment-item {
@@ -312,10 +313,18 @@
     gap: 8px;
 }
 
+.comment-title-nearby-flex {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+}
+
 .comment-text-wrapper {
     display: flex;
 
     width: fit-content;
+    max-width: 100%;
     padding: 8px;
     border-radius: 12px;
 

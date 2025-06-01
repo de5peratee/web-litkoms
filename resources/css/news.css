@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    width: 560px;
+    width: 600px;
 }
 
 .news-header {
@@ -30,10 +30,12 @@
 .news-tab {
     display: flex;
     justify-content: center;
+
     width: 100%;
     gap: 8px;
     padding: 8px 12px;
     border-radius: 12px;
+
     background-color: var(--white);
     cursor: pointer;
     transition: all 0.2s ease;
@@ -53,9 +55,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 560px;
+
+    width: 100%;
     border-radius: 32px;
     padding: 24px;
+
     background-color: var(--white);
 }
 
@@ -379,4 +383,31 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 140px);
     height: 280px;
+}
+
+
+/* Добавленные стили для табов и исправления отступов */
+.tab-content {
+    display: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* Совпадает с gap в .posts-list */
+}
+
+.tab-content[data-content="all"] {
+    display: flex; /* Устанавливаем flex для начального отображения */
+}
+
+.no-results {
+    text-align: center;
+    color: var(--secondary);
+    font-size: 16px;
+    margin: 20px 0;
+}
+
+
+.no-results {
+    text-align: center;
 }
