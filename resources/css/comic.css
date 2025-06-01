@@ -231,7 +231,7 @@
 .comment-part-block, .author-part-block {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    flex: 1; /* Делим пространство поровну с учетом gap */
 
     gap: 24px;
 }
@@ -332,6 +332,16 @@
     color: var(--secondary);
 }
 
+.comment-text-wrapper p {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Длинные слова обрезаются с троеточием */
+    white-space: normal; /* Обычные слова переносятся */
+    overflow-wrap: break-word; /* Перенос слов, если они не помещаются */
+    word-break: break-all; /* Длинные слова без пробелов разбиваются */
+}
+
+
 .error-message {
     color: var(--primary-red);
 }
@@ -350,11 +360,6 @@
 .comment-item.animate-in {
     animation: fadeInUp 0.4s ease-out;
 }
-
-
-
-
-/*Комментарии*/
 
 .profile-sub-action {
     display: flex;
@@ -422,4 +427,15 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+
+@media (max-width: 768px) {
+    .info-content {
+        flex-direction: column;
+    }
+    .comment-part-block, .author-part-block {
+        flex: none; /* Отключаем flex: 1, чтобы блоки занимали всю ширину */
+        width: 100%;
+    }
 }
