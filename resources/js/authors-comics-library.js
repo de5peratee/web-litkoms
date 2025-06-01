@@ -8,7 +8,7 @@ function handleGenreTags() {
         $tags.removeClass('hidden');
 
         const containerWidth = $container.width();
-        const moreTagWidth = 88;
+        const moreTagWidth = 96;
         let totalWidth = 0;
         let cutoffIndex = $tags.length;
 
@@ -34,7 +34,7 @@ function handleGenreTags() {
     });
 }
 
-function loadMoreBooks() {
+function loadMoreComics() {
     $(document).on('click', '#load-more', function (e) {
         e.preventDefault();
         const $btn = $(this);
@@ -43,14 +43,14 @@ function loadMoreBooks() {
             page: $btn.data('page'),
             search: $btn.data('search') || '',
             genres: $btn.data('genres') || [],
-            sort: $btn.data('sort') || 'desc'
+            sort: $btn.data('sort') || 'date-desc'
         };
 
         $btn.prop('disabled', true).text('Загрузка...');
 
         $.get(url, data)
             .done(response => {
-                $('.library-grid').append(response.html);
+                $('.comics-grid').append(response.html);
                 $btn.data('page', data.page + 1);
                 if (!response.has_more) $btn.remove();
                 handleGenreTags();
@@ -61,13 +61,13 @@ function loadMoreBooks() {
 }
 
 function updateFilterCount(genres, sort) {
-    const count = genres.length + (sort !== 'desc' ? 1 : 0);
+    const count = genres.length + (sort !== 'date-desc' ? 1 : 0);
     $('#filter-count, #filter-count-modal').text(count).toggleClass('hidden', count === 0);
 }
 
 function initFilters() {
     let selectedGenres = $('#load-more').data('genres') || [];
-    let sortOrder = $('#load-more').data('sort') || 'desc';
+    let sortOrder = $('#load-more').data('sort') || 'date-desc';
     let tempGenres = [...selectedGenres];
     let tempSortOrder = sortOrder;
     const allGenres = window.allGenres || [];
@@ -220,7 +220,7 @@ function initSearchClear() {
 
 $(function () {
     handleGenreTags();
-    loadMoreBooks();
+    loadMoreComics();
     initFilters();
     initSearchClear();
 });

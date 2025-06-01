@@ -17,6 +17,15 @@
     background-color: var(--white);
 }
 
+.library-header-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+}
+
 .search-container {
     display: flex;
     flex-direction: column;
@@ -152,7 +161,7 @@
     gap: 32px 16px;
 }
 
-.book {
+.comic-card {
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -161,17 +170,27 @@
     overflow: hidden;
 }
 
-.book > .book-text-data {
+.comic-card > .comic-text-data {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.book-author-text {
+.comic-author-text {
     color: var(--secondary);
+    white-space: nowrap; /* Запрещает перенос текста */
+    overflow: hidden; /* Скрывает текст, выходящий за пределы контейнера */
+    text-overflow: ellipsis; /* Добавляет троеточие для обрезанного текста */
 }
 
-.book-genres {
+.comic-title-text {
+    white-space: nowrap; /* Запрещает перенос текста */
+    overflow: hidden; /* Скрывает текст, выходящий за пределы контейнера */
+    text-overflow: ellipsis; /* Добавляет троеточие для обрезанного текста */
+}
+
+
+.comic-genres {
     display: flex;
     flex-wrap: nowrap;
     overflow: hidden;
@@ -179,7 +198,7 @@
     gap: 4px;
 }
 
-.book-genre-tag {
+.comic-genre-tag {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -191,7 +210,7 @@
     color: var(--primary);
 }
 
-.book-genre-tag.more-genres {
+.comic-genre-tag.more-genres {
     background-color: var(--primary);
     color: var(--white);
     cursor: default;

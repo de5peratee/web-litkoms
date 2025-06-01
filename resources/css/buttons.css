@@ -83,10 +83,14 @@
     border-color: var(--primary-blue-dark);
 }
 
+.tertiary-btn:hover {
+    color: var(--primary-blue-dark);
+}
 
 
-
-.primary-btn:active, .secondary-btn:active, .tertiary-btn {
+.primary-btn:active,
+.secondary-btn:active,
+.tertiary-btn:active {
     transform: scale(0.95); /* Мелкое сжатие при нажатии */
 }
 
