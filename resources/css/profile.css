@@ -104,7 +104,7 @@
     flex-direction: row;
     align-items: center;
 
-    gap: 24px;
+    gap: 12px;
 }
 
 .subscription-username-data {
@@ -116,6 +116,24 @@
 
 .subscription-name {
     color: var(--secondary);
+}
+
+.subscription-right-data {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: fit-content;
+    gap: 24px;
+}
+
+.subscription-wrapper-flex {
+    display: flex;
+    align-items: center;
+
+    width: fit-content;
+
+    gap: 8px;
 }
 
 .profile-header {
@@ -157,6 +175,27 @@
     flex-direction: column;
 
     gap: 16px;
+}
+
+.profile-nearby-text-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.editor-role-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /*padding: 6px 8px;*/
+    /*border-radius: 12px;*/
+    width: fit-content;
+
+    color: var(--primary-blue);
+    /*background-color: var(--light-gray);*/
+    text-transform: uppercase;
 }
 
 .profile-title-flex {

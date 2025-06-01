@@ -12,20 +12,20 @@
             <h2>Лента</h2>
         </div>
 
-{{--        <div class="news-tabs-wrapper">--}}
-{{--            <div class="news-tab active-tab">--}}
-{{--                <img src="{{ asset('images/icons/comics-icon-white.svg') }}" alt="icon" class="icon-24">--}}
-{{--                Комиксы--}}
-{{--            </div>--}}
-{{--            <div class="news-tab">--}}
-{{--                <img src="{{ asset('images/icons/event-primary.svg') }}" alt="icon" class="icon-24">--}}
-{{--                Мероприятия--}}
-{{--            </div>--}}
-{{--            <div class="news-tab">--}}
-{{--                <img src="{{ asset('images/icons/post-primary.svg') }}" alt="icon" class="icon-24">--}}
-{{--                Посты--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        <div class="news-tabs-wrapper">
+            <div class="news-tab active-tab">
+                <img src="{{ asset('images/icons/comics-icon-white.svg') }}" alt="icon" class="icon-24">
+                Комиксы
+            </div>
+            <div class="news-tab">
+                <img src="{{ asset('images/icons/event-primary.svg') }}" alt="icon" class="icon-24">
+                Мероприятия
+            </div>
+            <div class="news-tab">
+                <img src="{{ asset('images/icons/post-primary.svg') }}" alt="icon" class="icon-24">
+                Посты
+            </div>
+        </div>
 
         <div class="newsfeed-container">
             <div class="posts-list">

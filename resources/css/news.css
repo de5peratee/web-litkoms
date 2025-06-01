@@ -299,6 +299,10 @@
 .tertiary-btn,
 .primary-btn {
     width: fit-content;
+
+    height: 36px;
+    padding-inline: 12px;
+    border-radius: 10px;
 }
 
 /* ---------- LAYOUT ПО КОЛИЧЕСТВУ КАРТИНОК ---------- */
