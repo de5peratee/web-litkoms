@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const loadMoreBtn = document.getElementById('load-more-comments');
     const noComments = document.getElementById('no-comments');
 
-    // Обработка отправки комментария
     if (commentForm) {
         commentForm.addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -24,23 +23,29 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                 });
 
-                const data = await response.json();
+                if (!response.ok) {
+                    const data = await response.json();
 
-                if (response.ok) {
-                    commentList.insertAdjacentHTML('afterbegin', data.commentHtml);
-
-                    commentsCount.textContent = parseInt(commentsCount.textContent) + 1;
-
-                    if (noComments) {
-                        noComments.style.display = 'none';
+                    if (data.redirect_url) {
+                        // Если есть URL для редиректа, перенаправляем пользователя
+                        window.location.href = data.redirect_url;
+                    } else {
+                        errorMessage.textContent = data.message || 'Ошибка при добавлении комментария';
+                        errorMessage.style.display = 'block';
                     }
-
-                    commentInput.value = '';
-                    errorMessage.style.display = 'none';
-                } else {
-                    errorMessage.textContent = data.message || 'Ошибка при добавлении комментария';
-                    errorMessage.style.display = 'block';
+                    return;
                 }
+
+                const data = await response.json();
+                commentList.insertAdjacentHTML('afterbegin', data.commentHtml);
+                commentsCount.textContent = parseInt(commentsCount.textContent) + 1;
+
+                if (noComments) {
+                    noComments.style.display = 'none';
+                }
+
+                commentInput.value = '';
+                errorMessage.style.display = 'none';
             } catch (error) {
                 errorMessage.textContent = 'Произошла ошибка. Попробуйте позже.';
                 errorMessage.style.display = 'block';
@@ -48,10 +53,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Обработка пагинации комментариев
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', async function (e) {
-            e.preventDefault(); // Предотвращаем переход по ссылке
+            e.preventDefault();
             const url = loadMoreBtn.getAttribute('data-url');
 
             try {

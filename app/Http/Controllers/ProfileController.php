@@ -25,15 +25,12 @@ class ProfileController extends Controller
             ->limit(10)
             ->get();
 
-        $averageRating = $comics->isNotEmpty()
-            ? $comics->avg('average_assessment')
-            : 0;
-
         return view('user.profile', [
             'user' => $user,
             'isSub' => $isSub,
             'subscribersCount' => $user->subscribers_count,
-            'averageRating' => $averageRating,
+            'averageRating' => $user->average_rating,
+            'comicsCount' => $user->comics_count,
             'comics' => $comics
         ]);
     }

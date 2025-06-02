@@ -177,18 +177,18 @@
                             </div>
 
                             <div class="subscription-right-data">
-{{--                                <div class="subscription-comics-count subscription-wrapper-flex">--}}
-{{--                                    n комиксов--}}
-{{--                                </div>--}}
+                                <div class="subscription-comics-count subscription-wrapper-flex">
+                                    Комиксов: {{ $subscription->comics_count }}
+                                </div>
 
                                 <div class="subscription-subs-count subscription-wrapper-flex">
                                     Подписчиков: {{$subscription->subscribers()->count()}}
                                 </div>
 
-{{--                                <div class="subscription-avg-grade subscription-wrapper-flex">--}}
-{{--                                    <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">--}}
-{{--                                    <p>{{ number_format($subscription->$averageRating, 1) }}</p>--}}
-{{--                                </div>--}}
+                                <div class="subscription-avg-grade subscription-wrapper-flex">
+                                    <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">
+                                    <p>{{ number_format($subscription->average_rating, 1) }}</p>
+                                </div>
                             </div>
 
                         </a>

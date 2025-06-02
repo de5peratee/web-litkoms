@@ -58,7 +58,7 @@ class NewsFeedController extends Controller
         // Собираем и сортируем элементы
         $allItems = collect();
 
-        // Комиксы с фильтрацией подписок
+      
         foreach ($comics as $comic) {
             if (!auth()->check() || auth()->user()->isSubscribedTo($comic->created_by)) {
                 $allItems->push(['type' => 'comic', 'item' => $comic, 'sort_date' => $comic->published_at]);

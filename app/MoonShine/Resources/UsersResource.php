@@ -69,7 +69,7 @@ class UsersResource extends ModelResource
                 Grid::make([
                     Column::make([
                         Date::make('Дата рождения', 'birth_date')->required(),
-                    ])->columnSpan(6),
+                    ])->columnSpan(4),
 
                     Column::make([
                         Select::make('Роль', 'role')
@@ -77,9 +77,13 @@ class UsersResource extends ModelResource
                                 'user' => 'Пользователь',
                                 'editor' => 'Редактор',
                             ]),
-                        ])->columnSpan(6),
+                        ])->columnSpan(4),
 
-                ]),
+                    Column::make([
+                        Date::make('Дата верификации (подтверждения почты)', 'email_verified_at')->withTime(),
+                    ])->columnSpan(4),
+
+                    ]),
 
                 Grid::make([
                     Column::make([
@@ -133,6 +137,7 @@ class UsersResource extends ModelResource
             Image::make('Иконка', 'icon'),
             Image::make('Шапка профиля', 'head_profile'),
             Text::make('Роль', 'role'),
+            Date::make('Дата верификации (подтверждения почты)', 'email_verified_at'),
         ];
     }
 
