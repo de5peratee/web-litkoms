@@ -27,7 +27,6 @@ class NewsFeedController extends Controller
         $events = Event::with(['tags'])->get();
         $posts = MultimediaPost::with(['createdBy', 'medias'])->get();
 
-        // Собираем и сортируем элементы
         $allItems = new Collection();
         foreach ($comics as $comic) {
             if (auth()->check() && auth()->user()->isSubscribedTo($comic->created_by)) {

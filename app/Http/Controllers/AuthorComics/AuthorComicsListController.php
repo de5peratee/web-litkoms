@@ -70,7 +70,6 @@ class AuthorComicsListController extends Controller
             }
         }
 
-        // Сортировка
         $sort = $request->input('sort', 'date-desc');
         if ($sort === 'date-asc') {
             $query->orderBy('published_at', 'asc');
@@ -79,7 +78,7 @@ class AuthorComicsListController extends Controller
         } elseif ($sort === 'rating-asc') {
             $query->orderBy('average_assessment', 'asc');
         } else {
-            $query->orderBy('published_at', 'desc'); // По умолчанию: новые сначала
+            $query->orderBy('published_at', 'desc');
         }
 
         $comics = $query->paginate(12);

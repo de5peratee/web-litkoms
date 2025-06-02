@@ -12,6 +12,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+
         $eventNews = Event::where('start_date', '>=', now())
             ->orderBy('created_at', 'desc')
             ->take(5)
@@ -23,6 +24,8 @@ class HomeController extends Controller
             ->get()
             ->map(fn($m) => News::formatMultimedia($m));
 
+        $eventNews = collect($eventNews ?? []);
+        $mediaNews = collect($mediaNews ?? []);
         $news = $eventNews->merge($mediaNews)
             ->sortByDesc('date')
             ->take(3)
