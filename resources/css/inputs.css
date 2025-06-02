@@ -78,14 +78,6 @@
     cursor: pointer;
     vertical-align: middle;
 }
-/*.checkbox-field label {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    cursor: pointer;*/
-/*    font-size: 14px;*/
-/*    font-weight: 500;*/
-/*    color: var(--primary);*/
-/*}*/
 
 .checkbox-field a {
     color: var(--primary-blue);

@@ -23,12 +23,14 @@ class UserSettingsController extends Controller
 
         try {
             DB::beginTransaction();
+
             if ($request->hasFile('icon')) {
                 if ($user->icon) {
                     Storage::disk('public')->delete($user->icon);
                 }
                 $data['icon'] = $request->file('icon')->store('icons', 'public');
             }
+
             if ($request->hasFile('head_profile')) {
                 if ($user->head_profile) {
                     Storage::disk('public')->delete($user->head_profile);

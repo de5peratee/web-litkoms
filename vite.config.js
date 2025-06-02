@@ -72,6 +72,7 @@ export default defineConfig({
                 'resources/js/editor/catalog-list-modal.js',
 
                 'resources/js/user/author-comics-list-modal.js',
+                'resources/js/user/settings.js',
             ],
             refresh: true,
         }),

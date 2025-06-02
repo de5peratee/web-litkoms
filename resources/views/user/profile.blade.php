@@ -87,7 +87,7 @@
             </div>
         </div>
 
-        @if(!empty($user->description))
+        @if(!empty($user->about))
             <div class="info-block profile-description-wrapper">
                 <div class="info-header">
                     <h3>Об авторе</h3>
@@ -95,7 +95,7 @@
 
                 <div class="h-divider"></div>
 
-                <p>{{ $user->description }}</p>
+                <p>{{ $user->about }}</p>
             </div>
         @endif
 
