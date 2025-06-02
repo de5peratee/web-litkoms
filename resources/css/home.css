@@ -200,16 +200,19 @@
     padding-inline: 24px;
 }
 
-.event-card-datetime, .event-card-datetime-data, .event-card-datetime-title {
+.bottom-event-flex-data {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 4px;
 
-    color: var(--secondary);
+    gap: 24px;
 }
 
-.event-card-datetime > .event-card-datetime-data {
-    gap: 2px;
+.event-datetime-wrapper,
+.event-location-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .event-title-block {
@@ -230,7 +233,7 @@
 .event-categories {
     display: flex;
     flex-wrap: nowrap;
-    overflow: hidden;
+    /*overflow: hidden;*/
     gap: 4px;
 }
 
@@ -243,8 +246,10 @@
     white-space: nowrap;
 
     text-transform: capitalize;
-    border: 1px solid var(--primary);
-    color: var(--primary);
+    /*border: 1px solid var(--gray);*/
+    background-color: var(--gray);
+    color: var(--secondary);
+    /*box-shadow: 0 2px 24px rgba(0, 0, 0, 0.04);*/
 }
 
 .event-tag.more-tags {
