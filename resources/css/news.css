@@ -338,8 +338,8 @@
     gap: 8px;
 }
 
-.tertiary-btn,
-.primary-btn {
+.tab-content .tertiary-btn,
+.tab-content .primary-btn {
     width: fit-content;
 
     height: 36px;
