@@ -122,28 +122,28 @@
     </div>
 
     <!-- Review Modal -->
-    <div class="modal hidden" id="review-catalog-modal">
+    <div class="modal hidden" id="review-submission-modal">
         <div class="modal-content">
-            <div class="modal-close" id="delete-catalog-modal-close">
+            <div class="modal-close" id="review-submission-modal-close">
                 <img src="{{ asset('images/icons/close-primary.svg') }}" class="icon-24" alt="close">
             </div>
 
-            <h3 id="delete-catalog-modal-title">Итоговое решение</h3>
+            <h3 id="review-submission-modal-title">Итоговое решение</h3>
 
             <div class="h-divider"></div>
 
-            <form id="review-catalog-form" method="POST" action="{{route('editor.comic_moderation', $comic->slug)}}"  class="lit-form">
+            <form id="review-submission-form" method="POST" action="{{route('editor.comic_moderation', $comic->slug)}}"  class="lit-form">
                 @csrf
                 @method('PUT')
 
                 <div class="lit-field">
-                    <label for="edit-comic-description">Комментарий</label>
-                    <textarea name="description" id="edit-comic-description" rows="5" placeholder="Напишите причину отказа..."></textarea>
+                    <label for="edit-submission-comment">Комментарий</label>
+                    <textarea name="description" id="edit-submission-comment" rows="5" placeholder="Напишите причину отказа..."></textarea>
                     <div class="input-error" id="review-submission-error"></div>
                 </div>
 
                 <div class="modal-actions">
-                    <button type="button" class="secondary-btn" id="cancel-delete-catalog">Отмена</button>
+                    <button type="button" class="secondary-btn" id="cancel-review-modal">Отмена</button>
                     <button type="submit" class="primary-btn"></button>
                 </div>
             </form>
