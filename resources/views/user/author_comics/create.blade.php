@@ -82,20 +82,6 @@
                     </div>
                 </div>
                 <div class="lit-fields-group">
-{{--                    <div class="lit-field">--}}
-{{--                        <label for="cover">Обложка комикса</label>--}}
-{{--                        <input--}}
-{{--                            type="file"--}}
-{{--                            name="cover"--}}
-{{--                            id="cover"--}}
-{{--                            accept="image/*"--}}
-{{--                            class="{{ $errors->has('cover') ? 'is-invalid' : '' }}">--}}
-
-{{--                        @error('cover')--}}
-{{--                        <div class="input-error">{{ $message }}</div>--}}
-{{--                        @enderror--}}
-{{--                    </div>--}}
-
                     <div class="lit-field">
                         <label for="cover">Обложка комикса</label>
 
