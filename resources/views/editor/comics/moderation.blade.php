@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="year-info-wrapper">
-                            <p class="year-title">Дата публикации</p>
+                            <p class="year-title">Дата заявки</p>
                             <p class="text-big">{{ $comic->created_at->format('d.m.Y') }}</p>
                         </div>
 
