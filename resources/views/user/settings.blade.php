@@ -12,7 +12,7 @@
         <div class="info-block header-block">
             <div class="info-header">
                 <div class="info-header-title">
-                    <img src="{{ asset('images/icons/hw/user-settings-icon.svg') }}" alt="icon" class="icon-48">
+                    <img src="{{ asset('images/icons/hw/user-settings-icon.svg') }}" alt="icon" class="icon-32">
                     <h3>Настройки профиля</h3>
                 </div>
                 <a href="{{ route('profile.index', Auth::user()->nickname) }}" class="primary-btn">Перейти в профиль</a>

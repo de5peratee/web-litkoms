@@ -10,7 +10,7 @@
     <div class="submissions-list-container">
         <div class="submissions-list-container-header">
             <div class="info-header-title">
-                <img src="{{ asset('images/icons/hw/submissions-icon.svg') }}" alt="icon" class="icon-48">
+                <img src="{{ asset('images/icons/hw/submissions-icon.svg') }}" alt="icon" class="icon-32">
                 <h3>Заявки на модерацию</h3>
                 <p class="text-medium submissions-count-text">{{$comics->count()}}</p>
             </div>
