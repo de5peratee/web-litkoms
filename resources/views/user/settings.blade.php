@@ -9,7 +9,7 @@
 
     <div class="user-settings-container">
 
-        <div class="info-block">
+        <div class="info-block header-block">
             <div class="info-header">
                 <div class="info-header-title">
                     <img src="{{ asset('images/icons/hw/user-settings-icon.svg') }}" alt="icon" class="icon-48">
@@ -17,17 +17,6 @@
                 </div>
                 <a href="{{ route('profile.index', Auth::user()->nickname) }}" class="primary-btn">Перейти в профиль</a>
             </div>
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
         </div>
 
         <div class="info-block">
@@ -39,18 +28,21 @@
                     <div class="lit-field-group">
                         <div class="lit-field">
                             <div class="user-settings-avatar-wrapper" data-default-avatar="{{ $user->icon ? 'custom' : 'default' }}">
+                                <img src="{{ asset('images/icons/load-white-icon.svg') }}" class="icon-24 hover-icon" alt="change cover icon">
+
                                 @if($user->icon && Storage::disk('public')->exists($user->icon))
                                     <img src="{{ Storage::url($user->icon) }}" alt="avatar" class="avatar-image">
                                 @else
-                                    <img src="{{ asset('images/lit_avatars/lit-ava-1.png') }}" alt="default avatar" class="avatar-image">
+                                    <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="default avatar" class="avatar-image">
                                 @endif
                             </div>
 
                             @error('icon')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            <input type="hidden" name="icon" id="selected-icon" value="{{ $user->icon ?? 'lit_avatars/lit-ava-1.png' }}">
+
                             <input type="file" name="icon" id="custom-icon" class="custom-icon-input" style="display: none;" accept="image/*">
+                            <input type="hidden" name="selected_avatar" id="selected-avatar" value="">
                         </div>
 
                         <div class="avatar-picker-container">
@@ -67,21 +59,15 @@
                                     'lit_avatars/lit-ava-4.png',
                                     'lit_avatars/lit-ava-5.png',
                                 ];
-
-                                // Если иконка отсутствует или соответствует одной из дефолтных — значит дефолтная
-                                $currentIcon = $user->icon ?? 'lit_avatars/lit-ava-1.png';
                             @endphp
 
                             <div class="avatar-picker-list-flex">
                                 @foreach ($defaultAvatars as $avatar)
-                                    @php
-                                        $isActive = $currentIcon === $avatar;
-                                    @endphp
                                     <div class="default-avatar-pick-wrapper-flex" data-avatar="{{ $avatar }}">
-                                        <div class="default-avatar-pick-wrapper {{ $isActive ? 'active-default-avatar' : '' }}">
+                                        <div class="default-avatar-pick-wrapper">
                                             <img src="{{ asset('images/' . $avatar) }}" alt="default-avatar">
                                         </div>
-                                        <div class="active-avatar-text-tag {{ $isActive ? '' : 'hidden' }}">
+                                        <div class="active-avatar-text-tag hidden">
                                             <p class="text-hint">Выбрано</p>
                                         </div>
                                     </div>
@@ -138,7 +124,7 @@
 
                         <div class="lit-field">
                             <label for="about">О себе</label>
-                            <textarea name="about" id="about" class="form-control">{{ old('about', $user->about) }}</textarea>
+                            <textarea name="about" id="about" class="form-control" placeholder="Напишите информацию о себе...">{{ old('about', $user->about) }}</textarea>
                             @error('about')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -167,6 +153,20 @@
                 </div>
 
             </form>
+        </div>
+
+        <div class="toaster-message" id="toaster">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
         </div>
 
     </div>

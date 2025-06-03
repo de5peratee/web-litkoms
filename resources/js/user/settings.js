@@ -67,13 +67,10 @@ $(document).ready(function () {
         }
     });
 
-    // Затемнение при наведении
-    $('.user-settings-avatar-wrapper').hover(
-        function () {
-            $(this).css('background-color', 'rgba(0, 0, 0, 0.1)');
-        },
-        function () {
-            $(this).css('background-color', 'transparent');
-        }
-    );
+    // Тостер сообщение
+    const $toaster = $('#toaster');
+    if ($toaster.length && $.trim($toaster.text()) !== '') {
+        setTimeout(() => $toaster.addClass('show'), 100); // плавное появление
+        setTimeout(() => $toaster.removeClass('show'), 3100); // скрытие через 3 секунды
+    }
 });
