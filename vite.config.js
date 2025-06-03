@@ -70,6 +70,7 @@ export default defineConfig({
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',
                 'resources/js/editor/catalog-list-modal.js',
+                'resources/js/editor/authors_сomics_submissions_list.js',
 
                 'resources/js/user/author-comics-list-modal.js',
                 'resources/js/user/settings.js',
