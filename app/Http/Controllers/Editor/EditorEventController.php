@@ -8,12 +8,20 @@ use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use App\Models\Guest;
 use App\Models\Tag;
+use App\Services\ImageCompressionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class EditorEventController extends Controller
 {
+    protected $imageCompressionService;
+
+    public function __construct(ImageCompressionService $imageCompressionService)
+    {
+        $this->imageCompressionService = $imageCompressionService;
+    }
+
     public function index()
     {
         $events = Event::with(['tags', 'guests'])
@@ -33,6 +41,7 @@ class EditorEventController extends Controller
             DB::beginTransaction();
 
             $coverPath = $request->file('cover')->store('event_covers', 'public');
+            $this->imageCompressionService->compressImage(storage_path("app/public/$coverPath"));
 
             $event = Event::create([
                 'created_by' => auth()->id(),
@@ -64,6 +73,7 @@ class EditorEventController extends Controller
                     Storage::disk('public')->delete($event->cover);
                 }
                 $event->cover = $request->file('cover')->store('event_covers', 'public');
+                $this->imageCompressionService->compressImage(storage_path("app/public/$event->cover"));
             }
 
             $event->update([

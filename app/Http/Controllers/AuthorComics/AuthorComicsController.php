@@ -120,7 +120,6 @@ class AuthorComicsController extends Controller
         try {
             DB::beginTransaction();
 
-            // Данные для обновления
             $data = [
                 'name' => $validated['title'],
                 'description' => $validated['description'],
