@@ -7,6 +7,7 @@ use App\Http\Requests\AuthorComicRequest;
 use App\Http\Requests\AuthorComicUpdateRequest;
 use App\Models\AuthorComics;
 use App\Models\Genre;
+use App\Services\ImageCompressionService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -14,6 +15,13 @@ use Illuminate\Support\Str;
 
 class AuthorComicsController extends Controller
 {
+    protected $imageCompressionService;
+
+    public function __construct(ImageCompressionService $imageCompressionService)
+    {
+        $this->imageCompressionService = $imageCompressionService;
+    }
+
     /**
      * Store a new author comic.
      */
@@ -64,6 +72,9 @@ class AuthorComicsController extends Controller
             $coverPath = $request->file('cover')->store('author_comics_covers', 'public');
             $comicFilePath = $request->file('comic_file')->store('comics_files', 'public');
 
+            $this->imageCompressionService->compressImage(storage_path("app/public/$coverPath"));
+
+
             $comic = AuthorComics::create([
                 'created_by' => auth()->id(),
                 'name' => $validated['title'],
@@ -100,17 +111,16 @@ class AuthorComicsController extends Controller
 
     public function update(AuthorComicUpdateRequest $request, AuthorComics $comic)
     {
-
-        Log::info('Request Data', ['request' => $request->all()]);
-
         if ($comic->created_by !== auth()->id()) {
             abort(403, 'Unauthorized action.');
         }
+
         $validated = $request->validated();
 
         try {
             DB::beginTransaction();
 
+            // Данные для обновления
             $data = [
                 'name' => $validated['title'],
                 'description' => $validated['description'],
@@ -123,14 +133,17 @@ class AuthorComicsController extends Controller
                 if ($comic->cover) {
                     Storage::disk('public')->delete($comic->cover);
                 }
-                $data['cover'] = $request->file('cover')->store('author_comics_covers', 'public');
+                $coverPath = $request->file('cover')->store('author_comics_covers', 'public');
+                $this->imageCompressionService->compressImage(storage_path("app/public/$coverPath"));
+                $data['cover'] = $coverPath;
             }
 
+            // Обновление файла комикса, если есть
             if ($request->hasFile('comic_file')) {
                 if ($comic->comics_file) {
                     Storage::disk('public')->delete($comic->comics_file);
                 }
-                $data['comics_file'] = $request->file('comic_file')->store('comics', 'public');
+                $data['comics_file'] = $request->file('comic_file')->store('comics_files', 'public');
             }
 
             $comic->update($data);
