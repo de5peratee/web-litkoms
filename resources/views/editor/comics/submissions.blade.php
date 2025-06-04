@@ -8,7 +8,8 @@
     @vite(['resources/js/editor/authors_сomics_submissions_list.js'])
 
     <div class="submissions-list-container">
-        <div class="submissions-list-container-header">
+
+        <div class="info-block">
             <div class="info-header-title">
                 <img src="{{ asset('images/icons/hw/submissions-icon.svg') }}" alt="icon" class="icon-32">
                 <h3>Заявки на модерацию</h3>
@@ -58,7 +59,7 @@
 
                         <div class="submission-comic-preview item-cell">
                             <div class="submission-comic-cover-wrapper">
-                                <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}" class="comic-cover">
+                                <img src="{{ $comic->cover ? Storage::url($comic->cover) : asset('images/default_template/comics.svg') }}" alt="comic-cover">
                             </div>
 
                             <div class="submission-comic-preview-text-wrapper">

@@ -6,66 +6,50 @@
     @vite(['resources/css/inputs.css'])
     @vite(['resources/css/editor/multimedia_list.css'])
     @vite(['resources/js/editor/multimedia-list-modal.js'])
+    @vite(['resources/js/editor/multimedia_items.js'])
 
     <div class="multimedia-list-container">
-        <div class="multimedia-list-container-header">
-            <h3>Посты</h3>
-            <a href="{{ route('editor.create_mediapost') }}" class="primary-btn">
-                Опубликовать пост
-                <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
-            </a>
-        </div>
-
-        <div class="media-post-list">
-            @foreach ($mediaPosts as $post)
-                <div class="media-post-item">
-                    <div class="media-post-data">
-                        <p>{{ $post->id }}</p>
-                        <p>{{ $post->name }}</p>
-                        <p>{{ $post->description ?: 'Нет описания' }}</p>
-                    </div>
-                    <div class="media-post-actions">
-                        @php
-                            $medias = [];
-                            foreach ($post->medias as $media) {
-                                $fileUrl = Storage::url($media->file);
-                                $fileExtension = pathinfo($media->file, PATHINFO_EXTENSION);
-
-                                if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif'])) {
-                                    $type = 'image';
-                                } elseif (in_array($fileExtension, ['mp4', 'webm', 'ogg'])) {
-                                    $type = 'video';
-                                } elseif (in_array($fileExtension, ['mp3', 'wav', 'ogg'])) {
-                                    $type = 'audio';
-                                } else {
-                                    $type = 'unsupported';
-                                }
-
-                                $medias[] = [
-                                    'url' => $fileUrl,
-                                    'type' => $type,
-                                    'ext' => $fileExtension
-                                ];
-                            }
-                        @endphp
-
-                        <a href="#" class="list-action-btn edit-post-btn"
-                           data-post-id="{{ $post->id }}"
-                           data-post-name="{{ $post->name }}"
-                           data-post-description="{{ $post->description }}"
-                           data-post-medias='@json($medias)'>
-                            <img src="{{ asset('images/icons/edit-primary.svg') }}" class="icon-24" alt="edit-icon">
-                        </a>
-
-                        <a href="#" class="list-action-btn delete-post-btn"
-                           data-post-id="{{ $post->id }}"
-                           data-post-name="{{ $post->name }}">
-                            <img src="{{ asset('images/icons/trash-primary-red.svg') }}" class="icon-24" alt="delete-icon">
-                        </a>
-                    </div>
+        <div class="info-block">
+            <div class="info-header">
+                <div class="info-header-title">
+                    <img src="{{ asset('images/icons/hw/media-form-icon.svg') }}" alt="icon" class="icon-32">
+                    <h3>Новостные посты</h3>
+                    <p class="text-medium info-count-text">{{ $total }}</p>
                 </div>
-            @endforeach
+
+                <a href="{{ route('editor.create_mediapost') }}" class="primary-btn">
+                    Опубликовать
+                    <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
+                </a>
+            </div>
+
+            <div class="search-container">
+                <form id="search-form" action="{{ route('editor.mediapost_index') }}" method="GET" class="search-form">
+                    <div class="search-input-wrapper">
+                        <input type="text" name="search" id="search-input" placeholder="Поиск по новостным постам..." value="{{ $search }}">
+                        <div class="clear-search hidden">
+                            <img src="{{ asset('images/icons/close-primary.svg') }}" class="icon-20" alt="clear">
+                        </div>
+                    </div>
+                    <button type="submit" class="secondary-btn">Найти</button>
+                </form>
+            </div>
         </div>
+
+        <div class="multimedia-list" id="multimedia-list">
+            @include('partials.editor_lists.multimedia_items', ['mediaPosts' => $mediaPosts, 'page' => 0])
+        </div>
+
+        @if ($mediaPosts->count() === 10 && $total > $mediaPosts->count())
+            <div class="load-more-container">
+                <button id="load-more" class="primary-btn"
+                        data-page="2"
+                        data-search="{{ $search }}"
+                        data-url="{{ route('editor.mediapost_loadMore') }}">
+                    Загрузить еще
+                </button>
+            </div>
+        @endif
     </div>
 
     <!-- Модалка удаления -->
@@ -101,25 +85,27 @@
                 @method('PATCH')
                 <input type="hidden" name="id" id="edit-post-id">
 
-                <div class="lit-field">
-                    <label for="edit-post-name">Название поста</label>
-                    <input type="text" name="name" id="edit-post-name" placeholder="Введите название" required>
-                    <div class="input-error" id="edit-post-name-error"></div>
+                <div class="lit-form-row">
+                    <div class="lit-field">
+                        <label for="edit-post-media">Фотографии и файлы</label>
+                        <div class="media-upload">
+                            <input type="file" name="media[]" id="media" accept="image/*,video/*,application/pdf" multiple class="{{ $errors->has('media') ? 'is-invalid' : '' }}">
+                            <div class="media-preview" id="edit-post-media-preview"></div>
+                        </div>
+                        <div class="input-error" id="edit-post-media-error"></div>
+                    </div>
+
+                    <div class="lit-field">
+                        <label for="edit-post-name">Название поста</label>
+                        <input type="text" name="name" id="edit-post-name" placeholder="Введите название" required>
+                        <div class="input-error" id="edit-post-name-error"></div>
+                    </div>
                 </div>
 
                 <div class="lit-field">
                     <label for="edit-post-description">Описание</label>
                     <textarea name="description" id="edit-post-description" rows="5" placeholder="Подробное описание поста" required></textarea>
                     <div class="input-error" id="edit-post-description-error"></div>
-                </div>
-
-                <div class="lit-field">
-                    <label for="edit-post-media">Медиафайлы</label>
-                    <div class="media-upload">
-                        <input type="file" name="media[]" id="media" accept="image/*,video/*,application/pdf" multiple class="{{ $errors->has('media') ? 'is-invalid' : '' }}">
-                        <div class="media-preview" id="edit-post-media-preview"></div>
-                    </div>
-                    <div class="input-error" id="edit-post-media-error"></div>
                 </div>
 
                 <div class="modal-actions">

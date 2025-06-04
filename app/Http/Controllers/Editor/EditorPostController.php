@@ -20,12 +20,54 @@ class EditorPostController extends Controller
         $this->imageCompressionService = $imageCompressionService;
     }
 
-    public function index()
+//    public function index()
+//    {
+//        $mediaPosts = MultimediaPost::with('medias')
+//            ->orderBy('created_at', 'desc')
+//            ->get();
+//        return view('editor.mediaposts.list', compact('mediaPosts'));
+//    }
+
+    public function index(Request $request)
     {
+        $perPage = 10;
+        $search = $request->input('search', '');
+
         $mediaPosts = MultimediaPost::with('medias')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
             ->orderBy('created_at', 'desc')
+            ->take($perPage)
             ->get();
-        return view('editor.mediaposts.list', compact('mediaPosts'));
+
+        $total = MultimediaPost::when($search, function ($query) use ($search) {
+            return $query->where('name', 'like', '%' . $search . '%');
+        })->count();
+
+        return view('editor.mediaposts.list', compact('mediaPosts', 'total', 'search'));
+    }
+
+    public function loadMore(Request $request)
+    {
+        $page = $request->input('page', 2);
+        $perPage = 10;
+        $search = $request->input('search', '');
+
+        $mediaPosts = MultimediaPost::with('medias')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+
+        return response()->json([
+            'mediaPosts' => $mediaPosts,
+            'hasMore' => $mediaPosts->count() === $perPage,
+            'nextPage' => $page + 1,
+        ]);
     }
 
 

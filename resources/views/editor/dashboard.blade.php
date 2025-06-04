@@ -18,15 +18,15 @@
 
                 <div class="create-actions">
                     <a href="{{route('editor.create_event')}}" class="primary-btn">
-                        Создать мероприятие
+                        Опубликовать мероприятие
                         <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
                     </a>
                     <a href="{{route('editor.create_mediapost')}}" class="primary-btn">
-                        Создать пост
+                        Опубликовать пост
                         <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
                     </a>
                     <a href="{{route('editor.create_catalog')}}" class="primary-btn">
-                        Загрузить комикс в каталог
+                        Опубликовать комикс
                         <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
                     </a>
                 </div>
@@ -37,8 +37,6 @@
             <div class="info-header">
                 <p class="header-title-text">Инструменты</p>
             </div>
-
-            <div class="h-divider"></div>
 
             <div class="cta-actions-list">
                 <a href="{{ route('editor.events_index') }}" class="cta-block-redirect">
@@ -75,11 +73,12 @@
                 </a>
             </div>
 
+            <div class="h-divider"></div>
+
             <div class="info-header">
                 <p class="header-title-text">Редакторы</p>
             </div>
 
-            <div class="h-divider"></div>
 
             <div class="editor-list-wrapper">
 {{--                <a href="{{ route('profile.index', ['nickname' => $author->nickname]) }}" class="author-item">--}}

@@ -6,46 +6,50 @@
     @vite(['resources/css/inputs.css'])
     @vite(['resources/css/editor/events_list.css'])
     @vite(['resources/js/editor/events-list-modal.js'])
+    @vite(['resources/js/editor/events_items.js'])
 
     <div class="events-list-container">
-        <div class="events-list-container-header">
-            <h3>Мероприятия</h3>
-            <a href="{{ route('editor.create_event') }}" class="primary-btn">
-                Опубликовать мероприятие
-                <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
-            </a>
-        </div>
-
-        <div class="event-list">
-            @foreach ($events as $event)
-                <div class="event-item">
-                    <div class="event-data">
-                        <p>{{ $event->id }}</p>
-                        <p>{{ $event->name }}</p>
-                        <p>{{ $event->description ?: 'Нет описания' }}</p>
-                    </div>
-                    <div class="event-actions">
-                        <a href="#" class="list-action-btn edit-event-btn"
-                           data-event-id="{{ $event->id }}"
-                           data-event-name="{{ $event->name }}"
-                           data-event-description="{{ $event->description }}"
-                           data-event-start_date="{{ $event->start_date ? $event->start_date->format('Y-m-d') : '' }}"
-                           data-event-time="{{ $event->start_date ? $event->start_date->format('H:i') : '' }}"
-                           data-event-guests="{{ $event->guests->pluck('name')->implode(', ') }}"
-                           data-event-tags="{{ $event->tags->pluck('name')->implode(', ') }}"
-                           data-event-cover="{{ $event->cover ? Storage::url($event->cover) : '' }}">
-                            <img src="{{ asset('images/icons/edit-primary.svg') }}" class="icon-24" alt="edit-icon">
-                        </a>
-
-                        <a href="#" class="list-action-btn delete-event-btn"
-                           data-event-id="{{ $event->id }}"
-                           data-event-name="{{ $event->name }}">
-                            <img src="{{ asset('images/icons/trash-primary-red.svg') }}" class="icon-24" alt="delete-icon">
-                        </a>
-                    </div>
+        <div class="info-block">
+            <div class="info-header">
+                <div class="info-header-title">
+                    <img src="{{ asset('images/icons/hw/event-form-icon.svg') }}" alt="icon" class="icon-32">
+                    <h3>Список мероприятий</h3>
+                    <p class="text-medium info-count-text">{{ $total }}</p>
                 </div>
-            @endforeach
+
+                <a href="{{ route('editor.create_event') }}" class="primary-btn">
+                    Опубликовать
+                    <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
+                </a>
+            </div>
+
+            <div class="search-container">
+                <form id="search-form" action="{{ route('editor.events_index') }}" method="GET" class="search-form">
+                    <div class="search-input-wrapper">
+                        <input type="text" name="search" id="search-input" placeholder="Поиск по мероприятиям..." value="{{ $search }}">
+                        <div class="clear-search hidden">
+                            <img src="{{ asset('images/icons/close-primary.svg') }}" class="icon-20" alt="clear">
+                        </div>
+                    </div>
+                    <button type="submit" class="secondary-btn">Найти</button>
+                </form>
+            </div>
         </div>
+
+        <div class="event-list" id="event-list">
+            @include('partials.editor_lists.events_items', ['events' => $events, 'page' => 0])
+        </div>
+
+        @if ($events->count() === 10 && $total > $events->count())
+            <div class="load-more-container">
+                <button id="load-more" class="primary-btn"
+                        data-page="2"
+                        data-search="{{ $search }}"
+                        data-url="{{ route('editor.events_loadMore') }}">
+                    Загрузить еще
+                </button>
+            </div>
+        @endif
     </div>
 
     <!-- Модалка удаления -->
@@ -81,19 +85,21 @@
                 @method('PATCH')
                 <input type="hidden" name="id" id="edit-event-id">
 
-                <div class="lit-field">
-                    <label for="edit-event-cover">Обложка мероприятия</label>
-                    <div class="cover-upload">
-                        <input type="file" name="cover" id="edit-event-cover" accept="image/*">
-                        <div class="cover-preview" id="edit-event-cover-preview"></div>
-                        <div class="input-error" id="edit-event-cover-error"></div>
+                <div class="lit-form-row">
+                    <div class="lit-field">
+                        <label for="edit-event-cover">Обложка мероприятия</label>
+                        <div class="cover-upload">
+                            <input type="file" name="cover" id="edit-event-cover" accept="image/*">
+                            <div class="cover-preview" id="edit-event-cover-preview"></div>
+                            <div class="input-error" id="edit-event-cover-error"></div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="lit-field">
-                    <label for="edit-event-name">Название мероприятия</label>
-                    <input type="text" name="name" id="edit-event-name" placeholder="Введите название" required>
-                    <div class="input-error" id="edit-event-name-error"></div>
+                    <div class="lit-field">
+                        <label for="edit-event-name">Название мероприятия</label>
+                        <input type="text" name="name" id="edit-event-name" placeholder="Введите название" required>
+                        <div class="input-error" id="edit-event-name-error"></div>
+                    </div>
                 </div>
 
                 <div class="lit-field">
@@ -102,7 +108,7 @@
                     <div class="input-error" id="edit-event-description-error"></div>
                 </div>
 
-                <div class="lit-field-group">
+                <div class="lit-form-row">
                     <div class="lit-field">
                         <label for="edit-event-start_date">Дата проведения</label>
                         <input type="date" name="start_date" id="edit-event-start_date" required>

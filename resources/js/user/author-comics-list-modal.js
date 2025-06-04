@@ -147,13 +147,13 @@ $(function () {
             $('#edit-comic-cover-preview').html('');
         }
 
-        if (comicFileName) {
-            $('#edit-comic-file-label').text(comicFileName);
-            $('#edit-comic-file-preview').html(`<p>Текущий файл: ${comicFileName}</p>`);
-        } else {
-            $('#edit-comic-file-label').text('Выберите файл');
-            $('#edit-comic-file-preview').html('<p>Файл не прикреплен</p>');
-        }
+        // if (comicFileName) {
+        //     $('#edit-comic-file-label').text(comicFileName);
+        //     $('#edit-comic-file-preview').html(`<p>Текущий файл: ${comicFileName}</p>`);
+        // } else {
+        //     $('#edit-comic-file-label').text('Выберите файл');
+        //     $('#edit-comic-file-preview').html('<p>Файл не прикреплен</p>');
+        // }
 
         openModal($('#edit-comic-modal'));
     });
@@ -192,14 +192,14 @@ $(function () {
     });
 
     // Обновление метки файла
-    $('#edit-comic-file').on('change', function () {
-        const file = this.files[0];
-        if (file) {
-            $('#edit-comic-file-label').text(file.name);
-            $('#edit-comic-file-preview').html(`<p>Выбран файл: ${file.name}</p>`);
-        } else {
-            $('#edit-comic-file-label').text('Выберите файл');
-            $('#edit-comic-file-preview').html('<p>Файл не прикреплен</p>');
-        }
-    });
+    // $('#edit-comic-file').on('change', function () {
+    //     const file = this.files[0];
+    //     if (file) {
+    //         $('#edit-comic-file-label').text(file.name);
+    //         $('#edit-comic-file-preview').html(`<p>Выбран файл: ${file.name}</p>`);
+    //     } else {
+    //         $('#edit-comic-file-label').text('Выберите файл');
+    //         $('#edit-comic-file-preview').html('<p>Файл не прикреплен</p>');
+    //     }
+    // });
 });

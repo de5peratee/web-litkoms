@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Auth;
 
 class AuthorComicsController extends Controller
 {
@@ -25,11 +27,38 @@ class AuthorComicsController extends Controller
     /**
      * Store a new author comic.
      */
-    public function index()
+//    public function index()
+//    {
+//        $comics = AuthorComics::where('created_by', auth()->id())
+//            ->with('genres')
+//            ->orderBy('published_at', 'desc')
+//            ->get()
+//            ->map(function ($comic) {
+//                $comic->genres_string = $comic->genres->pluck('name')->implode(', ') ?: 'Не указаны';
+//                $comic->status = match (true) {
+//                    $comic->is_published => 'Опубликован',
+//                    $comic->is_moderated === 'under review' => 'На модерации',
+//                    $comic->is_moderated === 'unsuccessful' => 'Не принят',
+//                    $comic->is_moderated === 'successful' => 'Принят',
+//                    default => 'Черновик',
+//                };
+//                return $comic;
+//            });
+//
+//        return view('user.author_comics.list', compact('comics'));
+//    }
+    public function index(Request $request)
     {
+        $perPage = 10;
+        $search = $request->input('search', '');
+
         $comics = AuthorComics::where('created_by', auth()->id())
             ->with('genres')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
             ->orderBy('published_at', 'desc')
+            ->take($perPage)
             ->get()
             ->map(function ($comic) {
                 $comic->genres_string = $comic->genres->pluck('name')->implode(', ') ?: 'Не указаны';
@@ -43,7 +72,47 @@ class AuthorComicsController extends Controller
                 return $comic;
             });
 
-        return view('user.author_comics.list', compact('comics'));
+        $total = AuthorComics::where('created_by',  auth()->id())
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->count();
+
+        return view('user.author_comics.list', compact('comics', 'total', 'search'));
+    }
+
+    public function loadMore(Request $request)
+    {
+        $page = $request->input('page', 2);
+        $perPage = 10;
+        $search = $request->input('search', '');
+
+        $comics = AuthorComics::where('created_by', auth()->id())
+            ->with('genres')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('published_at', 'desc')
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get()
+            ->map(function ($comic) {
+                $comic->genres_string = $comic->genres->pluck('name')->implode(', ') ?: 'Не указаны';
+                $comic->status = match (true) {
+                    $comic->is_published => 'Опубликован',
+                    $comic->is_moderated === 'under review' => 'На модерации',
+                    $comic->is_moderated === 'unsuccessful' => 'Не принят',
+                    $comic->is_moderated === 'successful' => 'Принят',
+                    default => 'Черновик',
+                };
+                return $comic;
+            });
+
+        return response()->json([
+            'comics' => $comics,
+            'hasMore' => $comics->count() === $perPage,
+            'nextPage' => $page + 1,
+        ]);
     }
 
     public function showModerationConfirm(AuthorComics $comic)
