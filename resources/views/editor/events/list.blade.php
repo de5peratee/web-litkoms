@@ -9,8 +9,11 @@
 
     <div class="events-list-container">
         <div class="events-list-container-header">
-            <h2>Мероприятия</h2>
-            <a href="{{ route('editor.create_event') }}" class="primary-btn">Создать мероприятие</a>
+            <h3>Мероприятия</h3>
+            <a href="{{ route('editor.create_event') }}" class="primary-btn">
+                Опубликовать мероприятие
+                <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
+            </a>
         </div>
 
         <div class="event-list">

@@ -9,8 +9,11 @@
 
     <div class="multimedia-list-container">
         <div class="multimedia-list-container-header">
-            <h2>Посты</h2>
-            <a href="{{ route('editor.create_mediapost') }}" class="primary-btn">Создать пост</a>
+            <h3>Посты</h3>
+            <a href="{{ route('editor.create_mediapost') }}" class="primary-btn">
+                Опубликовать пост
+                <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
+            </a>
         </div>
 
         <div class="media-post-list">

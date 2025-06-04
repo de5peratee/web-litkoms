@@ -22,7 +22,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="primary-btn">Наити</button>
+                    <button type="submit" class="primary-btn">Найти</button>
 
                     <div class="filter-btn" id="filter-btn">
                         <img src="{{ asset('images/icons/filter.svg') }}" class="icon-20" alt="icon">

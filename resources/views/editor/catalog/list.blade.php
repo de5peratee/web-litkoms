@@ -9,8 +9,11 @@
 
     <div class="catalogs-list-container">
         <div class="catalogs-list-container-header">
-            <h2>Каталог</h2>
-            <a href="{{ route('editor.create_catalog') }}" class="primary-btn">Добавить в каталог</a>
+            <h3>Каталог</h3>
+            <a href="{{ route('editor.create_catalog') }}" class="primary-btn">
+                Опубликовать комикс
+                <img src="{{ asset('images/icons/plus-icon-white.svg') }}" class="icon-24" alt="icon">
+            </a>
         </div>
 
         <div class="catalog-list">

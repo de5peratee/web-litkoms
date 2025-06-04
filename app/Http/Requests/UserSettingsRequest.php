@@ -24,6 +24,8 @@ class UserSettingsRequest extends FormRequest
     {
         $userId = $this->user()->id;
 
+//        dd($this->toArray());
+
         return [
             'nickname' => ['required', 'string', 'min:5', 'max:20', Rule::unique('users', 'nickname')->ignore($userId), 'regex:/^[a-zA-Z0-9_-]+$/',],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($userId),],

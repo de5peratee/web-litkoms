@@ -22,6 +22,32 @@ class EditorModerationController extends Controller
         ]);
     }
 
+//    public function index(Request $request)
+//    {
+//        $query = AuthorComics::with('createdBy');
+//
+//        // Apply search
+//        if ($search = $request->input('search')) {
+//            $query->where('name', 'like', '%' . $search . '%');
+//        }
+//
+//        // Apply status filter
+//        $status = $request->input('status', 'under review');
+//        if (in_array($status, ['under review', 'successful', 'unsuccessful'])) {
+//            $query->where('is_moderated', $status);
+//        }
+//
+//        // Paginate results
+//        $perPage = 10;
+//        $comics = $query->paginate($perPage);
+//
+//        return view('editor.comics.submissions', [
+//            'comics' => $comics,
+//            'comics_count' => $comics->total(),
+//            'status' => $status
+//        ]);
+//    }
+
     public function show($slug)
     {
         $comic = AuthorComics::with('createdBy')

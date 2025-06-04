@@ -45,5 +45,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="load-more-container">
+            <button id="load-more" class="primary-btn" style="display: none;">
+                Загрузить еще
+            </button>
+        </div>
     </div>
 @endsection
