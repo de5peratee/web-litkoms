@@ -10,6 +10,30 @@ class EventController extends Controller
 {
     public function index(Request $request)
     {
+        $events = $this->fetchEvents($request);
+
+        if ($request->ajax()) {
+            return $this->ajaxResponse($events);
+        }
+
+        $upcomingEvents = Event::with('tags')
+            ->where('start_date', '>=', now())
+            ->orderBy('start_date', 'asc')
+            ->limit(3)
+            ->get();
+
+        $categories = Tag::orderBy('name')->get();
+
+        return view('events.index', compact('events', 'categories', 'upcomingEvents'));
+    }
+
+    public function get_event(Event $event)
+    {
+        return view('events.event', compact('event'));
+    }
+
+    private function fetchEvents(Request $request)
+    {
         $search = $request->get('search');
         $selectedCategories = $request->get('categories', []);
         $sortOrder = $request->input('sort', 'asc') === 'desc' ? 'desc' : 'asc';
@@ -27,29 +51,14 @@ class EventController extends Controller
             });
         }
 
-        $events = $query->paginate($perPage);
-
-        if ($request->ajax()) {
-            return response()->json([
-                'html' => view('partials.event_cards', ['events' => $events])->render(),
-                'has_more' => $events->hasMorePages(),
-            ]);
-        }
-
-        $upcomingEvents = Event::with('tags')
-            ->where('start_date', '>=', now())
-            ->orderBy('start_date', 'asc')
-            ->limit(3)
-            ->get();
-
-        $categories = Tag::orderBy('name')->get();
-
-        return view('events.index', compact('events', 'categories', 'upcomingEvents'));
+        return $query->paginate($perPage);
     }
 
-
-    public function get_event(Event $event)
+    private function ajaxResponse($events)
     {
-        return view('events.event', compact('event'));
+        return response()->json([
+            'html' => view('partials.event_cards', ['events' => $events])->render(),
+            'has_more' => $events->hasMorePages(),
+        ]);
     }
 }

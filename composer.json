@@ -14,7 +14,8 @@
         "league/flysystem-aws-s3-v3": "^3.29",
         "maatwebsite/excel": "^3.1",
         "moonshine/moonshine": "^3.13",
-        "moonshine/ru": "^1.0"
+        "moonshine/ru": "^1.0",
+        "spatie/laravel-image-optimizer": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

@@ -7,12 +7,20 @@ use App\Http\Requests\StoreCatalogEditorRequest;
 use App\Http\Requests\UpdateCatalogEditorRequest;
 use App\Models\Catalog;
 use App\Models\Genre;
+use App\Services\ImageCompressionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class EditorCatalogController extends Controller
 {
+    protected $imageCompressionService;
+
+    public function __construct(ImageCompressionService $imageCompressionService)
+    {
+        $this->imageCompressionService = $imageCompressionService;
+    }
+
     public function index()
     {
         $catalogs = Catalog::with('genres')
@@ -34,6 +42,8 @@ class EditorCatalogController extends Controller
             $coverPath = $request->hasFile('cover')
                 ? $request->file('cover')->store('catalog_covers', 'public')
                 : null;
+
+            $this->imageCompressionService->compressImage(storage_path("app/public/$coverPath"));
 
             $catalog = Catalog::create([
                 'name' => $request->name,
@@ -64,6 +74,7 @@ class EditorCatalogController extends Controller
                     Storage::disk('public')->delete($catalog->cover);
                 }
                 $catalog->cover = $request->file('cover')->store('catalog_covers', 'public');
+                $this->imageCompressionService->compressImage(storage_path("app/public/$catalog->cover"));
             }
 
             $catalog->update([

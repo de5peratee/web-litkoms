@@ -1,18 +1,24 @@
 FROM php:8.2-fpm
 
 RUN apt-get update && apt-get install -y \
-      apt-utils \
-      libpq-dev \
-      libpng-dev \
-      libzip-dev \
-      zip unzip \
-      git \
-      curl \
-      nodejs \
-      npm && \
-      docker-php-ext-install pdo_mysql bcmath gd zip && \
-      apt-get clean && \
-      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    apt-utils \
+    libpq-dev \
+    libpng-dev \
+    libzip-dev \
+    zip unzip \
+    git \
+    curl \
+    nodejs \
+    npm \
+    jpegoptim \
+    optipng \
+    pngquant \
+    gifsicle \
+    webp \
+ && npm install -g svgo \
+ && docker-php-ext-install pdo_mysql bcmath gd zip \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 

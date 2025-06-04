@@ -6,15 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMultimediaPostRequest;
 use App\Http\Requests\UpdateMultimediaPostRequest;
 use App\Models\MultimediaPost;
+use App\Services\ImageCompressionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class EditorPostController extends Controller
 {
-    /**
-     * Отображает список всех медиа-постов.
-     */
+    protected $imageCompressionService;
+
+    public function __construct(ImageCompressionService $imageCompressionService)
+    {
+        $this->imageCompressionService = $imageCompressionService;
+    }
+
     public function index()
     {
         $mediaPosts = MultimediaPost::with('medias')
@@ -23,17 +28,13 @@ class EditorPostController extends Controller
         return view('editor.mediaposts.list', compact('mediaPosts'));
     }
 
-    /**
-     * Показывает форму для создания нового медиа-поста.
-     */
+
     public function create()
     {
         return view('editor.mediaposts.create');
     }
 
-    /**
-     * Сохраняет новый медиа-пост.
-     */
+
     public function store(StoreMultimediaPostRequest $request)
     {
         try {
@@ -48,6 +49,7 @@ class EditorPostController extends Controller
             if ($request->hasFile('media')) {
                 foreach ($request->file('media') as $file) {
                     $filePath = $file->store('mediapost_media', 'public');
+                    $this->imageCompressionService->compressImage(storage_path("app/public/$filePath"));
                     $mediaPost->medias()->create([
                         'file' => $filePath,
                     ]);
@@ -81,6 +83,7 @@ class EditorPostController extends Controller
 
                 foreach ($request->file('media') as $file) {
                     $filePath = $file->store('mediapost_media', 'public');
+                    $this->imageCompressionService->compressImage(storage_path("app/public/$filePath"));
                     $mediaPost->medias()->create([
                         'file' => $filePath,
                     ]);
