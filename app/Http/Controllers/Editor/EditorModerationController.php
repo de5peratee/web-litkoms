@@ -22,8 +22,16 @@ class EditorModerationController extends Controller
             $query->where('is_moderated', $status);
         }
 
-        $perPage = 10;
+        $perPage = 3;
         $comics = $query->paginate($perPage);
+
+        if ($request->ajax()) {
+            return response()->view('editor.comics.partials.submissions_list', [
+                'comics' => $comics,
+                'comics_count' => $comics->total(),
+                'status' => $status
+            ])->header('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+        }
 
         return view('editor.comics.submissions', [
             'comics' => $comics,
