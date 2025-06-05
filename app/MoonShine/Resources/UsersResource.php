@@ -35,6 +35,11 @@ class UsersResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Никнейм', 'nickname'),
+            Select::make('Роль', 'role')
+                ->options([
+                    'user' => 'Пользователь',
+                    'editor' => 'Редактор',
+                ]),
             Email::make('Email', 'email'),
             Text::make('Имя', 'name'),
             Text::make('Фамилия', 'last_name'),

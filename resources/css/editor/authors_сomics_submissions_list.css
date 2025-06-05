@@ -457,3 +457,7 @@
 .clear-search.hidden {
     display: none;
 }
+
+.clickable {
+    cursor: pointer;
+}

@@ -172,7 +172,7 @@
 
                 <div class="lit-field">
                     <label for="edit-comic-name">Название комикса</label>
-                    <input type="text" name="title" id="edit-comic-name" placeholder="Введите название" required>
+                    <input type="text" name="name" id="edit-comic-name" placeholder="Введите название" required>
                     <div class="input-error" id="edit-comic-name-error"></div>
                 </div>
 

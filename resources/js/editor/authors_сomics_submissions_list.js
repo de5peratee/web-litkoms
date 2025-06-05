@@ -1,10 +1,10 @@
 import $ from 'jquery';
 
 $(document).ready(function () {
-    let currentComicId = null;
+    let currentComicSlug = null;
     let isDislike = false;
 
-    // Функция для обновления иконок в табах
+    // Обновление иконок в табах действий
     function updateIcons($container) {
         $container.find('.submission-action-tab img').each(function () {
             const $img = $(this);
@@ -18,55 +18,61 @@ $(document).ready(function () {
         });
     }
 
-    // Открытие модалки
-    $('.submission-action-tab').on('click', function () {
+    // Делегирование событий для динамически добавленных элементов
+    $(document).on('click', '.submission-action-tab', function () {
         const $tab = $(this);
         const $submissionItem = $tab.closest('.submission-item');
+        currentComicSlug = $submissionItem.data('comic-slug');
         isDislike = $tab.hasClass('dislike-tab');
-        currentComicId = $submissionItem.data('comic-id'); // Убедитесь, что data-comic-id есть в HTML
 
-        // Стилизация активного таба
         $submissionItem.find('.submission-action-tab').removeClass('active-submission-tab');
         $tab.addClass('active-submission-tab');
         updateIcons($submissionItem);
 
-        // Показ/скрытие поля комментария
-        const $commentField = $('#edit-submission-comment').closest('.lit-field');
-        $commentField.toggle(isDislike);
-
-        // Обновление текста и экшена в модалке
         $('#review-submission-modal-title').text(isDislike ? 'Отклонить заявку' : 'Принять заявку');
-        $('#review-submission-modal .primary-btn').text(isDislike ? 'Да, отклонить' : 'Да, принять');
-        $('#review-submission-form').attr('action', `/editor/comics/${currentComicId}/${isDislike ? 'reject' : 'accept'}`);
+        $('#submit-review-btn').text(isDislike ? 'Да, отклонить' : 'Да, принять');
+        $('#moderation-status').val(isDislike ? 'unsuccessful' : 'successful');
+        $('#feedback-field').toggle(isDislike);
+        $('#review-submission-form').attr('action', `/dashboard/editor/moderation/${currentComicSlug}`);
+        $('#age-restriction').val($submissionItem.data('age-restriction'));
 
-        // Показ модалки
         $('#review-submission-modal').addClass('show').removeClass('hidden');
     });
 
-    // Закрытие модалки (иконка или кнопка "Отмена")
-    $('#cancel-review-modal, #review-submission-modal-close').on('click', function () {
+    // Закрытие модалки
+    $('#cancel-review-btn, #review-submission-modal-close').on('click', function () {
         closeModal();
     });
 
-    // Закрытие при клике вне контента
     $('#review-submission-modal').on('click', function (e) {
         if ($(e.target).is('#review-submission-modal')) {
             closeModal();
         }
     });
 
-    // Отправка формы
+    // Очистка поля поиска
+    $('.clear-search').on('click', function () {
+        $('input[name="search"]').val('');
+        $(this).addClass('hidden');
+        $('#search-form').submit();
+    });
+
+    // Отправка формы модерации
     $('#review-submission-form').on('submit', function (e) {
         e.preventDefault();
         const formData = $(this).serialize();
 
         $.ajax({
             url: $(this).attr('action'),
-            type: 'POST',
+            type: 'PUT',
             data: formData,
-            success: function () {
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
                 closeModal();
-                $(`.submission-item[data-comic-id="${currentComicId}"]`).remove();
+                $(`.submission-item[data-comic-slug="${currentComicSlug}"]`).remove();
+                $('.submissions-count-text').text(parseInt($('.submissions-count-text').text()) - 1);
             },
             error: function (xhr) {
                 const errorMessage = xhr.responseJSON?.message || 'Произошла ошибка';
@@ -75,7 +81,31 @@ $(document).ready(function () {
         });
     });
 
-    // Закрытие и сброс состояния
+    // Загрузка дополнительных комиксов
+    $(document).on('click', '#load-more', function () {
+        const $button = $(this);
+        const page = $button.data('page');
+        const search = $button.data('search');
+        const status = $button.data('status');
+
+        $.ajax({
+            url: '/dashboard/comics_submissions',
+            type: 'GET',
+            data: { page, search, status },
+            success: function (response) {
+                $('.submissions-list').append(response);
+                $button.data('page', page + 1);
+                if ($(response).find('.load-more-container').length === 0) {
+                    $button.parent().remove();
+                }
+            },
+            error: function (xhr) {
+                console.error('Ошибка при загрузке комиксов:', xhr.responseText);
+            }
+        });
+    });
+
+    // Закрытие и сброс модалки
     function closeModal() {
         $('#review-submission-modal').removeClass('show').addClass('hidden');
         $('.submission-action-tab').removeClass('active-submission-tab');
@@ -83,7 +113,8 @@ $(document).ready(function () {
         $('#edit-submission-comment').val('');
         $('#review-submission-error').text('').removeClass('error');
         $('#review-submission-form').attr('action', '');
-        currentComicId = null;
+        $('#age-restriction').val('');
+        currentComicSlug = null;
         isDislike = false;
     }
 });
