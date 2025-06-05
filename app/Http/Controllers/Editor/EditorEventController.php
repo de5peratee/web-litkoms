@@ -89,6 +89,7 @@ class EditorEventController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'start_date' => $request->start_date . ' ' . $request->time,
+                'end_date' => $request->start_date . ' ' . $request->time,
                 'cover' => $coverPath,
             ]);
 

@@ -33,8 +33,8 @@ class UserSettingsRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:100', 'regex:/^[a-zA-Zа-яА-ЯёЁ]+$/u',],
             'birth_date' => ['required', 'date',],
             'about' => ['nullable', 'string', 'max:500',],
-            'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048',],
-            'head_profile' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048',],
+            'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120',],
+            'head_profile' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120',],
             'password' => ['nullable', 'string', 'min:8', 'confirmed',],
         ];
     }
@@ -76,11 +76,11 @@ class UserSettingsRequest extends FormRequest
 
             'icon.image' => 'Иконка должна быть изображением.',
             'icon.mimes' => 'Иконка должна быть в формате: jpeg, png, jpg, gif.',
-            'icon.max' => 'Размер иконки не должен превышать :max КБ.',
+            'icon.max' => 'Размер иконки не должен превышать 5 МБ.',
 
             'head_profile.image' => 'Обложка профиля должна быть изображением.',
             'head_profile.mimes' => 'Обложка должна быть в формате: jpeg, png, jpg, gif.',
-            'head_profile.max' => 'Размер обложки не должен превышать :max КБ.',
+            'head_profile.max' => 'Размер обложки не должен превышать 5 МБ.',
 
             'password.string' => 'Пароль должен быть строкой.',
             'password.min' => 'Пароль должен содержать минимум :min символов.',

@@ -30,7 +30,7 @@ class EditorCatalogController extends Controller
 //    }
     public function index(Request $request)
     {
-        $perPage = 10; // Количество комиксов на страницу
+        $perPage = 10;
         $search = $request->input('search', '');
 
         $catalogs = Catalog::with('genres')

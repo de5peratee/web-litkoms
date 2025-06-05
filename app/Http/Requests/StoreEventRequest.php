@@ -19,6 +19,7 @@ class StoreEventRequest extends FormRequest
             'name' => 'required|string|min:3|max:255',
             'description' => 'required|string|min:10|max:5000',
             'start_date' => 'required|date_format:Y-m-d|after_or_equal:today',
+            'end_date' => ['required|date_format:Y-m-d|after_or_equal:start_date'],
             'time' => 'required|date_format:H:i',
             'guests' => 'nullable|string|max:1000|regex:/^[\p{L}\s,]+$/u',
             'tags' => 'required|string|max:1000|regex:/^[\p{L}\s,]+$/u',
@@ -64,9 +65,15 @@ class StoreEventRequest extends FormRequest
             'description.required' => 'Описание мероприятия обязательно.',
             'description.min' => 'Описание должно содержать минимум 10 символов.',
             'description.max' => 'Описание не должно превышать 5000 символов.',
+
             'start_date.required' => 'Дата начала обязательна.',
             'start_date.date_format' => 'Дата должна быть в формате ГГГГ-ММ-ДД.',
             'start_date.after_or_equal' => 'Дата начала не может быть в прошлом.',
+
+            'end_date.required' => 'Дата конца обязательна.',
+            'end_date.date_format' => 'Дата конца должна быть в формате ГГГГ-ММ-ДД.',
+            'end_date.after_or_equal' => 'Дата конца не может быть раньше даты начала.',
+
             'time.required' => 'Время начала обязательно.',
             'time.date_format' => 'Время должно быть в формате ЧЧ:ММ.',
             'guests.max' => 'Список гостей не должен превышать 1000 символов.',
