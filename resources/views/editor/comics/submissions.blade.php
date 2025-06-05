@@ -9,7 +9,8 @@
     @vite(['resources/js/editor/authors_сomics_submissions_list.js'])
 
     <div class="submissions-list-container">
-        <div class="submissions-list-container-header">
+
+        <div class="info-block">
             <div class="info-header-title">
                 <img src="{{ asset('images/icons/hw/submissions-icon.svg') }}" alt="icon" class="icon-32">
                 <h3>Заявки на модерацию</h3>

@@ -83,6 +83,7 @@ Route::prefix('/profile/comics')
     ->middleware('authorized')
     ->group(function () {
         Route::get('/', [AuthorComicsController::class, 'index'])->name('user.author_comics');
+        Route::get('/author-comics/load-more', [AuthorComicsController::class, 'loadMore'])->name('user.author_comics_loadMore');
 
         Route::get('/create', [AuthorComicsController::class, 'create'])->name('user.create_author_comics');
         Route::post('/', [AuthorComicsController::class, 'store'])->name('user.store_author_comics');
@@ -113,6 +114,8 @@ Route::prefix('dashboard')->middleware('editor')->group(function () {
 
     // События
     Route::get('/events', [EditorEventController::class, 'index'])->name('editor.events_index');
+    Route::get('/events/load-more', [EditorEventController::class, 'loadMore'])->name('editor.events_loadMore');
+
     Route::get('/events/create', [EditorEventController::class, 'create'])->name('editor.create_event');
     Route::post('/events/store', [EditorEventController::class, 'store'])->name('editor.store_event');
     Route::patch('/events/{event}', [EditorEventController::class, 'update'])->name('editor.update_event');
@@ -120,6 +123,8 @@ Route::prefix('dashboard')->middleware('editor')->group(function () {
 
     // Медиапосты
     Route::get('/mediaposts', [EditorPostController::class, 'index'])->name('editor.mediapost_index');
+    Route::get('/mediaposts/load-more', [EditorPostController::class, 'loadMore'])->name('editor.mediapost_loadMore');
+
     Route::get('/mediaposts/create', [EditorPostController::class, 'create'])->name('editor.create_mediapost');
     Route::post('/mediaposts/store', [EditorPostController::class, 'store'])->name('editor.store_mediapost');
     Route::patch('/mediaposts/{mediaPost}', [EditorPostController::class, 'update'])->name('editor.update_mediapost');
@@ -127,6 +132,8 @@ Route::prefix('dashboard')->middleware('editor')->group(function () {
 
     // Каталоги
     Route::get('/catalogs', [EditorCatalogController::class, 'index'])->name('editor.catalogs_index');
+    Route::get('/catalogs/load-more', [EditorCatalogController::class, 'loadMore'])->name('editor.catalogs_loadMore');
+
     Route::get('/catalogs/create', [EditorCatalogController::class, 'create'])->name('editor.create_catalog');
     Route::post('/catalogs/store', [EditorCatalogController::class, 'store'])->name('editor.store_catalog');
     Route::patch('/catalogs/{catalog}', [EditorCatalogController::class, 'update'])->name('editor.update_catalog');

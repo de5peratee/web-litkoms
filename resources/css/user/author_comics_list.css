@@ -5,35 +5,55 @@
     width: 1170px;
 }
 
-.comics-list-container-header {
+
+
+.info-block {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+
+    gap: 24px;
+
     padding: 32px;
     border-radius: 32px;
+
     background-color: var(--white);
 }
 
-.left-header {
+.info-header {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    gap: 24px;
+}
+
+.info-header-title {
+    display: flex;
+    flex-direction: row;
     align-items: center;
 
     gap: 16px;
+    width: 100%;
 }
 
-.title-container {
-    display: flex;
-    align-items: center;
-
-    gap: 8px;
+.info-count-text {
+    color: var(--secondary);
 }
 
+.primary-btn {
+    align-items: center; /* Вертикальное центрирование содержимого */
+    white-space: nowrap;
+}
 
 .search-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: fit-content;
+    width: 100%;
     gap: 24px;
 }
 
@@ -46,18 +66,26 @@
     gap: 8px;
 }
 
+.search-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
 .search-form input {
     padding: 8px 16px;
     height: 44px;
-    width: 320px;
+    width: 100%;
     border-radius: 12px;
-    border: 1px solid var(--gray);
+
     font-family: 'Involve', sans-serif;
     font-size: 14px;
     font-weight: 600;
     line-height: 140%;
+
+    border: 1px solid var(--gray);
     color: var(--primary);
     background-color: var(--light-gray);
+
     transition: box-shadow 0.1s ease-in, background-color 0.3s ease-in;
 }
 
@@ -69,11 +97,6 @@
     background-color: var(--white);
     border: 1px solid var(--primary-blue);
     box-shadow: 0 16px 48px rgba(0, 90, 255, 0.08);
-}
-
-.search-input-wrapper {
-    position: relative;
-    width: 320px;
 }
 
 .clear-search {
@@ -110,6 +133,25 @@
 .clear-search:hover {
     background-color: var(--light-gray);
 }
+
+
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Добавим в конец файла */
+.clear-search.hidden {
+    display: none;
+}
+
+
+
+
+
+
+
 
 
 .comic-list {
@@ -231,7 +273,7 @@
 .comic-cover-wrapper {
     flex: 0 0 64px; /* Фиксированная ширина, предотвращаем сжатие */
     aspect-ratio: 2/3;
-    border-radius: 12px;
+    border-radius: 8px;
     border: 1px solid var(--gray);
     background-color: var(--light-gray);
     overflow: hidden;
@@ -350,26 +392,27 @@
 }
 
 #edit-comic-cover-preview img {
-    max-width: 160px;
-    max-height: 96px;
+    /*max-width: 180px;*/
+    max-height: 128px;
     object-fit: cover;
-    border-radius: 16px;
+    border-radius: 8px;
     border: 1px solid var(--gray);
     background-color: var(--light-gray);
 }
 
-#edit-comic-file-preview {
-    gap: 8px;
-    max-width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
 
-#edit-comic-file-preview p {
-    color: var(--secondary);
-}
+/*#edit-comic-file-preview {*/
+/*    gap: 8px;*/
+/*    max-width: 100%;*/
+/*    height: auto;*/
+/*    display: flex;*/
+/*    justify-content: flex-start;*/
+/*    align-items: center;*/
+/*}*/
+
+/*#edit-comic-file-preview p {*/
+/*    color: var(--secondary);*/
+/*}*/
 
 .error {
     color: #d32f2f;
@@ -395,23 +438,6 @@
 .is-invalid:focus {
     border-color: #d32f2f;
     box-shadow: 0 0 8px rgba(211, 47, 47, 0.5);
-}
-
-@media (max-width: 640px) {
-    .input-error {
-        font-size: 0.75rem;
-        padding: 0.2rem 0.4rem;
-    }
-    .is-invalid {
-        border-width: 1.5px;
-    }
-    input[type="file"].is-invalid {
-        outline-width: 1.5px;
-    }
-    .cover-upload:has(input.is-invalid),
-    .file-upload:has(input.is-invalid) {
-        border-width: 1.5px;
-    }
 }
 
 .input-error:empty {

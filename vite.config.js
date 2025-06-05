@@ -71,9 +71,13 @@ export default defineConfig({
                 'resources/js/editor/events-list-modal.js',
                 'resources/js/editor/catalog-list-modal.js',
                 'resources/js/editor/authors_сomics_submissions_list.js',
+                'resources/js/editor/catalog_items.js',
+                'resources/js/editor/events_items.js',
+                'resources/js/editor/multimedia_items.js',
 
                 'resources/js/user/author-comics-list-modal.js',
                 'resources/js/user/settings.js',
+                'resources/js/user/authors_comics_items.js',
             ],
             refresh: true,
         }),

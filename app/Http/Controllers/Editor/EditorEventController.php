@@ -22,12 +22,53 @@ class EditorEventController extends Controller
         $this->imageCompressionService = $imageCompressionService;
     }
 
-    public function index()
+//    public function index()
+//    {
+//        $events = Event::with(['tags', 'guests'])
+//            ->orderBy('start_date', 'desc')
+//            ->get();
+//        return view('editor.events.list', compact('events'));
+//    }
+    public function index(Request $request)
     {
+        $perPage = 10;
+        $search = $request->input('search', '');
+
         $events = Event::with(['tags', 'guests'])
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
             ->orderBy('start_date', 'desc')
+            ->take($perPage)
             ->get();
-        return view('editor.events.list', compact('events'));
+
+        $total = Event::when($search, function ($query) use ($search) {
+            return $query->where('name', 'like', '%' . $search . '%');
+        })->count();
+
+        return view('editor.events.list', compact('events', 'total', 'search'));
+    }
+
+    public function loadMore(Request $request)
+    {
+        $page = $request->input('page', 2);
+        $perPage = 10;
+        $search = $request->input('search', '');
+
+        $events = Event::with(['tags', 'guests'])
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('start_date', 'desc')
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+
+        return response()->json([
+            'events' => $events,
+            'hasMore' => $events->count() === $perPage,
+            'nextPage' => $page + 1,
+        ]);
     }
 
     public function create()

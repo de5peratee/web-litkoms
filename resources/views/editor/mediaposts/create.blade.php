@@ -20,23 +20,25 @@
             <form method="POST" action="{{ route('editor.store_mediapost') }}" enctype="multipart/form-data" class="lit-form">
                 @csrf
 
-                <div class="lit-field">
-                    <label for="media">Медиафайлы</label>
-                    <div class="media-upload">
-                        <input type="file" name="media[]" id="media" accept="image/*,video/*,application/pdf" multiple class="{{ $errors->has('media') ? 'is-invalid' : '' }}">
-                        <div class="media-preview" id="mediaPreview"></div>
+                <div class="lit-form-row">
+                    <div class="lit-field">
+                        <label for="media">Медиафайлы</label>
+                        <div class="media-upload">
+                            <input type="file" name="media[]" id="media" accept="image/*,video/*,application/pdf" multiple class="{{ $errors->has('media') ? 'is-invalid' : '' }}">
+                            <div class="media-preview" id="mediaPreview"></div>
+                        </div>
+                        @error('media')
+                        <div class="input-error">{{ $message }}</div>
+                        @enderror
                     </div>
-                    @error('media')
-                    <div class="input-error">{{ $message }}</div>
-                    @enderror
-                </div>
 
-                <div class="lit-field">
-                    <label for="name">Название поста</label>
-                    <input type="text" name="name" id="name" placeholder="Введите название" value="{{ old('name') }}" class="{{ $errors->has('name') ? 'is-invalid' : '' }}">
-                    @error('name')
-                    <div class="input-error">{{ $message }}</div>
-                    @enderror
+                    <div class="lit-field">
+                        <label for="name">Название поста</label>
+                        <input type="text" name="name" id="name" placeholder="Введите название" value="{{ old('name') }}" class="{{ $errors->has('name') ? 'is-invalid' : '' }}">
+                        @error('name')
+                        <div class="input-error">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="lit-field">

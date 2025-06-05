@@ -6,7 +6,7 @@
     width: 1170px;
 }
 
-.submissions-list-container-header {
+.info-block {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -148,13 +148,13 @@
 }
 
 .age-restriction-tag {
-    padding: 6px;
+    width: fit-content;
+    padding: 6px 8px;
     border-radius: 999px;
 
-    width: 32px;
-    height: 32px;
     background-color: var(--primary);
     color: var(--white);
+    flex-shrink: 0;
 }
 
 .submission-datetime-tag {
@@ -444,6 +444,12 @@
     background-color: var(--light-gray);
 }
 
+/* Добавим в конец файла */
+.clear-search.hidden {
+    display: none;
+}
+
+
 
 .load-more-container {
     display: flex;
@@ -451,13 +457,3 @@
     width: 100%;
 }
 
-
-
-/* Добавим в конец файла */
-.clear-search.hidden {
-    display: none;
-}
-
-.clickable {
-    cursor: pointer;
-}
