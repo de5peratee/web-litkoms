@@ -38,7 +38,7 @@
                             </div>
 
                             @error('icon')
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="input-error">{{ $message }}</span>
                             @enderror
 
                             <input type="file" name="icon" id="custom-icon" class="custom-icon-input" style="display: none;" accept="image/*">

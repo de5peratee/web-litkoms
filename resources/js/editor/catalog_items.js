@@ -1,4 +1,5 @@
 import $ from 'jquery';
+
 $(document).ready(function () {
     // Настройка CSRF-токена для AJAX
     $.ajaxSetup({
@@ -37,7 +38,7 @@ $(document).ready(function () {
         }
     });
 
-    // Загрузка дополнительных комиксов
+    // Загрузка дополнительных элементов
     $(document).on('click', '#load-more', function () {
         const $button = $(this);
         const page = $button.data('page');
@@ -52,43 +53,8 @@ $(document).ready(function () {
                 search: search
             },
             success: function (response) {
-                if (response.catalogs.length > 0) {
-                    const $catalogList = $('#catalog-list');
-                    const html = response.catalogs.map((catalog, index) => `
-                        <div class="catalog-item">
-                            <div class="comic-item-left">
-                                <div class="item-sell num-cell">${(page - 1) * 10 + index + 1}</div>
-                                <div class="item-cell comic-preview-cell">
-                                    <div class="comic-cover-wrapper">
-                                        <img src="${catalog.cover ? `/storage/${catalog.cover}` : '/images/default_template/comics.svg'}" class="comic-cover" alt="icon">
-                                    </div>
-                                    <div class="comic-preview-text-wrapper">
-                                        <p class="text-big">${catalog.name}</p>
-                                        <p class="text-hint author-text">${catalog.author}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="catalog-actions">
-                                <a href="#" class="list-action-btn edit-catalog-btn"
-                                   data-catalog-id="${catalog.id}"
-                                   data-catalog-name="${catalog.name}"
-                                   data-catalog-author="${catalog.author}"
-                                   data-catalog-description="${catalog.description}"
-                                   data-catalog-release_year="${catalog.release_year}"
-                                   data-catalog-genres="${catalog.genres.map(genre => genre.name).join(', ')}"
-                                   data-catalog-cover="${catalog.cover ? `/storage/${catalog.cover}` : ''}">
-                                    <img src="/images/icons/edit-primary.svg" class="icon-24" alt="edit-icon">
-                                </a>
-                                <a href="#" class="list-action-btn delete-catalog-btn"
-                                   data-catalog-id="${catalog.id}"
-                                   data-catalog-name="${catalog.name}">
-                                    <img src="/images/icons/trash-primary-red.svg" class="icon-24" alt="delete-icon">
-                                </a>
-                            </div>
-                        </div>
-                    `).join('');
-
-                    $catalogList.append(html);
+                if (response.html && response.html.trim().length > 0) {
+                    $('#catalog-list').append(response.html);
 
                     if (response.hasMore) {
                         $button.data('page', response.nextPage);
@@ -100,7 +66,7 @@ $(document).ready(function () {
                 }
             },
             error: function () {
-                alert('Ошибка при загрузке комиксов.');
+                alert('Ошибка при загрузке каталога.');
             }
         });
     });

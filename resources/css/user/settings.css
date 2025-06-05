@@ -201,3 +201,17 @@
     padding: 12px;
     border-radius: 8px;
 }
+
+.input-error {
+    padding: 4px;
+    border-radius: 4px;
+
+    background-color: #ffebee;
+    color: #d32f2f;
+
+    display: flex;
+    width: fit-content;
+    word-break: break-word;
+    transition: opacity 0.2s ease-in-out;
+    opacity: 1;
+}

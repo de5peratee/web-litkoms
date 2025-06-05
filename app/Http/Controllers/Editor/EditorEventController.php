@@ -64,8 +64,13 @@ class EditorEventController extends Controller
             ->take($perPage)
             ->get();
 
-        return response()->json([
+        $html = view('partials.editor_lists.events_items', [
             'events' => $events,
+            'page' => $page - 1 // Для корректной нумерации
+        ])->render();
+
+        return response()->json([
+            'html' => $html,
             'hasMore' => $events->count() === $perPage,
             'nextPage' => $page + 1,
         ]);

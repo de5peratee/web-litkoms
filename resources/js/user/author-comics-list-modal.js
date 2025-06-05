@@ -28,18 +28,10 @@ $(function () {
         clearErrors();
 
         let isValid = true;
-        const form = $(this);
         const name = $('#edit-comic-name').val().trim();
         const description = $('#edit-comic-description').val().trim();
         const ageRestriction = $('#edit-comic-age_restriction').val();
         const comicId = $('#edit-comic-id').val();
-
-        console.log('Form Data:', {
-            name,
-            description,
-            ageRestriction,
-            comicId
-        });
 
         if (!name) {
             showError('edit-comic-name', 'Название обязательно');
@@ -55,7 +47,6 @@ $(function () {
         }
 
         if (isValid) {
-            // Преобразование age_restriction перед отправкой (6+ → 6)
             const formData = new FormData(this);
             formData.set('age_restriction', ageRestriction.replace('+', ''));
 
@@ -67,16 +58,15 @@ $(function () {
                 contentType: false,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'X-HTTP-Method-Override': 'PATCH' // ← Добавляем этот заголовок
+                    'X-HTTP-Method-Override': 'PATCH'
                 },
-                success: function (response) {
+                success: function () {
                     window.location.href = '/profile/comics';
                 },
                 error: function (xhr) {
-                    console.log('Error Response:', xhr.responseJSON);
                     const errors = xhr.responseJSON.errors || {};
                     for (const [field, messages] of Object.entries(errors)) {
-                        showError(`edit-comic-${field}`, messages[0]);
+                        showError(`edit-comic-${field.replace('.', '_')}`, messages[0]);
                     }
                     if (!Object.keys(errors).length) {
                         alert('Ошибка при сохранении комикса: ' + (xhr.responseJSON.message || 'Неизвестная ошибка'));
@@ -89,34 +79,30 @@ $(function () {
     // Обработка формы удаления
     $('#delete-comic-form').on('submit', function (e) {
         e.preventDefault();
-        const form = $(this);
-        const url = form.attr('action');
-        const comicId = form.attr('action').split('/').pop();
-
-        console.log('Deleting comic with ID:', comicId);
+        const url = $(this).attr('action');
+        const comicId = url.split('/').pop();
 
         $.ajax({
             url: url,
-            method: 'POST', // Change to POST
-            data: form.serialize(),
+            method: 'POST',
+            data: $(this).serialize(),
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                'X-HTTP-Method-Override': 'DELETE' // Add method override for DELETE
+                'X-HTTP-Method-Override': 'DELETE'
             },
-            success: function (response) {
+            success: function () {
                 $(`.delete-comic-btn[data-comic-id="${comicId}"]`).closest('.comic-item').remove();
                 closeModal($('#delete-comic-modal'));
             },
             error: function (xhr) {
-                console.log('Error Response:', xhr.responseJSON);
                 const message = xhr.responseJSON.errors?.error || xhr.responseJSON.message || 'Неизвестная ошибка при удалении комикса';
                 alert(message);
             }
         });
     });
 
-    // Открытие модального окна для редактирования
-    $('.edit-comic-btn').on('click', function (e) {
+    // Делегирование событий для кнопки редактирования
+    $(document).on('click', '.edit-comic-btn', function (e) {
         e.preventDefault();
 
         const comicId = $(this).data('comic-id');
@@ -125,14 +111,10 @@ $(function () {
         let comicAgeRestriction = $(this).data('comic-age_restriction');
         const comicGenres = $(this).data('comic-genres');
         const comicCover = $(this).data('comic-cover');
-        const comicFileName = $(this).data('comic-file-name');
 
-        // Преобразование числового age_restriction в строковое с "+"
         if (comicAgeRestriction && !comicAgeRestriction.endsWith('+')) {
             comicAgeRestriction = comicAgeRestriction + '+';
         }
-
-        console.log('Comic Age Restriction:', comicAgeRestriction); // Отладка
 
         $('#edit-comic-id').val(comicId);
         $('#edit-comic-name').val(comicName);
@@ -147,19 +129,11 @@ $(function () {
             $('#edit-comic-cover-preview').html('');
         }
 
-        // if (comicFileName) {
-        //     $('#edit-comic-file-label').text(comicFileName);
-        //     $('#edit-comic-file-preview').html(`<p>Текущий файл: ${comicFileName}</p>`);
-        // } else {
-        //     $('#edit-comic-file-label').text('Выберите файл');
-        //     $('#edit-comic-file-preview').html('<p>Файл не прикреплен</p>');
-        // }
-
         openModal($('#edit-comic-modal'));
     });
 
-    // Открытие модального окна для удаления
-    $('.delete-comic-btn').on('click', function (e) {
+    // Делегирование событий для кнопки удаления
+    $(document).on('click', '.delete-comic-btn', function (e) {
         e.preventDefault();
         const comicId = $(this).data('comic-id');
         const comicName = $(this).data('comic-name');
@@ -190,16 +164,4 @@ $(function () {
             reader.readAsDataURL(file);
         }
     });
-
-    // Обновление метки файла
-    // $('#edit-comic-file').on('change', function () {
-    //     const file = this.files[0];
-    //     if (file) {
-    //         $('#edit-comic-file-label').text(file.name);
-    //         $('#edit-comic-file-preview').html(`<p>Выбран файл: ${file.name}</p>`);
-    //     } else {
-    //         $('#edit-comic-file-label').text('Выберите файл');
-    //         $('#edit-comic-file-preview').html('<p>Файл не прикреплен</p>');
-    //     }
-    // });
 });

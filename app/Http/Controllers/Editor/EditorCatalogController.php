@@ -63,8 +63,13 @@ class EditorCatalogController extends Controller
             ->take($perPage)
             ->get();
 
-        return response()->json([
+        $html = view('partials.editor_lists.catalog_items', [
             'catalogs' => $catalogs,
+            'page' => $page - 1 // Для корректной нумерации
+        ])->render();
+
+        return response()->json([
+            'html' => $html,
             'hasMore' => $catalogs->count() === $perPage,
             'nextPage' => $page + 1,
         ]);

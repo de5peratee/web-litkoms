@@ -32,7 +32,9 @@
                data-event-name="{{ $event->name }}"
                data-event-description="{{ $event->description }}"
                data-event-start_date="{{ $event->start_date ? $event->start_date->format('Y-m-d') : '' }}"
-               data-event-time="{{ $event->start_date ? $event->start_date->format('H:i') : '' }}"
+               data-event-start_time="{{ $event->start_date ? $event->start_date->format('H:i') : '' }}"
+               data-event-end_date="{{ $event->end_date ? $event->end_date->format('Y-m-d') : '' }}"
+               data-event-end_time="{{ $event->end_date ? $event->end_date->format('H:i') : '' }}"
                data-event-guests="{{ $event->guests->pluck('name')->implode(', ') }}"
                data-event-tags="{{ $event->tags->pluck('name')->implode(', ') }}"
                data-event-cover="{{ $event->cover ? Storage::url($event->cover) : '' }}">

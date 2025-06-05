@@ -28,7 +28,6 @@ $(function () {
         clearErrors();
 
         let isValid = true;
-        const form = $(this);
         const name = $('#edit-post-name').val().trim();
         const description = $('#edit-post-description').val().trim();
         const postId = $('#edit-post-id').val();
@@ -49,20 +48,21 @@ $(function () {
                 data: new FormData(this),
                 processData: false,
                 contentType: false,
-                success: function (response) {
+                success: function () {
                     window.location.href = '/dashboard/mediaposts';
                 },
                 error: function (xhr) {
                     const errors = xhr.responseJSON.errors || {};
                     for (const [field, messages] of Object.entries(errors)) {
-                        showError(`edit-post-${field}`, messages[0]);
+                        showError(`edit-post-${field.replace('.', '_')}`, messages[0]);
                     }
                 }
             });
         }
     });
 
-    $('.delete-post-btn').on('click', function (e) {
+    // Делегирование событий для кнопки удаления
+    $(document).on('click', '.delete-post-btn', function (e) {
         e.preventDefault();
         const postId = $(this).data('post-id');
         const postName = $(this).data('post-name');
@@ -73,7 +73,8 @@ $(function () {
         openModal($('#delete-modal'));
     });
 
-    $('.edit-post-btn').on('click', function (e) {
+    // Делегирование событий для кнопки редактирования
+    $(document).on('click', '.edit-post-btn', function (e) {
         e.preventDefault();
 
         const postId = $(this).data('post-id');
@@ -107,6 +108,7 @@ $(function () {
         openModal($('#edit-modal'));
     });
 
+    // Закрытие модальных окон
     $('#delete-modal-close, #cancel-delete-post').on('click', function () {
         closeModal($('#delete-modal'));
     });
@@ -115,6 +117,7 @@ $(function () {
         closeModal($('#edit-modal'));
     });
 
+    // Предпросмотр загружаемых медиафайлов
     $('#edit-post-media').on('change', function () {
         const files = this.files;
         $('#edit-post-media-preview').empty();
@@ -123,7 +126,16 @@ $(function () {
                 const file = files[i];
                 const reader = new FileReader();
                 reader.onload = function (e) {
-                    const previewHtml = `<img src="${e.target.result}" alt="Предпросмотр" style="max-width: 100px; margin: 5px; border-radius: 8px;">`;
+                    let previewHtml;
+                    if (file.type.startsWith('image/')) {
+                        previewHtml = `<img src="${e.target.result}" alt="Предпросмотр" style="max-width: 100px; margin: 5px; border-radius: 8px;">`;
+                    } else if (file.type.startsWith('video/')) {
+                        previewHtml = `<video src="${e.target.result}" controls style="max-width: 100px; margin: 5px;"></video>`;
+                    } else if (file.type.startsWith('audio/')) {
+                        previewHtml = `<audio src="${e.target.result}" controls style="margin: 5px;"></audio>`;
+                    } else {
+                        previewHtml = `<p>Неподдерживаемый тип: ${file.name}</p>`;
+                    }
                     $('#edit-post-media-preview').append(previewHtml);
                 };
                 reader.readAsDataURL(file);

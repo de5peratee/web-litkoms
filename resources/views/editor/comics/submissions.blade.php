@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite(['resources/css/inputs.css'])
     @vite(['resources/css/editor/authors_сomics_submissions_list.css'])
-    @vite(['resources/js/editor/authors_сomics_submissions_list.js'])
+    @vite(['resources/js/editor/submissions_items.js'])
 
     <div class="submissions-list-container">
 
@@ -37,29 +37,43 @@
             <a href="{{ route('editor.comics_submissions_index', ['status' => 'under review', 'search' => request('search')]) }}"
                class="submissions-filter-tab {{ $status === 'under review' ? 'active-tab' : '' }}"
                data-tab="under review">
-                <img src="{{ asset('images/icons/review-clock-' . ($status === 'under review' ? 'white' : 'primary') . '.svg') }}"
-                     alt="icon" class="icon-24">
+                <img
+                    src="{{ asset('images/icons/review-clock-' . ($status === 'under review' ? 'white' : 'primary') . '.svg') }}"
+                    alt="icon" class="icon-24">
                 На рассмотрении
             </a>
             <a href="{{ route('editor.comics_submissions_index', ['status' => 'successful', 'search' => request('search')]) }}"
                class="submissions-filter-tab {{ $status === 'successful' ? 'active-tab' : '' }}"
                data-tab="successful">
-                <img src="{{ asset('images/icons/approves-icon-' . ($status === 'successful' ? 'white' : 'primary') . '.svg') }}"
-                     alt="icon" class="icon-24">
+                <img
+                    src="{{ asset('images/icons/approves-icon-' . ($status === 'successful' ? 'white' : 'primary') . '.svg') }}"
+                    alt="icon" class="icon-24">
                 Принятые
             </a>
             <a href="{{ route('editor.comics_submissions_index', ['status' => 'unsuccessful', 'search' => request('search')]) }}"
                class="submissions-filter-tab {{ $status === 'unsuccessful' ? 'active-tab' : '' }}"
                data-tab="unsuccessful">
-                <img src="{{ asset('images/icons/rejects-icon-' . ($status === 'unsuccessful' ? 'white' : 'primary') . '.svg') }}"
-                     alt="icon" class="icon-24">
+                <img
+                    src="{{ asset('images/icons/rejects-icon-' . ($status === 'unsuccessful' ? 'white' : 'primary') . '.svg') }}"
+                    alt="icon" class="icon-24">
                 Отклоненные
             </a>
         </div>
 
         <div class="submissions-list">
-            @include('editor.comics.partials.submissions_list')
+            @include('partials.editor_lists.submissions_items')
         </div>
+
+        @if ($comics->hasMorePages())
+            <div class="load-more-container">
+                <button id="load-more" class="primary-btn"
+                        data-page="{{ $comics->currentPage() + 1 }}"
+                        data-search="{{ request('search') ?? '' }}"
+                        data-status="{{ $status }}">
+                    Загрузить ещё
+                </button>
+            </div>
+        @endif
     </div>
 
     <!-- Review Modal -->

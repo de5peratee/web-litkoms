@@ -51,7 +51,7 @@
 
                 <div class="lit-form-row">
                     <div class="lit-field">
-                        <label for="start_date">Дата проведения</label>
+                        <label for="start_date">Дата начала</label>
                         <input type="date" name="start_date" id="start_date" value="{{ old('start_date') }}" class="{{ $errors->has('start_date') ? 'is-invalid' : '' }}">
                         @error('start_date')
                         <div class="input-error">{{ $message }}</div>
@@ -59,11 +59,29 @@
                     </div>
 
                     <div class="lit-field">
-                        <label for="time">Время начала</label>
-                        <input type="time" name="time" id="time" value="{{ old('time') }}" class="{{ $errors->has('time') ? 'is-invalid' : '' }}">
-                        @error('time')
+                        <label for="start_time">Время начала</label>
+                        <input type="time" name="start_time" id="start_time" value="{{ old('start_time') }}" class="{{ $errors->has('start_time') ? 'is-invalid' : '' }}">
+{{--                        @error('time')--}}
+{{--                        <div class="input-error">{{ $message }}</div>--}}
+{{--                        @enderror--}}
+                    </div>
+                </div>
+
+                <div class="lit-form-row">
+                    <div class="lit-field">
+                        <label for="end_date">Дата окончания</label>
+                        <input type="date" name="end_date" id="end_date" value="{{ old('end_date') }}" class="{{ $errors->has('end_date') ? 'is-invalid' : '' }}">
+                        @error('end_date')
                         <div class="input-error">{{ $message }}</div>
                         @enderror
+                    </div>
+
+                    <div class="lit-field">
+                        <label for="end_time">Время окончания</label>
+                        <input type="time" name="end_time" id="end_time" value="{{ old('end_time') }}" class="{{ $errors->has('end_time') ? 'is-invalid' : '' }}">
+{{--                        @error('time')--}}
+{{--                        <div class="input-error">{{ $message }}</div>--}}
+{{--                        @enderror--}}
                     </div>
                 </div>
 
