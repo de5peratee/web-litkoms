@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class AcceptAuthorComicsRequest extends FormRequest
 {
@@ -21,18 +22,17 @@ class AcceptAuthorComicsRequest extends FormRequest
      */
     public function rules(): array
     {
+        Log::info('AcceptAuthorComicsRequest input:', $this->all());
+
         return [
-            'age_restriction' => 'required|in:6,12,16,18',
+            'moderation_status' => 'required|in:successful,unsuccessful',
             'feedback' => $this->moderation_status === 'unsuccessful' ? 'required|string|max:1000' : 'nullable|string|max:1000',
-            'moderation_status' => 'required|in:successful,unsuccessful'
         ];
     }
 
     public function messages(): array
     {
         return [
-            'age_restriction.required' => 'Ограничение по возрасту обязательно.',
-            'age_restriction.in' => 'Ограничение по возрасту должно быть одним из: 6, 12, 16, 18.',
             'feedback.required' => 'Обратная связь обязательна при неуспешной модерации.',
             'feedback.string' => 'Обратная связь должна быть текстом.',
             'feedback.max' => 'Обратная связь не должна превышать 1000 символов.',

@@ -183,14 +183,13 @@ class AuthorComicsController extends Controller
         if ($comic->created_by !== auth()->id()) {
             abort(403, 'Unauthorized action.');
         }
-
         $validated = $request->validated();
 
         try {
             DB::beginTransaction();
 
             $data = [
-                'name' => $validated['title'],
+                'name' => $validated['name'],
                 'description' => $validated['description'],
                 'age_restriction' => $validated['age_restriction'],
                 'is_moderated' => 'under review',

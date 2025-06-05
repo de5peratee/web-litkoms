@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthorComics\AuthorComicsLandingController;
 use App\Http\Controllers\AuthorComics\AuthorComicsListController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\Editor\EditorCatalogController;
+use App\Http\Controllers\Editor\EditorDashboardController;
 use App\Http\Controllers\Editor\EditorEventController;
 use App\Http\Controllers\Editor\EditorModerationController;
 use App\Http\Controllers\Editor\EditorPostController;
@@ -105,8 +106,7 @@ Route::middleware('authorized')->group(function () {
 
 // Панель редактора
 Route::prefix('dashboard')->middleware('editor')->group(function () {
-    Route::view('/', 'editor.dashboard')->name('editor.dashboard');
-
+    Route::get('/', [EditorDashboardController::class, 'index'])->name('editor.dashboard');
 
     Route::get('/comics_submissions', [EditorModerationController::class, 'index'])->name('editor.comics_submissions_index');
     Route::get('/editor/moderation/{slug}', [EditorModerationController::class, 'show'])->name('editor.comic_moderation');
