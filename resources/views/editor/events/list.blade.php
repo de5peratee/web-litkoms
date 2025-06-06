@@ -110,28 +110,44 @@
 
                 <div class="lit-form-row">
                     <div class="lit-field">
-                        <label for="edit-event-start_date">Дата проведения</label>
+                        <label for="edit-event-start_date">Дата начала</label>
                         <input type="date" name="start_date" id="edit-event-start_date" required>
                         <div class="input-error" id="edit-event-start_date-error"></div>
                     </div>
 
                     <div class="lit-field">
-                        <label for="edit-event-time">Время начала</label>
-                        <input type="time" name="time" id="edit-event-time" required>
-                        <div class="input-error" id="edit-event-time-error"></div>
+                        <label for="edit-event-start_time">Время начала</label>
+                        <input type="time" name="start_time" id="edit-event-start_time" required>
+{{--                        <div class="input-error" id="edit-event-time-error"></div>--}}
                     </div>
                 </div>
 
-                <div class="lit-field">
-                    <label for="edit-event-guests">Список гостей</label>
-                    <input type="text" name="guests" id="edit-event-guests" placeholder="Имена гостей через запятую">
-                    <div class="input-error" id="edit-event-guests-error"></div>
+                <div class="lit-form-row">
+                    <div class="lit-field">
+                        <label for="edit-event-end_date">Дата окончания</label>
+                        <input type="date" name="end_date" id="edit-event-end_date" required>
+                        <div class="input-error" id="edit-event-end_date-error"></div>
+                    </div>
+
+                    <div class="lit-field">
+                        <label for="edit-event-end_time">Время окончания</label>
+                        <input type="time" name="end_time" id="edit-event-end_time" required>
+{{--                        <div class="input-error" id="edit-event-time-error"></div>--}}
+                    </div>
                 </div>
 
-                <div class="lit-field">
-                    <label for="edit-event-tags">Теги</label>
-                    <input type="text" name="tags" id="edit-event-tags" placeholder="Теги через запятую">
-                    <div class="input-error" id="edit-event-tags-error"></div>
+                <div class="lit-form-row">
+                    <div class="lit-field">
+                        <label for="edit-event-guests">Список гостей</label>
+                        <input type="text" name="guests" id="edit-event-guests" placeholder="Имена гостей через запятую">
+                        <div class="input-error" id="edit-event-guests-error"></div>
+                    </div>
+
+                    <div class="lit-field">
+                        <label for="edit-event-tags">Теги</label>
+                        <input type="text" name="tags" id="edit-event-tags" placeholder="Теги через запятую">
+                        <div class="input-error" id="edit-event-tags-error"></div>
+                    </div>
                 </div>
 
                 <div class="modal-actions">

@@ -63,14 +63,3 @@
 @empty
     <p>Нет комиксов в выбранной категории</p>
 @endforelse
-
-@if ($comics->hasMorePages())
-    <div class="load-more-container">
-        <button id="load-more" class="primary-btn"
-                data-page="{{ $comics->currentPage() + 1 }}"
-                data-search="{{ request('search') ?? '' }}"
-                data-status="{{ $status }}">
-            Загрузить ещё
-        </button>
-    </div>
-@endif

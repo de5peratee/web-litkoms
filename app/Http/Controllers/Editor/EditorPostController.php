@@ -63,8 +63,13 @@ class EditorPostController extends Controller
             ->take($perPage)
             ->get();
 
-        return response()->json([
+        $html = view('partials.editor_lists.multimedia_items', [
             'mediaPosts' => $mediaPosts,
+            'page' => $page - 1 // Для корректной нумерации
+        ])->render();
+
+        return response()->json([
+            'html' => $html,
             'hasMore' => $mediaPosts->count() === $perPage,
             'nextPage' => $page + 1,
         ]);

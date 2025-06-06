@@ -22,12 +22,12 @@ $(function () {
         $(`#${fieldId}`).addClass('is-invalid');
     }
 
+    // Обработчик отправки формы редактирования
     $('#edit-catalog-form').on('submit', function (e) {
         e.preventDefault();
         clearErrors();
 
         let isValid = true;
-        const form = $(this);
         const name = $('#edit-catalog-name').val().trim();
         const author = $('#edit-catalog-author').val().trim();
         const catalogId = $('#edit-catalog-id').val();
@@ -48,7 +48,7 @@ $(function () {
                 data: new FormData(this),
                 processData: false,
                 contentType: false,
-                success: function (response) {
+                success: function () {
                     window.location.href = '/dashboard/catalogs';
                 },
                 error: function (xhr) {
@@ -61,7 +61,8 @@ $(function () {
         }
     });
 
-    $('.delete-catalog-btn').on('click', function (e) {
+    // Делегирование событий для кнопки удаления
+    $(document).on('click', '.delete-catalog-btn', function (e) {
         e.preventDefault();
         const catalogId = $(this).data('catalog-id');
         const catalogName = $(this).data('catalog-name');
@@ -72,7 +73,8 @@ $(function () {
         openModal($('#delete-catalog-modal'));
     });
 
-    $('.edit-catalog-btn').on('click', function (e) {
+    // Делегирование событий для кнопки редактирования
+    $(document).on('click', '.edit-catalog-btn', function (e) {
         e.preventDefault();
 
         const catalogId = $(this).data('catalog-id');
@@ -100,6 +102,7 @@ $(function () {
         openModal($('#edit-catalog-modal'));
     });
 
+    // Закрытие модальных окон
     $('#delete-catalog-modal-close, #cancel-delete-catalog').on('click', function () {
         closeModal($('#delete-catalog-modal'));
     });
@@ -108,6 +111,7 @@ $(function () {
         closeModal($('#edit-catalog-modal'));
     });
 
+    // Предпросмотр обложки при выборе файла
     $('#edit-catalog-cover').on('change', function () {
         const file = this.files[0];
         if (file) {

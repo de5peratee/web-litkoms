@@ -108,8 +108,13 @@ class AuthorComicsController extends Controller
                 return $comic;
             });
 
-        return response()->json([
+        $html = view('partials.user_lists.authors_comics_items', [
             'comics' => $comics,
+            'page' => $page - 1 // Для корректной нумерации
+        ])->render();
+
+        return response()->json([
+            'html' => $html,
             'hasMore' => $comics->count() === $perPage,
             'nextPage' => $page + 1,
         ]);

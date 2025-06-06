@@ -85,21 +85,19 @@
                 @method('PATCH')
                 <input type="hidden" name="id" id="edit-post-id">
 
-                <div class="lit-form-row">
-                    <div class="lit-field">
-                        <label for="edit-post-media">Фотографии и файлы</label>
-                        <div class="media-upload">
-                            <input type="file" name="media[]" id="media" accept="image/*,video/*,application/pdf" multiple class="{{ $errors->has('media') ? 'is-invalid' : '' }}">
-                            <div class="media-preview" id="edit-post-media-preview"></div>
-                        </div>
-                        <div class="input-error" id="edit-post-media-error"></div>
+                <div class="lit-field">
+                    <label for="edit-post-media">Фотографии и файлы</label>
+                    <div class="media-upload">
+                        <input type="file" name="media[]" id="media" accept="image/*,video/*,application/pdf" multiple class="{{ $errors->has('media') ? 'is-invalid' : '' }}">
+                        <div class="media-preview" id="edit-post-media-preview"></div>
                     </div>
+                    <div class="input-error" id="edit-post-media-error"></div>
+                </div>
 
-                    <div class="lit-field">
-                        <label for="edit-post-name">Название поста</label>
-                        <input type="text" name="name" id="edit-post-name" placeholder="Введите название" required>
-                        <div class="input-error" id="edit-post-name-error"></div>
-                    </div>
+                <div class="lit-field">
+                    <label for="edit-post-name">Название поста</label>
+                    <input type="text" name="name" id="edit-post-name" placeholder="Введите название" required>
+                    <div class="input-error" id="edit-post-name-error"></div>
                 </div>
 
                 <div class="lit-field">
