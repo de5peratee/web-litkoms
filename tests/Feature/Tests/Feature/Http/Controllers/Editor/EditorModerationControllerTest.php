@@ -57,7 +57,7 @@ class EditorModerationControllerTest extends TestCase
             ->get(route('editor.comics_submissions_index', ['search' => 'Test', 'status' => 'under review']), ['X-Requested-With' => 'XMLHttpRequest']);
 
         $response->assertStatus(200)
-            ->assertViewIs('editor.comics.partials.submissions_list')
+            ->assertViewIs('partials.editor_lists.submissions_items')
             ->assertViewHas('comics', fn ($comics) => $comics->contains('name', 'Test Comic'))
             ->assertViewHas('comics_count', 1)
             ->assertViewHas('status', 'under review');

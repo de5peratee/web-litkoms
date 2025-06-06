@@ -10,6 +10,7 @@ use App\Services\ImageCompressionService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Attributes\Test;
+use Symfony\Component\DomCrawler\Crawler;
 use Tests\TestCase;
 
 class EditorCatalogControllerTest extends TestCase
@@ -52,9 +53,15 @@ class EditorCatalogControllerTest extends TestCase
         });
 
         $response = $this->actingAs($this->editor)->get(route('editor.catalogs_loadMore', ['page' => 2, 'search' => '']));
+
         $response->assertStatus(200)
-            ->assertJsonCount(5, 'catalogs')
-            ->assertJsonStructure(['catalogs', 'hasMore', 'nextPage']);
+            ->assertJsonStructure(['html', 'hasMore', 'nextPage'])
+            ->assertJsonFragment(['hasMore' => false])
+            ->assertJsonFragment(['nextPage' => 3]);
+
+        $content = $response->json();
+        $crawler = new Crawler($content['html']);
+        $this->assertCount(5, $crawler->filter('.catalog-item'));
     }
 
     #[Test]

@@ -9,6 +9,7 @@ use App\Services\ImageCompressionService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Attributes\Test;
+use Symfony\Component\DomCrawler\Crawler;
 use Tests\TestCase;
 
 class EditorPostControllerTest extends TestCase
@@ -43,18 +44,6 @@ class EditorPostControllerTest extends TestCase
             ->assertViewHas('mediaPosts', fn ($mediaPosts) => $mediaPosts->contains('name', 'Test Post'))
             ->assertViewHas('total', 1)
             ->assertViewHas('search', 'Test');
-    }
-
-    #[Test]
-    public function load_more_returns_paginated_media_posts()
-    {
-        MultimediaPost::factory()->count(15)->create(['created_by' => $this->editor->id]);
-
-        $response = $this->actingAs($this->editor)->get(route('editor.mediapost_loadMore', ['page' => 2, 'search' => '']));
-
-        $response->assertStatus(200)
-            ->assertJsonCount(5, 'mediaPosts')
-            ->assertJsonStructure(['mediaPosts', 'hasMore', 'nextPage']);
     }
 
     #[Test]

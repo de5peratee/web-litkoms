@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Services\ImageCompressionService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\DomCrawler\Crawler;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use App\Http\Requests\User\AuthorComicUpdateRequest;
@@ -47,8 +48,13 @@ class AuthorComicsControllerTest extends TestCase
         $response = $this->actingAs($this->user)->get(route('user.author_comics_loadMore', ['page' => 2, 'search' => '']));
 
         $response->assertStatus(200)
-            ->assertJsonCount(5, 'comics')
-            ->assertJsonStructure(['comics', 'hasMore', 'nextPage']);
+            ->assertJsonStructure(['html', 'hasMore', 'nextPage'])
+            ->assertJsonFragment(['hasMore' => false]) // Ожидаем hasMore => false
+            ->assertJsonFragment(['nextPage' => 3]);
+
+        $content = $response->json();
+        $crawler = new Crawler($content['html']);
+        $this->assertCount(5, $crawler->filter('.comic-item'));
     }
 
     #[Test]

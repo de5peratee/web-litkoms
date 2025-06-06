@@ -16,17 +16,27 @@ $(function () {
         const link = $(this).attr('href');
 
         // Игнорировать переход, если это внешняя ссылка
-        if (!link || link.startsWith('http') && !link.startsWith(window.location.origin)) {
+        if (!link || (link.startsWith('http') && !link.startsWith(window.location.origin))) {
             return;
         }
 
         e.preventDefault(); // Остановить переход
-        $transitionElement.removeClass('fade-out'); // Показать белый оверлей (затухание)
-        $transitionElement.addClass('fade-in');     // Добавить новый класс (если нужно, см. ниже)
+        $transitionElement.removeClass('fade-out').addClass('fade-in');
 
-        // Подождать завершения transition (или задать фиксированную задержку)
         setTimeout(() => {
             window.location.href = link;
-        }, 500); // Время совпадает с CSS `transition: opacity 0.6s`
+        }, 500);
+    });
+
+    // Обработка возвращения назад (bfcache)
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+            // Сбросим состояние и повторно скроем белый фон
+            $transitionElement.removeClass('fade-in').show();
+
+            setTimeout(function () {
+                $transitionElement.addClass('fade-out');
+            }, 50);
+        }
     });
 });
