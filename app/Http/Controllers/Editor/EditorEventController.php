@@ -83,6 +83,7 @@ class EditorEventController extends Controller
 
     public function store(StoreEventRequest $request)
     {
+//        dd($request->start_date . ' ' . $request->start_time);
         try {
             DB::beginTransaction();
 
@@ -93,8 +94,8 @@ class EditorEventController extends Controller
                 'created_by' => auth()->id(),
                 'name' => $request->name,
                 'description' => $request->description,
-                'start_date' => $request->start_date . ' ' . $request->time,
-                'end_date' => $request->start_date . ' ' . $request->time,
+                'start_date' => $request->start_date . ' ' . $request->start_time ,
+                'end_date' => $request->end_date . ' ' . $request->end_time,
                 'cover' => $coverPath,
             ]);
 

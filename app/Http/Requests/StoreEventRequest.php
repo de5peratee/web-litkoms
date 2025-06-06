@@ -31,6 +31,7 @@ class StoreEventRequest extends FormRequest
     public function withValidator(Validator $validator): void
     {
         $validator->after(function (Validator $validator) {
+            // Проверка гостей
             if ($this->filled('guests')) {
                 $guests = array_filter(array_map('trim', explode(',', $this->input('guests'))));
                 $guestCount = count($guests);
@@ -42,6 +43,7 @@ class StoreEventRequest extends FormRequest
                 }
             }
 
+            // Проверка тегов
             $tags = array_filter(array_map('trim', explode(',', $this->input('tags'))));
             $tagsCount = count($tags);
             if (count(array_unique(array_map('strtolower', $tags))) < $tagsCount) {
@@ -51,15 +53,11 @@ class StoreEventRequest extends FormRequest
                 $validator->errors()->add('tags', 'Количество тегов не должно превышать 5.');
             }
 
-            try {
-                $startDateTime = Carbon::createFromFormat('Y-m-d H:i', $this->input('start_date') . ' ' . $this->input('start_time'));
-                $endDateTime = Carbon::createFromFormat('Y-m-d H:i', $this->input('end_date') . ' ' . $this->input('end_time'));
+            $startDateTime = Carbon::createFromFormat('Y-m-d H:i', $this->input('start_date') . ' ' . $this->input('start_time'));
+            $endDateTime = Carbon::createFromFormat('Y-m-d H:i', $this->input('end_date') . ' ' . $this->input('end_time'));
 
-                if ($endDateTime->lessThan($startDateTime)) {
-                    $validator->errors()->add('end_time', 'Время окончания не может быть раньше времени начала.');
-                }
-            } catch (\Exception $e) {
-                $validator->errors()->add('end_time', 'Некорректный формат даты или времени.');
+            if ($endDateTime->lessThan($startDateTime)) {
+                $validator->errors()->add('end_time', 'Дата и время окончания не могут быть раньше даты и времени начала.');
             }
         });
     }

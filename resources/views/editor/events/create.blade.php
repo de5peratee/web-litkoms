@@ -61,9 +61,9 @@
                     <div class="lit-field">
                         <label for="start_time">Время начала</label>
                         <input type="time" name="start_time" id="start_time" value="{{ old('start_time') }}" class="{{ $errors->has('start_time') ? 'is-invalid' : '' }}">
-{{--                        @error('time')--}}
-{{--                        <div class="input-error">{{ $message }}</div>--}}
-{{--                        @enderror--}}
+                        @error('start_time')
+                        <div class="input-error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
@@ -79,9 +79,9 @@
                     <div class="lit-field">
                         <label for="end_time">Время окончания</label>
                         <input type="time" name="end_time" id="end_time" value="{{ old('end_time') }}" class="{{ $errors->has('end_time') ? 'is-invalid' : '' }}">
-{{--                        @error('time')--}}
-{{--                        <div class="input-error">{{ $message }}</div>--}}
-{{--                        @enderror--}}
+                        @error('end_time')
+                        <div class="input-error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
