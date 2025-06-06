@@ -17,6 +17,8 @@
 
 </head>
 <body>
+<!-- Page transition overlay -->
+<div id="page-transition" class="page-transition"></div>
 
 @include('partials.header')
 

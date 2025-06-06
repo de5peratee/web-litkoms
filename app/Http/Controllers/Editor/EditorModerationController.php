@@ -22,7 +22,7 @@ class EditorModerationController extends Controller
             $query->where('is_moderated', $status);
         }
 
-        $perPage = 2;
+        $perPage = 10;
         $comics = $query->paginate($perPage);
 
         if ($request->ajax()) {
