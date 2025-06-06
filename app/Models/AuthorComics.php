@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AuthorComics extends Model
 {
+    use HasFactory;
+
     protected $guarded = false;
     protected $fillable = [
         'created_by',
