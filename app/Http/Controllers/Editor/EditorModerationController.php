@@ -11,7 +11,7 @@ class EditorModerationController extends Controller
 {
     public function index(Request $request)
     {
-        $query = AuthorComics::with('createdBy');
+        $query = AuthorComics::with('createdBy')->orderBy('created_at', 'DESC');;
 
         if ($search = $request->input('search')) {
             $query->where('name', 'like', '%' . $search . '%');
@@ -22,11 +22,11 @@ class EditorModerationController extends Controller
             $query->where('is_moderated', $status);
         }
 
-        $perPage = 10;
+        $perPage = 2;
         $comics = $query->paginate($perPage);
 
         if ($request->ajax()) {
-            return response()->view('editor.comics.partials.submissions_list', [
+            return response()->view('partials.editor_lists.submissions_items', [
                 'comics' => $comics,
                 'comics_count' => $comics->total(),
                 'status' => $status

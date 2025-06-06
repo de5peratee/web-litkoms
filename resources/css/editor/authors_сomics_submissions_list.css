@@ -143,6 +143,18 @@
     gap: 8px;
 }
 
+.preview-text-flex > p.text-big {
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Ограничиваем заголовок одной строкой */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Разрешаем перенос слов */
+    word-break: break-word;
+    margin: 0;
+    flex: 1; /* Заголовок занимает доступное пространство */
+}
+
 .age-restriction-tag, .submission-datetime-tag {
     width: fit-content;
 }
@@ -179,6 +191,7 @@
 
     border: 1px solid var(--gray);
     background-color: var(--light-gray);
+    flex: 0 0 64px; /* Фиксированная ширина, предотвращаем сжатие */
 }
 
 .submission-author-cover-wrapper {

@@ -30,11 +30,12 @@ $(document).ready(function () {
         updateIcons($submissionItem);
 
         $('#review-submission-modal-title').text(isDislike ? 'Отклонить заявку' : 'Принять заявку');
-        $('#submit-review-btn').text(isDislike ? 'Да, отклонить' : 'Да, принять');
+        $('#submit-review-btn').text(isDislike ? 'Да, отклонить' : 'Да, принять').prop('disabled', false);
         $('#moderation-status').val(isDislike ? 'unsuccessful' : 'successful');
         $('#feedback-field').toggle(isDislike);
         $('#review-submission-form').attr('action', `/dashboard/editor/moderation/${currentComicSlug}`);
         $('#age-restriction').val($submissionItem.data('age-restriction'));
+        $('#review-submission-error').text('').removeClass('error'); // Очистка ошибок
 
         $('#review-submission-modal').addClass('show').removeClass('hidden');
     });
@@ -60,23 +61,46 @@ $(document).ready(function () {
     // Отправка формы модерации
     $('#review-submission-form').on('submit', function (e) {
         e.preventDefault();
-        const formData = $(this).serialize();
+        const $form = $(this);
+        const $submitBtn = $('#submit-review-btn');
+        $submitBtn.prop('disabled', true).text('Подождите...');
 
         $.ajax({
-            url: $(this).attr('action'),
+            url: $form.attr('action'),
             type: 'PUT',
-            data: formData,
+            data: $form.serialize(),
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (response) {
                 closeModal();
-                $(`.submission-item[data-comic-slug="${currentComicSlug}"]`).remove();
-                $('.submissions-count-text').text(parseInt($('.submissions-count-text').text()) - 1);
+                // Перезагружаем список комиксов
+                $.ajax({
+                    url: '/dashboard/comics_submissions',
+                    type: 'GET',
+                    data: {
+                        search: $('input[name="search"]').val(),
+                        status: $('input[name="status"]').val(),
+                        page: 1
+                    },
+                    success: function (response) {
+                        $('.submissions-list').html(response);
+                        $('.submissions-count-text').text($(response).find('.submission-item').length || 0);
+                        if ($(response).find('.submission-item').length === 0) {
+                            $('.submissions-list').html('<p>Нет комиксов в выбранной категории</p>');
+                            $('.load-more-container').remove();
+                        }
+                    },
+                    error: function (xhr) {
+                        console.error('Ошибка при обновлении списка:', xhr.responseText);
+                        $submitBtn.prop('disabled', false).text(isDislike ? 'Да, отклонить' : 'Да, принять');
+                    }
+                });
             },
             error: function (xhr) {
                 const errorMessage = xhr.responseJSON?.message || 'Произошла ошибка';
                 $('#review-submission-error').text(errorMessage).addClass('error');
+                $submitBtn.prop('disabled', false).text(isDislike ? 'Да, отклонить' : 'Да, принять');
             }
         });
     });
@@ -88,19 +112,30 @@ $(document).ready(function () {
         const search = $button.data('search');
         const status = $button.data('status');
 
+        $button.prop('disabled', true).text('Загрузка...');
+
         $.ajax({
             url: '/dashboard/comics_submissions',
             type: 'GET',
             data: { page, search, status },
             success: function (response) {
-                $('.submissions-list').append(response);
-                $button.data('page', page + 1);
-                if ($(response).find('.load-more-container').length === 0) {
-                    $button.parent().remove();
+                const $html = $('<div>').html(response);
+                const $newItems = $html.find('.submission-item');
+
+                if ($newItems.length) {
+                    $('.submissions-list').append($newItems);
+                    $button.data('page', page + 1);
+                    $button.prop('disabled', false).text('Загрузить ещё');
+                } else {
+                    $button.closest('.load-more-container').remove();
+                    if ($('.submission-item').length === 0) {
+                        $('.submissions-list').html('<p>Нет комиксов в выбранной категории</p>');
+                    }
                 }
             },
             error: function (xhr) {
                 console.error('Ошибка при загрузке комиксов:', xhr.responseText);
+                $button.prop('disabled', false).text('Загрузить ещё');
             }
         });
     });
@@ -114,6 +149,7 @@ $(document).ready(function () {
         $('#review-submission-error').text('').removeClass('error');
         $('#review-submission-form').attr('action', '');
         $('#age-restriction').val('');
+        $('#submit-review-btn').prop('disabled', false).text('Подождите...');
         currentComicSlug = null;
         isDislike = false;
     }
