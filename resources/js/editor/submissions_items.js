@@ -74,28 +74,8 @@ $(document).ready(function () {
             },
             success: function (response) {
                 closeModal();
-                // Перезагружаем список комиксов
-                $.ajax({
-                    url: '/dashboard/comics_submissions',
-                    type: 'GET',
-                    data: {
-                        search: $('input[name="search"]').val(),
-                        status: $('input[name="status"]').val(),
-                        page: 1
-                    },
-                    success: function (response) {
-                        $('.submissions-list').html(response);
-                        $('.submissions-count-text').text($(response).find('.submission-item').length || 0);
-                        if ($(response).find('.submission-item').length === 0) {
-                            $('.submissions-list').html('<p>Нет комиксов в выбранной категории</p>');
-                            $('.load-more-container').remove();
-                        }
-                    },
-                    error: function (xhr) {
-                        console.error('Ошибка при обновлении списка:', xhr.responseText);
-                        $submitBtn.prop('disabled', false).text(isDislike ? 'Да, отклонить' : 'Да, принять');
-                    }
-                });
+                // Перезагружаем страницу
+                window.location.reload();
             },
             error: function (xhr) {
                 const errorMessage = xhr.responseJSON?.message || 'Произошла ошибка';
