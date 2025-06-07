@@ -16,6 +16,7 @@ use MoonShine\Support\DTOs\FileItemExtra;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Column;
 use MoonShine\UI\Components\Layout\Grid;
+use MoonShine\UI\Components\Rating;
 use MoonShine\UI\Components\When;
 use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\Date;
@@ -217,5 +218,10 @@ class AuthorComicsResource extends ModelResource
         return [
             'published_at.before_or_equal' => 'Дата публикации не может быть позже текущего момента.',
         ];
+    }
+
+    public function search(): array
+    {
+        return ['name', 'description'];
     }
 }

@@ -70,4 +70,9 @@ class TagsResource extends ModelResource
             'name' => 'required|string',
         ];
     }
+
+    public function search(): array
+    {
+        return ['name'];
+    }
 }

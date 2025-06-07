@@ -39,7 +39,7 @@ class EventsResource extends ModelResource
             Text::make('Название события', 'name')->sortable(),
             Image::make('Обложка', 'cover')
                 ->extraAttributes(fn(string $filename, int $index): ?FileItemExtra => new FileItemExtra(wide: false, auto: true, styles: 'width: 250px;'))
-                ->dir('icon_user')
+                ->dir('event_covers')
                 ->disk('public')
                 ->nullable()
                 ->allowedExtensions(['png', 'jpg', 'jpeg']),
@@ -84,7 +84,7 @@ class EventsResource extends ModelResource
 
                 Image::make('Обложка', 'cover')
                     ->extraAttributes(fn(string $filename, int $index): ?FileItemExtra => new FileItemExtra(wide: false, auto: true, styles: 'width: 250px;'))
-                    ->dir('icon_user')
+                    ->dir('event_covers')
                     ->disk('public')
                     ->nullable()
                     ->allowedExtensions(['png', 'jpg', 'jpeg']),
@@ -128,7 +128,7 @@ class EventsResource extends ModelResource
 
             Image::make('Обложка', 'cover')
                 ->extraAttributes(fn(string $filename, int $index): ?FileItemExtra => new FileItemExtra(wide: false, auto: true, styles: 'width: 250px;'))
-                ->dir('icon_user')
+                ->dir('event_covers')
                 ->disk('public')
                 ->nullable()
                 ->allowedExtensions(['png', 'jpg', 'jpeg']),
@@ -192,5 +192,9 @@ class EventsResource extends ModelResource
         ];
     }
 
+    public function search(): array
+    {
+        return ['name'];
+    }
 
 }

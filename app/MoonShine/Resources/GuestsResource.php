@@ -75,4 +75,9 @@ class GuestsResource extends ModelResource
             'surname' => ['required', 'string', 'regex:/^[\pL]+$/u'],
         ];
     }
+
+    public function search(): array
+    {
+        return ['name', 'surname'];
+    }
 }

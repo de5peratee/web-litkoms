@@ -34,15 +34,15 @@ class UsersResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Никнейм', 'nickname'),
-            Select::make('Роль', 'role')
+            Text::make('Никнейм', 'nickname')->sortable(),
+            Select::make('Роль', 'role')->sortable()
                 ->options([
                     'user' => 'Пользователь',
                     'editor' => 'Редактор',
                 ]),
-            Email::make('Email', 'email'),
-            Text::make('Имя', 'name'),
-            Text::make('Фамилия', 'last_name'),
+            Email::make('Email', 'email')->sortable(),
+            Text::make('Имя', 'name')->sortable(),
+            Text::make('Фамилия', 'last_name')->sortable(),
         ];
     }
 
@@ -162,5 +162,10 @@ class UsersResource extends ModelResource
                 ? 'required|min:8|required_with:password_repeat|same:password_repeat'
                 : 'sometimes|nullable|min:8|required_with:password_repeat|same:password_repeat',
         ];
+    }
+
+    public function search(): array
+    {
+        return ['name', 'last_name', 'nickname', 'email', 'role', 'birth_date'];
     }
 }
