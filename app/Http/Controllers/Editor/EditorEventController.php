@@ -22,13 +22,6 @@ class EditorEventController extends Controller
         $this->imageCompressionService = $imageCompressionService;
     }
 
-//    public function index()
-//    {
-//        $events = Event::with(['tags', 'guests'])
-//            ->orderBy('start_date', 'desc')
-//            ->get();
-//        return view('editor.events.list', compact('events'));
-//    }
     public function index(Request $request)
     {
         $perPage = 10;
@@ -127,7 +120,8 @@ class EditorEventController extends Controller
             $event->update([
                 'name' => $request->name,
                 'description' => $request->description,
-                'start_date' => $request->start_date . ' ' . $request->time,
+                'start_date' => $request->start_date . ' ' . $request->start_time ,
+                'end_date' => $request->end_date . ' ' . $request->end_time,
                 'cover' => $event->cover,
             ]);
 

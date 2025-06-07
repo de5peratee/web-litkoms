@@ -115,7 +115,7 @@ class EditorEventControllerTest extends TestCase
             'id' => $event->id,
             'name' => 'Updated Event',
             'description' => 'Updated Description',
-            'start_date' => '2025-06-15 00:00:00',
+            'start_date' => '2025-06-15 12:00:00',
             'end_date' => '2025-07-15 12:00:00',
             'cover' => null,
         ]);

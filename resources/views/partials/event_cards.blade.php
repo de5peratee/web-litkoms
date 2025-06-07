@@ -1,6 +1,6 @@
 @foreach($events as $event)
     <a href="{{ route('events.get_event', $event->id) }}" class="event-card">
-        @if(\Carbon\Carbon::parse($event->start_date)->isPast())
+        @if(\Carbon\Carbon::parse($event->start_date)->isPast() && \Carbon\Carbon::parse($event->end_date)->isPast())
             <div class="past-sign">
                 <img src="{{ asset('images/icons/lock-secondary.svg') }}" class="icon-20" alt="icon">
                 <p class="text-hint">Уже прошло</p>

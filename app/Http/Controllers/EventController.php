@@ -39,7 +39,13 @@ class EventController extends Controller
         $sortOrder = $request->input('sort', 'asc') === 'desc' ? 'desc' : 'asc';
         $perPage = 6;
 
-        $query = Event::with(['tags', 'guests'])->orderBy('start_date', $sortOrder);
+        $query = Event::with(['tags', 'guests'])
+            ->orderByRaw('CASE 
+                WHEN (end_date IS NOT NULL AND end_date < NOW()) OR 
+                     (end_date IS NULL AND start_date < NOW()) THEN 1 
+                ELSE 0 
+            END')
+            ->orderBy('start_date', $sortOrder);
 
         if ($search) {
             $query->where('name', 'like', '%' . $search . '%');

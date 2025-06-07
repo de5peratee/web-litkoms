@@ -118,7 +118,7 @@
                     <div class="lit-field">
                         <label for="edit-event-start_time">Время начала</label>
                         <input type="time" name="start_time" id="edit-event-start_time" required>
-{{--                        <div class="input-error" id="edit-event-time-error"></div>--}}
+                        <div class="input-error" id="edit-event-start_time-error"></div>
                     </div>
                 </div>
 
@@ -132,7 +132,7 @@
                     <div class="lit-field">
                         <label for="edit-event-end_time">Время окончания</label>
                         <input type="time" name="end_time" id="edit-event-end_time" required>
-{{--                        <div class="input-error" id="edit-event-time-error"></div>--}}
+                        <div class="input-error" id="edit-event-end_time-error"></div>
                     </div>
                 </div>
 
