@@ -31,7 +31,7 @@ class EditorEventController extends Controller
             ->when($search, function ($query) use ($search) {
                 return $query->where('name', 'like', '%' . $search . '%');
             })
-            ->orderBy('start_date', 'desc')
+            ->orderBy('start_date', 'asc')
             ->take($perPage)
             ->get();
 

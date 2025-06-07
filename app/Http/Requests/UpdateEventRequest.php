@@ -15,11 +15,12 @@ class UpdateEventRequest extends FormRequest
 
     public function rules(): array
     {
+//        |after_or_equal:today
         return [
             'cover' => 'image|mimes:jpeg,png,jpg|max:4096',
             'name' => 'required|string|min:3|max:255',
             'description' => 'required|string|min:10|max:5000',
-            'start_date' => 'required|date_format:Y-m-d|after_or_equal:today',
+            'start_date' => 'required|date_format:Y-m-d',
             'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',
