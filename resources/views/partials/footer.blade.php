@@ -4,7 +4,7 @@
 <footer>
     <div class="litcoms-info">
         <p class="text-big">litcoms@mail.ru</p>
-        <p class="text-big">+7(999) 999-99-99 </p>
+        <p class="text-big">+7 (8692) 57-21-91</p>
     </div>
 
     <ul class="footer-nav-menu">
@@ -16,10 +16,21 @@
         <li><a href="{{ route('litar_landing') }}" class="nav-link ">Лит-AR</a></li>
     </ul>
 
+    <p class="location-text">г. Севастополь, ул. Бирюзова, д. 9 Библиотека-филиал №5 "Центр гуманитарно-технической информации"</p>
+
+    <div class="socials-block">
+        <div class="media-link">
+            Вконтакте
+        </div>
+        <div class="media-link">
+            Телеграмм
+        </div>
+    </div>
+
     <div class="policy_desc">
         <span>&copy; 2025 Все права защищены</span>
         <span>Политика конфиденциальности</span>
-        <span>Условия использования контента</span>
+        <span>Правила сообщества</span>
     </div>
 
 </footer>

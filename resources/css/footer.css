@@ -1,8 +1,10 @@
 footer {
     display: flex;
     flex-direction: column;
-    gap: 24px;
     justify-content: center;
+    align-items: center;
+
+    gap: 24px;
     padding: 48px 135px;
     margin-top: 64px;
 
@@ -31,6 +33,11 @@ footer {
     flex-direction: row;
     gap: 16px;
     justify-content: center;
+}
+
+.location-text {
+    font-weight: 500;
+    opacity: 0.48;
 }
 
 .policy_desc {
