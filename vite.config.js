@@ -28,6 +28,7 @@ export default defineConfig({
                 'resources/css/home.css',
                 'resources/css/news.css',
                 'resources/css/verify-email.css',
+                'resources/css/player.css',
 
                 'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
@@ -47,6 +48,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/home.js',
                 'resources/js/news.js',
+                'resources/js/player.js',
                 'resources/js/profile-dropdown.js',
                 'resources/js/mobile-menu.js',
                 'resources/js/library.js',

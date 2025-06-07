@@ -25,7 +25,7 @@ $(function () {
 
         setTimeout(() => {
             window.location.href = link;
-        }, 500);
+        }, 300);
     });
 
     // Обработка возвращения назад (bfcache)

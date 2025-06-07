@@ -1,0 +1,132 @@
+.audio-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    padding: 8px 32px;
+
+    background-color: var(--primary);
+    color: var(--white);
+    box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.32);
+    z-index: 1000;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+}
+
+.player-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+    border-radius: 999px;
+}
+
+.player-btn:hover  {
+    background-color: rgba(255, 255, 255, 0.08);
+
+    scale: 1.15;
+}
+
+.play-btn .play-icon,
+.play-btn .pause-icon {
+    display: none;
+}
+
+.play-btn .play-icon.active,
+.play-btn .pause-icon.active {
+    display: inline;
+}
+
+.loop-btn.active img {
+    filter: brightness(0) saturate(100%) invert(54%) sepia(69%) saturate(2125%) hue-rotate(189deg) brightness(101%) contrast(101%); /* Цвет #1e90ff */
+}
+
+.player-info {
+    flex: 1;
+    margin: 0 16px;
+}
+
+.track-title {
+    margin-bottom: 4px;
+    display: block;
+}
+
+.progress-bar {
+    background-color: #333;
+    height: 4px;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.progress {
+    background-color: var(--white);
+    width: 0;
+    height: 100%;
+    transition: width 0.1s linear;
+
+    border-radius: 999px;
+}
+
+.time {
+    /*font-size: 12px;*/
+    margin-top: 5px;
+    display: block;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.volume-control img {
+    width: 24px;
+    height: 24px;
+    display: none;
+}
+
+.volume-control .volume-icon.active {
+    display: inline;
+}
+
+.volume-slider {
+    width: 100px;
+    -webkit-appearance: none;
+    background: #333;
+    height: 5px;
+    border-radius: 3px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--white);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: var(--light-gray);
+    border-radius: 50%;
+    cursor: pointer;
+}
