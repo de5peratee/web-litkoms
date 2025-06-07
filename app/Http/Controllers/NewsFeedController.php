@@ -45,52 +45,83 @@ class NewsFeedController extends Controller
 //        return view('news', compact('comics', 'events', 'posts', 'allItems'));
 //    }
 
-    public function index()
+    public function index(Request $request)
     {
-        $comics = AuthorComics::with(['createdBy', 'genres'])
+        $perPage = 8; // Количество элементов на страницу
+
+        // Получаем данные, как в первом варианте
+        $comicsQuery = AuthorComics::with(['createdBy', 'genres'])
             ->where('is_published', true)
-            ->where('is_moderated', 'successful')
-            ->get();
+            ->where('is_moderated', 'successful');
 
-        $events = Event::with(['tags'])->get();
-        $posts = MultimediaPost::with(['createdBy', 'medias'])->get();
-
-        // Собираем и сортируем элементы
-        $allItems = collect();
-
-
-        foreach ($comics as $comic) {
-            if (!auth()->check() || auth()->user()->isSubscribedTo($comic->created_by)) {
-                $allItems->push(['type' => 'comic', 'item' => $comic, 'sort_date' => $comic->published_at]);
+        if (auth()->check()) {
+            $subscribedAuthorIds = auth()->user()->subscriptions()->pluck('subscribed_to_id');
+            if ($subscribedAuthorIds->isNotEmpty()) {
+                $comicsQuery->whereIn('created_by', $subscribedAuthorIds);
+            } else {
+                $comicsQuery->whereRaw('1 = 0'); // Пустой результат, если нет подписок
             }
         }
 
-        // Разделяем события на будущие и прошедшие
-        $futureEvents = $events->filter(function ($event) {
-            return $event->start_date && $event->start_date->isFuture();
-        })->sortBy('start_date'); // Сортировка будущих по возрастанию (от ближайшего к дальнему)
-        $pastEvents = $events->filter(function ($event) {
-            return $event->start_date && $event->start_date->isPast();
-        })->sortByDesc('start_date'); // Сортировка прошедших по убыванию (от недавнего к старому)
+        $comics = $comicsQuery->get();
+        $events = Event::with(['tags'])->get();
+        $posts = MultimediaPost::with(['createdBy', 'medias'])->get();
 
-        // Добавляем будущие события (сначала ближайшие)
-        foreach ($futureEvents as $event) {
-            $allItems->push(['type' => 'event', 'item' => $event, 'sort_date' => $event->start_date]);
+        // Собираем все элементы в коллекцию
+        $allItems = collect();
+
+        // Комиксы
+        foreach ($comics as $comic) {
+            $allItems->push([
+                'type' => 'comic',
+                'item' => $comic,
+                'sort_date' => $comic->published_at ?? $comic->created_at
+            ]);
         }
 
-        // Добавляем прошедшие события (затем старые)
-        foreach ($pastEvents as $event) {
-            $allItems->push(['type' => 'event', 'item' => $event, 'sort_date' => $event->start_date]);
+        // Мероприятия (по created_at)
+        foreach ($events as $event) {
+            $allItems->push([
+                'type' => 'event',
+                'item' => $event,
+                'sort_date' => $event->created_at
+            ]);
         }
 
         // Посты
         foreach ($posts as $post) {
-            $allItems->push(['type' => 'post', 'item' => $post, 'sort_date' => $post->created_at]);
+            $allItems->push([
+                'type' => 'post',
+                'item' => $post,
+                'sort_date' => $post->created_at
+            ]);
         }
 
-        // Убираем общую сортировку, так как порядок уже задан
-        // $allItems = $allItems->sortByDesc('sort_date'); // Убрано
+        // Сортировка всех элементов по sort_date (от новых к старым)
+        $allItems = $allItems->sortByDesc('sort_date');
 
-        return view('news', compact('comics', 'events', 'posts', 'allItems'));
+        // Пагинация коллекции
+        $currentPage = $request->input('page', 1);
+        $paginatedItems = $allItems->slice(($currentPage - 1) * $perPage, $perPage)->values();
+        $totalItems = $allItems->count();
+        $hasMorePages = $totalItems > $currentPage * $perPage;
+
+        // Для AJAX-запроса возвращаем только partials
+        if ($request->ajax()) {
+            return response()->view('partials.news-cards', [
+                'items' => $paginatedItems
+            ])->header('Cache-Control', 'no-store, no-cache, must-revalidate');
+        }
+
+        return view('news', [
+            'allItems' => $paginatedItems,
+            'comics' => $comics,
+            'events' => $events,
+            'posts' => $posts,
+            'hasMorePages' => $hasMorePages,
+            'currentPage' => $currentPage,
+            'perPage' => $perPage,
+            'totalItems' => $totalItems
+        ]);
     }
 }

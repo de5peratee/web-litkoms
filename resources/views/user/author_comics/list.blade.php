@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Список авторских комиксов')
+@section('title', 'Мои авторские комиксы')
 
 @section('content')
     @vite(['resources/css/inputs.css'])
@@ -9,11 +9,17 @@
     @vite(['resources/js/user/authors_comics_items.js'])
 
     <div class="comics-list-container">
+        <div class="path-bar">
+            <a href="{{ URL::previous() }}" class="text-hint">Назад</a>
+            <img src="{{ asset('images/icons/arrow-right.svg') }}"  class="icon-24" alt="icon">
+            <p class="text-hint">Мои авторские комиксы</p>
+        </div>
+
         <div class="info-block">
             <div class="info-header">
                 <div class="info-header-title">
                     <img src="{{ asset('images/icons/hw/draw-pencil.svg') }}" alt="icon" class="icon-32">
-                    <h3>Список авторских комиксов</h3>
+                    <h3>Мои авторские комиксы</h3>
                     <p class="text-medium info-count-text">{{ $total }}</p>
                 </div>
 

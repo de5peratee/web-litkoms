@@ -9,6 +9,11 @@
     @vite(['resources/js/editor/submissions_items.js'])
 
     <div class="submissions-list-container">
+        <div class="path-bar">
+            <a href="{{ URL::previous() }}" class="text-hint">Назад</a>
+            <img src="{{ asset('images/icons/arrow-right.svg') }}"  class="icon-24" alt="icon">
+            <p class="text-hint">Заявки на модерацию</p>
+        </div>
 
         <div class="info-block">
             <div class="info-header-title">

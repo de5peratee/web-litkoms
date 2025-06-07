@@ -7,6 +7,12 @@
     @vite(['resources/css/editor/create_post.css'])
 
     <div class="form-container">
+        <div class="path-bar">
+            <a href="{{ URL::previous() }}" class="text-hint">Назад</a>
+            <img src="{{ asset('images/icons/arrow-right.svg') }}"  class="icon-24" alt="icon">
+            <p class="text-hint">Новый пост</p>
+        </div>
+
         <div class="info-block">
             <div class="info-header">
                 <div class="info-header-title">

@@ -9,6 +9,11 @@
     @vite(['resources/js/pdf-viewer.js'])
 
     <div class="author_comics-form-container">
+        <div class="path-bar">
+            <a href="{{ URL::previous() }}" class="text-hint">Назад</a>
+            <img src="{{ asset('images/icons/arrow-right.svg') }}"  class="icon-24" alt="icon">
+            <p class="text-hint">Модерация. {{ $comic->name }}</p>
+        </div>
 
         <div class="info-block moderation-block">
             <h3>Страница модерации</h3>

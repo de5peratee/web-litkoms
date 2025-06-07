@@ -63,7 +63,7 @@
             $event = $item['item'];
         @endphp
         <div class="post-wrapper event-post" data-type="event">
-            @if(\Carbon\Carbon::parse($event->start_date)->isPast())
+            @if(\Carbon\Carbon::parse($event->start_date)->isPast() && \Carbon\Carbon::parse($event->end_date)->isPast())
                 <div class="past-sign">
                     <img src="{{ asset('images/icons/lock-secondary.svg') }}" class="icon-20" alt="icon">
                     <p class="text-hint">Уже прошло</p>
@@ -95,9 +95,9 @@
                 <div class="post-meta-wrapper">
                     <div class="event-datetime-wrapper">
                         <img src="{{ asset('images/icons/calendar-tertiary.svg') }}" class="icon-20" alt="icon">
-                        <p class="slide-event-card-date">{{ $event->start_date->translatedFormat('j F Y', 'ru') }}</p>
+                        <p class="slide-event-card-date">{{ $event->start_date ? $event->start_date->translatedFormat('j F Y', 'ru') : 'Дата не указана' }}</p>
                         <p>·</p>
-                        <p class="slide-event-card-date">{{ $event->start_date->translatedFormat('H:i', 'ru') }}</p>
+                        <p class="slide-event-card-date">{{ $event->start_date ? $event->start_date->translatedFormat('H:i', 'ru') : '' }}</p>
                     </div>
                     <div class="event-location-wrapper">
                         <img src="{{ asset('images/icons/location-tertiary.svg') }}" class="icon-20" alt="icon">
