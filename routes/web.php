@@ -56,8 +56,6 @@ Route::middleware(['authorized', 'not.verified'])->group(function () {
 
 
 
-
-
 // Медиапосты
 Route::get('/news', [NewsFeedController::class, 'index'])->name('mediaposts');
 

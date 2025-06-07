@@ -90,7 +90,8 @@ class EditorEventControllerTest extends TestCase
         $event = Event::factory()->create([
             'name' => 'Old Event',
             'description' => 'Old Description',
-            'start_date' => '2025-06-01 10:00:00',
+            'start_date' => '2025-06-15 12:00:00',
+            'end_date' => '2025-07-15 12:00:00',
             'created_by' => $this->editor->id,
             'cover' => null,
         ]);
@@ -98,7 +99,9 @@ class EditorEventControllerTest extends TestCase
             'name' => 'Updated Event',
             'description' => 'Updated Description',
             'start_date' => '2025-06-15',
-            'time' => '15:00',
+            'end_date' => '2025-07-15',
+            'start_time' => '12:00',
+            'end_time' => '12:00',
             'guests' => 'Alice Brown',
             'tags' => 'Seminar',
         ];
@@ -112,9 +115,12 @@ class EditorEventControllerTest extends TestCase
             'id' => $event->id,
             'name' => 'Updated Event',
             'description' => 'Updated Description',
-            'start_date' => '2025-06-15 15:00:00',
+            'start_date' => '2025-06-15 00:00:00',
+            'end_date' => '2025-07-15 12:00:00',
             'cover' => null,
         ]);
+
+
         $this->assertDatabaseHas('guests', ['name' => 'Alice Brown']);
         $this->assertDatabaseHas('tags', ['name' => 'Seminar']);
     }

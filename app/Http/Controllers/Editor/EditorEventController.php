@@ -66,7 +66,7 @@ class EditorEventController extends Controller
 
         $html = view('partials.editor_lists.events_items', [
             'events' => $events,
-            'page' => $page - 1 // Для корректной нумерации
+            'page' => $page - 1
         ])->render();
 
         return response()->json([
