@@ -47,35 +47,3 @@ main {
 
     width: 100%;
 }
-
-.web-radio-cta {
-    position: absolute;
-    height: 64px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: move;;
-    transition: all 0.2s ease;
-    z-index: 1000;
-}
-
-.web-radio-cta:hover {
-    transform: scale(1.1);
-}
-
-.web-radio-cta img {
-   height: 64px;
-}
-
-@media (max-width: 768px) {
-    .web-radio-cta {
-        width: 48px;
-        height: 48px;
-    }
-    .web-radio-cta img {
-        width: 24px;
-        height: 24px;
-    }
-}

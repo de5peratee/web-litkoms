@@ -10,6 +10,7 @@ footer {
 
     background-color: var(--primary);
     color: var(--white);
+    text-align: center;
 }
 
 .footer-nav-menu {
@@ -46,4 +47,19 @@ footer {
     justify-content: center;
     gap: 16px;
     color: var(--secondary);
+}
+
+.socials-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 24px;
+}
+
+.media-link {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
 }

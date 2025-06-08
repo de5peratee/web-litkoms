@@ -154,9 +154,4 @@
             </div>
         </div>
     </div>
-
-{{--    <div class="web-radio-cta" id="floating-blob">--}}
-{{--        <img src="{{ asset('images/blob.svg') }}" alt="icon">--}}
-{{--    </div>--}}
-
 @endsection

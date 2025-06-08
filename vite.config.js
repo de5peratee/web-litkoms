@@ -44,6 +44,7 @@ export default defineConfig({
                 'resources/css/user/create_author_comics.css',
                 'resources/css/user/moderation-confirm-comics.css',
                 'resources/css/user/settings.css',
+                'resources/css/manuals.css',
 
                 'resources/js/app.js',
                 'resources/js/home.js',
@@ -67,6 +68,7 @@ export default defineConfig({
                 'resources/js/comics-list-wrapper-fix.js',
                 'resources/js/authors-comics-library.js',
                 'resources/js/verify-email.js',
+                'resources/js/newsfeed-slider.js',
 
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',

@@ -121,14 +121,19 @@
             });
         @endphp
 
-        <div class="post-wrapper media-post" data-type="post">
+        <div class="post-wrapper media-post" data-type="post" data-post-id="{{ $post->id }}">
             @if ($imageMedias->count() > 0)
-                <div class="post-media-grid images-count-{{ min($imageMedias->count(), 6) }}">
+                <div class="post-media-grid images-count-{{ min($imageMedias->count(), 6) }}" data-images='@json($imageMedias->pluck('file')->map(fn($file) => Storage::url($file)))'>
                     @foreach ($imageMedias->take(6) as $media)
                         <div class="post-media-wrapper">
                             <img src="{{ Storage::url($media->file) }}" alt="post_media">
                         </div>
                     @endforeach
+                    @if ($imageMedias->count() > 6)
+                        <div class="post-media-overlay">
+                            <p class="text-big">6+ Изображений</p>
+                        </div>
+                    @endif
                 </div>
             @endif
 
@@ -169,3 +174,24 @@
 @if ($items->isEmpty())
     <p class="no-results">К сожалению ничего не нашли :(</p>
 @endif
+
+<div class="media-slider" id="media-slider" style="display: none;">
+    <div class="media-slider-overlay"></div>
+    <div class="media-slider-content">
+        <button class="slider-close-btn">
+            <img src="{{ asset('images/icons/close-white.svg') }}" class="icon-24" alt="close">
+        </button>
+        <div class="slider-image-wrapper">
+            <img id="slider-image" src="" alt="slider image">
+        </div>
+        <div class="slider-controls">
+            <button class="slider-prev-btn">
+                <img src="{{ asset('images/icons/arrow-left-white.svg') }}" class="icon-24" alt="prev">
+            </button>
+            <p class="slider-counter" id="slider-counter">1/1</p>
+            <button class="slider-next-btn">
+                <img src="{{ asset('images/icons/arrow-right-white.svg') }}" class="icon-24" alt="next">
+            </button>
+        </div>
+    </div>
+</div>
