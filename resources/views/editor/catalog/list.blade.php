@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Список каталога')
+@section('title', 'Каталог комиксов Литкомс')
 
 @section('content')
     @vite(['resources/css/inputs.css'])
@@ -9,6 +9,12 @@
     @vite(['resources/js/editor/catalog_items.js'])
 
     <div class="catalogs-list-container">
+        <div class="path-bar">
+            <a href="{{ URL::previous() }}" class="text-hint">Назад</a>
+            <img src="{{ asset('images/icons/arrow-right.svg') }}"  class="icon-24" alt="icon">
+            <p class="text-hint">Каталог комиксов Литкомс</p>
+        </div>
+
         <div class="info-block">
             <div class="info-header">
                 <div class="info-header-title">

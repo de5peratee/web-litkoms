@@ -28,6 +28,7 @@ export default defineConfig({
                 'resources/css/home.css',
                 'resources/css/news.css',
                 'resources/css/verify-email.css',
+                'resources/css/player.css',
 
                 'resources/css/editor/dashboard.css',
                 'resources/css/editor/create_event.css',
@@ -37,17 +38,18 @@ export default defineConfig({
                 'resources/css/editor/multimedia_list.css',
                 'resources/css/editor/catalog_list.css',
                 'resources/css/editor/authors_сomics_submissions_list.css',
-                'resources/css/editor/moderation.css',
                 'resources/css/editor/authors_comics_moderation.css',
 
                 'resources/css/user/author_comics_list.css',
                 'resources/css/user/create_author_comics.css',
                 'resources/css/user/moderation-confirm-comics.css',
                 'resources/css/user/settings.css',
+                'resources/css/manuals.css',
 
                 'resources/js/app.js',
                 'resources/js/home.js',
                 'resources/js/news.js',
+                'resources/js/player.js',
                 'resources/js/profile-dropdown.js',
                 'resources/js/mobile-menu.js',
                 'resources/js/library.js',
@@ -66,6 +68,7 @@ export default defineConfig({
                 'resources/js/comics-list-wrapper-fix.js',
                 'resources/js/authors-comics-library.js',
                 'resources/js/verify-email.js',
+                'resources/js/newsfeed-slider.js',
 
                 'resources/js/editor/multimedia-list-modal.js',
                 'resources/js/editor/events-list-modal.js',

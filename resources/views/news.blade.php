@@ -4,6 +4,7 @@
 
 @section('content')
     @vite(['resources/css/news.css', 'resources/js/news.js'])
+    @vite(['resources/js/newsfeed-slider.js'])
 
     <div class="news-container">
         <div class="news-header">
@@ -46,10 +47,14 @@
             </div>
         </div>
 
-        <div class="load-more-container">
-            <button id="load-more" class="primary-btn" style="display: none;">
-                Загрузить еще
-            </button>
-        </div>
+        @if ($hasMorePages)
+            <div class="load-more-container">
+                <button id="load-more" class="primary-btn"
+                        data-page="{{ $currentPage + 1 }}"
+                        data-tab="all">
+                    Загрузить еще
+                </button>
+            </div>
+        @endif
     </div>
 @endsection

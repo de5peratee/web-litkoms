@@ -1,21 +1,30 @@
-.lit-field-group-flex {
-    display: flex;
-    align-items: flex-start;
-    gap: 48px;
-}
-
-.lit-field-group {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    flex: 1;
-}
-
 .user-settings-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
     width: 1170px;
+}
+
+.path-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+
+    align-items: center;
+}
+
+.path-bar a {
+    padding: 4px 8px;
+    border-radius: 8px;
+
+    text-decoration: none;
+    background-color: var(--white);
+
+    transition: color 0.3s ease-in, background-color 0.3s ease-in;
+}
+
+.path-bar a:hover {
+    color: var(--primary-blue);
 }
 
 .info-block {
@@ -46,6 +55,19 @@
     flex-direction: row;
     align-items: center;
     gap: 12px;
+}
+
+.lit-field-group-flex {
+    display: flex;
+    align-items: flex-start;
+    gap: 48px;
+}
+
+.lit-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
 }
 
 .user-settings-avatar-wrapper {

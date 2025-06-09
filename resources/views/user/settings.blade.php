@@ -8,6 +8,11 @@
     @vite(['resources/js/user/settings.js'])
 
     <div class="user-settings-container">
+{{--        <div class="path-bar">--}}
+{{--            <a href="{{ URL::previous() }}" class="text-hint">Назад</a>--}}
+{{--            <img src="{{ asset('images/icons/arrow-right.svg') }}"  class="icon-24" alt="icon">--}}
+{{--            <p class="text-hint">Настройки профиля</p>--}}
+{{--        </div>--}}
 
         <div class="info-block header-block">
             <div class="info-header">

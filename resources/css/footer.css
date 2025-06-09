@@ -1,13 +1,16 @@
 footer {
     display: flex;
     flex-direction: column;
-    gap: 24px;
     justify-content: center;
+    align-items: center;
+
+    gap: 24px;
     padding: 48px 135px;
     margin-top: 64px;
 
     background-color: var(--primary);
     color: var(--white);
+    text-align: center;
 }
 
 .footer-nav-menu {
@@ -33,10 +36,30 @@ footer {
     justify-content: center;
 }
 
+.location-text {
+    font-weight: 500;
+    opacity: 0.48;
+}
+
 .policy_desc {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 16px;
     color: var(--secondary);
+}
+
+.socials-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 24px;
+}
+
+.media-link {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
 }
