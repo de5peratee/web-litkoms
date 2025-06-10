@@ -31,12 +31,12 @@
         @endguest
 
         @auth
-            <div class="icon-wrapper" id="notify-trigger">
-                <img src="{{ asset('images/icons/bell.svg') }}" alt="icon">
-            </div>
+{{--            <div class="icon-wrapper" id="notify-trigger">--}}
+{{--                <img src="{{ asset('images/icons/bell.svg') }}" alt="icon">--}}
+{{--            </div>--}}
 
                 <div class="header-profile-container" id="headerProfileContainer">
-                <a href="{{route('profile.index', Auth::user()->nickname)}}" class="header-profile-info">
+                <div class="header-profile-info">
                     <div class="header-avatar-wrapper">
                         @if(Auth::user()->icon && Storage::disk('public')->exists(Auth::user()->icon))
                             <img src="{{ Storage::url(Auth::user()->icon) }}" alt="avatar">
@@ -47,7 +47,7 @@
                     <p class="text-small">
                         {{ Auth::user()->name }} {{ mb_substr(Auth::user()->last_name, 0, 1) }}.
                     </p>
-                </a>
+                </div>
 
                 <div class="profile-dropdown" id="profileDropdown">
                     <div class="dropdown-content">
@@ -108,6 +108,15 @@
                 <li><a href="{{ route('events.index') }}" class="{{ Route::currentRouteName() == 'events.index' ? 'active-link' : '' }}">Мероприятия</a></li>
                 <li><a href="{{ route('authors_comics_landing') }}" class="{{ Route::currentRouteName() == 'authors_comics_landing' ? 'active-link' : '' }}">Авторские комиксы</a></li>
                 <li><a href="{{ route('litar_landing') }}" class="{{ Route::currentRouteName() == 'litar_landing' ? 'active-link' : '' }}">Лит-AR</a></li>
+
+                <div class="h-divider"></div>
+
+                <li><a href="{{ route('profile.index', Auth::user()->nickname)}}" class="{{ Route::currentRouteName() == 'profile.index' ? 'active-link' : '' }}">Профиль</a></li>
+                <li><a href="{{ route('settings.show') }}" class="{{ Route::currentRouteName() == 'settings.show' ? 'active-link' : '' }}">Настройки</a></li>
+                @if (auth()->user()->role === 'editor')
+                    <li><a href="{{ route('editor.dashboard') }}" class="{{ Route::currentRouteName() == 'editor.dashboard' ? 'active-link' : '' }}">Панель редактора</a></li>
+                @endif
+
             </ul>
 
             <div class="h-divider"></div>
