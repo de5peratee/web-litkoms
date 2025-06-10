@@ -457,9 +457,9 @@ header .icon-wrapper:hover {
     }
 
     .header-avatar-wrapper {
-        width: 24px;
-        height: 24px;
-        min-width: 24px;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
     }
 
     .header-profile-info {
