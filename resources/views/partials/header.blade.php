@@ -90,6 +90,7 @@
 
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
     <div class="mobile-menu" id="mobileMenu">
+
         <div class="mobile-menu__header">
             <a href="{{ route('home') }}">
                 <img src="{{ asset('images/logo.svg') }}" alt="logo" class="logo">
@@ -100,34 +101,47 @@
             </div>
 
         </div>
+
         <nav class="mobile-menu__content">
-            <ul>
+            <p class="text-small drop-down-menu-title">МЕНЮ</p>
+            <ul class="submenu-wrapper">
                 <li><a href="{{ route('home') }}" class="{{ Route::currentRouteName() == 'home' ? 'active-link' : '' }}">Главная</a></li>
                 <li><a href="{{ route('library.index') }}" class="{{ Route::currentRouteName() == 'library.index' ? 'active-link' : '' }}">Библиотека</a></li>
                 <li><a href="{{ route('mediaposts') }}" class="{{ Route::currentRouteName() == 'mediaposts' ? 'active-link' : '' }}">Лента</a></li>
                 <li><a href="{{ route('events.index') }}" class="{{ Route::currentRouteName() == 'events.index' ? 'active-link' : '' }}">Мероприятия</a></li>
                 <li><a href="{{ route('authors_comics_landing') }}" class="{{ Route::currentRouteName() == 'authors_comics_landing' ? 'active-link' : '' }}">Авторские комиксы</a></li>
                 <li><a href="{{ route('litar_landing') }}" class="{{ Route::currentRouteName() == 'litar_landing' ? 'active-link' : '' }}">Лит-AR</a></li>
+            </ul>
 
-                <div class="h-divider"></div>
+            @auth
 
+            <div class="h-divider"></div>
+
+            <p class="text-small drop-down-menu-title">АККАУНТ</p>
+
+            <ul class="submenu-wrapper">
                 <li><a href="{{ route('profile.index', Auth::user()->nickname)}}" class="{{ Route::currentRouteName() == 'profile.index' ? 'active-link' : '' }}">Профиль</a></li>
                 <li><a href="{{ route('settings.show') }}" class="{{ Route::currentRouteName() == 'settings.show' ? 'active-link' : '' }}">Настройки</a></li>
                 @if (auth()->user()->role === 'editor')
                     <li><a href="{{ route('editor.dashboard') }}" class="{{ Route::currentRouteName() == 'editor.dashboard' ? 'active-link' : '' }}">Панель редактора</a></li>
                 @endif
-
             </ul>
+
+                <div class="h-divider"></div>
+
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="dropdown-item logout-btn">
+                        <img src="{{ asset('images/icons/exit.svg') }}" alt="icon" class="icon-24">
+                        Выйти
+                    </button>
+                </form>
+
+            @endauth
 
             <div class="h-divider"></div>
 
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="dropdown-item logout-btn">
-                    <img src="{{ asset('images/icons/exit.svg') }}" alt="icon" class="icon-24">
-                    Выйти
-                </button>
-            </form>
+            <a href="{{ route('manuals.policy') }}" class="text-hint policy-menu-text">Политика конфиденциальности</a>
 
         </nav>
     </div>

@@ -197,7 +197,7 @@ header .icon-wrapper:hover {
     gap: 12px;
     padding: 8px 12px;
     min-height: 44px;
-    border-radius: 8px;
+    border-radius: 12px;
 
     color: var(--primary);
     text-decoration: none;
@@ -208,7 +208,7 @@ header .icon-wrapper:hover {
 
 .dropdown-item:hover {
     background-color: var(--light-gray);
-    color: var(--primary);
+    color: var(--primary-blue);
 }
 
 .dropdown-item img {
@@ -233,7 +233,7 @@ header .icon-wrapper:hover {
     /*background-color: var(--light-gray);*/
     color: var(--primary-red);
     border: 1px solid var(--primary-red);
-
+    border-radius: 12px;
 
     transition: all 0.2s ease, transform 0.2s;
 }
@@ -242,6 +242,27 @@ header .icon-wrapper:hover {
     background-color: #FFF5F3;
     color: var(--primary-red);
 }
+
+.logout-btn:active {
+    scale: 0.95;
+}
+
+.drop-down-menu-title {
+    color: var(--secondary);
+}
+
+.submenu-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    gap: 4px;
+    /*padding: 8px;*/
+    border-radius: 12px;
+
+    background-color: var(--light-gray);
+}
+
 
 /* Бургер-иконка (изначально скрыта) */
 #menu-trigger {
@@ -275,6 +296,11 @@ header .icon-wrapper:hover {
     border-radius: 16px 0 0 16px;
 
     background: var(--white);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
 
     transition: right 0.3s ease;
     overflow-y: auto;
@@ -310,7 +336,7 @@ header .icon-wrapper:hover {
     padding: 12px;
     color: var(--primary);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 12px;
     transition: background-color 0.2s ease;
 }
 
@@ -321,6 +347,7 @@ header .icon-wrapper:hover {
 
 .mobile-menu__content a:not(.active-link):hover {
     background-color: var(--gray);
+    color: var(--primary-blue);
 }
 /* Состояния при открытии */
 .mobile-menu.active {
@@ -331,6 +358,18 @@ header .icon-wrapper:hover {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+}
+
+.text-hint.policy-menu-text {
+    color: var(--secondary);
+
+    padding-block: 4px;
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+.text-hint.policy-menu-text:hover {
+    background-color: transparent !important;
 }
 
 /* Планшеты (576px–992px) */
