@@ -290,21 +290,22 @@ header .icon-wrapper:hover {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 280px;
+    width: 300px;
     height: 100%;
     z-index: 1000;
-    border-radius: 16px 0 0 16px;
-
-    background: var(--white);
 
     display: flex;
     flex-direction: column;
 
     gap: 16px;
+    padding-inline: 8px;
+    border-radius: 16px 0 0 16px;
 
     transition: right 0.3s ease;
     overflow-y: auto;
     pointer-events: auto;
+
+    background: var(--white);
 }
 
 .mobile-menu__header {
@@ -333,11 +334,14 @@ header .icon-wrapper:hover {
 
 .mobile-menu__content a {
     display: block;
+
     padding: 12px;
-    color: var(--primary);
-    text-decoration: none;
     border-radius: 12px;
-    transition: background-color 0.2s ease;
+
+    text-decoration: none;
+
+    color: var(--primary);
+    transition:all 0.2s ease;
 }
 
 .mobile-menu__content a.active-link {
@@ -384,7 +388,7 @@ header .icon-wrapper:hover {
     }
 
     .logo {
-        height: 40px;
+        height: 48px;
     }
 
     .header-account-wrapper {
@@ -417,6 +421,20 @@ header .icon-wrapper:hover {
     .mobile-menu {
         width: 260px;
     }
+
+    /*.logout-btn {*/
+    /*    padding: 6px 12px;*/
+    /*    height: 40px;*/
+    /*    border-radius: 8px;*/
+    /*    font-size: 14px;*/
+    /*}*/
+    /*.mobile-menu__content a {*/
+    /*    padding: 6px 12px;*/
+    /*    height: 40px;*/
+    /*    border-radius: 8px;*/
+    /*    font-size: 14px;*/
+    /*}*/
+
 }
 
 /* Мобильные устройства (<576px) */
@@ -431,7 +449,7 @@ header .icon-wrapper:hover {
     }
 
     .logo {
-        height: 32px;
+        height: 36px;
     }
 
     .header-account-wrapper {
@@ -469,6 +487,20 @@ header .icon-wrapper:hover {
     .mobile-menu__content {
         padding: 6px;
     }
+
+    /*.logout-btn {*/
+    /*    padding: 4px 12px;*/
+    /*    height: 36px;*/
+    /*    border-radius: 8px;*/
+    /*    font-size: 12px;*/
+    /*}*/
+
+    /*.mobile-menu__content a {*/
+    /*    padding: 4px 12px;*/
+    /*    border-radius: 8px;*/
+    /*    height: 36px;*/
+    /*    font-size: 12px;*/
+    /*}*/
 }
 
 

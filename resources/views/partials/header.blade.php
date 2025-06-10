@@ -127,8 +127,6 @@
                 @endif
             </ul>
 
-                <div class="h-divider"></div>
-
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="dropdown-item logout-btn">

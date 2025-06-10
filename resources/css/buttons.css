@@ -99,19 +99,19 @@
     .primary-btn {
         padding: 6px 12px;
         height: 40px;
-        border-radius: 8px;
+        border-radius: 10px;
         font-size: 14px;
     }
     .secondary-btn {
         padding: 6px 12px;
         height: 40px;
-        border-radius: 8px;
+        border-radius: 10px;
         font-size: 14px;
     }
     .tertiary-btn {
         padding: 6px 0;
         height: 40px;
-        border-radius: 8px;
+        border-radius: 10px;
         font-size: 14px;
     }
 }
