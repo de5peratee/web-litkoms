@@ -117,20 +117,17 @@
 @media (max-width: 576px) {
     .primary-btn {
         padding: 4px 12px;
-        height: 36px;
-        border-radius: 8px;
+        height: 40px;
         font-size: 12px;
     }
     .secondary-btn {
         padding: 4px 12px;
-        height: 36px;
-        border-radius: 8px;
+        height: 40px;
         font-size: 12px;
     }
     .tertiary-btn {
         padding: 4px 0;
         height: 36px;
-        border-radius: 8px;
         font-size: 12px;
     }
 }

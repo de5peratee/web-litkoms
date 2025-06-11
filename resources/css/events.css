@@ -572,6 +572,7 @@ option {
     .events-container,
     .events-slider-container {
         width: 640px;
+        border-radius: 24px;
     }
     .events-explore-container {
         padding: 24px;
@@ -581,6 +582,10 @@ option {
         flex-direction: column;
         align-items: center;
         gap: 12px;
+        padding-block: 8px;
+    }
+    .slide-center-data {
+        gap: 24px; /* Увеличенный отступ между кнопкой и датой */
     }
     .search-form {
         justify-content: center; /* Синхронизация с библиотекой */
@@ -594,6 +599,19 @@ option {
     .search-input-wrapper {
         width: 100%; /* Синхронизация с инпутом */
     }
+    .modal-content {
+        padding: 24px;
+        border-radius: 24px;
+        width: 400px;
+    }
+    .modal-content select, #category-search {
+        padding: 6px 12px;
+        height: 40px;
+    }
+    .modal-close {
+        width: 36px;
+        height: 36px;
+    }
     .events-grid {
         grid-template-columns: 1fr;
     }
@@ -606,6 +624,10 @@ option {
     .slide {
         height: 464px;
     }
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
 }
 
 @media (max-width: 640px) and (min-width: 480px) {
@@ -615,19 +637,25 @@ option {
     }
     .search-form input {
         padding: 5px 10px; /* Синхронизация с библиотекой */
-        height: 36px; /* Синхронизация с библиотекой */
+        height: 40px; /* Синхронизация с библиотекой */
     }
     .events-explore-container {
         padding: 16px;
     }
+    .modal-content select, #category-search {
+        padding: 5px 10px;
+        height: 40px;
+    }
+    .modal-close {
+        width: 32px;
+        height: 32px;
+    }
     .slide {
-        height: 528px;
+        height: 460px;
     }
     .filter-btn {
         padding: 4px 12px; /* Синхронизация с библиотекой */
-        height: 36px; /* Синхронизация с библиотекой */
-        border-radius: 8px; /* Синхронизация с библиотекой */
-        font-size: 12px; /* Синхронизация с библиотекой */
+        height: 40px; /* Синхронизация с библиотекой */
     }
 
     .event-card {
@@ -638,26 +666,45 @@ option {
 @media (max-width: 480px) {
     .events-container,
     .events-slider-container {
-        width: 320px;
+        width: 340px;
     }
     .events-explore-container {
         padding: 16px;
     }
     .search-form input {
         padding: 4px 8px; /* Синхронизация с библиотекой */
-        height: 32px; /* Синхронизация с библиотекой */
+        height: 40px; /* Синхронизация с библиотекой */
         max-width: 200px; /* Сохранение ограничения */
     }
+    .modal-content {
+        padding: 16px;
+        border-radius: 20px;
+        width: 320px;
+    }
+    .modal-content select, #category-search {
+        padding: 4px 8px;
+        height: 40px;
+    }
+    .modal-close {
+        width: 28px;
+        height: 28px;
+    }
     .slide {
-        height: 592px;
+        height: 400px;
+    }
+    .slide-center-data {
+        gap: 16px; /* Увеличенный отступ между кнопкой и датой */
     }
     .filter-btn {
         padding: 4px 12px; /* Синхронизация с библиотекой */
-        height: 36px; /* Синхронизация с библиотекой */
-        border-radius: 8px; /* Синхронизация с библиотекой */
+        height: 40px; /* Синхронизация с библиотекой */
         font-size: 12px; /* Синхронизация с библиотекой */
     }
     .event-card {
         min-width: 0;
+    }
+    .dot {
+        width: 8px;
+        height: 8px;
     }
 }
