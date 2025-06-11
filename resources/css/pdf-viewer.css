@@ -93,7 +93,6 @@
     }
     .pdf-btn {
         padding: 10px 14px;
-        font-size: 13px;
     }
     #zoom-in,
     #zoom-out {
@@ -113,10 +112,10 @@
     }
     .pdf-btn {
         padding: 12px;
-        font-size: 12px;
         width: 100%;
         text-align: center;
         border-radius: 10px;
+        font-size: 12px;
     }
     #zoom-in,
     #zoom-out {
@@ -169,15 +168,10 @@
 
     .pdf-btn {
         padding: 12px;
-        font-size: 10px;
         width: 100%;
         text-align: center;
     }
-    #zoom-in,
-    #zoom-out {
-        width: 36px;
-        height: 36px;
-    }
+
     #pdf-canvas {
         width: 100%;
     }
