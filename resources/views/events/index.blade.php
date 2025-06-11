@@ -35,7 +35,6 @@
                                 </div>
                             </div>
 
-
                             <a href="{{ route('events.get_event', $event->id) }}" class="primary-btn">
                                 Подробнее
                                 <img src="{{ asset('images/icons/arrow-top-right-white.svg') }}" class="icon-24" alt="icon">
