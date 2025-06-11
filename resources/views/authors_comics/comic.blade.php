@@ -95,7 +95,7 @@
                 @auth
                     <div class="grade-wrapper">
                         <div class="grade-title">
-                            <p>Оцените комикс</p>
+                            <p>Оценка</p>
                         </div>
                         <div class="rating-stars" data-selected="{{ $userRating }}">
                             @for ($i = 1; $i <= 5; $i++)
