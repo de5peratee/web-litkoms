@@ -57,15 +57,21 @@
 
             <div class="comics-preview-text">
                 <div class="author-wrapper">
-                    @if(Auth::user()->icon && Storage::exists(Auth::user()->icon))
-                        <div class="comics-author-avatar-wrapper">
-                            <img src="{{ Storage::url(Auth::user()->icon) }}" alt="{{ Auth::user()->icon }}">
-                        </div>
+                    @if(Auth::user()->icon && Storage::disk('public')->exists(Auth::user()->icon))
+                    <img src="{{ Storage::url(Auth::user()->icon) }}" alt="avatar">
                     @else
-                        <div class="comics-author-avatar-wrapper">
-                            <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">
-                        </div>
+                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="default avatar">
                     @endif
+
+{{--                    @if(Auth::user()->icon && Storage::exists(Auth::user()->icon))--}}
+{{--                        <div class="comics-author-avatar-wrapper">--}}
+{{--                            <img src="{{ Storage::url(Auth::user()->icon) }}" alt="{{ Auth::user()->icon }}">--}}
+{{--                        </div>--}}
+{{--                    @else--}}
+{{--                        <div class="comics-author-avatar-wrapper">--}}
+{{--                            <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
                     <p class="author-nickname-text">{{ '@' . Auth::user()->nickname }}</p>
                 </div>
 
