@@ -64,7 +64,7 @@
 {{--                    <a href="#" class="primary-btn">Буду на мероприятии</a>--}}
                 </div>
 
-                @if(\Carbon\Carbon::parse($event->start_date)->isPast())
+                @if(\Carbon\Carbon::parse($event->start_date)->isPast() && \Carbon\Carbon::parse($event->end_date)->isPast())
                     <div class="past-sign-wrapper">
                         <img src="{{ asset('images/icons/hw/event-ready-icon.svg') }}" class="icon-48" alt="icon">
 
