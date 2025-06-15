@@ -53,12 +53,12 @@
                     </div>
                     <div class="user-status-bar">
 
-                        <p class="user-subscribers">Подписчиков: {{ $user->subscribers()->count() }}</p>
+                        <p class="user-subscribers text-small">Подписчиков: {{ $user->subscribers()->count() }}</p>
                         <div class="v-divider"></div>
                         <div class="user-avg-grade">
-                            <p>Средняя оценка: </p>
+                            <p class="text-small">Средняя оценка: </p>
                             <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">
-                            <p>{{ number_format($averageRating, 1) }}</p>
+                            <p class="text-small">{{ number_format($averageRating, 1) }}</p>
                         </div>
 
                     </div>
@@ -137,17 +137,6 @@
                                     @endif
                                 </div>
 
-{{--                                @if($user->icon && Storage::exists($user->icon))--}}
-{{--                                    <div class="subscription-avatar-wrapper">--}}
-{{--                                        <img src="{{ Storage::url($user->icon) }}" alt="{{ $user->icon }}">--}}
-{{--                                    </div>--}}
-{{--                                @else--}}
-{{--                                    <div class="subscription-avatar-wrapper">--}}
-{{--                                        <img src="{{ asset('images/default_template/ava_cover.png') }}"--}}
-{{--                                             alt="subscription_ava_cover">--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
-
                                 <div class="subscription-username-data">
                                     <p class="text-medium">{{ '@' . ($subscription->nickname) }}</p>
                                     <p class="text-hint subscription-name">{{ $subscription->name }} {{ $subscription->last_name }}</p>
@@ -156,16 +145,16 @@
 
                             <div class="subscription-right-data">
                                 <div class="subscription-comics-count subscription-wrapper-flex">
-                                    Комиксов: {{ $subscription->comics_count }}
+                                    <p class="text-small">Комиксов: {{ $subscription->comics_count }}</p>
                                 </div>
 
                                 <div class="subscription-subs-count subscription-wrapper-flex">
-                                    Подписчиков: {{$subscription->subscribers()->count()}}
+                                    <p class="text-small">Подписчиков: {{$subscription->subscribers()->count()}}</p>
                                 </div>
 
                                 <div class="subscription-avg-grade subscription-wrapper-flex">
                                     <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">
-                                    <p>{{ number_format($subscription->average_rating, 1) }}</p>
+                                    <p class="text-small">{{ number_format($subscription->average_rating, 1) }}</p>
                                 </div>
                             </div>
 
@@ -230,12 +219,12 @@
 
                             <div class="comic-title">
                                 <p class="text-big">{{ $comic->name }}</p>
-                                <p class="comic-author-text">{{ '@' }}{{ $comic->createdBy->nickname }}</p>
+                                <p class="comic-author-text text-small">{{ '@' }}{{ $comic->createdBy->nickname }}</p>
                             </div>
 
                             <div class="comic-avg-grade">
                                 <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">
-                                <p>{{ number_format($comic->average_assessment ?? 0, 1) }}</p>
+                                <p class="text-small">{{ number_format($comic->average_assessment ?? 0, 1) }}</p>
                             </div>
                         </div>
                     @empty
