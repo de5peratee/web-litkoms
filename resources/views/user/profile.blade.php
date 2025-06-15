@@ -187,7 +187,7 @@
                     @auth
                         @if (Auth::id() == $user->id)
                             <a href="{{ route('user.author_comics', Auth::user()->nickname) }}" class="tertiary-btn">
-                                Мои авторские комиксы
+                                Мои комиксы
                                 <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
                             </a>
 

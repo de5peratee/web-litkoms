@@ -463,6 +463,8 @@ option {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center
+;
     gap: 32px; /* Увеличенный отступ между кнопкой и датой */
     padding-block: 16px;
 }
@@ -590,9 +592,11 @@ option {
     .events-explore-header {
         flex-direction: column;
         align-items: center;
+
         gap: 12px;
         padding-block: 8px;
     }
+
     .slide-center-data {
         gap: 24px; /* Увеличенный отступ между кнопкой и датой */
     }
