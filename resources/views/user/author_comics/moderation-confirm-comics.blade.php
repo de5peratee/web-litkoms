@@ -57,21 +57,13 @@
 
             <div class="comics-preview-text">
                 <div class="author-wrapper">
-                    @if(Auth::user()->icon && Storage::disk('public')->exists(Auth::user()->icon))
-                    <img src="{{ Storage::url(Auth::user()->icon) }}" alt="avatar">
-                    @else
-                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="default avatar">
-                    @endif
-
-{{--                    @if(Auth::user()->icon && Storage::exists(Auth::user()->icon))--}}
-{{--                        <div class="comics-author-avatar-wrapper">--}}
-{{--                            <img src="{{ Storage::url(Auth::user()->icon) }}" alt="{{ Auth::user()->icon }}">--}}
-{{--                        </div>--}}
-{{--                    @else--}}
-{{--                        <div class="comics-author-avatar-wrapper">--}}
-{{--                            <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="ava_cover">--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
+                    <div class="comics-author-avatar-wrapper">
+                        @if(Auth::user()->icon && Storage::disk('public')->exists(Auth::user()->icon))
+                            <img src="{{ Storage::url(Auth::user()->icon) }}" alt="avatar">
+                        @else
+                            <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="default avatar">
+                        @endif
+                    </div>
                     <p class="author-nickname-text">{{ '@' . Auth::user()->nickname }}</p>
                 </div>
 
@@ -92,7 +84,7 @@
         <div class="moderation-confirm-actions">
             <a href="{{ route('user.author_comics') }}" class="secondary-btn">Вернуться к списку</a>
             @if($comic->is_moderated === 'successful' && !$comic->is_published)
-                <form action="{{ route('user.publish_comic', $comic->slug) }}" method="POST" style="display: inline;">
+                <form action="{{ route('user.publish_comic', $comic->slug) }}" method="POST" style="display: inline;" class="lit-form">
                     @csrf
                     <button type="submit" class="primary-btn">Опубликовать</button>
                 </form>
