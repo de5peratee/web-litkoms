@@ -422,19 +422,6 @@ header .icon-wrapper:hover {
         width: 260px;
     }
 
-    /*.logout-btn {*/
-    /*    padding: 6px 12px;*/
-    /*    height: 40px;*/
-    /*    border-radius: 8px;*/
-    /*    font-size: 14px;*/
-    /*}*/
-    /*.mobile-menu__content a {*/
-    /*    padding: 6px 12px;*/
-    /*    height: 40px;*/
-    /*    border-radius: 8px;*/
-    /*    font-size: 14px;*/
-    /*}*/
-
 }
 
 /* Мобильные устройства (<576px) */
@@ -487,20 +474,6 @@ header .icon-wrapper:hover {
     .mobile-menu__content {
         padding: 6px;
     }
-
-    /*.logout-btn {*/
-    /*    padding: 4px 12px;*/
-    /*    height: 36px;*/
-    /*    border-radius: 8px;*/
-    /*    font-size: 12px;*/
-    /*}*/
-
-    /*.mobile-menu__content a {*/
-    /*    padding: 4px 12px;*/
-    /*    border-radius: 8px;*/
-    /*    height: 36px;*/
-    /*    font-size: 12px;*/
-    /*}*/
 }
 
 

@@ -87,19 +87,6 @@
                         </div>
                     </div>
                 @endif
-
-{{--                <div class="event-datetime-wrapper">--}}
-{{--                    <div class="event-date">--}}
-{{--                        <p class="text-small">Дата</p>--}}
-{{--                        <h3>{{ $event->start_date->format('d') }}</h3>--}}
-{{--                        <p class="text-small">{{ $event->start_date->translatedFormat('F') }}</p>--}}
-{{--                    </div>--}}
-{{--                    <div class="event-time">--}}
-{{--                        <p class="text-small">Время</p>--}}
-{{--                        <h3>{{ $event->start_date->format('H:i') }}</h3>--}}
-{{--                        <p class="text-small">по МСК</p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
             </div>
         </div>
 
