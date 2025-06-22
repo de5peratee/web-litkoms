@@ -21,7 +21,7 @@
     <div class="socials-block">
         <a href="https://vk.com/litkoms" target="_blank" class="media-link">
             <img src="{{ asset('images/icons/socials/vk.png') }}" class="icon-32" alt="icon">
-            Вконтакте
+            Группа Вконтакте
         </a>
 {{--        <a href=#" target="_blank" class="media-link">--}}
 {{--            <img src="{{ asset('images/icons/socials/vk.png') }}" class="icon-32" alt="icon">--}}
@@ -29,9 +29,12 @@
 {{--        </a>--}}
     </div>
 
+    <div class="h-divider footer-divider"></div>
+
     <div class="policy_desc">
-        <span>&copy; 2025 Все права защищены</span>
-        <a href="{{ route('manuals.policy') }}">Политика конфиденциальности</a>
+        <p class="text-hint">&copy; 2025 Все права защищены</p>
+        <p class="text-hint"> · </p>
+        <a href="{{ route('manuals.policy') }}" class="text-hint footer-manual-link">Политика конфиденциальности</a>
 {{--        <span>Правила сообщества</span>--}}
     </div>
 

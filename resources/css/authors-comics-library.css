@@ -7,37 +7,33 @@
 
 .authors-comics-header {
     position: relative;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     width: 100%;
     gap: 24px;
     padding: 32px;
     border-radius: 32px;
-
     background-color: var(--white);
 }
 
 #ak-picture1 {
     position: absolute;
-    left: 64px; /* Сдвигаем на 16px влево от родителя */
+    left: 64px;
     top: 50%;
     transform: translateY(-50%);
 }
 
 #ak-picture2 {
     position: absolute;
-    right: 64px; /* Сдвигаем на 16px вправо от родителя */
+    right: 64px;
     top: 50%;
     transform: translateY(-50%);
 }
 
 #ak-picture1, #ak-picture2 {
     opacity: 0.64;
-
     transition: all 0.3s ease;
 }
 
@@ -70,13 +66,14 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    gap: 8px;
+    gap: 4px;
+    flex-wrap: nowrap;
 }
 
 .search-form input {
     padding: 8px 16px;
     height: 44px;
-    width: 320px;
+    width: 320px; /* Фиксированная ширина до 960px */
     border-radius: 12px;
     border: 1px solid var(--gray);
     font-family: 'Involve', sans-serif;
@@ -100,7 +97,7 @@
 
 .search-input-wrapper {
     position: relative;
-    width: 320px;
+    width: 320px; /* Синхронизация с инпутом */
 }
 
 .clear-search {
@@ -154,6 +151,7 @@
 
 .comics-grid {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 32px 16px;
 }
@@ -405,4 +403,225 @@ option {
     color: var(--secondary);
     font-size: 16px;
     margin: 20px 0;
+}
+
+/* Планшеты горизонтальные (960px–1200px) */
+@media (max-width: 1200px) and (min-width: 960px) {
+    .authors-comics-container {
+        width: 940px;
+    }
+    .authors-comics-header {
+        padding: 32px;
+        border-radius: 32px;
+    }
+    .search-form {
+        gap: 4px;
+    }
+    .search-form input {
+        padding: 6px 12px;
+        height: 40px;
+    }
+    .comics-grid {
+        gap: 24px 12px;
+    }
+    .load-more-container {
+        margin: 16px 0;
+    }
+    .modal-content {
+        padding: 24px;
+        border-radius: 24px;
+    }
+    .modal-content select, #genre-search {
+        padding: 6px 12px;
+        height: 40px;
+    }
+    .modal-close {
+        width: 36px;
+        height: 36px;
+    }
+    .filter-btn {
+        padding: 6px;
+        height: 40px;
+        font-size: 14px;
+    }
+    .cover_wrapper {
+        aspect-ratio: 2/3;
+        border-radius: 20px;
+    }
+    .comic {
+        width: 220px;
+    }
+}
+
+/* Планшеты вертикальные и ниже (до 960px) */
+@media (max-width: 960px) {
+    .authors-comics-container {
+        width: 640px;
+    }
+    .authors-comics-header {
+        padding: 24px;
+        border-radius: 24px;
+    }
+    #ak-picture1, #ak-picture2 {
+        display: none; /* Скрываем боковые картинки ниже 640px */
+    }
+    .search-form {
+        gap: 2px;
+    }
+    .search-form input {
+        width: 100%; /* Растягиваем на 100% ниже 960px */
+        padding: 6px 12px;
+        height: 40px;
+    }
+    .search-input-wrapper {
+        width: 100%; /* Синхронизация с инпутом */
+    }
+    .comics-grid {
+        gap: 20px 10px;
+    }
+    .load-more-container {
+        margin: 14px 0;
+    }
+    .modal-content {
+        padding: 20px;
+        border-radius: 20px;
+        max-width: 400px;
+    }
+    .modal-content select, #genre-search {
+        padding: 6px 12px;
+        height: 40px;
+    }
+    .modal-close {
+        width: 36px;
+        height: 36px;
+    }
+    .filter-btn {
+        padding: 6px;
+        height: 40px;
+        font-size: 14px;
+    }
+    .cover_wrapper {
+        aspect-ratio: 2/3;
+        border-radius: 18px;
+    }
+    .comic {
+        width: 180px;
+    }
+    .selected-genre-tag {
+        padding: 6px 8px;
+    }
+    .comic-genre-tag {
+        padding: 6px 8px;
+    }
+}
+
+/* Смартфоны горизонтальные (480px–640px) */
+@media (max-width: 640px) and (min-width: 480px) {
+    .authors-comics-container {
+        width: 480px;
+    }
+    .authors-comics-header {
+        padding: 24px;
+        border-radius: 24px;
+    }
+    #ak-picture1, #ak-picture2 {
+        display: none; /* Скрываем боковые картинки ниже 640px */
+    }
+    .search-form input {
+        padding: 5px 10px;
+        height: 36px;
+    }
+    .comics-grid {
+        gap: 16px 8px;
+    }
+    .load-more-container {
+        margin: 12px 0;
+    }
+    .modal-content {
+        padding: 16px;
+        border-radius: 16px;
+    }
+    .modal-content select, #genre-search {
+        padding: 5px 10px;
+        height: 36px;
+    }
+    .modal-close {
+        width: 32px;
+        height: 32px;
+    }
+    .filter-btn {
+        padding: 4px;
+        height: 36px;
+        border-radius: 8px;
+        font-size: 12px;
+    }
+    .cover_wrapper {
+        aspect-ratio: 2/3;
+        border-radius: 16px;
+    }
+    .comic {
+        width: 140px;
+    }
+    .selected-genre-tag {
+        padding: 4px 6px;
+    }
+    .comic-genre-tag {
+        padding: 4px 6px;
+    }
+}
+
+/* Смартфоны вертикальные (320px–480px) */
+@media (max-width: 480px) {
+    .authors-comics-container {
+        width: 320px;
+    }
+    .authors-comics-header {
+        padding: 16px;
+        border-radius: 20px;
+    }
+    #ak-picture1, #ak-picture2 {
+        display: none; /* Скрываем боковые картинки ниже 640px */
+    }
+    .search-form input {
+        padding: 4px 8px;
+        height: 32px;
+    }
+    .comics-grid {
+        gap: 12px 6px;
+    }
+    .load-more-container {
+        margin: 10px 0;
+    }
+    .modal-content {
+        padding: 12px;
+        border-radius: 12px;
+        max-width: 320px;
+    }
+    .modal-content select, #genre-search {
+        padding: 4px 8px;
+        height: 32px;
+    }
+    .modal-close {
+        width: 28px;
+        height: 28px;
+    }
+    .filter-btn {
+        padding: 4px;
+        height: 36px;
+        border-radius: 8px;
+        font-size: 12px;
+    }
+    .cover_wrapper {
+        aspect-ratio: 2/3;
+        border-radius: 12px;
+    }
+    .comic {
+        width: 120px;
+    }
+    .selected-genre-tag {
+        padding: 2px 4px;
+    }
+    .comic-genre-tag {
+        padding: 2px 4px;
+    }
 }

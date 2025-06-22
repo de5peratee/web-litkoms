@@ -33,9 +33,9 @@
             <div class="bottom-event-flex-data">
                 <div class="event-datetime-wrapper">
                     <img src="{{ asset('images/icons/calendar-tertiary.svg') }}" class="icon-20" alt="icon">
-                    <p class="slide-event-card-date">{{ $event->start_date->translatedFormat('j F Y', 'ru') }}</p>
-                    <p>·</p>
-                    <p class="slide-event-card-date">{{ $event->start_date->translatedFormat('H:i', 'ru') }}</p>
+                    <p class="text-small slide-event-card-date">{{ $event->start_date->translatedFormat('j F Y', 'ru') }}</p>
+                    <p class="text-small">·</p>
+                    <p class="text-small slide-event-card-date">{{ $event->start_date->translatedFormat('H:i', 'ru') }}</p>
                 </div>
                 <div class="event-location-wrapper">
                     <img src="{{ asset('images/icons/location-tertiary.svg') }}" class="icon-20" alt="icon">

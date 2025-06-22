@@ -31,12 +31,14 @@
     <!-- Audio Player -->
     <div class="audio-player-container">
         <div class="audio-player expanded">
+
             <div class="player-controls">
                 <button class="player-btn play-btn" title="Play/Pause">
                     <img src="{{ asset('images/icons/player/player-play-white.svg') }}" alt="Play" class="icon-24 play-icon active">
                     <img src="{{ asset('images/icons/player/player-pause-white.svg') }}" alt="Pause" class="icon-24 pause-icon">
                 </button>
             </div>
+
             <div class="player-info">
                 <p class="track-title text-medium">Трек не загружен</p>
                 <div class="player-progress-bar">

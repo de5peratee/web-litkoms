@@ -93,7 +93,7 @@ $(document).ready(function () {
             $tags.removeClass('hidden');
 
             const containerWidth = $container.width();
-            const moreTagWidth = 88; // Предполагаемая ширина тега "+n жанров"
+            const moreTagWidth = 52; // Предполагаемая ширина тега "+n жанров"
             let totalWidth = 0;
             let cutoffIndex = $tags.length;
 
@@ -112,7 +112,7 @@ $(document).ready(function () {
 
                 $('<p>', {
                     class: 'comic-genre-tag text-hint more-genres',
-                    text: `+${count} жанров`,
+                    text: `+${count}`,
                     title: $hiddenTags.map(function () { return $(this).text(); }).get().join(', ')
                 }).appendTo($container);
             }
@@ -126,7 +126,7 @@ $(document).ready(function () {
             $tags.removeClass('hidden');
 
             const containerWidth = $container.width();
-            const moreTagWidth = 88; // Предполагаемая ширина тега "+n категорий"
+            const moreTagWidth = 52; // Предполагаемая ширина тега "+n категорий"
             let totalWidth = 0;
             let cutoffIndex = $tags.length;
 
@@ -145,7 +145,7 @@ $(document).ready(function () {
 
                 $('<p>', {
                     class: 'event-category-tag text-hint more-categories',
-                    text: `+${count} категорий`,
+                    text: `+${count}`,
                     title: $hiddenTags.map(function () { return $(this).text(); }).get().join(', ')
                 }).appendTo($container);
             }

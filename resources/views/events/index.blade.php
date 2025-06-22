@@ -20,7 +20,7 @@
                             </div>
 
                             <div class="slide-center-data">
-                                <h1>{{ $event->name }}</h1>
+                                <h2>{{ $event->name }}</h2>
 
                                 <div class="slide-event-tags-wrapper">
                                     @foreach ($event->tags as $tag)
@@ -34,7 +34,6 @@
                                     <p class="slide-event-card-date">{{ $event->start_date->translatedFormat('H:i', 'ru') }}</p>
                                 </div>
                             </div>
-
 
                             <a href="{{ route('events.get_event', $event->id) }}" class="primary-btn">
                                 Подробнее

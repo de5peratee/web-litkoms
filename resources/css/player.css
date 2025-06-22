@@ -67,7 +67,7 @@
 }
 
 .web-radio-cta:hover {
-    transform: scale(1.25);
+    transform: scale(1.15);
 }
 
 .web-radio-cta .blob-image {
@@ -221,4 +221,83 @@
 main {
     position: relative;
     z-index: 1; /* Выше фиксированных элементов по умолчанию */
+}
+
+
+
+
+/* Планшеты (576px–992px) */
+@media (max-width: 992px) {
+    .audio-player-container {
+        width: 480px;
+    }
+    .audio-player {
+        padding: 6px 16px;
+        border-radius: 20px;
+    }
+    .player-btn {
+        width: 36px;
+        height: 36px;
+    }
+    .player-btn img {
+        width: 20px;
+        height: 20px;
+    }
+    .player-info {
+        padding: 6px 12px;
+    }
+    .player-progress-bar {
+        height: 3px;
+    }
+    .volume-slider {
+        width: 80px;
+    }
+    .web-radio-cta {
+        padding: 6px 12px;
+    }
+    .web-radio-cta .expand-icon {
+        width: 20px;
+        height: 20px;
+    }
+    .web-radio-cta .blob-image {
+        height: 104px;
+    }
+}
+
+/* Мобильные устройства (<576px) */
+@media (max-width: 576px) {
+    .audio-player-container {
+        width: 312px;
+    }
+    .audio-player {
+        padding: 4px 12px;
+        border-radius: 16px;
+    }
+    .player-btn {
+        width: 32px;
+        height: 32px;
+    }
+    .player-btn img {
+        width: 16px;
+        height: 16px;
+    }
+    .player-info {
+        padding: 4px 8px;
+    }
+    .player-progress-bar {
+        height: 2px;
+    }
+    .volume-slider {
+        width: 60px;
+    }
+    .web-radio-cta {
+        padding: 4px 8px;
+    }
+    .web-radio-cta .expand-icon {
+        width: 16px;
+        height: 16px;
+    }
+    .web-radio-cta .blob-image {
+        height: 96px;
+    }
 }

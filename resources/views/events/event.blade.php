@@ -6,6 +6,31 @@
     @vite(['resources/css/event.css', 'resources/js/event-map.js'])
 
     <div class="event-container">
+{{--        <div class="event-preview" style="background-image: url('{{ $event->cover ? Storage::url('/' . $event->cover) : asset('images/default_template/event-cover.svg') }}');">--}}
+{{--            <div class="event-preview-content">--}}
+{{--                <div class="event-authors">--}}
+{{--                    <p>{{ implode(' · ', $event->guests->map(function($guest) {--}}
+{{--                                                        return $guest->name . ' ' . $guest->surname;--}}
+{{--                                                    })->toArray()) }}</p>--}}
+{{--                </div>--}}
+
+{{--                <div class="event-bottom-text">--}}
+{{--                    <div class="left-part-text">--}}
+{{--                        <h1>{{ $event->name }}</h1>--}}
+{{--                        <div class="event-tags-wrapper">--}}
+{{--                            @foreach ($event->tags as $tag)--}}
+{{--                                <div class="event-tag">{{ $tag->name }}</div>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="event-location">--}}
+{{--                        <img src="{{ asset('images/icons/location.svg') }}" alt="Cover Image">--}}
+{{--                        <p>ул. Маршала Бирюзова, 9</p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
         <div class="event-preview" style="background-image: url('{{ $event->cover ? Storage::url('/' . $event->cover) : asset('images/default_template/event-cover.svg') }}');">
             <div class="event-preview-content">
                 <div class="event-authors">
@@ -14,19 +39,18 @@
                                                     })->toArray()) }}</p>
                 </div>
 
-                <div class="event-bottom-text">
-                    <div class="left-part-text">
-                        <h1>{{ $event->name }}</h1>
+                <div class="event-details">
+                    <h2>{{ $event->name }}</h2>
+                    <div class="event-info">
                         <div class="event-tags-wrapper">
                             @foreach ($event->tags as $tag)
                                 <div class="event-tag">{{ $tag->name }}</div>
                             @endforeach
                         </div>
-                    </div>
-
-                    <div class="event-location">
-                        <img src="{{ asset('images/icons/location.svg') }}" alt="Cover Image">
-                        <p>ул. Маршала Бирюзова, 9</p>
+                        <div class="event-location">
+                            <img src="{{ asset('images/icons/location.svg') }}" alt="Cover Image">
+                            <p class="text-small">ул. Маршала Бирюзова, 9</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,11 +60,11 @@
             <div class="event-description">
                 <div class="event-action-block">
                     <h3>О мероприятии</h3>
-                    <p>{{ $event->description }}</p>
+                    <p class="text-small">{{ $event->description }}</p>
 {{--                    <a href="#" class="primary-btn">Буду на мероприятии</a>--}}
                 </div>
 
-                @if(\Carbon\Carbon::parse($event->start_date)->isPast())
+                @if(\Carbon\Carbon::parse($event->start_date)->isPast() && \Carbon\Carbon::parse($event->end_date)->isPast())
                     <div class="past-sign-wrapper">
                         <img src="{{ asset('images/icons/hw/event-ready-icon.svg') }}" class="icon-48" alt="icon">
 
@@ -63,19 +87,6 @@
                         </div>
                     </div>
                 @endif
-
-{{--                <div class="event-datetime-wrapper">--}}
-{{--                    <div class="event-date">--}}
-{{--                        <p class="text-small">Дата</p>--}}
-{{--                        <h3>{{ $event->start_date->format('d') }}</h3>--}}
-{{--                        <p class="text-small">{{ $event->start_date->translatedFormat('F') }}</p>--}}
-{{--                    </div>--}}
-{{--                    <div class="event-time">--}}
-{{--                        <p class="text-small">Время</p>--}}
-{{--                        <h3>{{ $event->start_date->format('H:i') }}</h3>--}}
-{{--                        <p class="text-small">по МСК</p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
             </div>
         </div>
 
@@ -86,7 +97,7 @@
 
             <div class="event-location">
                 <img src="{{ asset('images/icons/location-gray.svg') }}" alt="icon">
-                <p>ул. Маршала Бирюзова, 9</p>
+                <p class="text-small">ул. Маршала Бирюзова, 9</p>
             </div>
         </div>
     </div>

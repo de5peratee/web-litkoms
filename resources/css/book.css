@@ -131,3 +131,127 @@
     height: 100%;
     object-fit: cover;
 }
+
+/* Планшеты горизонтальные (960px–1200px) */
+@media (max-width: 1200px) and (min-width: 960px) {
+    .book-container {
+        width: 940px;
+    }
+    .info-block {
+        padding: 32px;
+        border-radius: 32px;
+    }
+    .book-preview-info {
+        gap: 24px;
+    }
+    .cover_wrapper {
+        width: 220px;
+        border-radius: 20px;
+    }
+    .author-info-wrapper, .year-info-wrapper {
+        padding: 16px;
+        min-width: 180px;
+    }
+    .genre-tag {
+        padding: 6px 12px;
+    }
+}
+
+/* Планшеты вертикальные и ниже (до 960px) */
+@media (max-width: 960px) {
+    .book-container {
+        width: 100%;
+        padding: 0 16px;
+    }
+    .info-block {
+        padding: 24px;
+        border-radius: 24px;
+    }
+    .book-preview-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .cover_wrapper {
+        width: 100%;
+        max-width: 280px;
+        border-radius: 18px;
+    }
+    .book-text-description {
+        width: 100%;
+    }
+    .text-info-flex {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .author-info-wrapper, .year-info-wrapper {
+        width: 100%;
+        min-width: 0;
+        padding: 12px;
+    }
+    .genre-tag {
+        padding: 6px 12px;
+        border: 1px solid var(--primary);
+    }
+
+    .genres-wrapper {
+        flex-wrap: wrap;
+    }
+}
+
+/* Смартфоны горизонтальные (480px–640px) */
+@media (max-width: 640px) and (min-width: 480px) {
+    .cover_wrapper {
+        max-width: 200px;
+        border-radius: 16px;
+    }
+    .genre-tag {
+        padding: 4px 8px;
+    }
+
+    .text-info-flex {
+        gap: 8px;
+    }
+
+    .genres-wrapper {
+        flex-wrap: wrap;
+    }
+}
+
+/* Смартфоны вертикальные (320px–480px) */
+@media (max-width: 480px) {
+    .book-container {
+        padding: 0 8px;
+    }
+    .info-block {
+        padding: 16px;
+        border-radius: 20px;
+    }
+    .cover_wrapper {
+        max-width: 160px;
+        border-radius: 12px;
+    }
+    .genre-tag {
+        padding: 4px 8px;
+    }
+
+    .text-info-flex {
+        gap: 4px;
+    }
+
+    .book-preview-info {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .book-text-description{
+        justify-content: center;
+        text-align: center;
+    }
+
+    .genres-wrapper {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}

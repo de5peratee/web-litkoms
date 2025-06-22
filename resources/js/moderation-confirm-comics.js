@@ -38,7 +38,7 @@ $(document).ready(function() {
                 // Создаем тег "+n жанров" с правильной шириной
                 let $moreTag = $('<span>', {
                     class: 'comics-genre-tag more-genres',
-                    text: `+${count} жанра`,
+                    text: `+${count}`,
                     title: $hiddenTags.map(function() { return $(this).text(); }).get().join(', ')
                 }).appendTo($container);
 

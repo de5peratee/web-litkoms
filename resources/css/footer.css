@@ -3,14 +3,14 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 
     gap: 24px;
-    padding: 48px 135px;
+    padding: 24px;
     margin-top: 64px;
 
     background-color: var(--primary);
     color: var(--white);
-    text-align: center;
 }
 
 .footer-nav-menu {
@@ -21,31 +21,23 @@ footer {
 }
 
 .footer-nav-menu .nav-link {
-    background-color: var(--primary);
+    background-color: rgba(255,255,255, 0.08);
     color: var(--white);
 }
 
 .footer-nav-menu .nav-link:hover {
-    color: var(--secondary);
+    background-color: rgba(255,255,255, 0.16);
 }
 
 .litcoms-info {
     display: flex;
-    flex-direction: row;
-    gap: 16px;
     justify-content: center;
+    padding-block: 16px;
+
+    gap: 16px;
 }
 
 .location-text {
-    font-weight: 500;
-    opacity: 0.48;
-}
-
-.policy_desc {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 16px;
     color: var(--secondary);
 }
 
@@ -62,4 +54,124 @@ footer {
     align-items: center;
 
     gap: 8px;
+}
+
+.policy_desc {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    gap: 8px;
+
+    color: var(--secondary);
+}
+
+.footer-manual-link {
+    transition: all 0.2s ease;
+}
+
+.footer-manual-link:hover {
+    color: var(--white);
+}
+
+
+.h-divider.footer-divider {
+    opacity: 0.08;
+    width: 100%; /* Растягиваем линию на всю ширину контейнера */
+    height: 1px; /* Толщина линии */
+
+    background-color: var(--light-gray); /* Цвет линии (используем вашу переменную) */
+}
+
+
+
+/* Планшеты (576px–992px) */
+@media (max-width: 992px) {
+    footer {
+        gap: 24px;
+        padding: 20px;
+        margin-top: 48px;
+    }
+
+    .footer-nav-menu {
+        flex-wrap: wrap; /* Перенос элементов на новую строку при нехватке места */
+        gap: 16px 8px;
+        width: 100%;
+    }
+
+    .footer-nav-menu .nav-link {
+        padding: 6px 12px;
+    }
+
+    .litcoms-info {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-block: 12px;
+    }
+
+    .location-text {
+        font-size: 11px;
+    }
+
+    .socials-block {
+        gap: 20px;
+    }
+
+    .media-link {
+        gap: 8px;
+    }
+
+    .policy_desc {
+        flex-wrap: wrap;
+        gap: 6px;
+        font-size: 11px;
+    }
+}
+
+/* Мобильные устройства (<576px) */
+@media (max-width: 576px) {
+    footer {
+        gap: 24px;
+        padding: 16px;
+        margin-top: 32px;
+    }
+
+    .footer-nav-menu {
+        flex-direction: column; /* Вертикальное расположение для мобильных */
+        align-items: center;
+        gap: 16px 8px;
+        width: 100%;
+    }
+
+    .footer-nav-menu .nav-link {
+        padding: 6px 10px;
+        width: 100%; /* Ссылки на всю ширину для удобства */
+        text-align: center;
+    }
+
+    .litcoms-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding-block: 10px;
+    }
+
+    .socials-block {
+        flex-wrap: wrap; /* Перенос иконок на новую строку, если нужно */
+        gap: 16px;
+    }
+
+    .media-link {
+        gap: 8px;
+    }
+
+    .policy_desc {
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .h-divider.footer-divider {
+        width: 100%;
+    }
 }

@@ -22,7 +22,7 @@
 {{--                            </div>--}}
 
                             <div class="slide-center-data">
-                                <h1>{{$post->title}}</h1>
+                                <h2>{{$post->title}}</h2>
 
 {{--                                <div class="slide-event-tags-wrapper">--}}
 {{--                                    @foreach ($event->tags as $tag)--}}

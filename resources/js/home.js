@@ -8,7 +8,7 @@ function handleCategoryTags() {
         $tags.removeClass('hidden');
 
         const containerWidth = $container.width();
-        const moreTagWidth = 88;
+        const moreTagWidth = 52;
         let totalWidth = 0;
         let cutoffIndex = $tags.length;
 
@@ -27,7 +27,7 @@ function handleCategoryTags() {
 
             $('<span>', {
                 class: 'event-tag more-categories',
-                text: `+${count} категорий`,
+                text: `+${count}`,
                 title: $hiddenTags.map(function () { return $(this).text(); }).get().join(', ')
             }).appendTo($container);
         }

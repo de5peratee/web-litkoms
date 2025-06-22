@@ -2,14 +2,21 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     width: 100%;
     height: 64px;
     padding-inline: 24px;
+
     background-color: var(--white);
-    position: sticky; /* Делаем шапку липкой */
-    top: 0; /* Прилипает к верхнему краю окна */
-    z-index: 1000; /* Устанавливаем высокий z-index, чтобы шапка была поверх других элементов */
-    box-shadow: 0 0 32px rgba(0, 0, 0, 0.08); /* Опционально: тень для визуального отделения */
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+header.scrolled {
+    box-shadow: 0 0 32px rgba(0, 0, 0, 0.08);
 }
 
 .h-divider {
@@ -21,34 +28,40 @@ header {
 .logo-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: left;
-    width: 260px;
+    justify-content: flex-start;
+    width: 280px;
+    flex-shrink: 0;
 }
 
 .logo {
     height: 48px;
+    width: auto;
 }
 
 .nav-menu {
     list-style: none;
     display: flex;
     flex-direction: row;
+
     gap: 4px;
+    flex-grow: 1;
 }
 
 /* Стили для ссылок */
 .nav-link {
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 140%;
-
     padding: 8px 12px;
     border-radius: 8px;
     text-decoration: none;
 
+    max-width: 120px; /* Ограничиваем ширину ссылки */
+    white-space: nowrap; /* Предотвращаем перенос */
+    overflow: hidden; /* Скрываем переполнение */
+    text-overflow: ellipsis; /* Обрезаем текст троеточием */
+
     color: var(--primary); /* Цвет текста */
 
     transition: all 0.2s ease;
+
 }
 
 .nav-link:hover {
@@ -72,10 +85,11 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: right;
-    gap: 8px;
     align-items: center;
 
-    width: 260px;
+    width: 280px;
+    flex-shrink: 0;
+    gap: 8px;
 }
 
 .header-profile-container {
@@ -92,7 +106,16 @@ header {
     cursor: pointer;
 
     transition: all 0.2s ease;
+
+    max-width: 200px; /* Ограничиваем ширину для текста */
+    overflow: hidden; /* Скрываем переполнение */
 }
+.header-profile-info p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Троеточие при переполнении */
+}
+
 
 .header-profile-info:hover {
     color: var(--primary-blue);
@@ -105,6 +128,7 @@ header {
     align-items: center;
 
     width: 44px;
+    min-width: 24px;
     height: 44px;
 
     border-radius: 999px;
@@ -173,7 +197,7 @@ header .icon-wrapper:hover {
     gap: 12px;
     padding: 8px 12px;
     min-height: 44px;
-    border-radius: 8px;
+    border-radius: 12px;
 
     color: var(--primary);
     text-decoration: none;
@@ -184,7 +208,7 @@ header .icon-wrapper:hover {
 
 .dropdown-item:hover {
     background-color: var(--light-gray);
-    color: var(--primary);
+    color: var(--primary-blue);
 }
 
 .dropdown-item img {
@@ -209,7 +233,7 @@ header .icon-wrapper:hover {
     /*background-color: var(--light-gray);*/
     color: var(--primary-red);
     border: 1px solid var(--primary-red);
-
+    border-radius: 12px;
 
     transition: all 0.2s ease, transform 0.2s;
 }
@@ -218,6 +242,27 @@ header .icon-wrapper:hover {
     background-color: #FFF5F3;
     color: var(--primary-red);
 }
+
+.logout-btn:active {
+    scale: 0.95;
+}
+
+.drop-down-menu-title {
+    color: var(--secondary);
+}
+
+.submenu-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    gap: 4px;
+    /*padding: 8px;*/
+    border-radius: 12px;
+
+    background-color: var(--light-gray);
+}
+
 
 /* Бургер-иконка (изначально скрыта) */
 #menu-trigger {
@@ -245,16 +290,22 @@ header .icon-wrapper:hover {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 280px;
+    width: 300px;
     height: 100%;
     z-index: 1000;
-    border-radius: 16px 0 0 16px;
 
-    background: var(--white);
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+    padding-inline: 8px;
+    border-radius: 16px 0 0 16px;
 
     transition: right 0.3s ease;
     overflow-y: auto;
     pointer-events: auto;
+
+    background: var(--white);
 }
 
 .mobile-menu__header {
@@ -283,11 +334,14 @@ header .icon-wrapper:hover {
 
 .mobile-menu__content a {
     display: block;
+
     padding: 12px;
-    color: var(--primary);
+    border-radius: 12px;
+
     text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
+
+    color: var(--primary);
+    transition:all 0.2s ease;
 }
 
 .mobile-menu__content a.active-link {
@@ -297,6 +351,7 @@ header .icon-wrapper:hover {
 
 .mobile-menu__content a:not(.active-link):hover {
     background-color: var(--gray);
+    color: var(--primary-blue);
 }
 /* Состояния при открытии */
 .mobile-menu.active {
@@ -309,8 +364,120 @@ header .icon-wrapper:hover {
     pointer-events: auto;
 }
 
-/* Показываем бургер на маленьких экранах */
-@media (max-width: 1200px) {
+.text-hint.policy-menu-text {
+    color: var(--secondary);
+
+    padding-block: 4px;
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+.text-hint.policy-menu-text:hover {
+    background-color: transparent !important;
+}
+
+/* Планшеты (576px–992px) */
+@media (max-width: 992px) {
+    header {
+        padding: 0 16px;
+        height: 56px;
+    }
+
+    .logo-wrapper {
+            width: 180px;
+    }
+
+    .logo {
+        height: 48px;
+    }
+
+    .header-account-wrapper {
+        width: 180px;
+    }
+
+    .header-avatar-wrapper {
+        width: 36px;
+        height: 36px;
+    }
+
+    .header-profile-info {
+        max-width: 140px; /* Меньше места для текста */
+    }
+
+    .profile-dropdown {
+        width: 200px;
+        right: 0;
+        top: calc(100% + 16px);
+    }
+
+    #menu-trigger {
+        display: flex;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .mobile-menu {
+        width: 260px;
+    }
+
+}
+
+/* Мобильные устройства (<576px) */
+@media (max-width: 576px) {
+    header {
+        padding: 0 12px;
+        height: 48px;
+    }
+
+    .logo-wrapper {
+        width: 140px;
+    }
+
+    .logo {
+        height: 36px;
+    }
+
+    .header-account-wrapper {
+        width: 140px;
+    }
+
+    .header-avatar-wrapper {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+    }
+
+    .header-profile-info {
+        max-width: 100px; /* Ещё меньше места для текста */
+    }
+
+    .header-profile-info p {
+        font-size: 12px; /* Уменьшаем для мобильных */
+    }
+
+    .profile-dropdown {
+        width: 180px;
+        right: 0;
+        top: calc(100% + 12px);
+    }
+
+    .mobile-menu {
+        width: 240px;
+    }
+
+    .mobile-menu__header {
+        padding: 12px;
+    }
+
+    .mobile-menu__content {
+        padding: 6px;
+    }
+}
+
+
+@media (max-width: 1170px) {
     #menu-trigger {
         display: flex;
     }
@@ -320,6 +487,5 @@ header .icon-wrapper:hover {
         display: none;
     }
 }
-
 
 

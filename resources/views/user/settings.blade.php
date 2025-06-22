@@ -31,7 +31,7 @@
 
                 <div class="lit-field-group-flex">
                     <div class="lit-field-group">
-                        <div class="lit-field">
+                        <div class="lit-field user-avatar-preview">
                             <div class="user-settings-avatar-wrapper" data-default-avatar="{{ $user->icon ? 'custom' : 'default' }}">
                                 <img src="{{ asset('images/icons/load-white-icon.svg') }}" class="icon-24 hover-icon" alt="change cover icon">
 
