@@ -1,14 +1,12 @@
-
 /* Стили для блока просмотра PDF */
 .pdf-view {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    width: 100%;
     gap: 48px;
     padding: 8px;
     border-radius: 16px;
-
     background-color: var(--light-gray);
 }
 
@@ -16,7 +14,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     width: 100%;
     gap: 16px;
 }
@@ -24,7 +21,6 @@
 .pdf-desc {
     padding-left: 12px;
     width: 240px;
-
     color: var(--secondary);
 }
 
@@ -37,7 +33,6 @@
     display: flex;
     justify-content: flex-end;
     gap: 8px;
-
     width: 240px;
 }
 
@@ -45,7 +40,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-
     gap: 4px;
 }
 
@@ -53,26 +47,22 @@
     padding: 12px 16px;
     border-radius: 12px;
     cursor: pointer;
-
     font-family: 'Involve', sans-serif;
     font-size: 14px;
     font-weight: 600;
-
     background-color: var(--primary);
     color: var(--white);
     border: none;
-
     transition: background-color 0.2s ease;
 }
 
-#zoom-in, #zoom-out {
+#zoom-in,
+#zoom-out {
     display: flex;
     justify-content: center;
     align-items: center;
-
     width: 40px;
     height: 40px;
-
     padding: 0;
 }
 
@@ -87,20 +77,97 @@
 
 #pdf-canvas {
     max-width: 100%;
-
     height: auto;
     border: 1px solid var(--gray);
     border-radius: 8px;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
+/* Планшеты горизонтальные (960px–1200px) */
+@media (max-width: 1200px) and (min-width: 960px) {
+    .pdf-controls {
+        gap: 12px;
+    }
+    .pdf-desc,
+    .zoom-controls {
+        width: 200px;
+    }
+    .pdf-btn {
+        padding: 10px 14px;
+    }
+    #zoom-in,
+    #zoom-out {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Планшеты вертикальные и ниже (до 960px) */
+@media (max-width: 960px) {
+    .pdf-desc,
+    .zoom-controls {
+        width: 100%;
+        padding: 0;
+        text-align: center;
+        justify-content: center;
+    }
+    .pdf-btn {
+        padding: 12px;
+        width: 100%;
+        text-align: center;
+        border-radius: 10px;
+        font-size: 12px;
+    }
+    #zoom-in,
+    #zoom-out {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+    }
+    #pdf-canvas {
+        width: 100%;
+    }
+}
+
+/* Смартфоны горизонтальные (480px–640px) */
+@media (max-width: 640px) and (min-width: 480px) {
+    .pdf-view {
+        gap: 32px;
+    }
+    .pdf-controls {
+        gap: 8px;
+    }
+
+    .pdf-desc,
+    .zoom-controls {
+        width: 100%;
+    }
+    .page-controls {
+        gap: 6px;
+    }
+}
+
+/* Смартфоны вертикальные (320px–480px) */
+@media (max-width: 480px) {
+    .pdf-view {
+        gap: 24px;
+        padding: 4px;
+    }
     .pdf-controls {
         flex-direction: column;
         gap: 8px;
     }
+    .pdf-desc,
+    .zoom-controls {
+        width: 100%;
+        padding: 0;
+        text-align: center;
+    }
+     .pdf-desc {
+         display: none;
+     }
 
     .pdf-btn {
+        padding: 12px;
         width: 100%;
         text-align: center;
     }

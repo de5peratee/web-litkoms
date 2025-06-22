@@ -17,9 +17,26 @@ class AuthorComicsLandingController extends Controller
             ->take(5)
             ->get();
 
-        $topAuthors = User::whereHas('authorComics')
-            ->withCount('authorComics')
-            ->orderByDesc('created_at')
+        $topAuthors = User::whereHas('authorComics', function ($query) {
+            $query->where('is_moderated', 'successful')
+                ->where('is_published', true);
+        })
+            ->withCount(['authorComics' => function ($query) {
+                $query->where('is_moderated', 'successful')
+                    ->where('is_published', true);
+            }])
+            ->with(['authorComics' => function ($query) {
+                $query->where('is_moderated', 'successful')
+                    ->where('is_published', true);
+            }])
+            ->select('users.*')
+            ->leftJoin('author_comics', function ($join) {
+                $join->on('users.id', '=', 'author_comics.created_by')
+                    ->where('author_comics.is_moderated', 'successful')
+                    ->where('author_comics.is_published', true);
+            })
+            ->groupBy('users.id')
+            ->orderByRaw('AVG(author_comics.average_assessment) DESC')
             ->take(10)
             ->get();
 

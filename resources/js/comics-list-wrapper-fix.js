@@ -11,7 +11,7 @@ $(document).ready(function() {
                 $tags.removeClass('hidden');
 
                 const containerWidth = $container.width();
-                const moreTagWidth = 88;
+                const moreTagWidth = 52;
                 let totalWidth = 0;
                 let cutoffIndex = $tags.length;
 
@@ -30,7 +30,7 @@ $(document).ready(function() {
 
                     $('<p>', {
                         class: 'text-hint comic-tag more-tag',
-                        text: `+${count} жанров`,
+                        text: `+${count}`,
                         title: $hiddenTags.map(function() { return $(this).text(); }).get().join(', ')
                     }).appendTo($container);
                 }

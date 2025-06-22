@@ -6,13 +6,16 @@
                  alt="{{ $comment->createdBy->nickname }}" class="avatar">
         </div>
 
-        <a href="{{ route('profile.index', ['nickname' => $comment->createdBy->nickname]) }}">
-            {{ '@' . $comment->createdBy->nickname }}
-        </a>
+        <div class="comment-title-nearby-flex">
+            <a href="{{ route('profile.index', ['nickname' => $comment->createdBy->nickname]) }}">
+                {{ '@' . $comment->createdBy->nickname }}
+            </a>
 
-        <p class="text-hint comment-hint-text">·</p>
+            <p class="text-hint comment-hint-text">·</p>
 
-        <p class="text-hint comment-hint-text">{{ $comment->created_at->diffForHumans() }}</p>
+            <p class="text-hint comment-hint-text">{{ $comment->created_at->diffForHumans() }}</p>
+        </div>
+
     </div>
 
     <div class="comment-text-wrapper">

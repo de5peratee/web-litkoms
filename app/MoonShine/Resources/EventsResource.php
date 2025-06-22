@@ -39,7 +39,7 @@ class EventsResource extends ModelResource
             Text::make('Название события', 'name')->sortable(),
             Image::make('Обложка', 'cover')
                 ->extraAttributes(fn(string $filename, int $index): ?FileItemExtra => new FileItemExtra(wide: false, auto: true, styles: 'width: 250px;'))
-                ->dir('icon_user')
+                ->dir('event_covers')
                 ->disk('public')
                 ->nullable()
                 ->allowedExtensions(['png', 'jpg', 'jpeg']),
@@ -78,16 +78,16 @@ class EventsResource extends ModelResource
                 )->selectMode()->placeholder('Теги')->required(),
 
                 Date::make('Дата начала', 'start_date')->withTime()->required(),
-                Date::make('Дата окончания', 'end_date')->withTime()->required(),
+                Date::make('Дата окончания', 'end_date')->withTime(),
 
                 Textarea::make('Описание','description')->required(),
 
                 Image::make('Обложка', 'cover')
                     ->extraAttributes(fn(string $filename, int $index): ?FileItemExtra => new FileItemExtra(wide: false, auto: true, styles: 'width: 250px;'))
-                    ->dir('icon_user')
+                    ->dir('event_covers')
                     ->disk('public')
                     ->nullable()
-                    ->allowedExtensions(['png', 'jpg', 'jpeg'])->required(),
+                    ->allowedExtensions(['png', 'jpg', 'jpeg']),
 
                 BelongsTo::make(
                     'Создатель события',
@@ -122,16 +122,16 @@ class EventsResource extends ModelResource
             )->selectMode()->placeholder('Теги')->inLine(separator: ', ')->required(),
 
             Date::make('Дата начала', 'start_date')->withTime()->required(),
-            Date::make('Дата окончания', 'end_date')->withTime()->required(),
+            Date::make('Дата окончания', 'end_date')->withTime(),
 
             Textarea::make('Описание','description')->required(),
 
             Image::make('Обложка', 'cover')
                 ->extraAttributes(fn(string $filename, int $index): ?FileItemExtra => new FileItemExtra(wide: false, auto: true, styles: 'width: 250px;'))
-                ->dir('icon_user')
+                ->dir('event_covers')
                 ->disk('public')
                 ->nullable()
-                ->allowedExtensions(['png', 'jpg', 'jpeg'])->required(),
+                ->allowedExtensions(['png', 'jpg', 'jpeg']),
 
             BelongsTo::make(
                 'Создатель события',
@@ -151,11 +151,11 @@ class EventsResource extends ModelResource
     protected function rules(mixed $item): array
     {
         return [
-            'cover' => 'required|image|mimes:jpeg,png,jpg|max:4096',
+            'cover' => 'image|mimes:jpeg,png,jpg|max:4096',
             'name' => 'required|string|min:3|max:255',
             'description' => 'required|string|min:10|max:5000',
             'start_date' => ['required', 'date_format:Y-m-d\TH:i', 'after_or_equal:now'],
-            'end_date' => ['required', 'date_format:Y-m-d\TH:i', 'after_or_equal:start_date'],
+            'end_date' => ['date_format:Y-m-d\TH:i', 'after_or_equal:start_date'],
             'guests' => 'nullable|max:1000',
             'tags' => 'required|max:1000',
         ];
@@ -164,7 +164,6 @@ class EventsResource extends ModelResource
     public function validationMessages(): array
     {
         return [
-            'cover.required' => 'Пожалуйста, загрузите обложку события.',
             'cover.image' => 'Файл обложки должен быть изображением.',
             'cover.mimes' => 'Допустимые форматы обложки: jpeg, png, jpg.',
             'cover.max' => 'Максимальный размер изображения — 4MB.',
@@ -183,7 +182,6 @@ class EventsResource extends ModelResource
             'start_date.date_format' => 'Дата начала должна быть в формате: ГГГГ-ММ-ДДTчч:мм.',
             'start_date.after_or_equal' => 'Дата начала не может быть раньше текущего времени.',
 
-            'end_date.required' => 'Дата и время окончания обязательны.',
             'end_date.date_format' => 'Дата окончания должна быть в формате: ГГГГ-ММ-ДД чч:мм:сс.',
             'end_date.after_or_equal' => 'Дата окончания не может быть раньше даты начала.',
 
@@ -194,5 +192,9 @@ class EventsResource extends ModelResource
         ];
     }
 
+    public function search(): array
+    {
+        return ['name'];
+    }
 
 }

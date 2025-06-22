@@ -1,7 +1,6 @@
 .events-container {
     display: flex;
     flex-direction: column;
-
     gap: 8px;
     width: 1170px;
 }
@@ -10,10 +9,8 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-
     padding: 32px;
     border-radius: 32px;
-
     background-color: var(--white);
 }
 
@@ -22,21 +19,17 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-
     width: 100%;
     gap: 24px;
 }
 
-.info-block{
+.info-block {
     width: 100%;
-
     display: flex;
     flex-direction: column;
     gap: 16px;
-
     padding: 32px;
     border-radius: 32px;
-
     background-color: var(--white);
 }
 
@@ -45,12 +38,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
-    gap: 16px
+    gap: 16px;
 }
-
-
-
 
 .search-container {
     display: flex;
@@ -65,15 +54,16 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-end; /* Выравнивание по правому краю до 960px */
     width: 100%;
-    gap: 8px;
+    gap: 4px; /* Синхронизация с библиотекой */
+    flex-wrap: nowrap;
 }
 
 .search-form input {
     padding: 8px 16px;
     height: 44px;
-    width: 320px;
+    width: 320px; /* Фиксированная ширина до 640px */
     border-radius: 12px;
     border: 1px solid var(--gray);
     font-family: 'Involve', sans-serif;
@@ -97,7 +87,7 @@
 
 .search-input-wrapper {
     position: relative;
-    width: 320px;
+    width: 320px; /* Синхронизация с инпутом */
 }
 
 .clear-search {
@@ -105,30 +95,15 @@
     top: 50%;
     right: 8px;
     transform: translateY(-50%);
-
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    width: 24px;
-    height: 24px;
+    width: 24px; /* Синхронизация с библиотекой */
+    height: 24px; /* Синхронизация с библиотекой */
     border-radius: 999px;
-
     background: transparent;
-    transition: background-color 0.2s ease;
-}
-
-.clear-search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 32px;
-    height: 32px;
-    border-radius: 999px;
-
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease; /* Синхронизация с библиотекой */
 }
 
 .clear-search:hover {
@@ -141,16 +116,13 @@
     align-items: center;
     min-width: 44px;
     height: 44px;
-
     border-radius: 12px;
     padding: 8px;
     gap: 2px;
     cursor: pointer;
-
     font-family: 'Involve', sans-serif;
     font-size: 14px;
     font-weight: 600;
-
     background-color: var(--primary);
     color: var(--white);
     border: none;
@@ -162,46 +134,64 @@
 }
 
 .events-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Уточняем, чтобы колонки были строго равны */
+    box-sizing: border-box; /* Убеждаемся, что отступы не ломают ширину */
     gap: 8px;
-
-    width:100%;
+    width: 100%;
 }
 
 .event-card {
-    overflow: hidden;
-
+    position: relative;
     display: flex;
     flex-direction: column;
-
     gap: 24px;
     padding-bottom: 24px;
     border-radius: 24px;
-    width: 548px;
+    width: 100%;
+    box-sizing: border-box; /* Добавляем, чтобы границы не влияли на ширину */
 
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--gray);
     background-color: var(--light-gray);
+}
+
+.past-sign {
+    position: absolute;
+    top: 24px;
+    right: -16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 8px;
+    transform: rotate(8deg);
+    transform-origin: right top;
+    z-index: 1;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    background-color: var(--primary);
+    color: var(--white);
 }
 
 .event-description {
     display: flex;
     flex-direction: column;
     gap: 16px;
-
     padding-inline: 24px;
 }
 
-.event-card-datetime, .event-card-datetime-data, .event-card-datetime-title {
+.bottom-event-flex-data {
     display: flex;
+    justify-content: space-between; /* Сохранение space-between */
     align-items: center;
-    gap: 4px;
-
-    color: var(--secondary);
+    gap: 24px;
+    flex-wrap: wrap; /* Перенос текста на 2 строки при нехватке места */
 }
 
-.event-card-datetime > .event-card-datetime-data {
-    gap: 2px;
+.event-datetime-wrapper,
+.event-location-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .event-title-block {
@@ -229,14 +219,12 @@
 .event-tag {
     display: flex;
     align-items: center;
-
     padding: 8px 16px;
     border-radius: 999px;
     white-space: nowrap;
-
     text-transform: capitalize;
-    border: 1px solid var(--primary);
-    color: var(--primary);
+    background-color: var(--gray);
+    color: var(--secondary);
 }
 
 .event-tag.more-tags {
@@ -251,26 +239,23 @@
 
 .cover_wrapper {
     overflow: hidden;
-
     width: 100%;
-    aspect-ratio: 2/1;
+    aspect-ratio: 2/1; /* Установка фиксированного соотношения 2:1 */
+    border-radius: 24px 24px 0 0;
 }
 
 .cover_wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Обрезка изображения с сохранением соотношения */
 }
 
 .load-more-container {
     display: flex;
-    justify-content:center;
-
+    justify-content: center;
     text-align: center;
     margin: 20px 0;
 }
-
-
 
 .hidden {
     visibility: hidden;
@@ -284,14 +269,11 @@
     position: fixed;
     top: 0;
     left: 0;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     width: 100%;
     height: 100%;
-
     background: rgba(0, 0, 0, 0.32);
     z-index: 1000;
     visibility: hidden;
@@ -309,7 +291,6 @@
 .modal-content {
     display: flex;
     flex-direction: column;
-
     border-radius: 32px;
     padding: 32px;
     width: 100%;
@@ -323,7 +304,6 @@
 .modal-section {
     display: flex;
     flex-direction: column;
-
     gap: 8px;
 }
 
@@ -333,7 +313,8 @@
     gap: 8px;
 }
 
-.modal-content select, #category-search {
+.modal-content select,
+#category-search {
     padding: 8px 12px;
     height: 44px;
     border-radius: 12px;
@@ -347,11 +328,13 @@
     transition: box-shadow 0.1s ease-in, background-color 0.3s ease-in;
 }
 
-.modal-content select::placeholder, #category-search::placeholder {
+.modal-content select::placeholder,
+#category-search::placeholder {
     color: var(--tertiary);
 }
 
-.modal-content select:focus, #category-search:focus {
+.modal-content select:focus,
+#category-search:focus {
     background-color: var(--white);
     border: 1px solid var(--primary-blue);
     box-shadow: 0 16px 48px rgba(0, 90, 255, 0.08);
@@ -386,18 +369,15 @@
 .selected-category-tag {
     display: flex;
     align-items: center;
-
     padding: 8px 16px;
     border-radius: 999px;
     gap: 8px;
-
     background-color: var(--primary);
     color: var(--white);
 }
 
 .selected-category-tag .remove-category {
     color: var(--white);
-
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -423,7 +403,6 @@ option {
     width: 280px;
     box-shadow: 0 2px 32px rgba(0,0,0,0.08);
     margin-top: 64px;
-
     padding: 8px;
     border-radius: 16px;
 }
@@ -432,7 +411,6 @@ option {
     padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
-
     transition: all 0.2s ease;
 }
 
@@ -441,12 +419,9 @@ option {
     background-color: var(--light-gray);
 }
 
-
-
 .events-slider-container {
     position: relative;
     overflow: hidden;
-
     width: 1170px;
     margin: 0 auto;
     border-radius: 32px;
@@ -460,30 +435,27 @@ option {
 .slide {
     overflow: hidden;
     display: flex;
-    align-items: flex-end;
+    align-items: center; /* Выравнивание по центру */
     justify-content: center;
-
     min-width: 100%;
     height: 400px;
     background-size: cover;
     background-position: center;
-    /*border-radius: 32px;*/
-
     background-color: var(--primary-blue);
 }
 
 .slide-content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center; /* Выравнивание по центру */
     align-items: center;
-
-    padding: 32px 32px 48px 32px;
+    padding: 32px;
     width: 100%;
     height: 100%;
-
     background: rgba(0, 0, 0, 0.32);
     color: var(--white);
+    overflow: hidden;
+    text-align: center; /* Текст по центру */
 }
 
 .slide-center-data {
@@ -491,26 +463,25 @@ option {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    gap: 16px;
+    text-align: center
+;
+    gap: 32px; /* Увеличенный отступ между кнопкой и датой */
+    padding-block: 16px;
 }
 
 .slide-event-tags-wrapper {
     display: flex;
     align-items: center;
-
     gap: 4px;
 }
 
 .slide-event-tag {
     display: flex;
-
     padding: 8px 16px;
     border-radius: 999px;
-
     background-color: rgba(255, 255, 255, 0.16);
-    backdrop-filter: blur(24px); /* Эффект размытия */
-    -webkit-backdrop-filter: blur(24px); /* Для поддержки в Safari */
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     text-transform: capitalize;
 }
 
@@ -519,15 +490,15 @@ option {
     flex-direction: row;
     align-items: center;
     gap: 8px;
-
     color: rgba(255, 255, 255, 0.96);
+    margin-top: 16px; /* Отступ между кнопкой и датой */
 }
 
-.prev-button, .next-button {
+.prev-button,
+.next-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -536,16 +507,16 @@ option {
     padding: 8px;
     border-radius: 999px;
     cursor: pointer;
-
     background: rgba(255, 255, 255, 0.16);
-    backdrop-filter: blur(24px); /* Эффект размытия */
-    -webkit-backdrop-filter: blur(24px); /* Для поддержки в Safari */
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
 }
 
 .prev-button { left: 16px; }
 .next-button { right: 16px; }
 
-.prev-button:hover, .next-button:hover {
+.prev-button:hover,
+.next-button:hover {
     background: rgba(255, 255, 255, 0.24);
 }
 
@@ -562,15 +533,191 @@ option {
     width: 12px;
     height: 12px;
     border-radius: 999px;
-    /*background-color: var(--primary);*/
     background: rgba(255, 255, 255, 0.16);
-    backdrop-filter: blur(24px); /* Эффект размытия */
-    -webkit-backdrop-filter: blur(24px); /* Для поддержки в Safari */
-
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .dot.active {
     background: white;
 }
 
+/* Адаптивность */
+@media (max-width: 1200px) and (min-width: 960px) {
+    .events-container,
+    .events-slider-container {
+        width: 940px;
+    }
+    .events-explore-container {
+        padding: 32px;
+        border-radius: 32px;
+    }
+    .search-form {
+        gap: 4px;
+    }
+    .search-form input {
+        padding: 6px 12px; /* Синхронизация с библиотекой */
+        height: 40px; /* Синхронизация с библиотекой */
+    }
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .event-card {
+        min-width: 0;
+        width: 100%;
+        box-sizing: border-box; /* Добавляем, чтобы границы не влияли на ширину */
+    }
+    .slide {
+        height: 400px;
+    }
+    .filter-btn {
+        padding: 6px 12px; /* Синхронизация с библиотекой */
+        height: 40px; /* Синхронизация с библиотекой */
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 960px) {
+    .events-container,
+    .events-slider-container {
+        width: 640px;
+        border-radius: 24px;
+    }
+    .events-explore-container {
+        padding: 24px;
+        border-radius: 24px;
+    }
+    .events-explore-header {
+        flex-direction: column;
+        align-items: center;
+
+        gap: 12px;
+        padding-block: 8px;
+    }
+
+    .slide-center-data {
+        gap: 24px; /* Увеличенный отступ между кнопкой и датой */
+    }
+    .search-form {
+        justify-content: center; /* Синхронизация с библиотекой */
+        gap: 2px; /* Синхронизация с библиотекой */
+    }
+    .search-form input {
+        width: 100%; /* Растягиваем на 100% ниже 960px */
+        padding: 6px 12px; /* Синхронизация с библиотекой */
+        height: 40px; /* Синхронизация с библиотекой */
+    }
+    .search-input-wrapper {
+        width: 100%; /* Синхронизация с инпутом */
+    }
+    .modal-content {
+        padding: 24px;
+        border-radius: 24px;
+        width: 400px;
+    }
+    .modal-content select, #category-search {
+        padding: 6px 12px;
+        height: 40px;
+    }
+    .modal-close {
+        width: 36px;
+        height: 36px;
+    }
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+    .event-card {
+        width: 100%;
+    }
+    .cover_wrapper {
+        height: auto;
+    }
+    .slide {
+        height: 464px;
+    }
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 640px) and (min-width: 480px) {
+    .events-container,
+    .events-slider-container {
+        width: 480px;
+    }
+    .search-form input {
+        padding: 5px 10px; /* Синхронизация с библиотекой */
+        height: 40px; /* Синхронизация с библиотекой */
+    }
+    .events-explore-container {
+        padding: 16px;
+    }
+    .modal-content select, #category-search {
+        padding: 5px 10px;
+        height: 40px;
+    }
+    .modal-close {
+        width: 32px;
+        height: 32px;
+    }
+    .slide {
+        height: 460px;
+    }
+    .filter-btn {
+        padding: 4px 12px; /* Синхронизация с библиотекой */
+        height: 40px; /* Синхронизация с библиотекой */
+    }
+
+    .event-card {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .events-container,
+    .events-slider-container {
+        width: 340px;
+    }
+    .events-explore-container {
+        padding: 16px;
+    }
+    .search-form input {
+        padding: 4px 8px; /* Синхронизация с библиотекой */
+        height: 40px; /* Синхронизация с библиотекой */
+        max-width: 200px; /* Сохранение ограничения */
+    }
+    .modal-content {
+        padding: 16px;
+        border-radius: 20px;
+        width: 320px;
+    }
+    .modal-content select, #category-search {
+        padding: 4px 8px;
+        height: 40px;
+    }
+    .modal-close {
+        width: 28px;
+        height: 28px;
+    }
+    .slide {
+        height: 400px;
+    }
+    .slide-center-data {
+        gap: 16px; /* Увеличенный отступ между кнопкой и датой */
+    }
+    .filter-btn {
+        padding: 4px 12px; /* Синхронизация с библиотекой */
+        height: 40px; /* Синхронизация с библиотекой */
+        font-size: 12px; /* Синхронизация с библиотекой */
+    }
+    .event-card {
+        min-width: 0;
+    }
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+}

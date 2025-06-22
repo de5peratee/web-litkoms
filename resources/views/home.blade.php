@@ -22,7 +22,7 @@
 {{--                            </div>--}}
 
                             <div class="slide-center-data">
-                                <h1>{{$post->title}}</h1>
+                                <h2>{{$post->title}}</h2>
 
 {{--                                <div class="slide-event-tags-wrapper">--}}
 {{--                                    @foreach ($event->tags as $tag)--}}
@@ -75,7 +75,7 @@
 
         <div class="info-block events-container">
             <div class="info-header">
-                <h2>Мероприятия</h2>
+                <h3>Мероприятия</h3>
                 <a href="{{ route('events.index') }}" class="tertiary-btn">
                     Подробнее
                     <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
@@ -109,7 +109,7 @@
 
         <div class="info-block new-comics-list-container">
             <div class="info-header">
-                <h2>Новые комиксы в Литкомс</h2>
+                <h3>Новые комиксы в Литкомс</h3>
                 <a href="{{ route('library.index') }}" class="tertiary-btn">
                     Перейти в библиотеку
                     <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
@@ -154,9 +154,4 @@
             </div>
         </div>
     </div>
-
-{{--    <div class="web-radio-cta" id="floating-blob">--}}
-{{--        <img src="{{ asset('images/blob.svg') }}" alt="icon">--}}
-{{--    </div>--}}
-
 @endsection

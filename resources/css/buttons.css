@@ -5,7 +5,7 @@
     justify-content: center;
     gap: 8px;
 
-    padding: 8px 24px;
+    padding: 8px 16px;
     height: 44px;
     border-radius: 12px;
     cursor: pointer;
@@ -30,7 +30,7 @@
     justify-content: center;
     gap: 8px;
 
-    padding: 8px 24px;
+    padding: 8px 16px;
     height: 44px;
     border-radius: 12px;
     cursor: pointer;
@@ -83,11 +83,53 @@
     border-color: var(--primary-blue-dark);
 }
 
+.tertiary-btn:hover {
+    color: var(--primary-blue-dark);
+}
 
 
-
-.primary-btn:active, .secondary-btn:active, .tertiary-btn {
+.primary-btn:active,
+.secondary-btn:active,
+.tertiary-btn:active {
     transform: scale(0.95); /* Мелкое сжатие при нажатии */
+}
+
+/* Планшеты (576px–992px) */
+@media (max-width: 992px) {
+    .primary-btn {
+        padding: 6px 12px;
+        height: 40px;
+        font-size: 14px;
+    }
+    .secondary-btn {
+        padding: 6px 12px;
+        height: 40px;
+        font-size: 14px;
+    }
+    .tertiary-btn {
+        padding: 6px 0;
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+/* Мобильные устройства (<576px) */
+@media (max-width: 576px) {
+    .primary-btn {
+        padding: 4px 12px;
+        height: 40px;
+        font-size: 12px;
+    }
+    .secondary-btn {
+        padding: 4px 12px;
+        height: 40px;
+        font-size: 12px;
+    }
+    .tertiary-btn {
+        padding: 4px 0;
+        height: 36px;
+        font-size: 12px;
+    }
 }
 
 

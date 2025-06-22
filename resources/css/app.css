@@ -1,8 +1,31 @@
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+
+    opacity: 1;
+    z-index: 9999;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.page-transition.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.page-transition.fade-in {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
 body {
     display: flex;
     flex-direction: column;
 
-    gap: 8px;
     min-height: 100vh;
     scroll-padding-top: 64px;
     overflow-x: hidden;
@@ -21,38 +44,13 @@ main {
     align-items: center;
 
     margin: 0 auto;
+    padding-block: 8px;
 
     width: 100%;
+    min-height: 800px;
 }
 
-.web-radio-cta {
-    position: absolute;
-    height: 64px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: move;;
-    transition: all 0.2s ease;
-    z-index: 1000;
+body, html {
+    overflow-x: hidden;
 }
 
-.web-radio-cta:hover {
-    transform: scale(1.1);
-}
-
-.web-radio-cta img {
-   height: 64px;
-}
-
-@media (max-width: 768px) {
-    .web-radio-cta {
-        width: 48px;
-        height: 48px;
-    }
-    .web-radio-cta img {
-        width: 24px;
-        height: 24px;
-    }
-}

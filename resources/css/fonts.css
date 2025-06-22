@@ -70,3 +70,81 @@ span, label, .text-hint {
     line-height: 140%;
     letter-spacing: 0;
 }
+
+
+
+/* Планшеты (576px–992px) */
+@media (max-width: 992px) {
+    h1 {
+        font-size: 48px; /* Уменьшаем размер для планшетов */
+        line-height: 115%;
+    }
+
+    h2 {
+        font-size: 36px;
+        line-height: 115%;
+    }
+
+    h3 {
+        font-size: 24px;
+        line-height: 115%;
+    }
+
+    .text-big {
+        font-size: 16px;
+        line-height: 120%;
+    }
+
+    .text-medium {
+        font-size: 14px;
+        line-height: 135%;
+    }
+
+    .text-small {
+        font-size: 12px;
+        line-height: 135%;
+    }
+
+    span, label, .text-hint {
+        font-size: 12px;
+        line-height: 135%;
+    }
+}
+
+/* Мобильные устройства (<576px) */
+@media (max-width: 576px) {
+    h1 {
+        font-size: 32px; /* Ещё меньше для мобильных */
+        line-height: 110%;
+    }
+
+    h2 {
+        font-size: 28px;
+        line-height: 110%;
+    }
+
+    h3 {
+        font-size: 20px;
+        line-height: 110%;
+    }
+
+    .text-big {
+        font-size: 16px;
+        line-height: 120%;
+    }
+
+    .text-medium {
+        font-size: 14px;
+        line-height: 130%;
+    }
+
+    .text-small {
+        font-size: 12px;
+        line-height: 130%;
+    }
+
+    span, label, .text-hint {
+        font-size: 12px;
+        line-height: 130%;
+    }
+}

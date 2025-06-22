@@ -7,18 +7,72 @@ use App\Http\Requests\StoreCatalogEditorRequest;
 use App\Http\Requests\UpdateCatalogEditorRequest;
 use App\Models\Catalog;
 use App\Models\Genre;
+use App\Services\ImageCompressionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class EditorCatalogController extends Controller
 {
-    public function index()
+    protected $imageCompressionService;
+
+    public function __construct(ImageCompressionService $imageCompressionService)
     {
+        $this->imageCompressionService = $imageCompressionService;
+    }
+
+//    public function index()
+//    {
+//        $catalogs = Catalog::with('genres')
+//            ->orderBy('created_at', 'desc')
+//            ->get();
+//        return view('editor.catalog.list', compact('catalogs'));
+//    }
+    public function index(Request $request)
+    {
+        $perPage = 10;
+        $search = $request->input('search', '');
+
         $catalogs = Catalog::with('genres')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
             ->orderBy('created_at', 'desc')
+            ->take($perPage)
             ->get();
-        return view('editor.catalog.list', compact('catalogs'));
+
+        $total = Catalog::when($search, function ($query) use ($search) {
+            return $query->where('name', 'like', '%' . $search . '%');
+        })->count();
+
+        return view('editor.catalog.list', compact('catalogs', 'total', 'search'));
+    }
+
+    public function loadMore(Request $request)
+    {
+        $page = $request->input('page', 2);
+        $perPage = 10;
+        $search = $request->input('search', '');
+
+        $catalogs = Catalog::with('genres')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+
+        $html = view('partials.editor_lists.catalog_items', [
+            'catalogs' => $catalogs,
+            'page' => $page - 1 // Для корректной нумерации
+        ])->render();
+
+        return response()->json([
+            'html' => $html,
+            'hasMore' => $catalogs->count() === $perPage,
+            'nextPage' => $page + 1,
+        ]);
     }
 
     public function create()
@@ -34,6 +88,8 @@ class EditorCatalogController extends Controller
             $coverPath = $request->hasFile('cover')
                 ? $request->file('cover')->store('catalog_covers', 'public')
                 : null;
+
+            $this->imageCompressionService->compressImage(storage_path("app/public/$coverPath"));
 
             $catalog = Catalog::create([
                 'name' => $request->name,
@@ -64,6 +120,7 @@ class EditorCatalogController extends Controller
                     Storage::disk('public')->delete($catalog->cover);
                 }
                 $catalog->cover = $request->file('cover')->store('catalog_covers', 'public');
+                $this->imageCompressionService->compressImage(storage_path("app/public/$catalog->cover"));
             }
 
             $catalog->update([

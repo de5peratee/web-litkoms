@@ -8,8 +8,14 @@
     @vite(['resources/js/dynamic-cover.js'])
 
     <div class="author_comics-form-container">
+{{--        <div class="path-bar">--}}
+{{--            <a href="{{ URL::previous() }}" class="text-hint">Назад</a>--}}
+{{--            <img src="{{ asset('images/icons/arrow-right.svg') }}"  class="icon-24" alt="icon">--}}
+{{--            <p class="text-hint">Новый авторский комикс</p>--}}
+{{--        </div>--}}
+
         <div class="author_comics-form-container-header">
-            <h3>Форма публикации</h3>
+            <h3>Новый авторский комикс</h3>
             <div class="progress-bar">
                 <div class="progress-bar-endpoint active-endpoint">
                     {{-- <img src="{{ asset('images/icons/moderation/success-icon.svg') }}" class="icon-24" alt="icon"> --}}
@@ -82,20 +88,6 @@
                     </div>
                 </div>
                 <div class="lit-fields-group">
-{{--                    <div class="lit-field">--}}
-{{--                        <label for="cover">Обложка комикса</label>--}}
-{{--                        <input--}}
-{{--                            type="file"--}}
-{{--                            name="cover"--}}
-{{--                            id="cover"--}}
-{{--                            accept="image/*"--}}
-{{--                            class="{{ $errors->has('cover') ? 'is-invalid' : '' }}">--}}
-
-{{--                        @error('cover')--}}
-{{--                        <div class="input-error">{{ $message }}</div>--}}
-{{--                        @enderror--}}
-{{--                    </div>--}}
-
                     <div class="lit-field">
                         <label for="cover">Обложка комикса</label>
 

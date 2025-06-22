@@ -7,21 +7,58 @@ use App\Http\Requests\AuthorComicRequest;
 use App\Http\Requests\AuthorComicUpdateRequest;
 use App\Models\AuthorComics;
 use App\Models\Genre;
+use App\Services\ImageCompressionService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Auth;
 
 class AuthorComicsController extends Controller
 {
+    protected $imageCompressionService;
+
+    public function __construct(ImageCompressionService $imageCompressionService)
+    {
+        $this->imageCompressionService = $imageCompressionService;
+    }
+
     /**
      * Store a new author comic.
      */
-    public function index()
+//    public function index()
+//    {
+//        $comics = AuthorComics::where('created_by', auth()->id())
+//            ->with('genres')
+//            ->orderBy('published_at', 'desc')
+//            ->get()
+//            ->map(function ($comic) {
+//                $comic->genres_string = $comic->genres->pluck('name')->implode(', ') ?: 'Не указаны';
+//                $comic->status = match (true) {
+//                    $comic->is_published => 'Опубликован',
+//                    $comic->is_moderated === 'under review' => 'На модерации',
+//                    $comic->is_moderated === 'unsuccessful' => 'Не принят',
+//                    $comic->is_moderated === 'successful' => 'Принят',
+//                    default => 'Черновик',
+//                };
+//                return $comic;
+//            });
+//
+//        return view('user.author_comics.list', compact('comics'));
+//    }
+    public function index(Request $request)
     {
+        $perPage = 10;
+        $search = $request->input('search', '');
+
         $comics = AuthorComics::where('created_by', auth()->id())
             ->with('genres')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
             ->orderBy('published_at', 'desc')
+            ->take($perPage)
             ->get()
             ->map(function ($comic) {
                 $comic->genres_string = $comic->genres->pluck('name')->implode(', ') ?: 'Не указаны';
@@ -35,7 +72,52 @@ class AuthorComicsController extends Controller
                 return $comic;
             });
 
-        return view('user.author_comics.list', compact('comics'));
+        $total = AuthorComics::where('created_by',  auth()->id())
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->count();
+
+        return view('user.author_comics.list', compact('comics', 'total', 'search'));
+    }
+
+    public function loadMore(Request $request)
+    {
+        $page = $request->input('page', 2);
+        $perPage = 10;
+        $search = $request->input('search', '');
+
+        $comics = AuthorComics::where('created_by', auth()->id())
+            ->with('genres')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('published_at', 'desc')
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get()
+            ->map(function ($comic) {
+                $comic->genres_string = $comic->genres->pluck('name')->implode(', ') ?: 'Не указаны';
+                $comic->status = match (true) {
+                    $comic->is_published => 'Опубликован',
+                    $comic->is_moderated === 'under review' => 'На модерации',
+                    $comic->is_moderated === 'unsuccessful' => 'Не принят',
+                    $comic->is_moderated === 'successful' => 'Принят',
+                    default => 'Черновик',
+                };
+                return $comic;
+            });
+
+        $html = view('partials.user_lists.authors_comics_items', [
+            'comics' => $comics,
+            'page' => $page - 1 // Для корректной нумерации
+        ])->render();
+
+        return response()->json([
+            'html' => $html,
+            'hasMore' => $comics->count() === $perPage,
+            'nextPage' => $page + 1,
+        ]);
     }
 
     public function showModerationConfirm(AuthorComics $comic)
@@ -63,6 +145,9 @@ class AuthorComicsController extends Controller
 
             $coverPath = $request->file('cover')->store('author_comics_covers', 'public');
             $comicFilePath = $request->file('comic_file')->store('comics_files', 'public');
+
+            $this->imageCompressionService->compressImage(storage_path("app/public/$coverPath"));
+
 
             $comic = AuthorComics::create([
                 'created_by' => auth()->id(),
@@ -100,9 +185,6 @@ class AuthorComicsController extends Controller
 
     public function update(AuthorComicUpdateRequest $request, AuthorComics $comic)
     {
-
-        Log::info('Request Data', ['request' => $request->all()]);
-
         if ($comic->created_by !== auth()->id()) {
             abort(403, 'Unauthorized action.');
         }
@@ -112,7 +194,7 @@ class AuthorComicsController extends Controller
             DB::beginTransaction();
 
             $data = [
-                'name' => $validated['title'],
+                'name' => $validated['name'],
                 'description' => $validated['description'],
                 'age_restriction' => $validated['age_restriction'],
                 'is_moderated' => 'under review',
@@ -123,14 +205,17 @@ class AuthorComicsController extends Controller
                 if ($comic->cover) {
                     Storage::disk('public')->delete($comic->cover);
                 }
-                $data['cover'] = $request->file('cover')->store('author_comics_covers', 'public');
+                $coverPath = $request->file('cover')->store('author_comics_covers', 'public');
+                $this->imageCompressionService->compressImage(storage_path("app/public/$coverPath"));
+                $data['cover'] = $coverPath;
             }
 
+            // Обновление файла комикса, если есть
             if ($request->hasFile('comic_file')) {
                 if ($comic->comics_file) {
                     Storage::disk('public')->delete($comic->comics_file);
                 }
-                $data['comics_file'] = $request->file('comic_file')->store('comics', 'public');
+                $data['comics_file'] = $request->file('comic_file')->store('comics_files', 'public');
             }
 
             $comic->update($data);

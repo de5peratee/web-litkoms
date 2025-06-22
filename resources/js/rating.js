@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 newRating = 0;
             }
 
+            // Обновление UI сразу (оптимистично)
             stars.forEach(s => {
                 s.src = s.dataset.index <= newRating ? window.filledStar : window.outlineStar;
             });
@@ -26,14 +27,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json',
                 },
                 body: JSON.stringify({ rating: newRating }),
             })
-                .then(response => {
-                    if (!response.ok) throw new Error('Ошибка при сохранении рейтинга');
-                    return response.json();
-                })
-                .then(data => {
+                .then(async response => {
+                    let data;
+                    try {
+                        data = await response.json();
+                    } catch (e) {
+                        window.location.reload();
+                        return;
+                    }
+
+                    if (data.redirect_url) {
+                        window.location.href = data.redirect_url;
+                        return;
+                    }
+
+                    if (!response.ok) {
+                        throw new Error(data.message || 'Ошибка при сохранении рейтинга');
+                    }
+
                     avgGradeElement.textContent = data.average_rating;
                     ratingInput.value = data.user_rating;
                 })

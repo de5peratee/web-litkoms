@@ -22,16 +22,18 @@ $(function () {
         $(`#${fieldId}`).addClass('is-invalid');
     }
 
+    // Обработчик отправки формы редактирования
     $('#edit-event-form').on('submit', function (e) {
         e.preventDefault();
         clearErrors();
 
         let isValid = true;
-        const form = $(this);
         const name = $('#edit-event-name').val().trim();
         const description = $('#edit-event-description').val().trim();
         const startDate = $('#edit-event-start_date').val();
-        const time = $('#edit-event-time').val();
+        const startTime = $('#edit-event-start_time').val();
+        const endDate = $('#edit-event-end_date').val();
+        const endTime = $('#edit-event-end_time').val();
         const eventId = $('#edit-event-id').val();
 
         if (!name) {
@@ -43,11 +45,19 @@ $(function () {
             isValid = false;
         }
         if (!startDate) {
-            showError('edit-event-start_date', 'Дата проведения обязательна');
+            showError('edit-event-start_date', 'Дата начала обязательна');
             isValid = false;
         }
-        if (!time) {
-            showError('edit-event-time', 'Время начала обязательно');
+        if (!startTime) {
+            showError('edit-event-start_time', 'Время начала обязательно');
+            isValid = false;
+        }
+        if (!endDate) {
+            showError('edit-event-end_date', 'Дата окончания обязательна');
+            isValid = false;
+        }
+        if (!endTime) {
+            showError('edit-event-end_time', 'Время окончания обязательно');
             isValid = false;
         }
 
@@ -58,20 +68,21 @@ $(function () {
                 data: new FormData(this),
                 processData: false,
                 contentType: false,
-                success: function (response) {
+                success: function () {
                     window.location.href = '/dashboard/events';
                 },
                 error: function (xhr) {
                     const errors = xhr.responseJSON.errors || {};
                     for (const [field, messages] of Object.entries(errors)) {
-                        showError(`edit-event-${field}`, messages[0]);
+                        showError(`edit-event-${field.replace('.', '_')}`, messages[0]);
                     }
                 }
             });
         }
     });
 
-    $('.delete-event-btn').on('click', function (e) {
+    // Делегирование событий для кнопки удаления
+    $(document).on('click', '.delete-event-btn', function (e) {
         e.preventDefault();
         const eventId = $(this).data('event-id');
         const eventName = $(this).data('event-name');
@@ -82,14 +93,17 @@ $(function () {
         openModal($('#delete-event-modal'));
     });
 
-    $('.edit-event-btn').on('click', function (e) {
+    // Делегирование событий для кнопки редактирования
+    $(document).on('click', '.edit-event-btn', function (e) {
         e.preventDefault();
 
         const eventId = $(this).data('event-id');
         const eventName = $(this).data('event-name');
         const eventDescription = $(this).data('event-description');
         const eventStartDate = $(this).data('event-start_date');
-        const eventTime = $(this).data('event-time');
+        const eventStartTime = $(this).data('event-start_time');
+        const eventEndDate = $(this).data('event-end_date');
+        const eventEndTime = $(this).data('event-end_time');
         const eventGuests = $(this).data('event-guests');
         const eventTags = $(this).data('event-tags');
         const eventCover = $(this).data('event-cover');
@@ -98,10 +112,12 @@ $(function () {
         $('#edit-event-name').val(eventName);
         $('#edit-event-description').val(eventDescription);
         $('#edit-event-start_date').val(eventStartDate);
-        $('#edit-event-time').val(eventTime);
+        $('#edit-event-start_time').val(eventStartTime);
+        $('#edit-event-end_date').val(eventEndDate);
+        $('#edit-event-end_time').val(eventEndTime);
         $('#edit-event-guests').val(eventGuests);
         $('#edit-event-tags').val(eventTags);
-        $('#edit-event-form').attr('action', `/events/${eventId}`);
+        $('#edit-event-form').attr('action', `/dashboard/events/${eventId}`);
 
         if (eventCover) {
             $('#edit-event-cover-preview').html(`<img src="${eventCover}" alt="Текущая обложка" style="max-width: 100%; border-radius: 16px;">`);
@@ -112,12 +128,11 @@ $(function () {
         openModal($('#edit-event-modal'));
     });
 
-    // Закрыть модалку удаления
+    // Закрытие модальных окон
     $('#delete-event-modal-close, #cancel-delete-event').on('click', function () {
         closeModal($('#delete-event-modal'));
     });
 
-    // Закрыть модалку редактирования
     $('#edit-event-modal-close, #cancel-edit-event').on('click', function () {
         closeModal($('#edit-event-modal'));
     });

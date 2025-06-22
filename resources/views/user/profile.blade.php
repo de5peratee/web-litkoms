@@ -25,27 +25,40 @@
                 </div>
 
                 <div class="profile-text-data">
-                    <div class="profile-title-flex">
-                        <h3>{{ $user->name }} {{ $user->last_name }}</h3>
-                        <a href="{{ route('settings.show') }}" class="profile-settings-btn">
-                            <img src="{{ asset('images/icons/edit-primary.svg') }}" class="icon-24" alt="icon">
-                        </a>
-                    </div>
+                    <div class="profile-nearby-text-wrapper">
+                        @if ($user->role === 'editor')
+                            <div class="editor-role-tag">
+                                Редактор
+                            </div>
+                        @endif
 
-                    <div class="profile-secondary-text-data">
-                        <p class="text-medium">{{ '@' }}{{ $user->nickname }}</p>
-                        <p class="text-medium dot">·</p>
-                        <p class="text-medium profile-email">{{ $user->email }}</p>
-                    </div>
 
+                        <div class="profile-title-flex">
+                            <h3>{{ $user->name }} {{ $user->last_name }}</h3>
+
+                            @auth
+                                @if (Auth::id() == $user->id)
+                                    <a href="{{ route('settings.show') }}" class="profile-settings-btn">
+                                        <img src="{{ asset('images/icons/edit-primary.svg') }}" class="icon-24" alt="icon">
+                                    </a>
+                                @endif
+                            @endauth
+                        </div>
+
+                        <div class="profile-secondary-text-data">
+                            <p class="text-medium">{{ '@' }}{{ $user->nickname }}</p>
+                            <p class="text-medium dot">·</p>
+                            <p class="text-medium profile-email">{{ $user->email }}</p>
+                        </div>
+                    </div>
                     <div class="user-status-bar">
 
-                        <p class="user-subscribers">Подписчиков: {{ $user->subscribers()->count() }}</p>
+                        <p class="user-subscribers text-small">Подписчиков: {{ $user->subscribers()->count() }}</p>
                         <div class="v-divider"></div>
                         <div class="user-avg-grade">
-                            <p>Средняя оценка: </p>
+                            <p class="text-small">Средняя оценка: </p>
                             <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">
-                            <p>{{ number_format($averageRating, 1) }}</p>
+                            <p class="text-small">{{ number_format($averageRating, 1) }}</p>
                         </div>
 
                     </div>
@@ -74,6 +87,18 @@
             </div>
         </div>
 
+        @if(!empty($user->about))
+            <div class="info-block profile-description-wrapper">
+                <div class="info-header">
+                    <h3>Об авторе</h3>
+                </div>
+
+                <div class="h-divider"></div>
+
+                <p>{{ $user->about }}</p>
+            </div>
+        @endif
+
         <div class="profile-tabs-wrapper">
             <div class="profile-tab active-tab author-comics-tab" data-tab="author-comics">
                 <img src="{{ asset('images/icons/comics-icon-primary.svg') }}" alt="icon" class="icon-24">
@@ -101,20 +126,16 @@
             @else
                 <div class="subscriptions-list">
                     @foreach($user->subscriptions as $subscription)
-                        <a href="{{ route('profile.index', $subscription->nickname) }}"
-                           class="subscription-item">
+                        <a href="{{ route('profile.index', $subscription->nickname) }}" class="subscription-item">
 
                             <div class="subscription-left-data">
-                                @if($user->icon && Storage::exists($user->icon))
-                                    <div class="subscription-avatar-wrapper">
-                                        <img src="{{ Storage::url($user->icon) }}" alt="{{ $user->icon }}">
-                                    </div>
-                                @else
-                                    <div class="subscription-avatar-wrapper">
-                                        <img src="{{ asset('images/default_template/ava_cover.png') }}"
-                                             alt="subscription_ava_cover">
-                                    </div>
-                                @endif
+                                <div class="subscription-avatar-wrapper">
+                                    @if($subscription->icon && Storage::disk('public')->exists($subscription->icon))
+                                        <img src="{{ Storage::url($subscription->icon) }}" alt="avatar">
+                                    @else
+                                        <img src="{{ asset('images/default_template/ava_cover.png') }}" alt="default avatar">
+                                    @endif
+                                </div>
 
                                 <div class="subscription-username-data">
                                     <p class="text-medium">{{ '@' . ($subscription->nickname) }}</p>
@@ -122,8 +143,19 @@
                                 </div>
                             </div>
 
-                            <div class="subscription-right-data primary-btn">
-                                Профиль
+                            <div class="subscription-right-data">
+                                <div class="subscription-comics-count subscription-wrapper-flex">
+                                    <p class="text-small">Комиксов: {{ $subscription->comics_count }}</p>
+                                </div>
+
+                                <div class="subscription-subs-count subscription-wrapper-flex">
+                                    <p class="text-small">Подписчиков: {{$subscription->subscribers()->count()}}</p>
+                                </div>
+
+                                <div class="subscription-avg-grade subscription-wrapper-flex">
+                                    <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">
+                                    <p class="text-small">{{ number_format($subscription->average_rating, 1) }}</p>
+                                </div>
                             </div>
 
                         </a>
@@ -144,7 +176,7 @@
                     @auth
                         @if (Auth::id() == $user->id)
                             <a href="{{ route('user.author_comics', Auth::user()->nickname) }}" class="tertiary-btn">
-                                Все комиксы
+                                Мои комиксы
                                 <img src="{{ asset('images/icons/blue-arrow-link.svg') }}" class="icon-24" alt="icon">
                             </a>
 
@@ -187,12 +219,12 @@
 
                             <div class="comic-title">
                                 <p class="text-big">{{ $comic->name }}</p>
-                                <p class="comic-author-text">{{ '@' }}{{ $comic->createdBy->nickname }}</p>
+                                <p class="comic-author-text text-small">{{ '@' }}{{ $comic->createdBy->nickname }}</p>
                             </div>
 
                             <div class="comic-avg-grade">
                                 <img src="{{ asset('images/icons/grade_star_fill.svg') }}" alt="icon" class="icon-24">
-                                <p>{{ number_format($comic->average_assessment ?? 0, 1) }}</p>
+                                <p class="text-small">{{ number_format($comic->average_assessment ?? 0, 1) }}</p>
                             </div>
                         </div>
                     @empty
@@ -203,9 +235,6 @@
                     <img src="{{ asset('images/icons/arrow-full-right-white.svg') }}" alt="right" class="icon-24">
                 </button>
             </div>
-
-
-
         </div>
     </div>
 

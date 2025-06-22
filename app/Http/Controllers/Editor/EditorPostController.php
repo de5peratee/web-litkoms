@@ -6,34 +6,82 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMultimediaPostRequest;
 use App\Http\Requests\UpdateMultimediaPostRequest;
 use App\Models\MultimediaPost;
+use App\Services\ImageCompressionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class EditorPostController extends Controller
 {
-    /**
-     * Отображает список всех медиа-постов.
-     */
-    public function index()
+    protected $imageCompressionService;
+
+    public function __construct(ImageCompressionService $imageCompressionService)
     {
-        $mediaPosts = MultimediaPost::with('medias')
-            ->orderBy('created_at', 'desc')
-            ->get();
-        return view('editor.mediaposts.list', compact('mediaPosts'));
+        $this->imageCompressionService = $imageCompressionService;
     }
 
-    /**
-     * Показывает форму для создания нового медиа-поста.
-     */
+//    public function index()
+//    {
+//        $mediaPosts = MultimediaPost::with('medias')
+//            ->orderBy('created_at', 'desc')
+//            ->get();
+//        return view('editor.mediaposts.list', compact('mediaPosts'));
+//    }
+
+    public function index(Request $request)
+    {
+        $perPage = 10;
+        $search = $request->input('search', '');
+
+        $mediaPosts = MultimediaPost::with('medias')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->take($perPage)
+            ->get();
+
+        $total = MultimediaPost::when($search, function ($query) use ($search) {
+            return $query->where('name', 'like', '%' . $search . '%');
+        })->count();
+
+        return view('editor.mediaposts.list', compact('mediaPosts', 'total', 'search'));
+    }
+
+    public function loadMore(Request $request)
+    {
+        $page = $request->input('page', 2);
+        $perPage = 10;
+        $search = $request->input('search', '');
+
+        $mediaPosts = MultimediaPost::with('medias')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+
+        $html = view('partials.editor_lists.multimedia_items', [
+            'mediaPosts' => $mediaPosts,
+            'page' => $page - 1 // Для корректной нумерации
+        ])->render();
+
+        return response()->json([
+            'html' => $html,
+            'hasMore' => $mediaPosts->count() === $perPage,
+            'nextPage' => $page + 1,
+        ]);
+    }
+
+
     public function create()
     {
         return view('editor.mediaposts.create');
     }
 
-    /**
-     * Сохраняет новый медиа-пост.
-     */
+
     public function store(StoreMultimediaPostRequest $request)
     {
         try {
@@ -48,6 +96,7 @@ class EditorPostController extends Controller
             if ($request->hasFile('media')) {
                 foreach ($request->file('media') as $file) {
                     $filePath = $file->store('mediapost_media', 'public');
+                    $this->imageCompressionService->compressImage(storage_path("app/public/$filePath"));
                     $mediaPost->medias()->create([
                         'file' => $filePath,
                     ]);
@@ -81,6 +130,7 @@ class EditorPostController extends Controller
 
                 foreach ($request->file('media') as $file) {
                     $filePath = $file->store('mediapost_media', 'public');
+                    $this->imageCompressionService->compressImage(storage_path("app/public/$filePath"));
                     $mediaPost->medias()->create([
                         'file' => $filePath,
                     ]);

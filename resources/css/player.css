@@ -1,0 +1,303 @@
+.audio-player-container {
+    position: fixed;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 580px; /* Фиксированная ширина плеера */
+    z-index: 1000;
+    pointer-events: none; /* Разрешаем клики на плеере */
+}
+
+.audio-player-container .audio-player {
+    pointer-events: auto; /* Включаем взаимодействие только для самого плеера */
+}
+
+.audio-player {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 8px 24px;
+    border-radius: 24px;
+    background-color: var(--primary);
+    color: var(--white);
+    box-shadow: 0 0px 96px rgba(0, 0, 0, 0.64);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.audio-player.expanded {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.audio-player.collapsed {
+    transform: translateY(100px);
+    opacity: 0;
+    pointer-events: none; /* Блокируем клики, когда свёрнут */
+    height: 0; /* Обнуляем высоту, чтобы исключить из компоновки */
+    overflow: hidden; /* Предотвращаем влияние содержимого */
+}
+
+/* Web Radio CTA (Klyaksa) как независимый элемент */
+.web-radio-cta {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 8px 16px;
+    z-index: 1001; /* Выше плеера */
+    pointer-events: auto; /* Разрешаем клики на кляксе */
+
+    color: var(--white);
+}
+
+.web-radio-cta.hidden {
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+    height: 0; /* Обнуляем высоту */
+    width: 0; /* Обнуляем ширину */
+    overflow: hidden; /* Предотвращаем влияние содержимого */
+}
+
+.web-radio-cta:hover {
+    transform: scale(1.15);
+}
+
+.web-radio-cta .blob-image {
+    height: 128px;
+    width: auto;
+    position: relative;
+}
+
+.web-radio-cta .expand-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.web-radio-cta .expand-icon.playing {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.player-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.player-btn:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+}
+
+.player-btn:active {
+    background-color: rgba(255, 255, 255, 0.16);
+    scale: 0.9;
+}
+
+.player-btn img {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.player-btn .shrink-icon {
+    display: block;
+}
+
+.play-btn .play-icon,
+.play-btn .pause-icon {
+    display: none;
+}
+
+.play-btn .play-icon.active,
+.play-btn .pause-icon.active {
+    display: block;
+}
+
+.player-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px;
+    gap: 4px;
+}
+
+.track-title {
+    margin-bottom: 4px;
+    display: block;
+}
+
+.player-progress-bar {
+    background-color: #333;
+    height: 4px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    background-color: var(--white);
+    width: 0;
+    height: 100%;
+    transition: width 0.1s linear;
+    border-radius: 999px;
+}
+
+.time {
+    margin-top: 5px;
+    display: block;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.volume-control img {
+    width: 24px;
+    height: 24px;
+    display: none;
+}
+
+.volume-control .volume-icon.active {
+    display: block;
+}
+
+.volume-slider {
+    width: 100px;
+    -webkit-appearance: none;
+    background: #333;
+    height: 5px;
+    border-radius: 3px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--white);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: var(--light-gray);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Добавляем стили для предотвращения перекрытия контента */
+main {
+    position: relative;
+    z-index: 1; /* Выше фиксированных элементов по умолчанию */
+}
+
+
+
+
+/* Планшеты (576px–992px) */
+@media (max-width: 992px) {
+    .audio-player-container {
+        width: 480px;
+    }
+    .audio-player {
+        padding: 6px 16px;
+        border-radius: 20px;
+    }
+    .player-btn {
+        width: 36px;
+        height: 36px;
+    }
+    .player-btn img {
+        width: 20px;
+        height: 20px;
+    }
+    .player-info {
+        padding: 6px 12px;
+    }
+    .player-progress-bar {
+        height: 3px;
+    }
+    .volume-slider {
+        width: 80px;
+    }
+    .web-radio-cta {
+        padding: 6px 12px;
+    }
+    .web-radio-cta .expand-icon {
+        width: 20px;
+        height: 20px;
+    }
+    .web-radio-cta .blob-image {
+        height: 104px;
+    }
+}
+
+/* Мобильные устройства (<576px) */
+@media (max-width: 576px) {
+    .audio-player-container {
+        width: 312px;
+    }
+    .audio-player {
+        padding: 4px 12px;
+        border-radius: 16px;
+    }
+    .player-btn {
+        width: 32px;
+        height: 32px;
+    }
+    .player-btn img {
+        width: 16px;
+        height: 16px;
+    }
+    .player-info {
+        padding: 4px 8px;
+    }
+    .player-progress-bar {
+        height: 2px;
+    }
+    .volume-slider {
+        width: 60px;
+    }
+    .web-radio-cta {
+        padding: 4px 8px;
+    }
+    .web-radio-cta .expand-icon {
+        width: 16px;
+        height: 16px;
+    }
+    .web-radio-cta .blob-image {
+        height: 96px;
+    }
+}

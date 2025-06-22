@@ -18,40 +18,22 @@ use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 
-/**
- * @extends ModelResource<MultimediaPost>
- */
 class MultimediaPostResource extends ModelResource
 {
     protected string $model = MultimediaPost::class;
     public string $column = 'file';
 
     protected string $title = 'Мультимедиа пост';
-    
-    /**
-     * @return list<FieldContract>
-     */
+
     protected function indexFields(): iterable
     {
         return [
             ID::make()->sortable(),
             Text::make('Название', 'name'),
             Textarea::make('Описание', 'description'),
-
-//            BelongsToMany::make(
-//                'Медиа',
-//                'medias',
-//                'file',
-//                resource: MediaResource::class,
-//            )
-//                ->selectMode()
-//                ->placeholder('Выберите медиа')->inLine(separator: ',')
             ];
     }
 
-    /**
-     * @return list<ComponentContract|FieldContract>
-     */
     protected function formFields(): iterable
     {
         return [
@@ -64,19 +46,15 @@ class MultimediaPostResource extends ModelResource
                     'Медиа',
                     'medias',
                     'id',
-                    resource: MediaResource::class,
+                    resource: MediaResource::class
                 )
+                    ->withImage('file', 'public', 'mediapost_media')
                     ->selectMode()
-                    ->placeholder('Выберите медиа (ID)')
-
-
+                    ->placeholder('Выберите медиа')
             ])
         ];
     }
 
-    /**
-     * @return list<FieldContract>
-     */
     protected function detailFields(): iterable
     {
         return [
@@ -94,14 +72,12 @@ class MultimediaPostResource extends ModelResource
         ];
     }
 
-    /**
-     * @param MultimediaPost $item
-     *
-     * @return array<string, string[]|string>
-     * @see https://laravel.com/docs/validation#available-validation-rules
-     */
     protected function rules(mixed $item): array
     {
         return [];
+    }
+    public function search(): array
+    {
+        return ['name', 'description'];
     }
 }

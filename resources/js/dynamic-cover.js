@@ -3,17 +3,46 @@ document.getElementById('cover').addEventListener('change', function(e) {
     const preview = document.getElementById('coverPreview');
     const defaultIcon = preview.querySelector('.default-icon');
     let loadedImage = preview.querySelector('.loaded-image');
+    const maxSizeMB = 5; // Максимальный размер для обложки в мегабайтах
+    const maxSizeBytes = maxSizeMB * 1024 * 1024; // Конвертация в байты
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']; // Допустимые форматы
 
-    if (!loadedImage) {
-        loadedImage = document.createElement('img');
-        loadedImage.classList.add('loaded-image');
-        preview.appendChild(loadedImage);
+    // Очистка предыдущих ошибок
+    const existingError = preview.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
     }
 
     if (file) {
+        // Проверка размера файла
+        if (file.size > maxSizeBytes) {
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('input-error', 'error-message');
+            errorMessage.textContent = `Файл слишком большой. Максимальный размер: ${maxSizeMB} МБ.`;
+            preview.appendChild(errorMessage);
+            this.value = ''; // Сбрасываем input
+            return;
+        }
+
+        // Проверка формата файла
+        if (!allowedTypes.includes(file.type)) {
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('input-error', 'error-message');
+            errorMessage.textContent = 'Недопустимый формат файла. Допустимы: JPEG, PNG, GIF, WebP.';
+            preview.appendChild(errorMessage);
+            this.value = ''; // Сбрасываем input
+            return;
+        }
+
+        // Если файл прошел валидацию, загружаем предпросмотр
         const reader = new FileReader();
 
         reader.onload = function(event) {
+            if (!loadedImage) {
+                loadedImage = document.createElement('img');
+                loadedImage.classList.add('loaded-image');
+                preview.appendChild(loadedImage);
+            }
             loadedImage.src = event.target.result;
             loadedImage.style.display = 'block';
             defaultIcon.style.opacity = '0';
@@ -21,25 +50,68 @@ document.getElementById('cover').addEventListener('change', function(e) {
         };
 
         reader.onerror = function() {
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('input-error', 'error-message');
+            errorMessage.textContent = 'Ошибка при чтении файла.';
+            preview.appendChild(errorMessage);
             console.error('Ошибка при чтении файла:', reader.error);
+            this.value = ''; // Сбрасываем input
         };
 
         reader.readAsDataURL(file);
     } else {
-        loadedImage.style.display = 'none';
+        if (loadedImage) {
+            loadedImage.style.display = 'none';
+        }
         defaultIcon.style.opacity = '1';
         preview.classList.remove('hovered');
     }
 });
 
-// Обработчик клика на обертку
+// Обработчик клика на обертку для обложки
 document.getElementById('coverPreview').addEventListener('click', function(e) {
     const input = document.getElementById('cover');
-    // Если клик не на самом input, вызываем клик на input
     if (e.target.tagName !== 'INPUT') {
-        // Сбрасываем значение input, чтобы можно было выбрать тот же файл
         input.value = '';
-        // Программно вызываем клик на input для открытия диалога выбора файла
         input.click();
+    }
+});
+
+// Проверка файла комикса
+document.getElementById('comic_file').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const inputContainer = this.parentElement; // Родительский .lit-field
+    const maxSizeMB = 50; // Максимальный размер для файла комикса в мегабайтах
+    const maxSizeBytes = maxSizeMB * 1024 * 1024; // Конвертация в байты
+    const allowedTypes = ['application/pdf']; // Допустимый формат
+
+    // Очистка предыдущих ошибок
+    const existingError = inputContainer.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+
+    if (file) {
+        // Проверка размера файла
+        if (file.size > maxSizeBytes) {
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('input-error', 'error-message');
+            errorMessage.textContent = `Файл слишком большой. Максимальный размер: ${maxSizeMB} МБ.`;
+            inputContainer.appendChild(errorMessage);
+            this.value = ''; // Сбрасываем input
+            return;
+        }
+
+        // Проверка формата файла
+        if (!allowedTypes.includes(file.type)) {
+            const errorMessage = document.createElement('div');
+            errorMessage.classList.add('input-error', 'error-message');
+            errorMessage.textContent = 'Недопустимый формат файла. Допустим только PDF.';
+            inputContainer.appendChild(errorMessage);
+            this.value = ''; // Сбрасываем input
+            return;
+        }
+
+        // Если файл прошел валидацию, ошибки не отображаются
     }
 });

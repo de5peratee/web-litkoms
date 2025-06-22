@@ -44,7 +44,7 @@ class CatalogController extends Controller
 
         if ($request->ajax()) {
             return response()->json([
-                'html' => view('partials.books', ['library' => $library])->render(),
+                'html' => view('partials.comics', ['comics' => $library])->render(),
                 'has_more' => $library->hasMorePages()
             ]);
         }

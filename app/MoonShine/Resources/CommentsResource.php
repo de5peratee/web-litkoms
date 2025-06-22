@@ -105,4 +105,9 @@ class CommentsResource extends ModelResource
     {
         return [];
     }
+
+    public function search(): array
+    {
+        return ['comment'];
+    }
 }

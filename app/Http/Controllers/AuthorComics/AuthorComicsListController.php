@@ -19,26 +19,81 @@ class AuthorComicsListController extends Controller
         $this->viewCounterService = $viewCounterService;
     }
 
+//    public function library(Request $request)
+//    {
+//        $search = $request->query('search');
+//
+//        $genre = $request->query('genre');
+//
+//        $comics = AuthorComics::where('is_published', true)
+//            ->where('is_moderated', 'successful')
+//            ->when($search, function ($query, $search) {
+//                return $query->where('name', 'like', '%' . $search . '%');
+//            })
+//            ->when($genre, function ($query, $genre) {
+//                return $query->whereHas('genres', function ($q) use ($genre) {
+//                    $q->where('slug', $genre);
+//                });
+//            })
+//            ->with(['genres', 'createdBy'])
+//            ->paginate(12);
+//
+//        $genres = Genre::all();
+//
+//        return view('authors_comics.library', compact('comics', 'search', 'genres'));
+//    }
     public function library(Request $request)
     {
-        $search = $request->query('search');
-        $genre = $request->query('genre');
-        $comics = AuthorComics::where('is_published', true)
-            ->where('is_moderated', 'successful')
-            ->when($search, function ($query, $search) {
-                return $query->where('name', 'like', '%' . $search . '%');
-            })
-            ->when($genre, function ($query, $genre) {
-                return $query->whereHas('genres', function ($q) use ($genre) {
-                    $q->where('slug', $genre);
+        if (!$request->ajax()) {
+            session(['catalog_url' => $request->fullUrl()]);
+        }
+
+        $query = AuthorComics::with(['genres', 'createdBy'])
+            ->where('is_published', true)
+            ->where('is_moderated', 'successful');
+
+        if ($request->filled('search')) {
+            $search = trim($request->search);
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        $genres = $request->input('genres', []);
+
+        if (!empty($genres)) {
+            if (!is_array($genres)) {
+                $genres = [$genres];
+            }
+            foreach ($genres as $genre) {
+                $query->whereHas('genres', function ($q) use ($genre) {
+                    $q->where('genres.name', $genre);
                 });
-            })
-            ->with(['genres', 'createdBy'])
-            ->paginate(12);
+            }
+        }
 
-        $genres = Genre::all();
+        $sort = $request->input('sort', 'date-desc');
+        if ($sort === 'date-asc') {
+            $query->orderBy('published_at', 'asc');
+        } elseif ($sort === 'rating-desc') {
+            $query->orderBy('average_assessment', 'desc');
+        } elseif ($sort === 'rating-asc') {
+            $query->orderBy('average_assessment', 'asc');
+        } else {
+            $query->orderBy('published_at', 'desc');
+        }
 
-        return view('authors_comics.library', compact('comics', 'search', 'genres'));
+        $comics = $query->paginate(12);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('partials.authors_comics', ['comics' => $comics])->render(),
+                'has_more' => $comics->hasMorePages()
+            ]);
+        }
+
+        return view('authors_comics.library', [
+            'comics' => $comics,
+            'genres' => Genre::all()
+        ]);
     }
 
     public function show(AuthorComics $authorComic)

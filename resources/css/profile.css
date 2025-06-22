@@ -75,7 +75,7 @@
     display: flex;
     align-items: center;
 
-    gap: 8px;
+    gap: 16px;
 }
 
 
@@ -104,7 +104,7 @@
     flex-direction: row;
     align-items: center;
 
-    gap: 24px;
+    gap: 12px;
 }
 
 .subscription-username-data {
@@ -116,6 +116,24 @@
 
 .subscription-name {
     color: var(--secondary);
+}
+
+.subscription-right-data {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: fit-content;
+    gap: 24px;
+}
+
+.subscription-wrapper-flex {
+    display: flex;
+    align-items: center;
+
+    width: fit-content;
+
+    gap: 8px;
 }
 
 .profile-header {
@@ -157,6 +175,27 @@
     flex-direction: column;
 
     gap: 16px;
+}
+
+.profile-nearby-text-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.editor-role-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /*padding: 6px 8px;*/
+    /*border-radius: 12px;*/
+    width: fit-content;
+
+    color: var(--primary-blue);
+    /*background-color: var(--light-gray);*/
+    text-transform: uppercase;
 }
 
 .profile-title-flex {
@@ -462,3 +501,231 @@
     gap: 8px;
 }
 
+/* Базовые стили для ограничения текста */
+.profile-title-flex h3,
+.profile-secondary-text-data .text-medium,
+.subscription-username-data .text-medium,
+.subscription-name {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Адаптив для профиля */
+@media (max-width: 1200px) and (min-width: 960px) {
+    .profile-container {
+        width: 940px;
+    }
+    .profile-header {
+        padding: 32px;
+        border-radius: 32px;
+    }
+    .profile-user-avatar-wrapper {
+        width: 112px;
+        height: 112px;
+    }
+    .subscription-avatar-wrapper {
+        width: 40px;
+        height: 40px;
+    }
+    .info-block {
+        padding: 32px;
+        border-radius: 32px;
+    }
+    .comic {
+        width: 220px;
+    }
+    .comic-cover-wrapper {
+        width: 100%;
+        aspect-ratio: 2/3;
+        border-radius: 20px;
+    }
+    .subscription-item {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 960px) {
+    .profile-container {
+        width: 100%;
+        padding: 0 16px;
+    }
+    .profile-header {
+        padding: 24px;
+        border-radius: 24px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .profile-user-data {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-nearby-text-wrapper {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-text-data {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .profile-user-avatar-wrapper {
+        width: 96px;
+        height: 96px;
+    }
+    .subscription-avatar-wrapper {
+        width: 36px;
+        height: 36px;
+    }
+    .info-block {
+        padding: 24px;
+        border-radius: 24px;
+    }
+    .comic {
+        width: 180px;
+    }
+    .comic-cover-wrapper {
+        width: 100%;
+        aspect-ratio: 2/3;
+        border-radius: 18px;
+    }
+    /*.subscription-item {*/
+    /*    flex-direction: column;*/
+    /*    align-items: flex-start;*/
+    /*    padding: 12px;*/
+    /*}*/
+    /*.subscription-right-data {*/
+    /*    flex-direction: column;*/
+    /*    align-items: flex-start;*/
+    /*    gap: 12px;*/
+    /*}*/
+}
+
+@media (max-width: 640px) and (min-width: 480px) {
+    .profile-container {
+        padding: 0 12px;
+    }
+    .profile-header {
+        padding: 16px;
+        border-radius: 20px;
+    }
+    .profile-user-avatar-wrapper {
+        width: 80px;
+        height: 80px;
+    }
+    .subscription-avatar-wrapper {
+        width: 32px;
+        height: 32px;
+    }
+    .info-block {
+        padding: 16px;
+        border-radius: 20px;
+    }
+    .comic {
+        width: 140px;
+    }
+    .comic-cover-wrapper {
+        width: 100%;
+        aspect-ratio: 2/3;
+        border-radius: 16px;
+    }
+
+    .subscription-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px;
+
+        gap: 16px;
+    }
+    /*.subscription-right-data {*/
+    /*    flex-direction: column;*/
+    /*    align-items: flex-start;*/
+    /*    gap: 12px;*/
+    /*}*/
+
+    .info-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .profile-tabs-wrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .profile-tab {
+        width: 100%;
+    }
+
+    .ruler-icon {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        padding: 0 8px;
+    }
+    .profile-header {
+        padding: 12px;
+        border-radius: 16px;
+    }
+    .profile-user-data {
+        flex-direction: column;
+        align-items: center;
+    }
+    .profile-user-avatar-wrapper {
+        width: 64px;
+        height: 64px;
+    }
+    .subscription-avatar-wrapper {
+        width: 28px;
+        height: 28px;
+    }
+    .info-block {
+        padding: 12px;
+        border-radius: 16px;
+    }
+    .comic {
+        width: 120px;
+    }
+    .comic-cover-wrapper {
+        width: 100%;
+        aspect-ratio: 2/3;
+        border-radius: 12px;
+    }
+    .subscription-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 6px;
+        gap: 12px;
+    }
+    /*.subscription-right-data {*/
+    /*    flex-direction: column;*/
+    /*    align-items: flex-start;*/
+    /*    gap: 8px;*/
+    /*}*/
+
+    .info-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .profile-tabs-wrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .profile-tab {
+        width: 100%;
+    }
+
+    .hw-abstract {
+        display: none;
+    }
+}

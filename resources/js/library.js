@@ -1,14 +1,14 @@
 import $ from 'jquery';
 
 function handleGenreTags() {
-    $('.book-genres').each(function () {
+    $('.comic-genres').each(function () {
         const $container = $(this);
-        const $tags = $container.find('.book-genre-tag').not('.more-genres');
+        const $tags = $container.find('.comic-genre-tag').not('.more-genres');
         $container.find('.more-genres').remove();
         $tags.removeClass('hidden');
 
         const containerWidth = $container.width();
-        const moreTagWidth = 88;
+        const moreTagWidth = 52;
         let totalWidth = 0;
         let cutoffIndex = $tags.length;
 
@@ -26,8 +26,8 @@ function handleGenreTags() {
             $hiddenTags.addClass('hidden');
 
             $('<span>', {
-                class: 'book-genre-tag more-genres',
-                text: `+${count} жанра`,
+                class: 'comic-genre-tag more-genres',
+                text: `+${count}`,
                 title: $hiddenTags.map(function () { return $(this).text(); }).get().join(', ')
             }).appendTo($container);
         }
