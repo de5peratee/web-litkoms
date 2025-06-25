@@ -50,6 +50,9 @@
                 </div>
 
                 <button type="submit" class="primary-btn">Войти</button>
+
+                <p class="text-hint"> Нажимая на кнопку я даю согласие с <a href="{{ route('manuals.policy') }}" target="_blank" class="link-text">политикой конфиденциальности</a> <br>и
+                    <a href="#" target="_blank" class="link-text">правилами сообщества</a>.</p>
             </form>
 
             <form method="POST" action="{{ route('auth.register') }}" id="registerForm" class="lit-form">
@@ -110,6 +113,16 @@
                         <input type="password" name="password_confirmation" id="password_confirmation"
                                placeholder="Повторите пароль">
                     </div>
+                </div>
+                <div class="lit-field">
+                    <label>
+                        <input type="checkbox" class="lit-checkbox" name="agree" {{ old('agree') ? 'checked' : '' }}>
+                        Я подтверждаю согласие с <a href="{{ route('manuals.policy') }}" target="_blank" class="link-text">политикой конфиденциальности</a> <br>и
+                        <a href="#" target="_blank" class="link-text">правилами сообщества</a>.
+                    </label>
+                    @error('agree')
+                    <div class="input-error">{{ $message }}</div>
+                    @enderror
                 </div>
                 <button type="submit" class="primary-btn">Зарегистрироваться</button>
             </form>

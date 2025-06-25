@@ -16,6 +16,7 @@
     @vite(['resources/css/player.css'])
 
     @vite(['resources/js/player.js'])
+    @vite(['resources/js/cookie-consent.js'])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
 </head>
@@ -61,6 +62,15 @@
     <!-- Web Radio CTA (Klyaksa) -->
     <div class="web-radio-cta" id="floating-blob"> <!-- Убираем hidden -->
         <img src="{{ asset('images/blob.svg') }}" alt="Blob" class="blob-image">
+    </div>
+
+    <!-- Cookie Consent Popup -->
+    <div id="cookie-consent" class="cookie-consent hidden">
+        <p class="text-small">Мы используем cookie (localStorage) для сохранения настроек сайта и аналитики. Продолжая использовать сайт, вы соглашаетесь с <a href="{{ route('manuals.policy') }}" target="_blank">Политикой конфиденциальности</a>.</p>
+        <div class="cookie-buttons">
+            <button id="accept-cookies" class="primary-btn">Принять</button>
+{{--            <button id="reject-cookies" class="secondary-btn">Отклонить</button>--}}
+        </div>
     </div>
 </main>
 

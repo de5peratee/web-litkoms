@@ -63,4 +63,17 @@ $(document).ready(function() {
             switchTab(false);
         }
     });
+
+    // === ✅ Отключение кнопки регистрации, если чекбокс не активен ===
+    const $agreeCheckbox = $('#registerForm input[name="agree"]');
+    const $registerBtn = $('#registerForm button[type="submit"]');
+
+    function toggleRegisterButton() {
+        $registerBtn.prop('disabled', !$agreeCheckbox.prop('checked'));
+    }
+
+    if ($agreeCheckbox.length && $registerBtn.length) {
+        toggleRegisterButton(); // Проверка при загрузке
+        $agreeCheckbox.on('change', toggleRegisterButton);
+    }
 });

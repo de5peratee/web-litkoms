@@ -54,3 +54,69 @@ body, html {
     overflow-x: hidden;
 }
 
+.cookie-consent {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 16px 24px;
+    border-radius: 24px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3);
+    z-index: 1002; /* Выше плеера и кляксы */
+    max-width: 580px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /*text-align: center;*/
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cookie-consent.hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100px);
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.cookie-consent a {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.cookie-buttons .primary-btn {
+    background-color: var(--white);
+    color: var(--primary-blue);
+}
+
+.cookie-buttons .primary-btn:hover {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.cookie-buttons .secondary-btn {
+    border-color: var(--white);
+    color: var(--white);
+}
+
+.cookie-buttons .secondary-btn:hover {
+    border-color: var(--white);
+    color: var(--white);
+}
+
+
+@media (max-width: 576px) {
+    .cookie-consent {
+        padding: 12px 16px;
+        border-radius: 16px;
+        max-width: 312px;
+    }
+}
