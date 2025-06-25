@@ -1,17 +1,17 @@
 import $ from 'jquery';
 
 $(document).ready(function() {
-    // Playlist with paths to audio files in public/audio/
+    $('.audio-player, #floating-blob').addClass('no-transition'); // Отключаем анимации при загрузке
+
     const playlist = [
-        { title: "Sample 1", src: "/audio/sampleb.mp3" },
-        { title: "Sample 2", src: "/audio/sampleb.mp3" }
+        { title: "Интернет-радио", src: "/audio/litcoms-radio.mp3" },
+        { title: "Интернет-радио", src: "/audio/litcoms-radio.mp3" }
     ];
 
     let currentTrackIndex = 0;
     let sound = null;
-    let isCollapsed = false;
+    let isCollapsed = true; // Изначально свёрнут
 
-    // Preload next track
     function preloadNextTrack() {
         if (playlist.length > 1) {
             const nextIndex = (currentTrackIndex + 1) % playlist.length;
@@ -19,7 +19,7 @@ $(document).ready(function() {
                 src: [playlist[nextIndex].src],
                 html5: true,
                 preload: true,
-                volume: 0 // Загружаем без звука
+                volume: 0
             });
             nextSound.once('load', () => {
                 console.log('Next track preloaded:', playlist[nextIndex].title);
@@ -30,13 +30,12 @@ $(document).ready(function() {
         }
     }
 
-    // Restore player state from localStorage
     function restorePlayerState() {
         const savedTrackIndex = localStorage.getItem('playerTrackIndex');
         const savedVolume = localStorage.getItem('playerVolume');
         const savedPlaying = localStorage.getItem('playerPlaying') === 'true';
         const savedSeek = localStorage.getItem('playerSeek');
-        const savedCollapsed = localStorage.getItem('playerCollapsed') === 'true';
+        const savedCollapsed = localStorage.getItem('playerCollapsed');
 
         if (savedTrackIndex !== null) {
             currentTrackIndex = parseInt(savedTrackIndex);
@@ -44,8 +43,11 @@ $(document).ready(function() {
         const volume = savedVolume !== null ? parseFloat(savedVolume) : 1.0;
         $('.volume-slider').val(volume);
         updateVolumeIcon(volume);
-        if (savedCollapsed) {
-            isCollapsed = true;
+
+        // Устанавливаем isCollapsed по умолчанию true
+        isCollapsed = savedCollapsed !== null ? savedCollapsed === 'true' : true;
+
+        if (isCollapsed) {
             $('.audio-player').removeClass('expanded').addClass('collapsed');
             $('#floating-blob').removeClass('hidden');
             if (savedPlaying && $('.expand-icon').length) {
@@ -59,10 +61,14 @@ $(document).ready(function() {
             }
         }
 
+        // Включаем анимации после восстановления
+        setTimeout(() => {
+            $('.audio-player, #floating-blob').removeClass('no-transition');
+        }, 0);
+
         return { isPlaying: savedPlaying, seek: savedSeek ? parseFloat(savedSeek) : 0 };
     }
 
-    // Save player state
     function savePlayerState() {
         localStorage.setItem('playerTrackIndex', currentTrackIndex);
         localStorage.setItem('playerVolume', $('.volume-slider').val());
@@ -71,7 +77,6 @@ $(document).ready(function() {
         localStorage.setItem('playerCollapsed', isCollapsed);
     }
 
-    // Update volume icon
     function updateVolumeIcon(volume) {
         $('.volume-icon').removeClass('active');
         if (volume === 0) {
@@ -83,7 +88,6 @@ $(document).ready(function() {
         }
     }
 
-    // Load track
     function loadTrack(index, autoPlay = false) {
         if (!playlist.length) {
             $('.track-title').text('Плейлист пуст');
@@ -114,7 +118,7 @@ $(document).ready(function() {
                     }
                     $('.volume-slider').val(savedVolume);
                     updateVolumeIcon(savedVolume);
-                    preloadNextTrack(); // Предзагрузка следующего трека
+                    preloadNextTrack();
                 },
                 onloaderror: function(id, error) {
                     $('.track-title').text('Ошибка загрузки: ' + playlist[index].title);
@@ -152,7 +156,6 @@ $(document).ready(function() {
         }
     }
 
-    // Update track info
     function updateTrackInfo() {
         if (!playlist.length) return;
         $('.track-title').text(playlist[currentTrackIndex].title);
@@ -160,7 +163,6 @@ $(document).ready(function() {
         $('.time').text('0:00 / ' + duration);
     }
 
-    // Format time in mm:ss
     function formatTime(seconds) {
         if (!seconds || isNaN(seconds)) return '0:00';
         const min = Math.floor(seconds / 60);
@@ -168,7 +170,6 @@ $(document).ready(function() {
         return min + ':' + (sec < 10 ? '0' : '') + sec;
     }
 
-    // Update progress bar
     function updateProgress() {
         if (sound && sound.playing()) {
             const seek = sound.seek() || 0;
@@ -181,7 +182,6 @@ $(document).ready(function() {
         }
     }
 
-    // Play/Pause button
     $('.play-btn').click(function() {
         if (!sound || !playlist.length) {
             loadTrack(currentTrackIndex, true);
@@ -192,7 +192,6 @@ $(document).ready(function() {
         }
     });
 
-    // Volume control
     $('.volume-slider').on('input', function() {
         const volume = parseFloat($(this).val());
         if (sound) {
@@ -202,7 +201,6 @@ $(document).ready(function() {
         savePlayerState();
     });
 
-    // Collapse/Expand player
     $('.collapse-btn').click(function() {
         isCollapsed = !isCollapsed;
         if (isCollapsed) {
@@ -221,7 +219,6 @@ $(document).ready(function() {
         savePlayerState();
     });
 
-    // Toggle player via klyaksa
     $('#floating-blob').click(function() {
         isCollapsed = !isCollapsed;
         if (isCollapsed) {
@@ -236,12 +233,13 @@ $(document).ready(function() {
 
     // Initialize player
     if (playlist.length > 0) {
+        restorePlayerState(); // Восстанавливаем состояние первым
         loadTrack(currentTrackIndex, true);
         $('.play-btn').prop('disabled', false);
         const initialVolume = parseFloat(localStorage.getItem('playerVolume')) || 1.0;
         $('.volume-slider').val(initialVolume);
         updateVolumeIcon(initialVolume);
-        preloadNextTrack(); // Предзагрузка первого следующего трека
+        preloadNextTrack();
     } else {
         $('.track-title').text('Плейлист пуст');
         $('.play-btn').prop('disabled', true);

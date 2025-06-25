@@ -1,12 +1,11 @@
 .author_comics-form-container {
     display: flex;
     flex-direction: column;
-
+    align-items: center;
     gap: 16px;
     padding: 32px;
     border-radius: 32px;
     width: 1170px;
-
     background-color: var(--white);
 }
 
@@ -14,17 +13,14 @@
     display: flex;
     flex-direction: row;
     gap: 4px;
-
     align-items: center;
 }
 
 .path-bar a {
     padding: 4px 8px;
     border-radius: 8px;
-
     text-decoration: none;
     background-color: var(--white);
-
     transition: color 0.3s ease-in, background-color 0.3s ease-in;
 }
 
@@ -36,17 +32,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 }
 
 .author_comics-form-container-header > h3 {
     white-space: nowrap;
 }
 
-
 .progress-bar {
     display: flex;
     align-items: center;
-
     width: 50%;
     gap: 16px;
 }
@@ -55,7 +50,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     gap: 4px;
     white-space: nowrap;
     border-radius: 12px;
@@ -65,64 +59,20 @@
     color: var(--primary-blue);
 }
 
-
 .lit-form-row {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-
     gap: 32px;
+    width: 100%;
 }
 
 .lit-fields-group {
     display: flex;
     flex-direction: column;
-
     width: 100%;
     gap: 16px;
 }
-
-.lit-checkbox {
-    width: 16px; /* Увеличенный размер чекбокса */
-    height: 16px;
-    border-radius: 8px;
-
-    cursor: pointer;
-}
-
-.input-error {
-    color: #d32f2f;
-    font-size: 0.875rem;
-    line-height: 1.25;
-    margin-top: 0.25rem;
-    margin-bottom: 0.5rem;
-    padding: 0.25rem 0.5rem;
-    background-color: #ffebee;
-    border-radius: 4px;
-    display: inline-block;
-    width: fit-content;
-    word-break: break-word;
-    transition: opacity 0.2s ease-in-out;
-    opacity: 1;
-}
-
-.is-invalid {
-    border: 2px solid #d32f2f !important;
-    box-shadow: 0 0 5px rgba(211, 47, 47, 0.3);
-}
-
-.is-invalid:focus {
-    border-color: #d32f2f;
-    box-shadow: 0 0 8px rgba(211, 47, 47, 0.5);
-}
-
-.input-error:empty {
-    opacity: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-}
-
 
 .comic-cover-wrapper {
     display: flex;
@@ -206,4 +156,109 @@
 
 .primary-btn {
     width: fit-content;
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 1200px) and (min-width: 960px) {
+    .author_comics-form-container {
+        width: 940px;
+        padding: 32px;
+        border-radius: 32px;
+    }
+    .author_comics-form-container-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .progress-bar {
+        width: 60%;
+        gap: 12px;
+        padding-block: 16px;
+    }
+    .progress-bar-endpoint {
+        gap: 4px;
+    }
+    .lit-form-row {
+        gap: 24px;
+    }
+    .comic-cover-wrapper {
+        width: 180px;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 960px) {
+    .author_comics-form-container {
+        width: 100%;
+        margin-inline: 8px;
+        padding: 24px;
+        border-radius: 24px;
+    }
+    .author_comics-form-container-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .progress-bar {
+        width: 100%;
+        gap: 8px;
+        padding-block: 12px;
+    }
+    .progress-bar-endpoint {
+        gap: 4px;
+    }
+    .lit-form-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .lit-fields-group {
+        width: 100%;
+    }
+    .comic-cover-wrapper {
+        width: 160px;
+        border-radius: 18px;
+    }
+}
+
+@media (max-width: 640px) and (min-width: 480px) {
+    .author_comics-form-container {
+        padding: 16px;
+        border-radius: 20px;
+    }
+    .progress-bar {
+        gap: 6px;
+    }
+    .comic-cover-wrapper {
+        width: 140px;
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-bar {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 4px;
+    }
+    .progress-bar-endpoint {
+        flex-direction: column;
+        gap: 2px;
+    }
+    .lit-form-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .lit-fields-group {
+        width: 100%;
+        align-items: center;
+    }
+    .comic-cover-wrapper {
+        width: 128px;
+        border-radius: 12px;
+    }
+    .primary-btn {
+        width: 100%;
+    }
 }

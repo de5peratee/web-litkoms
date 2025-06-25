@@ -30,7 +30,7 @@
 
     <!-- Audio Player -->
     <div class="audio-player-container">
-        <div class="audio-player expanded">
+        <div class="audio-player collapsed">
 
             <div class="player-controls">
                 <button class="player-btn play-btn" title="Play/Pause">
@@ -59,7 +59,7 @@
     </div>
 
     <!-- Web Radio CTA (Klyaksa) -->
-    <div class="web-radio-cta hidden" id="floating-blob">
+    <div class="web-radio-cta" id="floating-blob"> <!-- Убираем hidden -->
         <img src="{{ asset('images/blob.svg') }}" alt="Blob" class="blob-image">
     </div>
 </main>
