@@ -47,6 +47,7 @@ export default defineConfig({
                 'resources/css/manuals.css',
 
                 'resources/js/app.js',
+                'resources/js/cookie-consent.js',
                 'resources/js/header.js',
                 'resources/js/home.js',
                 'resources/js/news.js',

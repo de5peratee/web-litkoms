@@ -8,6 +8,7 @@
     padding: 8px;
     border-radius: 16px;
     background-color: var(--light-gray);
+    touch-action: pan-x pan-y;
 }
 
 .pdf-controls {
@@ -76,10 +77,29 @@
 }
 
 #pdf-canvas {
-    max-width: 100%;
+    /*max-width: 100%;*/
+    max-width: none; /* снимаем ограничение */
     height: auto;
     border: 1px solid var(--gray);
     border-radius: 8px;
+    display: inline-block;
+}
+
+/* Обертка, чтобы разрешить горизонтальную прокрутку при увеличении canvas */
+.pdf-canvas-wrapper {
+    width: 100%;
+    overflow: auto;
+    text-align: center;
+}
+
+/* Фиксированная панель управления при прокрутке */
+.sticky-controls {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--light-gray);
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 /* Планшеты горизонтальные (960px–1200px) */

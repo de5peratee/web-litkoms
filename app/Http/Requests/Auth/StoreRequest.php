@@ -21,6 +21,7 @@ class StoreRequest extends FormRequest
             'nickname' => 'required|string|min:5|max:20|unique:users,nickname|regex:/^[a-zA-Z0-9_-]+$/',
             'name' => 'required|string|max:100|regex:/^[a-zA-Zа-яА-ЯёЁ]+$/u',
             'last_name' => 'required|string|max:100|regex:/^[a-zA-Zа-яА-ЯёЁ]+$/u',
+            'agree' => ['accepted'],
         ];
     }
 

@@ -111,7 +111,7 @@
             </div>
             <div class="h-divider"></div>
             <div class="pdf-view">
-                <div class="pdf-controls">
+                <div class="pdf-controls sticky-controls">
                     <div class="pdf-desc">
                         <p class="text-big">Литкомс</p>
                     </div>
@@ -133,7 +133,10 @@
                         </button>
                     </div>
                 </div>
-                <canvas id="pdf-canvas"></canvas>
+{{--                <canvas id="pdf-canvas"></canvas>--}}
+                <div id="pdf-canvas-wrapper" class="pdf-canvas-wrapper">
+                    <canvas id="pdf-canvas"></canvas>
+                </div>
             </div>
             <a href="{{ route('author_comic.download', $authorComic->slug) }}" class="primary-btn">
                 Скачать комикс

@@ -8,12 +8,6 @@
     @vite(['resources/js/dynamic-cover.js'])
 
     <div class="author_comics-form-container">
-{{--        <div class="path-bar">--}}
-{{--            <a href="{{ URL::previous() }}" class="text-hint">Назад</a>--}}
-{{--            <img src="{{ asset('images/icons/arrow-right.svg') }}"  class="icon-24" alt="icon">--}}
-{{--            <p class="text-hint">Новый авторский комикс</p>--}}
-{{--        </div>--}}
-
         <div class="author_comics-form-container-header">
             <h3>Новый авторский комикс</h3>
             <div class="progress-bar">

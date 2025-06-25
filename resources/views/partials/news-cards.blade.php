@@ -172,7 +172,7 @@
     @endif
 @endforeach
 @if ($items->isEmpty())
-    <p class="no-results">К сожалению ничего не нашли :(</p>
+    <p class="no-results">К сожалению, ничего не нашли :(</p>
 @endif
 
 <div class="media-slider" id="media-slider" style="display: none;">
