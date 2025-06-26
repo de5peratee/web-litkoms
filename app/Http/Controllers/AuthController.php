@@ -32,6 +32,7 @@ class AuthController extends Controller
     {
         $validated = $request->validated();
         $validated['password'] = Hash::make($validated['password']);
+        unset($validated['agree']);
         $user = User::create($validated);
         event(new Registered($user));
         Auth::login($user);

@@ -112,7 +112,7 @@
                 <div class="member">
                     <img src="images/default_template/ava_cover.png" alt="Польбицев П.П." class="member-photo" />
                     <div class="member-info">
-                        <p><strong>Польбицев П.П.</strong></p>
+                        <p><strong>Полбицев П.П.</strong></p>
                         <span>Backend разработчик</span>
                     </div>
                 </div>
