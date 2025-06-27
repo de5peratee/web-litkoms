@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorComics\AuthorComicsController;
 use App\Http\Controllers\AuthorComics\AuthorComicsLandingController;
@@ -149,4 +148,10 @@ Route::get('/{nickname}', [ProfileController::class, 'index'])->name('profile.in
 Route::prefix('profile')->group(function () {
     Route::get('/settings', [UserSettingsController::class, 'show'])->name('settings.show');
     Route::put('/settings', [UserSettingsController::class, 'update'])->name('settings.update');
+});
+
+Route::get('/sitemap.xml', function () {
+    return response()->file(public_path('sitemap.xml'), [
+        'Content-Type' => 'application/xml',
+    ]);
 });

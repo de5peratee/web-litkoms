@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /verify-email
+Disallow: /profile/settings
+Disallow: /auth
+Disallow: /profile/comics/
+Sitemap: https://litcoms.ru/sitemap.xml
