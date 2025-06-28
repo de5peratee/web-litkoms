@@ -139,7 +139,15 @@
 
             <div class="post-text-data">
                 <h3>{{ $post->name }}</h3>
-                <p class="text-small">{{ Str::limit($post->description, 100) }}</p>
+                <p class="text-small" id="description-{{ $post->id }}">
+                    @if (strlen($post->description) > 100)
+                        <span class="text-small short-description">{!! nl2br(e(Str::limit($post->description, 100))) !!}</span>
+                        <span class="text-small full-description" style="display: none;">{!! nl2br(e($post->description)) !!}</span>
+                        <a href="#" class="read-more" data-post-id="{{ $post->id }}">Подробнее</a>
+                    @else
+                        {!! nl2br(e($post->description)) !!}
+                    @endif
+                </p>
 
                 @if ($fileMedias->count() > 0)
                     <div class="files-container">

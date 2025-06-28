@@ -39,7 +39,7 @@
                         <label for="title">Название комикса</label>
                         <input type="text" name="title" id="title" placeholder="Введите название комикса" value="{{ old('title') }}" class="{{ $errors->has('title') ? 'is-invalid' : '' }}">
                         @error('title')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
 
@@ -47,7 +47,7 @@
                         <label for="genres">Жанры</label>
                         <input type="text" name="genres" id="genres" placeholder="Укажите жанры через запятую (например: Фэнтези, Комедия)" value="{{ old('genres') }}" class="{{ $errors->has('genres') ? 'is-invalid' : '' }}">
                         @error('genres')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
 
@@ -55,15 +55,15 @@
                         <label for="description">Описание</label>
                         <textarea name="description" id="description" rows="5" placeholder="Введите описание комикса" class="{{ $errors->has('description') ? 'is-invalid' : '' }}">{{ old('description') }}</textarea>
                         @error('description')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
 
                     <div class="lit-field">
                         <label for="comic_file">Файл комикса</label>
-                        <input type="file" name="comic_file" id="comic_file" accept="application/pdf,image/*" class="{{ $errors->has('comic_file') ? 'is-invalid' : '' }}">
+                        <input type="file" name="comic_file" id="comic_file" accept="application/pdf" class="{{ $errors->has('comic_file') ? 'is-invalid' : '' }}">
                         @error('comic_file')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
 
@@ -77,7 +77,7 @@
                             <option value="18" {{ old('age_restriction') == '18' ? 'selected' : '' }}>18+</option>
                         </select>
                         @error('age_restriction')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                         </div>
 
                         @error('cover')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                     <a href="#" target="_blank" class="link-text">правилами сообщества</a>.
                 </label>
                 @error('agree')
-                <div class="input-error">{{ $message }}</div>
+                <div class="input-error"><span>{{ $message }}</span></div>
                 @enderror
             </div>
 

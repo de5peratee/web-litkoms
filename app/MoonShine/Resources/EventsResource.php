@@ -154,7 +154,7 @@ class EventsResource extends ModelResource
             'cover' => 'image|mimes:jpeg,png,jpg|max:4096',
             'name' => 'required|string|min:3|max:255',
             'description' => 'required|string|min:10|max:5000',
-            'start_date' => ['required', 'date_format:Y-m-d\TH:i', 'after_or_equal:now'],
+            'start_date' => ['required', 'date_format:Y-m-d\TH:i'],
             'end_date' => ['date_format:Y-m-d\TH:i', 'after_or_equal:start_date'],
             'guests' => 'nullable|max:1000',
             'tags' => 'required|max:1000',
@@ -180,7 +180,7 @@ class EventsResource extends ModelResource
 
             'start_date.required' => 'Дата и время начала обязательны.',
             'start_date.date_format' => 'Дата начала должна быть в формате: ГГГГ-ММ-ДДTчч:мм.',
-            'start_date.after_or_equal' => 'Дата начала не может быть раньше текущего времени.',
+//            'start_date.after_or_equal' => 'Дата начала не может быть раньше текущего времени.',
 
             'end_date.date_format' => 'Дата окончания должна быть в формате: ГГГГ-ММ-ДД чч:мм:сс.',
             'end_date.after_or_equal' => 'Дата окончания не может быть раньше даты начала.',

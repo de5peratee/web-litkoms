@@ -5,7 +5,6 @@
 @section('content')
     @vite(['resources/css/news.css', 'resources/js/news.js'])
     @vite(['resources/js/newsfeed-slider.js'])
-
     <div class="news-container">
         <div class="news-header">
             <img src="{{ asset('images/icons/hw/news.svg') }}" class="icon-48" alt="icon">

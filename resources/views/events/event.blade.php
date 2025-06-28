@@ -60,7 +60,7 @@
             <div class="event-description">
                 <div class="event-action-block">
                     <h3>О мероприятии</h3>
-                    <p class="text-small">{{ $event->description }}</p>
+                    <p class="text-small">{!! nl2br(e($event->description)) !!}</p>
 {{--                    <a href="#" class="primary-btn">Буду на мероприятии</a>--}}
                 </div>
 

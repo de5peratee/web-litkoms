@@ -719,3 +719,23 @@
         aspect-ratio: 2/1;
     }
 }
+
+.text-small {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.read-more {
+    display: inline-block;
+    margin-left: 8px;
+    color: #007bff;
+    font-size: 12px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.read-more:hover {
+    color: #0056b3;
+    text-decoration: none;
+}

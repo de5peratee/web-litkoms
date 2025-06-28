@@ -111,6 +111,7 @@
     width: fit-content;
     background-color: var(--light-gray);
     box-sizing: border-box;
+    max-height: 120px;
 }
 
 .event-date, .event-time {
@@ -147,6 +148,7 @@
     border-radius: 24px;
     padding: 32px;
     box-sizing: border-box;
+    max-height: 100px;
 }
 
 .past-sign-text-flex {

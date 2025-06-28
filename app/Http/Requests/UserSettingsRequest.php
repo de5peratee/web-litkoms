@@ -32,7 +32,7 @@ class UserSettingsRequest extends FormRequest
             'name' => ['required', 'string', 'max:100', 'regex:/^[a-zA-Zа-яА-ЯёЁ]+$/u',],
             'last_name' => ['required', 'string', 'max:100', 'regex:/^[a-zA-Zа-яА-ЯёЁ]+$/u',],
             'birth_date' => ['required', 'date',],
-            'about' => ['nullable', 'string', 'max:500',],
+            'about' => ['nullable', 'string', 'max:1000',],
             'icon' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120',],
             'head_profile' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5120',],
             'password' => ['nullable', 'string', 'min:8', 'confirmed',],

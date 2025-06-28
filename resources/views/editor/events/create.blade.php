@@ -34,7 +34,7 @@
                             <div class="cover-preview" id="coverPreview"></div>
                         </div>
                         @error('cover')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
 
@@ -42,7 +42,7 @@
                         <label for="name">Название мероприятия</label>
                         <input type="text" name="name" id="name" placeholder="Введите название" value="{{ old('name') }}" class="{{ $errors->has('name') ? 'is-invalid' : '' }}">
                         @error('name')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <label for="description">Описание</label>
                     <textarea name="description" id="description" rows="5" placeholder="Подробное описание мероприятия" class="{{ $errors->has('description') ? 'is-invalid' : '' }}">{{ old('description') }}</textarea>
                     @error('description')
-                    <div class="input-error">{{ $message }}</div>
+                    <div class="input-error"><span>{{ $message }}</span></div>
                     @enderror
                 </div>
 
@@ -60,7 +60,7 @@
                         <label for="start_date">Дата начала</label>
                         <input type="date" name="start_date" id="start_date" value="{{ old('start_date') }}" class="{{ $errors->has('start_date') ? 'is-invalid' : '' }}">
                         @error('start_date')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
 
@@ -68,7 +68,7 @@
                         <label for="start_time">Время начала</label>
                         <input type="time" name="start_time" id="start_time" value="{{ old('start_time') }}" class="{{ $errors->has('start_time') ? 'is-invalid' : '' }}">
                         @error('start_time')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                         <label for="end_date">Дата окончания</label>
                         <input type="date" name="end_date" id="end_date" value="{{ old('end_date') }}" class="{{ $errors->has('end_date') ? 'is-invalid' : '' }}">
                         @error('end_date')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
 
@@ -86,7 +86,7 @@
                         <label for="end_time">Время окончания</label>
                         <input type="time" name="end_time" id="end_time" value="{{ old('end_time') }}" class="{{ $errors->has('end_time') ? 'is-invalid' : '' }}">
                         @error('end_time')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                     <label for="guests">Список гостей</label>
                     <input type="text" name="guests" id="guests" value="{{ old('guests') }}" placeholder="Имена гостей через запятую" class="{{ $errors->has('guests') ? 'is-invalid' : '' }}">
                     @error('guests')
-                    <div class="input-error">{{ $message }}</div>
+                    <div class="input-error"><span>{{ $message }}</span></div>
                     @enderror
                 </div>
 
@@ -103,7 +103,7 @@
                     <label for="tags">Теги</label>
                     <input type="text" name="tags" id="tags" value="{{ old('tags') }}" placeholder="Жанры через запятую" class="{{ $errors->has('genres') ? 'is-invalid' : '' }}">
                     @error('tags')
-                    <div class="input-error">{{ $message }}</div>
+                    <div class="input-error"><span>{{ $message }}</span></div>
                     @enderror
                 </div>
 

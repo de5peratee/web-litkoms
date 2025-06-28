@@ -88,7 +88,7 @@
                                 <label for="nickname">Никнейм</label>
                                 <input type="text" name="nickname" id="nickname" value="{{ old('nickname', $user->nickname) }}" class="form-control">
                                 @error('nickname')
-                                <span class="text-danger">{{ $message }}</span>
+                                <span class="input-error">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -96,7 +96,7 @@
                                 <label for="email">Email</label>
                                 <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" class="form-control">
                                 @error('email')
-                                <span class="text-danger">{{ $message }}</span>
+                                <span class="input-error">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                                 <label for="name">Имя</label>
                                 <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" class="form-control">
                                 @error('name')
-                                <span class="text-danger">{{ $message }}</span>
+                                <span class="input-error">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -114,7 +114,7 @@
                                 <label for="last_name">Фамилия</label>
                                 <input type="text" name="last_name" id="last_name" value="{{ old('last_name', $user->last_name) }}" class="form-control">
                                 @error('last_name')
-                                <span class="text-danger">{{ $message }}</span>
+                                <span class="input-error">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                             <label for="birth_date">Дата рождения</label>
                             <input type="date" name="birth_date" id="birth_date" value="{{ old('birth_date', $user->birth_date) }}" class="form-control">
                             @error('birth_date')
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="input-error">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -131,7 +131,7 @@
                             <label for="about">О себе</label>
                             <textarea name="about" id="about" class="form-control" placeholder="Напишите информацию о себе...">{{ old('about', $user->about) }}</textarea>
                             @error('about')
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="input-error">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -140,7 +140,7 @@
                                 <label for="password">Новый пароль</label>
                                 <input type="password" name="password" id="password" class="form-control" placeholder="Введите новый пароль..." autocomplete="new-password">
                                 @error('password')
-                                <span class="text-danger">{{ $message }}</span>
+                                <span class="input-error">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -148,7 +148,7 @@
                                 <label for="password_confirmation">Подтверждение пароля</label>
                                 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Введите новый пароль..." autocomplete="new-password">
                                 @error('password_confirmation')
-                                <span class="text-danger">{{ $message }}</span>
+                                <span class="input-error">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>

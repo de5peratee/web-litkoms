@@ -58,22 +58,6 @@
 }
 
 
-.input-error {
-    color: #d32f2f;
-    font-size: 0.875rem;
-    line-height: 1.25;
-    margin-top: 0.25rem;
-    margin-bottom: 0.5rem;
-    padding: 0.25rem 0.5rem;
-    background-color: #ffebee;
-    border-radius: 4px;
-    display: inline-block;
-    max-width: 100%;
-    word-break: break-word;
-    transition: opacity 0.2s ease-in-out;
-    opacity: 1;
-}
-
 .is-invalid {
     border: 2px solid #d32f2f !important;
     box-shadow: 0 0 5px rgba(211, 47, 47, 0.3);

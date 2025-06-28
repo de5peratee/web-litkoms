@@ -53,12 +53,24 @@ class StoreEventRequest extends FormRequest
                 $validator->errors()->add('tags', 'Количество тегов не должно превышать 5.');
             }
 
-            $startDateTime = Carbon::createFromFormat('Y-m-d H:i', $this->input('start_date') . ' ' . $this->input('start_time'));
-            $endDateTime = Carbon::createFromFormat('Y-m-d H:i', $this->input('end_date') . ' ' . $this->input('end_time'));
+            $startDate = $this->input('start_date');
+            $startTime = $this->input('start_time');
+            $endDate = $this->input('end_date');
+            $endTime = $this->input('end_time');
 
-            if ($endDateTime->lessThan($startDateTime)) {
-                $validator->errors()->add('end_time', 'Дата и время окончания не могут быть раньше даты и времени начала.');
+            if ($startDate && $startTime && $endDate && $endTime) {
+                try {
+                    $startDateTime = Carbon::createFromFormat('Y-m-d H:i', "$startDate $startTime");
+                    $endDateTime = Carbon::createFromFormat('Y-m-d H:i', "$endDate $endTime");
+
+                    if ($endDateTime->lessThan($startDateTime)) {
+                        $validator->errors()->add('end_time', 'Дата и время окончания не могут быть раньше даты и времени начала.');
+                    }
+                } catch (\Exception $e) {
+                    $validator->errors()->add('start_date', 'Неверный формат даты или времени.');
+                }
             }
+
         });
     }
 

@@ -34,7 +34,7 @@
                             <div class="media-preview" id="mediaPreview"></div>
                         </div>
                         @error('media')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
 
@@ -42,7 +42,7 @@
                         <label for="name">Название поста</label>
                         <input type="text" name="name" id="name" placeholder="Введите название" value="{{ old('name') }}" class="{{ $errors->has('name') ? 'is-invalid' : '' }}">
                         @error('name')
-                        <div class="input-error">{{ $message }}</div>
+                        <div class="input-error"><span>{{ $message }}</span></div>
                         @enderror
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <label for="description">Описание</label>
                     <textarea name="description" id="description" rows="5" placeholder="Подробное описание поста" class="{{ $errors->has('description') ? 'is-invalid' : '' }}">{{ old('description') }}</textarea>
                     @error('description')
-                    <div class="input-error">{{ $message }}</div>
+                    <div class="input-error"><span>{{ $message }}</span></div>
                     @enderror
                 </div>
 

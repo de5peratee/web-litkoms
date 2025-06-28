@@ -171,3 +171,22 @@
         height: 96px;
     }
 }
+
+.input-error {
+    color: #d32f2f;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    max-width: 100%;
+    word-break: break-word;
+    transition: opacity 0.2s ease-in-out;
+    opacity: 1;
+}
+
+.input-error span {
+    background-color: #ffebee;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}

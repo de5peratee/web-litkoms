@@ -152,3 +152,25 @@ $(document).ready(function () {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.read-more').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            const postId = this.getAttribute('data-post-id');
+            const descriptionElement = document.getElementById(`description-${postId}`);
+            const shortDesc = descriptionElement.querySelector('.short-description');
+            const fullDesc = descriptionElement.querySelector('.full-description');
+
+            if (fullDesc.style.display === 'none') {
+                shortDesc.style.display = 'none';
+                fullDesc.style.display = 'block';
+                this.textContent = 'Свернуть';
+            } else {
+                shortDesc.style.display = 'inline';
+                fullDesc.style.display = 'none';
+                this.textContent = 'Подробнее';
+            }
+        });
+    });
+});

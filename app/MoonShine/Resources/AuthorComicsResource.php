@@ -222,6 +222,6 @@ class AuthorComicsResource extends ModelResource
 
     public function search(): array
     {
-        return ['name', 'description'];
+        return ['name', 'description', 'published_at'];
     }
 }

@@ -95,7 +95,7 @@
 
                 <div class="h-divider"></div>
 
-                <p>{{ $user->about }}</p>
+                <p>{!! nl2br(e($user->about)) !!}</p>
             </div>
         @endif
 

@@ -79,10 +79,11 @@
         <div class="info-block">
             <div class="info-header">
                 <img src="{{ asset('images/icons/hw/feather.svg') }}" class="icon-32" alt="icon">
-                <h3>Сюжет</h3>
+                <h3>Описание</h3>
             </div>
             <div class="h-divider"></div>
-            <p class="text-medium">{{ $authorComic->description ?? 'Описание отсутствует' }}</p>
+            <p class="text-medium">{!! nl2br(e($authorComic->description ?? 'Описание отсутствует')) !!}</p>
+
         </div>
 
         <!-- Просмотр PDF -->
