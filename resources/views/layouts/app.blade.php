@@ -9,7 +9,7 @@
     @php
         $pageTitle = $__env->yieldContent('title', 'Литкомс — центр гуманитарно-технической информации');
         $pageDescription = $__env->yieldContent('meta_description', 'Литкомс — первый комикс‑центр Севастополя. Комикс‑школа, клуб, библиотека.');
-//        $pageImage = $__env->yieldContent('meta_image', asset('images/logo.svg'));
+        $pageImage = $__env->yieldContent('meta_image', asset('images/cover.png'));
         $logoImage = $__env->yieldContent('meta_logo', asset('images/logo.svg'));
     @endphp
 
@@ -21,13 +21,13 @@
     <meta property="og:url"         content="{{ url()->current() }}">
     <meta property="og:title"       content="{{ $pageTitle }}">
     <meta property="og:description" content="{{ $pageDescription }}">
-{{--    <meta property="og:image"       content="{{ $pageImage }}">--}}
+    <meta property="og:image"       content="{{ $pageImage }}">
     <meta property="og:logo"        content="{{ $logoImage }}">
 
     <meta name="twitter:card"        content="summary_large_image">
     <meta name="twitter:title"       content="{{ $pageTitle }}">
     <meta name="twitter:description" content="{{ $pageDescription }}">
-{{--    <meta name="twitter:image"       content="{{ $pageImage }}">--}}
+    <meta name="twitter:image"       content="{{ $pageImage }}">
 
     <meta name="robots" content="max-snippet:160">
 
